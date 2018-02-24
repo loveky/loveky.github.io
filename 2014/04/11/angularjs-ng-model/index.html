@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>AngularJS源码阅读之ngModel</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="loveky" />
+  <meta name="description" content="数据的双向绑定可能是Angular最为人们熟知的特性之一。举个最简单的例子 
+可以在result页面中看到，每当在input中输入时，$scope中对应model的值也改变了。反之，当用户点击Set按钮在$scope中更新了model的值时，input输入框中的内容也对应更新了。
+所有的这些魔法只需要我们在input元素上指定一个ng-model属性。可见ng-model这个directive是双向绑定这一特性不可缺少一点。本文就继续从源代码入手看看ngModel的实现方式以及其它directive是如何与ngModel交互的。
+ngModel被定义在input.js。从名字上可看出，该文件还定义input这个directive，从这点也可以看出ngModel与input之间的紧密关系。
+注: 文中所有涉及到的AngularJS源码均来自angular-1.2.8版本。
+var ngModelDirective = function() { return { require: [&amp;#39;ngModel&amp;#39;, &amp;#39;^?form&amp;#39;], controller: NgModelController, link: function(scope, element, attr, ctrls) { // notify others, especially parent forms  var modelCtrl = ctrls[0], formCtrl = ctrls[1] || nullFormCtrl; formCtrl.$addControl(modelCtrl); scope.$on(&amp;#39;$destroy&amp;#39;, function() { formCtrl.$removeControl(modelCtrl); }); } }; }; 可以看出ngModel依赖于ngModelController以及可选的formController。ngModel在link方法中只做了2件事:
+ 如果声明了ngModel的元素出现在一个form中，那么就向上层form注册自身 注册了$destroy事件的监听器，该事件触发时告知上层form移除对自身的引用  link方法如此简单以至于我们还没看到关于数据绑定的任何信息。看来问题的答案都藏在ngModelController中了。接下来看看ngModelController中都发生了什么。
+var NgModelController = [&amp;#39;$scope&amp;#39;, &amp;#39;$exceptionHandler&amp;#39;, &amp;#39;$attrs&amp;#39;, &amp;#39;$element&amp;#39;, &amp;#39;$parse&amp;#39;, function($scope, $exceptionHandler, $attr, $element, $parse) { this." />
+
+  
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@loveky_" />
+    <meta name="twitter:title" content="AngularJS源码阅读之ngModel" />
+    <meta name="twitter:description" content="数据的双向绑定可能是Angular最为人们熟知的特性之一。举个最简单的例子 
+可以在result页面中看到，每当在input中输入时，$scope中对应model的值也改变了。反之，当用户点击Set按钮在$scope中更新了model的值时，input输入框中的内容也对应更新了。
+所有的这些魔法只需要我们在input元素上指定一个ng-model属性。可见ng-model这个directive是双向绑定这一特性不可缺少一点。本文就继续从源代码入手看看ngModel的实现方式以及其它directive是如何与ngModel交互的。
+ngModel被定义在input.js。从名字上可看出，该文件还定义input这个directive，从这点也可以看出ngModel与input之间的紧密关系。
+注: 文中所有涉及到的AngularJS源码均来自angular-1.2.8版本。
+var ngModelDirective = function() { return { require: [&amp;#39;ngModel&amp;#39;, &amp;#39;^?form&amp;#39;], controller: NgModelController, link: function(scope, element, attr, ctrls) { // notify others, especially parent forms  var modelCtrl = ctrls[0], formCtrl = ctrls[1] || nullFormCtrl; formCtrl.$addControl(modelCtrl); scope.$on(&amp;#39;$destroy&amp;#39;, function() { formCtrl.$removeControl(modelCtrl); }); } }; }; 可以看出ngModel依赖于ngModelController以及可选的formController。ngModel在link方法中只做了2件事:
+ 如果声明了ngModel的元素出现在一个form中，那么就向上层form注册自身 注册了$destroy事件的监听器，该事件触发时告知上层form移除对自身的引用  link方法如此简单以至于我们还没看到关于数据绑定的任何信息。看来问题的答案都藏在ngModelController中了。接下来看看ngModelController中都发生了什么。
+var NgModelController = [&amp;#39;$scope&amp;#39;, &amp;#39;$exceptionHandler&amp;#39;, &amp;#39;$attrs&amp;#39;, &amp;#39;$element&amp;#39;, &amp;#39;$parse&amp;#39;, function($scope, $exceptionHandler, $attr, $element, $parse) { this." />
+    <meta name="twitter:image" content="https://loveky.github.io/img/avatar.jpg" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="AngularJS源码阅读之ngModel" />
+  <meta property="og:description" content="数据的双向绑定可能是Angular最为人们熟知的特性之一。举个最简单的例子 
+可以在result页面中看到，每当在input中输入时，$scope中对应model的值也改变了。反之，当用户点击Set按钮在$scope中更新了model的值时，input输入框中的内容也对应更新了。
+所有的这些魔法只需要我们在input元素上指定一个ng-model属性。可见ng-model这个directive是双向绑定这一特性不可缺少一点。本文就继续从源代码入手看看ngModel的实现方式以及其它directive是如何与ngModel交互的。
+ngModel被定义在input.js。从名字上可看出，该文件还定义input这个directive，从这点也可以看出ngModel与input之间的紧密关系。
+注: 文中所有涉及到的AngularJS源码均来自angular-1.2.8版本。
+var ngModelDirective = function() { return { require: [&amp;#39;ngModel&amp;#39;, &amp;#39;^?form&amp;#39;], controller: NgModelController, link: function(scope, element, attr, ctrls) { // notify others, especially parent forms  var modelCtrl = ctrls[0], formCtrl = ctrls[1] || nullFormCtrl; formCtrl.$addControl(modelCtrl); scope.$on(&amp;#39;$destroy&amp;#39;, function() { formCtrl.$removeControl(modelCtrl); }); } }; }; 可以看出ngModel依赖于ngModelController以及可选的formController。ngModel在link方法中只做了2件事:
+ 如果声明了ngModel的元素出现在一个form中，那么就向上层form注册自身 注册了$destroy事件的监听器，该事件触发时告知上层form移除对自身的引用  link方法如此简单以至于我们还没看到关于数据绑定的任何信息。看来问题的答案都藏在ngModelController中了。接下来看看ngModelController中都发生了什么。
+var NgModelController = [&amp;#39;$scope&amp;#39;, &amp;#39;$exceptionHandler&amp;#39;, &amp;#39;$attrs&amp;#39;, &amp;#39;$element&amp;#39;, &amp;#39;$parse&amp;#39;, function($scope, $exceptionHandler, $attr, $element, $parse) { this." />
+  <meta property="og:url" content="https://loveky.github.io/2014/04/11/angularjs-ng-model/" />
+  <meta property="og:image" content="https://loveky.github.io/img/avatar.jpg" />
+
+
+
+
+<meta name="generator" content="Hugo 0.36.1" />
+
+
+<link rel="canonical" href="https://loveky.github.io/2014/04/11/angularjs-ng-model/" />
+<link rel="alternative" href="https://loveky.github.io/index.xml" title="loveky的流水账" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="loveky的流水账" />
+<meta name="msapplication-tooltip" content="loveky的流水账" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://loveky.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://loveky.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://loveky.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://loveky.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://loveky.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://loveky.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://loveky.github.io/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://loveky.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">loveky的流水账</h2>
+  
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://loveky.github.io/">首页</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/tags/">标签</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/archive/">归档</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/links/">链接</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/about/">关于我</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:ylzcylx@gmail.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/loveky" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/loveky_" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//www.zhihu.com/people/loveky" title="Zhihu"><span class="icon icon-zhihu"></span></a>
+      </li>
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://loveky.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">AngularJS源码阅读之ngModel</h1>
+      <p class="post-meta">@loveky · Apr 11, 2014 · 3 min read</p>
+    </header>
+    <article class="post-content"><p>数据的双向绑定可能是Angular最为人们熟知的特性之一。举个最简单的例子
+<iframe width="100%" height="150" src="http://jsfiddle.net/loveky/r2eQb/embedded/" allowfullscreen="allowfullscreen" frameborder="0"> </iframe></p>
+
+<p>可以在result页面中看到，每当在input中输入时，$scope中对应model的值也改变了。反之，当用户点击Set按钮在$scope中更新了model的值时，input输入框中的内容也对应更新了。</p>
+
+<p>所有的这些魔法只需要我们在input元素上指定一个<code>ng-model</code>属性。可见<code>ng-model</code>这个directive是双向绑定这一特性不可缺少一点。本文就继续从源代码入手看看ngModel的实现方式以及其它directive是如何与ngModel交互的。</p>
+
+<p><code>ngModel</code>被定义在<a href="https://github.com/angular/angular.js/blob/v1.2.8/src/ng/directive/input.js#L1166">input.js</a>。从名字上可看出，该文件还定义<code>input</code>这个directive，从这点也可以看出ngModel与input之间的紧密关系。</p>
+
+<p><strong><em>注: 文中所有涉及到的AngularJS源码均来自<a href="https://github.com/angular/angular.js/tree/v1.2.8/">angular-1.2.8</a>版本。</em></strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">ngModelDirective</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>() {
+  <span style="color:#66d9ef">return</span> {
+    <span style="color:#a6e22e">require</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;ngModel&#39;</span>, <span style="color:#e6db74">&#39;^?form&#39;</span>],
+    <span style="color:#a6e22e">controller</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">NgModelController</span>,
+    <span style="color:#a6e22e">link</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">scope</span>, <span style="color:#a6e22e">element</span>, <span style="color:#a6e22e">attr</span>, <span style="color:#a6e22e">ctrls</span>) {
+      <span style="color:#75715e">// notify others, especially parent forms
+</span><span style="color:#75715e"></span>
+      <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">modelCtrl</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ctrls</span>[<span style="color:#ae81ff">0</span>],
+          <span style="color:#a6e22e">formCtrl</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ctrls</span>[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">||</span> <span style="color:#a6e22e">nullFormCtrl</span>;
+
+      <span style="color:#a6e22e">formCtrl</span>.<span style="color:#a6e22e">$addControl</span>(<span style="color:#a6e22e">modelCtrl</span>);
+
+      <span style="color:#a6e22e">scope</span>.<span style="color:#a6e22e">$on</span>(<span style="color:#e6db74">&#39;$destroy&#39;</span>, <span style="color:#66d9ef">function</span>() {
+        <span style="color:#a6e22e">formCtrl</span>.<span style="color:#a6e22e">$removeControl</span>(<span style="color:#a6e22e">modelCtrl</span>);
+      });
+    }
+  };
+};</code></pre></div>
+<p>可以看出ngModel依赖于ngModelController以及可选的formController。ngModel在link方法中只做了2件事:</p>
+
+<ul>
+<li>如果声明了ngModel的元素出现在一个form中，那么就向上层form注册自身</li>
+<li>注册了<code>$destroy</code>事件的监听器，该事件触发时告知上层form移除对自身的引用</li>
+</ul>
+
+<p>link方法如此简单以至于我们还没看到关于数据绑定的任何信息。看来问题的答案都藏在ngModelController中了。接下来看看ngModelController中都发生了什么。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">NgModelController</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;$scope&#39;</span>, <span style="color:#e6db74">&#39;$exceptionHandler&#39;</span>, <span style="color:#e6db74">&#39;$attrs&#39;</span>, <span style="color:#e6db74">&#39;$element&#39;</span>, <span style="color:#e6db74">&#39;$parse&#39;</span>,
+    <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">$scope</span>, <span style="color:#a6e22e">$exceptionHandler</span>, <span style="color:#a6e22e">$attr</span>, <span style="color:#a6e22e">$element</span>, <span style="color:#a6e22e">$parse</span>) {
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$viewValue</span> <span style="color:#f92672">=</span> Number.<span style="color:#66d9ef">NaN</span>; <span style="color:#75715e">// 页面中的值
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$modelValue</span> <span style="color:#f92672">=</span> Number.<span style="color:#66d9ef">NaN</span>; <span style="color:#75715e">// $scope中model的值
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$parsers</span> <span style="color:#f92672">=</span> []; <span style="color:#75715e">// 数组，包含了一些列函数用于对数据进行处理，过滤，合法性检查
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$formatters</span> <span style="color:#f92672">=</span> []; <span style="color:#75715e">// 同$parsers，但使用场景不一样
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$viewChangeListeners</span> <span style="color:#f92672">=</span> [];
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$pristine</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>; <span style="color:#75715e">// 数据是否处于原始状态, 即尚未被用户修改
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$dirty</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>; <span style="color:#75715e">// 数据是否被用户修改过 
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$valid</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>; <span style="color:#75715e">// 数据是否合法
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$invalid</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$name</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">$attr</span>.<span style="color:#a6e22e">name</span>;</code></pre></div>
+<p>这里可以注意到所有的属性都定义在了<code>this</code>上。这样当其他directive通过require ngModel来拿到了ngModelController时就可以通过这些变量来访问ngModel的内部状态了。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">ngModelGet</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">$parse</span>(<span style="color:#a6e22e">$attr</span>.<span style="color:#a6e22e">ngModel</span>),
+  <span style="color:#a6e22e">ngModelSet</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ngModelGet</span>.<span style="color:#a6e22e">assign</span>;
+
+<span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">ngModelSet</span>) {
+<span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">minErr</span>(<span style="color:#e6db74">&#39;ngModel&#39;</span>)(<span style="color:#e6db74">&#39;nonassign&#39;</span>, <span style="color:#e6db74">&#34;Expression &#39;{0}&#39; is non-assignable. Element: {1}&#34;</span>,
+    <span style="color:#a6e22e">$attr</span>.<span style="color:#a6e22e">ngModel</span>, <span style="color:#a6e22e">startingTag</span>(<span style="color:#a6e22e">$element</span>));
+}</code></pre></div>
+<p>通过<code>$parse</code>服务根据指定的model名字生成getter和setter方法。这里检查用户指定的model名字是否是一个可被赋值的表达式。如果不可被赋值，则会抛出错误。关于什么样的表达式会抛出<code>non-assignable</code>错误，<a href="http://docs.angularjs.org/error/$compile/nonassign">这里</a>有详细的说明。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$render</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">noop</span>;</code></pre></div>
+<p><code>$render</code>属性是一个方法。该方法的作用是当$scope中的model被修改时去更新页面显示。由于ngModel并不知道其调用者需要怎样对数据进行格式化，已经该更新哪个页面元素，所以该方法会被留给ngModel的调用者自行定义。因此这里只是将其设置为一个空函数。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$isEmpty</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">value</span>) {
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">isUndefined</span>(<span style="color:#a6e22e">value</span>) <span style="color:#f92672">||</span> <span style="color:#a6e22e">value</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;&#39;</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">value</span> <span style="color:#f92672">===</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">value</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">value</span>;
+};</code></pre></div>
+<p>$isEmpty方法用来判断输入值是否为空，默认的$isEmpty会在input为<code>undefined</code>, <code>''</code>, <code>null</code> 或 <code>NaN</code>之一时返回true。ngModel的调用者可以通过覆写该方法来实现定制的empty判断。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">parentForm</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">$element</span>.<span style="color:#a6e22e">inheritedData</span>(<span style="color:#e6db74">&#39;$formController&#39;</span>) <span style="color:#f92672">||</span> <span style="color:#a6e22e">nullFormCtrl</span>,
+    <span style="color:#a6e22e">invalidCount</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#75715e">// used to easily determine if we are valid
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">$error</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$error</span> <span style="color:#f92672">=</span> {}; <span style="color:#960050;background-color:#1e0010">// keep invalid keys here</span></code></pre></div>
+<p>获取对上层form的引用，用于在model值合法性改变时通知上层form。<br />
+invalidCount是对当前不合法属性的计数。一个model可能有多个条件来判断其值是否合法。每一个不合法的条件都会让该计数器加一。
+$error哈希则保存了具体不合法的属性的名字。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// Setup initial state of the control
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">$element</span>.<span style="color:#a6e22e">addClass</span>(<span style="color:#a6e22e">PRISTINE_CLASS</span>);
+<span style="color:#a6e22e">toggleValidCss</span>(<span style="color:#66d9ef">true</span>);
+
+<span style="color:#75715e">// convenience method for easy toggling of classes
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">toggleValidCss</span>(<span style="color:#a6e22e">isValid</span>, <span style="color:#a6e22e">validationErrorKey</span>) {
+  <span style="color:#a6e22e">validationErrorKey</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">validationErrorKey</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#39;-&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">snake_case</span>(<span style="color:#a6e22e">validationErrorKey</span>, <span style="color:#e6db74">&#39;-&#39;</span>) <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#39;</span>;
+  <span style="color:#a6e22e">$element</span>.
+    <span style="color:#a6e22e">removeClass</span>((<span style="color:#a6e22e">isValid</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">INVALID_CLASS</span> <span style="color:#f92672">:</span> <span style="color:#a6e22e">VALID_CLASS</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">validationErrorKey</span>).
+    <span style="color:#a6e22e">addClass</span>((<span style="color:#a6e22e">isValid</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">VALID_CLASS</span> <span style="color:#f92672">:</span> <span style="color:#a6e22e">INVALID_CLASS</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">validationErrorKey</span>);
+}</code></pre></div>
+<p>设置element的初始CSS状态。默认情况下，当一个声明了ngModel的element在页面初始化后会被添加上<code>ng-valid</code>和<code>ng-pristine</code>两个类。ng-valid在model值合法时出现，ng-pristine类则表示页面中的值尚未被用户修改，一旦用户修改页面值，ng-pristin类就会从元素上移除。</p>
+
+<p>toggleValidCss方法用来根据model值是否合法来设置相应CSS类。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$setValidity</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">validationErrorKey</span>, <span style="color:#a6e22e">isValid</span>) {
+  <span style="color:#75715e">// Purposeful use of ! here to cast isValid to boolean in case it is undefined
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// jshint -W018
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">$error</span>[<span style="color:#a6e22e">validationErrorKey</span>] <span style="color:#f92672">===</span> <span style="color:#f92672">!</span><span style="color:#a6e22e">isValid</span>) <span style="color:#66d9ef">return</span>;
+  <span style="color:#75715e">// jshint +W018
+</span><span style="color:#75715e"></span>
+  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">isValid</span>) {
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">$error</span>[<span style="color:#a6e22e">validationErrorKey</span>]) <span style="color:#a6e22e">invalidCount</span><span style="color:#f92672">--</span>;
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">invalidCount</span>) {
+      <span style="color:#a6e22e">toggleValidCss</span>(<span style="color:#66d9ef">true</span>);
+      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$valid</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$invalid</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+    }
+  } <span style="color:#66d9ef">else</span> {
+    <span style="color:#a6e22e">toggleValidCss</span>(<span style="color:#66d9ef">false</span>);
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$invalid</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$valid</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+    <span style="color:#a6e22e">invalidCount</span><span style="color:#f92672">++</span>;
+  }
+
+  <span style="color:#a6e22e">$error</span>[<span style="color:#a6e22e">validationErrorKey</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">!</span><span style="color:#a6e22e">isValid</span>;
+  <span style="color:#a6e22e">toggleValidCss</span>(<span style="color:#a6e22e">isValid</span>, <span style="color:#a6e22e">validationErrorKey</span>);
+
+  <span style="color:#a6e22e">parentForm</span>.<span style="color:#a6e22e">$setValidity</span>(<span style="color:#a6e22e">validationErrorKey</span>, <span style="color:#a6e22e">isValid</span>, <span style="color:#66d9ef">this</span>);
+};</code></pre></div>
+<p>$setValidity方法用来设置model的值是否合法。它会做以下3件事:</p>
+
+<ul>
+<li>更新$invalidCount计数器的值</li>
+<li>根据是否valid更新元素CSS类</li>
+<li>告知上层form此model的合法性，便于上层form更新form状态。<br /></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$setPristine</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$dirty</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$pristine</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+  <span style="color:#a6e22e">$element</span>.<span style="color:#a6e22e">removeClass</span>(<span style="color:#a6e22e">DIRTY_CLASS</span>).<span style="color:#a6e22e">addClass</span>(<span style="color:#a6e22e">PRISTINE_CLASS</span>);
+};</code></pre></div>
+<p>$setPristine方法用来移除dirty状态，设置pristine状态。(<em>暂时没发现在什么情形下会这么做</em>)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$setViewValue</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">value</span>) {
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$viewValue</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">value</span>;
+
+  <span style="color:#75715e">// change to dirty
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$pristine</span>) {
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$dirty</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$pristine</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+    <span style="color:#a6e22e">$element</span>.<span style="color:#a6e22e">removeClass</span>(<span style="color:#a6e22e">PRISTINE_CLASS</span>).<span style="color:#a6e22e">addClass</span>(<span style="color:#a6e22e">DIRTY_CLASS</span>);
+    <span style="color:#a6e22e">parentForm</span>.<span style="color:#a6e22e">$setDirty</span>();
+  }
+
+  <span style="color:#a6e22e">forEach</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$parsers</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">fn</span>) {
+    <span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">fn</span>(<span style="color:#a6e22e">value</span>);
+  });
+
+  <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$modelValue</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">value</span>) {
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$modelValue</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">value</span>;
+    <span style="color:#a6e22e">ngModelSet</span>(<span style="color:#a6e22e">$scope</span>, <span style="color:#a6e22e">value</span>);
+    <span style="color:#a6e22e">forEach</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$viewChangeListeners</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">listener</span>) {
+      <span style="color:#66d9ef">try</span> {
+        <span style="color:#a6e22e">listener</span>();
+      } <span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">e</span>) {
+        <span style="color:#a6e22e">$exceptionHandler</span>(<span style="color:#a6e22e">e</span>);
+      }
+    });
+  }
+};</code></pre></div>
+<p>该方法用来在页面值被修改时用来更新$scope中的model值，通常被ngModel调用者使用。该方法会:
+- 移除元素的pristine状态，添加dirty状态
+- 逐一调用$parsers数字中的方法处理新值。
+- 如果$scope中modle值与经过$parsers处理后的值不同，则更新$scope中的model，同是调用$viewChangeListeners中设置的callbacks</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">ctrl</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>;
+
+<span style="color:#a6e22e">$scope</span>.<span style="color:#a6e22e">$watch</span>(<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">ngModelWatch</span>() {
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ngModelGet</span>(<span style="color:#a6e22e">$scope</span>);
+
+  <span style="color:#75715e">// if scope model value and ngModel value are out of sync
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">ctrl</span>.<span style="color:#a6e22e">$modelValue</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">value</span>) {
+
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">formatters</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ctrl</span>.<span style="color:#a6e22e">$formatters</span>,
+        <span style="color:#a6e22e">idx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">formatters</span>.<span style="color:#a6e22e">length</span>;
+
+    <span style="color:#a6e22e">ctrl</span>.<span style="color:#a6e22e">$modelValue</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">value</span>;
+    <span style="color:#66d9ef">while</span>(<span style="color:#a6e22e">idx</span><span style="color:#f92672">--</span>) {
+      <span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">formatters</span>[<span style="color:#a6e22e">idx</span>](<span style="color:#a6e22e">value</span>);
+    }
+
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">ctrl</span>.<span style="color:#a6e22e">$viewValue</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">value</span>) {
+      <span style="color:#a6e22e">ctrl</span>.<span style="color:#a6e22e">$viewValue</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">value</span>;
+      <span style="color:#a6e22e">ctrl</span>.<span style="color:#a6e22e">$render</span>();
+    }
+  }
+
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">value</span>;
+});</code></pre></div>
+<p>ngModelController定义的最后是一个$scope.$watch调用，它会监视$scope中model值的变化，一旦改变便会调用$formatters中的处理器处理最新值。如果处理过的值与页面值不同，则调用$render方法将这个model的更新同步到页面上去。注意这里的$render是由ngModel的调用者定义的。</p>
+
+<p>最后还是画一幅图总结一下:
+<img src="https://loveky.github.io/img/ngModelController.png" alt="" /></p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://loveky.github.io/tags/angularjs"><span class="tag">AngularJS</span></a></li>
+        
+          <li><a href="https://loveky.github.io/tags/javascript"><span class="tag">JavaScript</span></a></li>
+        
+          <li><a href="https://loveky.github.io/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB"><span class="tag">源码阅读</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        This post was published <strong>1415</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "loveky" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 loveky的流水账</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\[','\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="https://loveky.github.io/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>

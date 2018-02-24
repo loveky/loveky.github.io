@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>[译]什么是Promise.try</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="loveky" />
+  <meta name="description" content="原文地址 http://cryto.net/~joepie91/blog/2016/05/11/what-is-promise-try-and-why-does-it-matter/
+在#Node.js#频道里经常困扰大家的一个话题是Bluebird提供的Promise.try方法。大家并不清楚该方法的功能也不知道为何要使用它。同时，几乎所有的关于Promsie的指南中针对该方法错误的演示使得这种情况没有任何改善。
+在本文中，我会尝试解释究竟什么是Promise.try以及为何你应该使用它。我假设你已经对Promise有所了解并且知道.then在Promise中的作用。
+即使你在使用一个不同的Promsie实现(例如ES6 Promise)，本文还是可以帮到你。文章末尾我会解释如何在非Bluebird环境中实现相同的功能。
+究竟什么是Promise.try呢？ 简单来说，除了不需要跟在一个前置Promise之后以外，Promise.try很像.then。这么说还是有一些含糊不清，所以让我们先看一个示例。
+以下是一段典型的Promise使用场景：
+function getUsername(userId) { return database.users.get({id: userId}) .then(function(user) { return user.name; }); }  到目前为止，一切顺利。我们假设database.users.get会返回一个Promise，并且该Promise最终会返回一个带有name属性的对象。
+以下是同样的代码，但是引入了Promise.try：
+var Promise = require(&amp;quot;bluebird&amp;quot;); function getUsername(userId) { return Promise.try(function() { return database.users.get({id: userID}); }).then(function(user) { return user.name; }); }  可以看到，我们的调用链以Promise.try而不是database.users.get开始。像使用.then一样，我们执行Promise.try方法并传递给它一个直接返回database.users.get调用的函数。
+这样做有什么意义呢？ 以上的代码看起来似乎是多余的。但实际上它有以下几个优点：
+ 更好的错误处理 同步代码中的异常不论出现在何处都会以rejection的形式向Promise链后端传递。 更好的兼容性 你可以始终使用你自己喜欢的Promise实现，而不用担心第三方代码在使用哪个。 更好的代码阅读体验 所有的代码在水平方向上将处于同一个缩进层级，这将使你阅读代码变得更容易。  接下来我会逐一介绍这些优点：
+1. 更好的错误处理 Promise的一个被大力宣扬的优点就是用户可以用同一种方式同时处理同步异常和异步异常 —— 同步异常会被捕获并且会作为一个rejected Promise向后传递。但事实真的是这样吗？让我们看看以下这个上文示例的小变种：
+function getUsername(userId) { return database.users.get({id: userId}) .then(function(user) { return uesr." />
+
+  
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@loveky_" />
+    <meta name="twitter:title" content="[译]什么是Promise.try" />
+    <meta name="twitter:description" content="原文地址 http://cryto.net/~joepie91/blog/2016/05/11/what-is-promise-try-and-why-does-it-matter/
+在#Node.js#频道里经常困扰大家的一个话题是Bluebird提供的Promise.try方法。大家并不清楚该方法的功能也不知道为何要使用它。同时，几乎所有的关于Promsie的指南中针对该方法错误的演示使得这种情况没有任何改善。
+在本文中，我会尝试解释究竟什么是Promise.try以及为何你应该使用它。我假设你已经对Promise有所了解并且知道.then在Promise中的作用。
+即使你在使用一个不同的Promsie实现(例如ES6 Promise)，本文还是可以帮到你。文章末尾我会解释如何在非Bluebird环境中实现相同的功能。
+究竟什么是Promise.try呢？ 简单来说，除了不需要跟在一个前置Promise之后以外，Promise.try很像.then。这么说还是有一些含糊不清，所以让我们先看一个示例。
+以下是一段典型的Promise使用场景：
+function getUsername(userId) { return database.users.get({id: userId}) .then(function(user) { return user.name; }); }  到目前为止，一切顺利。我们假设database.users.get会返回一个Promise，并且该Promise最终会返回一个带有name属性的对象。
+以下是同样的代码，但是引入了Promise.try：
+var Promise = require(&amp;quot;bluebird&amp;quot;); function getUsername(userId) { return Promise.try(function() { return database.users.get({id: userID}); }).then(function(user) { return user.name; }); }  可以看到，我们的调用链以Promise.try而不是database.users.get开始。像使用.then一样，我们执行Promise.try方法并传递给它一个直接返回database.users.get调用的函数。
+这样做有什么意义呢？ 以上的代码看起来似乎是多余的。但实际上它有以下几个优点：
+ 更好的错误处理 同步代码中的异常不论出现在何处都会以rejection的形式向Promise链后端传递。 更好的兼容性 你可以始终使用你自己喜欢的Promise实现，而不用担心第三方代码在使用哪个。 更好的代码阅读体验 所有的代码在水平方向上将处于同一个缩进层级，这将使你阅读代码变得更容易。  接下来我会逐一介绍这些优点：
+1. 更好的错误处理 Promise的一个被大力宣扬的优点就是用户可以用同一种方式同时处理同步异常和异步异常 —— 同步异常会被捕获并且会作为一个rejected Promise向后传递。但事实真的是这样吗？让我们看看以下这个上文示例的小变种：
+function getUsername(userId) { return database.users.get({id: userId}) .then(function(user) { return uesr." />
+    <meta name="twitter:image" content="https://loveky.github.io/img/avatar.jpg" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="[译]什么是Promise.try" />
+  <meta property="og:description" content="原文地址 http://cryto.net/~joepie91/blog/2016/05/11/what-is-promise-try-and-why-does-it-matter/
+在#Node.js#频道里经常困扰大家的一个话题是Bluebird提供的Promise.try方法。大家并不清楚该方法的功能也不知道为何要使用它。同时，几乎所有的关于Promsie的指南中针对该方法错误的演示使得这种情况没有任何改善。
+在本文中，我会尝试解释究竟什么是Promise.try以及为何你应该使用它。我假设你已经对Promise有所了解并且知道.then在Promise中的作用。
+即使你在使用一个不同的Promsie实现(例如ES6 Promise)，本文还是可以帮到你。文章末尾我会解释如何在非Bluebird环境中实现相同的功能。
+究竟什么是Promise.try呢？ 简单来说，除了不需要跟在一个前置Promise之后以外，Promise.try很像.then。这么说还是有一些含糊不清，所以让我们先看一个示例。
+以下是一段典型的Promise使用场景：
+function getUsername(userId) { return database.users.get({id: userId}) .then(function(user) { return user.name; }); }  到目前为止，一切顺利。我们假设database.users.get会返回一个Promise，并且该Promise最终会返回一个带有name属性的对象。
+以下是同样的代码，但是引入了Promise.try：
+var Promise = require(&amp;quot;bluebird&amp;quot;); function getUsername(userId) { return Promise.try(function() { return database.users.get({id: userID}); }).then(function(user) { return user.name; }); }  可以看到，我们的调用链以Promise.try而不是database.users.get开始。像使用.then一样，我们执行Promise.try方法并传递给它一个直接返回database.users.get调用的函数。
+这样做有什么意义呢？ 以上的代码看起来似乎是多余的。但实际上它有以下几个优点：
+ 更好的错误处理 同步代码中的异常不论出现在何处都会以rejection的形式向Promise链后端传递。 更好的兼容性 你可以始终使用你自己喜欢的Promise实现，而不用担心第三方代码在使用哪个。 更好的代码阅读体验 所有的代码在水平方向上将处于同一个缩进层级，这将使你阅读代码变得更容易。  接下来我会逐一介绍这些优点：
+1. 更好的错误处理 Promise的一个被大力宣扬的优点就是用户可以用同一种方式同时处理同步异常和异步异常 —— 同步异常会被捕获并且会作为一个rejected Promise向后传递。但事实真的是这样吗？让我们看看以下这个上文示例的小变种：
+function getUsername(userId) { return database.users.get({id: userId}) .then(function(user) { return uesr." />
+  <meta property="og:url" content="https://loveky.github.io/2016/08/04/promise-try/" />
+  <meta property="og:image" content="https://loveky.github.io/img/avatar.jpg" />
+
+
+
+
+<meta name="generator" content="Hugo 0.36.1" />
+
+
+<link rel="canonical" href="https://loveky.github.io/2016/08/04/promise-try/" />
+<link rel="alternative" href="https://loveky.github.io/index.xml" title="loveky的流水账" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="loveky的流水账" />
+<meta name="msapplication-tooltip" content="loveky的流水账" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://loveky.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://loveky.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://loveky.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://loveky.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://loveky.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://loveky.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://loveky.github.io/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://loveky.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">loveky的流水账</h2>
+  
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://loveky.github.io/">首页</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/tags/">标签</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/archive/">归档</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/links/">链接</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/about/">关于我</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:ylzcylx@gmail.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/loveky" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/loveky_" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//www.zhihu.com/people/loveky" title="Zhihu"><span class="icon icon-zhihu"></span></a>
+      </li>
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://loveky.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">[译]什么是Promise.try</h1>
+      <p class="post-meta">@loveky · Aug 4, 2016 · 2 min read</p>
+    </header>
+    <article class="post-content">
+
+<p>原文地址 <a href="http://cryto.net/~joepie91/blog/2016/05/11/what-is-promise-try-and-why-does-it-matter/">http://cryto.net/~joepie91/blog/2016/05/11/what-is-promise-try-and-why-does-it-matter/</a></p>
+
+<p>在#Node.js#频道里经常困扰大家的一个话题是Bluebird提供的<a href="http://bluebirdjs.com/docs/api/promise.try.html"><code>Promise.try</code></a>方法。大家并不清楚该方法的功能也不知道为何要使用它。同时，几乎所有的关于Promsie的指南中针对该方法错误的演示使得这种情况没有任何改善。</p>
+
+<p>在本文中，我会尝试解释究竟什么是<code>Promise.try</code>以及为何你应该使用它。我假设你已经对Promise有所了解并且知道<code>.then</code>在Promise中的作用。</p>
+
+<p>即使你在使用一个不同的Promsie实现(例如ES6 Promise)，本文还是可以帮到你。文章末尾我会解释如何在非Bluebird环境中实现相同的功能。</p>
+
+<h3 id="究竟什么是promise-try呢">究竟什么是Promise.try呢？</h3>
+
+<p>简单来说，除了不需要跟在一个前置Promise之后以外，<code>Promise.try</code>很像<code>.then</code>。这么说还是有一些含糊不清，所以让我们先看一个示例。</p>
+
+<p>以下是一段典型的Promise使用场景：</p>
+
+<pre><code>function getUsername(userId) {
+return database.users.get({id: userId})
+.then(function(user) {
+return user.name;
+});
+}
+</code></pre>
+
+<p>到目前为止，一切顺利。我们假设<code>database.users.get</code>会返回一个Promise，并且该Promise最终会返回一个带有<code>name</code>属性的对象。</p>
+
+<p>以下是同样的代码，但是引入了<code>Promise.try</code>：</p>
+
+<pre><code>var Promise = require(&quot;bluebird&quot;);
+
+function getUsername(userId) {
+return Promise.try(function() {
+return database.users.get({id: userID});
+}).then(function(user) {
+return user.name;
+});
+}
+</code></pre>
+
+<p>可以看到，我们的调用链以<code>Promise.try</code>而不是<code>database.users.get</code>开始。像使用<code>.then</code>一样，我们执行<code>Promise.try</code>方法并传递给它一个直接返回<code>database.users.get</code>调用的函数。</p>
+
+<h2 id="这样做有什么意义呢">这样做有什么意义呢？</h2>
+
+<p>以上的代码看起来似乎是多余的。但实际上它有以下几个优点：</p>
+
+<ol>
+<li><strong>更好的错误处理</strong> 同步代码中的异常不论出现在何处都会以rejection的形式向Promise链后端传递。</li>
+<li><strong>更好的兼容性</strong> 你可以始终使用你自己喜欢的Promise实现，而不用担心第三方代码在使用哪个。</li>
+<li><strong>更好的代码阅读体验</strong> 所有的代码在水平方向上将处于同一个缩进层级，这将使你阅读代码变得更容易。</li>
+</ol>
+
+<p>接下来我会逐一介绍这些优点：</p>
+
+<h3 id="1-更好的错误处理">1. 更好的错误处理</h3>
+
+<p>Promise的一个被大力宣扬的优点就是用户可以用同一种方式同时处理同步异常和异步异常 —— 同步异常会被捕获并且会作为一个rejected Promise向后传递。但事实真的是这样吗？让我们看看以下这个上文示例的小变种：</p>
+
+<pre><code>function getUsername(userId) {
+return database.users.get({id: userId})
+.then(function(user) {
+return uesr.name;
+});
+}
+</code></pre>
+
+<p>在这个改动后的版本中，我们在输入<code>user.name</code>的时候手误，现在它成了<code>uesr.name</code>。由于<code>uesr</code>是未定义的，所以它不可能有任何属性，因此该行代码会产生异常。接着就如你期望的一样，这个异常会被<code>.then</code>捕获并被转变成一个rejected Promise。</p>
+
+<p>但是如果<code>database.users.get</code>同步的抛出了异常呢？如果在第三方的代码里存在拼写错误或是其他问题呢？Promises的错误捕获机制的前提是使用者编写的所有同步代码都要放在<code>.then</code>中，这样它就可以将这些同步代码放入一个<code>try</code>/<code>catch</code>块中执行。</p>
+
+<p>但是&hellip;我们代码中的<code>database.users.get</code>并不在<code>.then</code>块中。因此Promise就不能访问这部分代码也就不能将它们包裹在<code>try</code>/<code>catch</code>中。这就导致同步异常不能被转变为异步异常。我们又回到了原点，不得不处理两种形式的异常 —— 同步的和异步的。</p>
+
+<p>现在，让我们回过头来看看使用了<code>Promise.try</code>的示例:</p>
+
+<pre><code>var Promise = require(&quot;bluebird&quot;);
+
+function getUsername(userId) {
+return Promise.try(function() {
+return database.users.get({id: userID});
+}).then(function(user) {
+return user.name;
+});
+}
+</code></pre>
+
+<p>我前边说过<code>Promise.try</code>很像<code>.then</code>,但是它不需要跟在Promise后边。除此之外，它还会捕获<code>database.users.get</code>中的同步异常，就像<code>.then</code>一样！</p>
+
+<p>通过引入<code>Promise.try</code>，我们已经把代码的错误处理改造为可以覆盖所有的同步异常,而不是只能捕获第一次异步操作(第一次<code>.then</code>调用)之后的异常了。</p>
+
+<h2 id="补充信息-promises-a">补充信息: Promises/A+</h2>
+
+<p>在我们继续讨论<code>Promise.try</code>的下一个优点之前，让我们看看什么是Promises/A+以及它扮演的角色。<a href="https://promisesaplus.com/">Promises/A+</a>网站上对它的介绍是：</p>
+
+<blockquote>
+<p>An open standard for sound, interoperable JavaScript promises—by implementers, for implementers.</p>
+</blockquote>
+
+<p>换种说法，它是一份可以保证不同的Promises实现(Bluebird,ES6,Q,RSVP, &hellip;)之间可以无缝衔接的规范。Promises/A+规范就是为什么你可以选择任何你喜欢的Promise实现，而不用担心第三方代码库(例如<a href="http://knexjs.org/">Knex</a>)使用何种Promise实现的原因。</p>
+
+<p>下图演示了Promises/A+对用户的帮助：</p>
+
+<p><img src="http://cryto.net/~joepie91/blog/attachments/promises-aplus.png" alt="Visual illustration of Promises/A+" /></p>
+
+<p>示例中所有红色高亮的函数都返回Bluebird Promises，蓝色高亮的返回ES6 Promise，绿色高亮的返回Q Promise。</p>
+
+<p>需要注意的是即使在第一个回调函数中我们返回了一个ES6 Promise，包裹它的<code>.then</code>方法还是会返回一个Bluebird Promise。同样的，即使第二个回调函数返回的是一个Q Promise，我们的<code>doStuff</code>函数还是会返回一个Bluebird Promise。</p>
+
+<p>出现这种结果的原因是，除了捕获同步异常以外，<code>.then</code>还会对回调函数的返回值进行处理以返回一个和<code>.then</code>自身来自同一个实现的Promise对象。实际上，这就意味着调用链中的第一个Promise决定了后续代码中你会与哪种Promise实现打交道。</p>
+
+<p>这是一种保证API一致性的实用方法。你只需要关心整个调用链第一个方法所使用的Promise实现，而不用担心后续代码使用何种实现。</p>
+
+<h3 id="2-更好的兼容性">2. 更好的兼容性</h3>
+
+<p>但是以上描述的行为并不总能符合预期，让我们看看下边的示例:</p>
+
+<pre><code>var Promise = require(&quot;bluebird&quot;);
+
+function getAllUsernames() {
+// This will return an ES6 Promise.
+return database.users.getAll()
+.map(function(user) {
+return user.name;
+});
+}
+</code></pre>
+
+<p>如果你对<code>map</code>不熟悉并想了解更多信息，可以参考<a href="http://cryto.net/%7Ejoepie91/blog/2015/05/04/functional-programming-in-javascript-map-filter-reduce">这篇文章</a>。</p>
+
+<p>在这个例子中使用的<code>.map</code>方法是<a href="http://bluebirdjs.com/docs/api/map.html">一个Bluebird的专有特性</a>，在ES6 Promises上并不可用。由于调用链的第一个函数(<code>database.users.getAll</code>)返回的是一个ES6 Promise，这就导致我们在这里并不能访问这个方法。哪怕是在项目中其它位置使用了Bluebird也不行。</p>
+
+<p>现在让我们再看看这个示例，只不过这次我们使用了<code>Promise.try</code>：</p>
+
+<pre><code>var Promise = require(&quot;bluebird&quot;);
+
+function getAllUsernames() {
+// This will return a Bluebird Promise.
+return Promise.try(function() {
+// This will return an ES6 Promise.
+return database.users.getAll();
+}).map(function(user) {
+return user.name;
+});
+}
+</code></pre>
+
+<p>现在我们就可以使用<code>.map</code>了！因为我们以来自Bluebird的<code>Promise.try</code>开始了调用链，这就使得所有后续的Promises都成为了Bluebird Promises。因此我们不必再关心每个<code>.then</code>回掉函数里发生了什么。</p>
+
+<p>通过像这样引入<code>Promise.try</code>，你就可以决定在整个调用链中采用哪种实现的Promise，只要保证调用链里第一个返回的Promise是你想要的类型就可以了。你无法通过<code>.then</code>实现相同的效果，因为<code>.then</code>需要跟在一个前置的Promise后边，而实际情况往往是你并不能决定这个前置Promise是来自那种Promise实现的。</p>
+
+<h3 id="3-更好的代码阅读体验">3. 更好的代码阅读体验</h3>
+
+<p>最后一个优点与可读性有关。通过使用<code>Promise.try</code>来开启每一个调用链，所有的“业务逻辑”都会在水平方向出现在同一个缩进层级上。虽然这个优点看起来微不足道，但由于人类浏览大段文字的方式，它实际上能起到很大的作用。</p>
+
+<p>让我们通过图片来解释这里的差别，下图展示的是你如何阅读没有使用<code>Promise.try</code>时的代码：</p>
+
+<p><img src="http://cryto.net/~joepie91/blog/attachments/promises-scan-1.png" alt="Visual scanning without Promise.try" /></p>
+
+<p>&hellip; 然后是同样的代码，但是使用了<code>Promise.try</code>:</p>
+
+<p><img src="http://cryto.net/~joepie91/blog/attachments/promises-scan-2.png" alt="Visual scanning with Promise.try" /></p>
+
+<p>虽然这使得代码变得看起来稍微有些“复杂”，但它可以帮你更快的理解代码的主要逻辑，因为你的眼睛不再需要左右寻找缩进。</p>
+
+<h3 id="如果我使用的不是bluebird呢">如果我使用的不是Bluebird呢？</h3>
+
+<p>据我所知，Bluebird是目前唯一自带<code>Promise.try</code>方法的Promise 实现。然而将该功能复制到其他Promise实现是<a href="https://git.cryto.net/joepie91/node-es6-promise-try/src/master/src/index.js">相当容易的</a>，只要这个Promise实现的<code>new Promise</code>可以捕获同步异常即可。</p>
+
+<p>例如，<a href="https://www.npmjs.com/package/es6-promise-try"><code>es6-promise-try</code></a>是我为ES6 Promises提供的一种实现，它同时也可以在浏览器中工作。我还没来得及为它编写文档。但它的使用方式本质上和<code>Promise.try</code>完全相同，只不过方法名变成了<code>promiseTry</code>，示例如下：</p>
+
+<pre><code>var promiseTry = require(&quot;es6-promise-try&quot;);
+
+function getUsername(userId) {
+return promiseTry(function() {
+return database.users.get({id: userID});
+}).then(function(user) {
+return user.name;
+});
+}
+</code></pre>
+
+<p>需要注意的是<code>es6-promise-try</code>默认假设你的运行环境中支持ES6 Promise。如果还不支持，那么你需要引入类似<a href="https://www.npmjs.com/package/es6-promise"><code>es6-promise</code></a>的polyfill脚本。</p>
+
+<p>由于Bluebird具有健壮的错误处理机制和强大的调试功能，我强烈建议你优先考虑它。通常情况下，ES6 Promises只有在受限环境中才会成为你的首选，例如需要兼容低版本IE浏览器或是尝试降低前端文件大小时。</p>
+
+<p>如果你知道有其他Promise库也实现了<code>Promise.try</code>的功能，请联系我。我会把它们列在这里。我的联系方式在页面底部可以找到。</p>
+
+<p>我目前正在提供<strong>Node.js代码评审和辅导</strong>服务。了解更多信息请点击<a href="http://cryto.net/%7Ejoepie91/code-review.html">这里</a></p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://loveky.github.io/tags/javascript"><span class="tag">JavaScript</span></a></li>
+        
+          <li><a href="https://loveky.github.io/tags/es6"><span class="tag">ES6</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        This post was published <strong>569</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "loveky" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 loveky的流水账</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\[','\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="https://loveky.github.io/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>AngularJS源码阅读之ngRepeat</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="loveky" />
+  <meta name="description" content="注: 文中所有涉及到的AngularJS源码均来自angular-1.2.8版本。
+注2: 本文结构为一段代码配一段说明，代码在上，说明在下。
+从3月3号到现在，进入新公司也有1个月了。过去这一个月里主要负责公司内部某个DevOps工具开发过程中的前端部分。由于涉及到较多的网页交互，该项目的前端部分使用了AngularJS这个框架。本人这正好借助这个机会进一步了解了AngularJS的相关知识。
+这两天项目主体完成，准备上线，算是有了一些自由时间，正好借此机会学习一下AngularJS内部的实现机制。
+本篇来说说最常见的directive之一 ngRepeat
+该文件的整体结构如下：
+var ngRepeatDirective = [&amp;#39;$parse&amp;#39;, &amp;#39;$animate&amp;#39;, function($parse, $animate) { var NG_REMOVED = &amp;#39;$$NG_REMOVED&amp;#39;; var ngRepeatMinErr = minErr(&amp;#39;ngRepeat&amp;#39;); return { transclude: &amp;#39;element&amp;#39;, priority: 1000, terminal: true, $$tlb: true, link: function($scope, $element, $attr, ctrl, $transclude){ ..... } }; function getBlockStart(block) { return block.clone[0]; } function getBlockEnd(block) { return block.clone[block.clone.length - 1]; } }]; ngRepeatDirective是一个数组，它会被传递给directive方法用来生成ngRepeat这个directive。可以看到ngRepeat依赖于$parse和$animate两个服务。$parse用来将字符串解析成javascript函数。$animate用来给DOM改变附加上动画效果。文件最后声明了两个helper方法，会在稍后的分析中介绍到。
+接下来把最大的篇幅交给这个directive的核心——link方法。
+var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]&#43;?)\s&#43;in\s&#43;([\s\S]&#43;?)(?:\s&#43;track\s&#43;by\s&#43;([\s\S]&#43;?))?\s*$/), trackByExp, trackByExpGetter, trackByIdExpFn, trackByIdArrayFn, trackByIdObjFn, lhs, rhs, valueIdentifier, keyIdentifier, hashFnLocals = {$id: hashKey}; if (!" />
+
+  
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@loveky_" />
+    <meta name="twitter:title" content="AngularJS源码阅读之ngRepeat" />
+    <meta name="twitter:description" content="注: 文中所有涉及到的AngularJS源码均来自angular-1.2.8版本。
+注2: 本文结构为一段代码配一段说明，代码在上，说明在下。
+从3月3号到现在，进入新公司也有1个月了。过去这一个月里主要负责公司内部某个DevOps工具开发过程中的前端部分。由于涉及到较多的网页交互，该项目的前端部分使用了AngularJS这个框架。本人这正好借助这个机会进一步了解了AngularJS的相关知识。
+这两天项目主体完成，准备上线，算是有了一些自由时间，正好借此机会学习一下AngularJS内部的实现机制。
+本篇来说说最常见的directive之一 ngRepeat
+该文件的整体结构如下：
+var ngRepeatDirective = [&amp;#39;$parse&amp;#39;, &amp;#39;$animate&amp;#39;, function($parse, $animate) { var NG_REMOVED = &amp;#39;$$NG_REMOVED&amp;#39;; var ngRepeatMinErr = minErr(&amp;#39;ngRepeat&amp;#39;); return { transclude: &amp;#39;element&amp;#39;, priority: 1000, terminal: true, $$tlb: true, link: function($scope, $element, $attr, ctrl, $transclude){ ..... } }; function getBlockStart(block) { return block.clone[0]; } function getBlockEnd(block) { return block.clone[block.clone.length - 1]; } }]; ngRepeatDirective是一个数组，它会被传递给directive方法用来生成ngRepeat这个directive。可以看到ngRepeat依赖于$parse和$animate两个服务。$parse用来将字符串解析成javascript函数。$animate用来给DOM改变附加上动画效果。文件最后声明了两个helper方法，会在稍后的分析中介绍到。
+接下来把最大的篇幅交给这个directive的核心——link方法。
+var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]&#43;?)\s&#43;in\s&#43;([\s\S]&#43;?)(?:\s&#43;track\s&#43;by\s&#43;([\s\S]&#43;?))?\s*$/), trackByExp, trackByExpGetter, trackByIdExpFn, trackByIdArrayFn, trackByIdObjFn, lhs, rhs, valueIdentifier, keyIdentifier, hashFnLocals = {$id: hashKey}; if (!" />
+    <meta name="twitter:image" content="https://loveky.github.io/img/avatar.jpg" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="AngularJS源码阅读之ngRepeat" />
+  <meta property="og:description" content="注: 文中所有涉及到的AngularJS源码均来自angular-1.2.8版本。
+注2: 本文结构为一段代码配一段说明，代码在上，说明在下。
+从3月3号到现在，进入新公司也有1个月了。过去这一个月里主要负责公司内部某个DevOps工具开发过程中的前端部分。由于涉及到较多的网页交互，该项目的前端部分使用了AngularJS这个框架。本人这正好借助这个机会进一步了解了AngularJS的相关知识。
+这两天项目主体完成，准备上线，算是有了一些自由时间，正好借此机会学习一下AngularJS内部的实现机制。
+本篇来说说最常见的directive之一 ngRepeat
+该文件的整体结构如下：
+var ngRepeatDirective = [&amp;#39;$parse&amp;#39;, &amp;#39;$animate&amp;#39;, function($parse, $animate) { var NG_REMOVED = &amp;#39;$$NG_REMOVED&amp;#39;; var ngRepeatMinErr = minErr(&amp;#39;ngRepeat&amp;#39;); return { transclude: &amp;#39;element&amp;#39;, priority: 1000, terminal: true, $$tlb: true, link: function($scope, $element, $attr, ctrl, $transclude){ ..... } }; function getBlockStart(block) { return block.clone[0]; } function getBlockEnd(block) { return block.clone[block.clone.length - 1]; } }]; ngRepeatDirective是一个数组，它会被传递给directive方法用来生成ngRepeat这个directive。可以看到ngRepeat依赖于$parse和$animate两个服务。$parse用来将字符串解析成javascript函数。$animate用来给DOM改变附加上动画效果。文件最后声明了两个helper方法，会在稍后的分析中介绍到。
+接下来把最大的篇幅交给这个directive的核心——link方法。
+var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]&#43;?)\s&#43;in\s&#43;([\s\S]&#43;?)(?:\s&#43;track\s&#43;by\s&#43;([\s\S]&#43;?))?\s*$/), trackByExp, trackByExpGetter, trackByIdExpFn, trackByIdArrayFn, trackByIdObjFn, lhs, rhs, valueIdentifier, keyIdentifier, hashFnLocals = {$id: hashKey}; if (!" />
+  <meta property="og:url" content="https://loveky.github.io/2014/04/02/angularjs-ngrepeat/" />
+  <meta property="og:image" content="https://loveky.github.io/img/avatar.jpg" />
+
+
+
+
+<meta name="generator" content="Hugo 0.36.1" />
+
+
+<link rel="canonical" href="https://loveky.github.io/2014/04/02/angularjs-ngrepeat/" />
+<link rel="alternative" href="https://loveky.github.io/index.xml" title="loveky的流水账" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="loveky的流水账" />
+<meta name="msapplication-tooltip" content="loveky的流水账" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://loveky.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://loveky.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://loveky.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://loveky.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://loveky.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://loveky.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://loveky.github.io/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://loveky.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">loveky的流水账</h2>
+  
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://loveky.github.io/">首页</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/tags/">标签</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/archive/">归档</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/links/">链接</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/about/">关于我</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:ylzcylx@gmail.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/loveky" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/loveky_" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//www.zhihu.com/people/loveky" title="Zhihu"><span class="icon icon-zhihu"></span></a>
+      </li>
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://loveky.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">AngularJS源码阅读之ngRepeat</h1>
+      <p class="post-meta">@loveky · Apr 2, 2014 · 4 min read</p>
+    </header>
+    <article class="post-content"><p><strong><em>注: 文中所有涉及到的AngularJS源码均来自<a href="https://github.com/angular/angular.js/tree/v1.2.8/">angular-1.2.8</a>版本。</em></strong><br />
+<strong><em>注2: 本文结构为一段代码配一段说明，代码在上，说明在下。</em></strong></p>
+
+<p>从3月3号到现在，进入新公司也有1个月了。过去这一个月里主要负责公司内部某个DevOps工具开发过程中的前端部分。由于涉及到较多的网页交互，该项目的前端部分使用了AngularJS这个框架。本人这正好借助这个机会进一步了解了AngularJS的相关知识。</p>
+
+<p>这两天项目主体完成，准备上线，算是有了一些自由时间，正好借此机会学习一下AngularJS内部的实现机制。</p>
+
+<p>本篇来说说最常见的directive之一 <a href="https://github.com/angular/angular.js/blob/v1.2.8/src/ng/directive/ngRepeat.js">ngRepeat</a></p>
+
+<p>该文件的整体结构如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">ngRepeatDirective</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;$parse&#39;</span>, <span style="color:#e6db74">&#39;$animate&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">$parse</span>, <span style="color:#a6e22e">$animate</span>) {
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">NG_REMOVED</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;$$NG_REMOVED&#39;</span>;
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">ngRepeatMinErr</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">minErr</span>(<span style="color:#e6db74">&#39;ngRepeat&#39;</span>);
+  <span style="color:#66d9ef">return</span> {
+    <span style="color:#a6e22e">transclude</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;element&#39;</span>,
+    <span style="color:#a6e22e">priority</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1000</span>,
+    <span style="color:#a6e22e">terminal</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+    <span style="color:#a6e22e">$$tlb</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+    <span style="color:#a6e22e">link</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">$scope</span>, <span style="color:#a6e22e">$element</span>, <span style="color:#a6e22e">$attr</span>, <span style="color:#a6e22e">ctrl</span>, <span style="color:#a6e22e">$transclude</span>){
+      .....
+    }
+  };
+
+  <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getBlockStart</span>(<span style="color:#a6e22e">block</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">block</span>.<span style="color:#a6e22e">clone</span>[<span style="color:#ae81ff">0</span>];
+  }
+
+  <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getBlockEnd</span>(<span style="color:#a6e22e">block</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">block</span>.<span style="color:#a6e22e">clone</span>[<span style="color:#a6e22e">block</span>.<span style="color:#a6e22e">clone</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+  }
+}];</code></pre></div>
+<p><code>ngRepeatDirective</code>是一个数组，它会被传递给directive方法用来生成ngRepeat这个directive。可以看到ngRepeat依赖于<code>$parse</code>和<code>$animate</code>两个服务。<code>$parse</code>用来将字符串解析成javascript函数。<code>$animate</code>用来给DOM改变附加上动画效果。文件最后声明了两个helper方法，会在稍后的分析中介绍到。</p>
+
+<p>接下来把最大的篇幅交给这个directive的核心——link方法。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">expression</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">$attr</span>.<span style="color:#a6e22e">ngRepeat</span>;
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">match</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">expression</span>.<span style="color:#a6e22e">match</span>(<span style="color:#e6db74">/^\s*([\s\S]+?)\s+in\s+([\s\S]+?)(?:\s+track\s+by\s+([\s\S]+?))?\s*$/</span>),
+  <span style="color:#a6e22e">trackByExp</span>, <span style="color:#a6e22e">trackByExpGetter</span>, <span style="color:#a6e22e">trackByIdExpFn</span>, <span style="color:#a6e22e">trackByIdArrayFn</span>, <span style="color:#a6e22e">trackByIdObjFn</span>,
+  <span style="color:#a6e22e">lhs</span>, <span style="color:#a6e22e">rhs</span>, <span style="color:#a6e22e">valueIdentifier</span>, <span style="color:#a6e22e">keyIdentifier</span>,
+  <span style="color:#a6e22e">hashFnLocals</span> <span style="color:#f92672">=</span> {<span style="color:#a6e22e">$id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">hashKey</span>};
+<span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">match</span>) {
+  <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">ngRepeatMinErr</span>(<span style="color:#e6db74">&#39;iexp&#39;</span>, <span style="color:#e6db74">&#34;Expected expression in form of &#39;_item_ in _collection_[ track by _id_]&#39; but got &#39;{0}&#39;.&#34;</span>,
+    <span style="color:#a6e22e">expression</span>);
+}
+<span style="color:#a6e22e">lhs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">match</span>[<span style="color:#ae81ff">1</span>];
+<span style="color:#a6e22e">rhs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">match</span>[<span style="color:#ae81ff">2</span>];
+<span style="color:#a6e22e">trackByExp</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">match</span>[<span style="color:#ae81ff">3</span>];</code></pre></div>
+<p>首先从directive元素的attribute中取出<code>ng-repeat</code>属性设置的字符串。接着会尝试用取到的字符串与一个正则表达式匹配，用来检查ng-repeat语句是否符合语法。如果语法正确，则将字符串拆分为3部分。<code>lhs</code>保存了循环中的临时变量的名字，<code>rhs</code>保存了被循环的collection的名字，<code>trackByExp</code>则保存了可选的<code>track by</code>字符串。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">trackByExp</span>) {
+  <span style="color:#a6e22e">trackByExpGetter</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">$parse</span>(<span style="color:#a6e22e">trackByExp</span>);
+  <span style="color:#a6e22e">trackByIdExpFn</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">value</span>, <span style="color:#a6e22e">index</span>) {
+    <span style="color:#75715e">// assign key, value, and $index to the locals so that they can be used in hash functions
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">keyIdentifier</span>) <span style="color:#a6e22e">hashFnLocals</span>[<span style="color:#a6e22e">keyIdentifier</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">key</span>;
+    <span style="color:#a6e22e">hashFnLocals</span>[<span style="color:#a6e22e">valueIdentifier</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">value</span>;
+    <span style="color:#a6e22e">hashFnLocals</span>.<span style="color:#a6e22e">$index</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">index</span>;
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">trackByExpGetter</span>(<span style="color:#a6e22e">$scope</span>, <span style="color:#a6e22e">hashFnLocals</span>);
+  };
+} <span style="color:#66d9ef">else</span> {
+  <span style="color:#a6e22e">trackByIdArrayFn</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">value</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">hashKey</span>(<span style="color:#a6e22e">value</span>);
+  };
+  <span style="color:#a6e22e">trackByIdObjFn</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">key</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">key</span>;
+  };
+}</code></pre></div>
+<p>如果指定了<code>trackByExp</code>则根据该字符串构造一个id生成函数，否则为数组和哈希构造缺省的id生成函数。这些函数生成的id会被用来把每个item与页面中唯一的元素绑定。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">match</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">lhs</span>.<span style="color:#a6e22e">match</span>(<span style="color:#e6db74">/^(?:([\$\w]+)|\(([\$\w]+)\s*,\s*([\$\w]+)\))$/</span>);
+<span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">match</span>) {
+  <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">ngRepeatMinErr</span>(<span style="color:#e6db74">&#39;iidexp&#39;</span>, <span style="color:#e6db74">&#34;&#39;_item_&#39; in &#39;_item_ in _collection_&#39; should be an identifier or &#39;(_key_, _value_)&#39; expression, but got &#39;{0}&#39;.&#34;</span>,
+                                                            <span style="color:#a6e22e">lhs</span>);
+}
+<span style="color:#a6e22e">valueIdentifier</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">match</span>[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">||</span> <span style="color:#a6e22e">match</span>[<span style="color:#ae81ff">1</span>];
+<span style="color:#a6e22e">keyIdentifier</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">match</span>[<span style="color:#ae81ff">2</span>];
+
+<span style="color:#75715e">// Store a list of elements from previous run. This is a hash where key is the item from the
+</span><span style="color:#75715e">// iterator, and the value is objects with following properties.
+</span><span style="color:#75715e">// - scope: bound scope
+</span><span style="color:#75715e">// - element: previous element.
+</span><span style="color:#75715e">// - index: position
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">lastBlockMap</span> <span style="color:#f92672">=</span> {};</code></pre></div>
+<p>判断临时变量的格式，angular支持两种格式<code>album in artist.albums</code>用来循环一个数组，<code>(key, value) in expression</code>用来循环一个哈希。两种格式中都有表示将要作为临时变量值的<code>valueIdentifier</code>，而只有在第二种情况中有作为临时变量键的<code>keyIdentifier</code>。</p>
+
+<p><code>lastBlockMap</code>是一个用来保存最近一次view更新完后各个循环item状态的hash。该hash的键是各个被循环的item，值则是一个保存了该item相应属性的对象：</p>
+
+<ul>
+<li>scope 与该item绑定的scope</li>
+<li>element view中在该元素之前的元素</li>
+<li>index item对应的元素在页面中的出现顺序，也即最后一次循环时，该item被处理的先后顺序。</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">$scope</span>.<span style="color:#a6e22e">$watchCollection</span>(<span style="color:#a6e22e">rhs</span>, <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">ngRepeatAction</span>(<span style="color:#a6e22e">collection</span>){
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">index</span>, <span style="color:#a6e22e">length</span>,
+      <span style="color:#a6e22e">previousNode</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">$element</span>[<span style="color:#ae81ff">0</span>], <span style="color:#75715e">// current position of the node 初始值为angular创建的一个helper元素，在页面中表现为一段注释，例如&lt;!--  ngRepeat: item in items --&gt;
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">nextNode</span>,
+      <span style="color:#75715e">// Same as lastBlockMap but it has the current state. It will become the
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// lastBlockMap on the next iteration.
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">nextBlockMap</span> <span style="color:#f92672">=</span> {},
+      <span style="color:#a6e22e">arrayLength</span>,
+      <span style="color:#a6e22e">childScope</span>,
+      <span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">value</span>, <span style="color:#75715e">// key/value of iteration
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">trackById</span>,
+      <span style="color:#a6e22e">trackByIdFn</span>,
+      <span style="color:#a6e22e">collectionKeys</span>,
+      <span style="color:#a6e22e">block</span>, <span style="color:#75715e">// last object information {scope, element, id}
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">nextBlockOrder</span> <span style="color:#f92672">=</span> [],
+      <span style="color:#a6e22e">elementsToRemove</span>;</code></pre></div>
+<p>接着便是link方法最核心的部分——监听model变化并更新view。这里使用了<code>$watchCollection</code>方法监听我们指定的collection，并在每次collection更新时调用ngRepeatAction方法。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">isArrayLike</span>(<span style="color:#a6e22e">collection</span>)) {
+  <span style="color:#a6e22e">collectionKeys</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">collection</span>;
+  <span style="color:#a6e22e">trackByIdFn</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">trackByIdExpFn</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">trackByIdArrayFn</span>;
+} <span style="color:#66d9ef">else</span> {
+  <span style="color:#a6e22e">trackByIdFn</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">trackByIdExpFn</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">trackByIdObjFn</span>;
+  <span style="color:#75715e">// if object, extract keys, sort them and use to determine order of iteration over obj props
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">collectionKeys</span> <span style="color:#f92672">=</span> [];
+  <span style="color:#66d9ef">for</span> (<span style="color:#a6e22e">key</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">collection</span>) {
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">collection</span>.<span style="color:#a6e22e">hasOwnProperty</span>(<span style="color:#a6e22e">key</span>) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">key</span>.<span style="color:#a6e22e">charAt</span>(<span style="color:#ae81ff">0</span>) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;$&#39;</span>) {
+      <span style="color:#a6e22e">collectionKeys</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">key</span>);
+    }
+  }
+  <span style="color:#a6e22e">collectionKeys</span>.<span style="color:#a6e22e">sort</span>();
+}
+
+<span style="color:#a6e22e">arrayLength</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">collectionKeys</span>.<span style="color:#a6e22e">length</span>;</code></pre></div>
+<p>首先确定<code>collectionKeys</code>和<code>trackByIdFn</code>。为将要被循环的集合中的每一个item创建一个key，保存在<code>collectionKeys</code>中。如果collection是数组，则key就是item自身；如果collection是对象，则每个键值对的键会被用作对于item的key(同时会对key排序，排序的结果就是collection中item在页面上显示的顺序)</p>
+
+<p>arrayLength用来保存本次将要循环的item的数目。也就是此次更新后页面中显示的item的数目。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// locate existing items
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">length</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">nextBlockOrder</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">collectionKeys</span>.<span style="color:#a6e22e">length</span>;
+<span style="color:#66d9ef">for</span>(<span style="color:#a6e22e">index</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">index</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">length</span>; <span style="color:#a6e22e">index</span><span style="color:#f92672">++</span>) {
+ <span style="color:#a6e22e">key</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">collection</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">collectionKeys</span>) <span style="color:#f92672">?</span> <span style="color:#a6e22e">index</span> <span style="color:#f92672">:</span> <span style="color:#a6e22e">collectionKeys</span>[<span style="color:#a6e22e">index</span>];
+ <span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">collection</span>[<span style="color:#a6e22e">key</span>];
+ <span style="color:#a6e22e">trackById</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">trackByIdFn</span>(<span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">value</span>, <span style="color:#a6e22e">index</span>);
+ <span style="color:#a6e22e">assertNotHasOwnProperty</span>(<span style="color:#a6e22e">trackById</span>, <span style="color:#e6db74">&#39;`track by` id&#39;</span>);
+ <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">lastBlockMap</span>.<span style="color:#a6e22e">hasOwnProperty</span>(<span style="color:#a6e22e">trackById</span>)) {
+   <span style="color:#a6e22e">block</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">lastBlockMap</span>[<span style="color:#a6e22e">trackById</span>];
+   <span style="color:#66d9ef">delete</span> <span style="color:#a6e22e">lastBlockMap</span>[<span style="color:#a6e22e">trackById</span>];
+   <span style="color:#a6e22e">nextBlockMap</span>[<span style="color:#a6e22e">trackById</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">block</span>;
+   <span style="color:#a6e22e">nextBlockOrder</span>[<span style="color:#a6e22e">index</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">block</span>;
+ } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">nextBlockMap</span>.<span style="color:#a6e22e">hasOwnProperty</span>(<span style="color:#a6e22e">trackById</span>)) {
+   <span style="color:#75715e">// restore lastBlockMap
+</span><span style="color:#75715e"></span>   <span style="color:#a6e22e">forEach</span>(<span style="color:#a6e22e">nextBlockOrder</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">block</span>) {
+     <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">block</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">block</span>.<span style="color:#a6e22e">scope</span>) <span style="color:#a6e22e">lastBlockMap</span>[<span style="color:#a6e22e">block</span>.<span style="color:#a6e22e">id</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">block</span>;
+   });
+   <span style="color:#75715e">// This is a duplicate and we need to throw an error throw ngRepeatMinErr(&#39;dupes&#39;, &#34;Duplicates in a repeater are not allowed. Use &#39;track by&#39; expression to specify unique keys. Repeater: {0}, Duplicate key: {1}&#34;,
+</span><span style="color:#75715e"></span>   <span style="color:#a6e22e">nextBlockOrder</span>[<span style="color:#a6e22e">index</span>] <span style="color:#f92672">=</span> { <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">trackById</span> };
+   <span style="color:#a6e22e">nextBlockMap</span>[<span style="color:#a6e22e">trackById</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+ }
+}</code></pre></div>
+<p>按照<code>collectionKeys</code>中保存的key依次取出要被循环处理的value。<code>trackById</code>是使用<code>trackByIdFn</code>计算出来的每个item唯一的标识，用来建立item与页面中元素间的关联。</p>
+
+<p>如果<code>lastBlockMap</code>中有<code>trackById</code>这个属性，则说明该item在上次循环中已经存在，则将相应的属性/值设置到<code>nextBlockMap</code>对象中，同时在<code>nextBlockOrder</code>数组中保存顺序。<br />
+如果在<code>lastBlockMap</code>中找不到<code>trackById</code>但在<code>nextBlockMap</code>中找到了，则说明在collection中有两个item的<code>trackById</code>是相同的，这时会抛出异常，因为不可能两个item对应页面中的同一个element。<br />
+如果在两个map对象中都没有找到，则说明这个item是首次出现，那么则在<code>nextBlockMap</code>中将对应的值设置为false，表明没有scope与之对应。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// remove existing items
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> (<span style="color:#a6e22e">key</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">lastBlockMap</span>) {
+  <span style="color:#75715e">// lastBlockMap is our own object so we don&#39;t need to use special hasOwnPropertyFn
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">lastBlockMap</span>.<span style="color:#a6e22e">hasOwnProperty</span>(<span style="color:#a6e22e">key</span>)) {
+    <span style="color:#a6e22e">block</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">lastBlockMap</span>[<span style="color:#a6e22e">key</span>];
+    <span style="color:#a6e22e">elementsToRemove</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">getBlockElements</span>(<span style="color:#a6e22e">block</span>.<span style="color:#a6e22e">clone</span>);
+    <span style="color:#a6e22e">$animate</span>.<span style="color:#a6e22e">leave</span>(<span style="color:#a6e22e">elementsToRemove</span>);
+    <span style="color:#a6e22e">forEach</span>(<span style="color:#a6e22e">elementsToRemove</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">element</span>) { <span style="color:#a6e22e">element</span>[<span style="color:#a6e22e">NG_REMOVED</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>; }); <span style="color:#75715e">// 标记该元素已经从DOM中移除
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">block</span>.<span style="color:#a6e22e">scope</span>.<span style="color:#a6e22e">$destroy</span>(); <span style="color:#75715e">// 销毁对应的scope
+</span><span style="color:#75715e"></span>  }
+}</code></pre></div>
+<p>在经历前面一次检查后，现在还留在<code>lastBlockMap</code>中的item就是被从collection中移除的item。要做的就是将对应的element从DOM中移除并销毁item对应的scope。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// we are not using forEach for perf reasons (trying to avoid #call)
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> (<span style="color:#a6e22e">index</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">length</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">collectionKeys</span>.<span style="color:#a6e22e">length</span>; <span style="color:#a6e22e">index</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">length</span>; <span style="color:#a6e22e">index</span><span style="color:#f92672">++</span>) {
+  <span style="color:#a6e22e">key</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">collection</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">collectionKeys</span>) <span style="color:#f92672">?</span> <span style="color:#a6e22e">index</span> <span style="color:#f92672">:</span> <span style="color:#a6e22e">collectionKeys</span>[<span style="color:#a6e22e">index</span>];
+  <span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">collection</span>[<span style="color:#a6e22e">key</span>];
+  <span style="color:#a6e22e">block</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">nextBlockOrder</span>[<span style="color:#a6e22e">index</span>];
+  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">nextBlockOrder</span>[<span style="color:#a6e22e">index</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]) <span style="color:#a6e22e">previousNode</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">getBlockEnd</span>(<span style="color:#a6e22e">nextBlockOrder</span>[<span style="color:#a6e22e">index</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]);
+
+  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">block</span>.<span style="color:#a6e22e">scope</span>) {
+    <span style="color:#75715e">// if we have already seen this object, then we need to reuse the
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// associated scope/element
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">childScope</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">block</span>.<span style="color:#a6e22e">scope</span>; <span style="color:#75715e">// 如果是已经存在的item，则使用之前生成的scope
+</span><span style="color:#75715e"></span>
+    <span style="color:#a6e22e">nextNode</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">previousNode</span>;
+    <span style="color:#66d9ef">do</span> {
+      <span style="color:#a6e22e">nextNode</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">nextNode</span>.<span style="color:#a6e22e">nextSibling</span>;
+    } <span style="color:#66d9ef">while</span>(<span style="color:#a6e22e">nextNode</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">nextNode</span>[<span style="color:#a6e22e">NG_REMOVED</span>]); <span style="color:#75715e">// 跳过被标记为已删除的元素
+</span><span style="color:#75715e"></span>
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">getBlockStart</span>(<span style="color:#a6e22e">block</span>) <span style="color:#f92672">!=</span> <span style="color:#a6e22e">nextNode</span>) { <span style="color:#75715e">// 如果当前block对应的元素并没有紧接在previousNode后边
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// existing item which got moved
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">$animate</span>.<span style="color:#a6e22e">move</span>(<span style="color:#a6e22e">getBlockElements</span>(<span style="color:#a6e22e">block</span>.<span style="color:#a6e22e">clone</span>), <span style="color:#66d9ef">null</span>, <span style="color:#a6e22e">jqLite</span>(<span style="color:#a6e22e">previousNode</span>)); <span style="color:#75715e">// 那么就将元素移动到previousNode之后的位置
+</span><span style="color:#75715e"></span>    }
+    <span style="color:#a6e22e">previousNode</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">getBlockEnd</span>(<span style="color:#a6e22e">block</span>); <span style="color:#75715e">// 同时设置previousNode为当前循环中的元素，为下一次循环做准备
+</span><span style="color:#75715e"></span>  } <span style="color:#66d9ef">else</span> {
+    <span style="color:#75715e">// new item which we don&#39;t know about
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">childScope</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">$scope</span>.<span style="color:#a6e22e">$new</span>(); <span style="color:#75715e">// 如果是新item，生成一个新scope
+</span><span style="color:#75715e"></span>  }</code></pre></div>
+<p>最后一个循环用来处理已有item的DOM移动以及新item对应的DOM插入。在这个循环中<code>previousNode</code>代表了上一次循环item元素在DOM中的位置，angular会顺次将各个block插入到前一个block的后面(对于已经存在的元素则是移动)。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">childScope</span>[<span style="color:#a6e22e">valueIdentifier</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">value</span>;
+<span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">keyIdentifier</span>) <span style="color:#a6e22e">childScope</span>[<span style="color:#a6e22e">keyIdentifier</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">key</span>;
+<span style="color:#a6e22e">childScope</span>.<span style="color:#a6e22e">$index</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">index</span>;
+<span style="color:#a6e22e">childScope</span>.<span style="color:#a6e22e">$first</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">index</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">0</span>);
+<span style="color:#a6e22e">childScope</span>.<span style="color:#a6e22e">$last</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">index</span> <span style="color:#f92672">===</span> (<span style="color:#a6e22e">arrayLength</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>));
+<span style="color:#a6e22e">childScope</span>.<span style="color:#a6e22e">$middle</span> <span style="color:#f92672">=</span> <span style="color:#f92672">!</span>(<span style="color:#a6e22e">childScope</span>.<span style="color:#a6e22e">$first</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">childScope</span>.<span style="color:#a6e22e">$last</span>);
+<span style="color:#75715e">// jshint bitwise: false
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">childScope</span>.<span style="color:#a6e22e">$odd</span> <span style="color:#f92672">=</span> <span style="color:#f92672">!</span>(<span style="color:#a6e22e">childScope</span>.<span style="color:#a6e22e">$even</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">index</span><span style="color:#f92672">&amp;</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">===</span> <span style="color:#ae81ff">0</span>);
+<span style="color:#960050;background-color:#1e0010">// jshint bitwise: true</span></code></pre></div>
+<p>接着设置了一些方便在directive中方便判断状态的变量。如当前元素是否是第一个/最后一个出现在页面上的item。方便用户为相应item元素做特殊处理。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">block</span>.<span style="color:#a6e22e">scope</span>) {
+    <span style="color:#a6e22e">$transclude</span>(<span style="color:#a6e22e">childScope</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">clone</span>) {
+      <span style="color:#a6e22e">clone</span>[<span style="color:#a6e22e">clone</span>.<span style="color:#a6e22e">length</span><span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">createComment</span>(<span style="color:#e6db74">&#39; end ngRepeat: &#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">expression</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39; &#39;</span>);
+      <span style="color:#a6e22e">$animate</span>.<span style="color:#a6e22e">enter</span>(<span style="color:#a6e22e">clone</span>, <span style="color:#66d9ef">null</span>, <span style="color:#a6e22e">jqLite</span>(<span style="color:#a6e22e">previousNode</span>));
+      <span style="color:#a6e22e">previousNode</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">clone</span>;
+      <span style="color:#a6e22e">block</span>.<span style="color:#a6e22e">scope</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">childScope</span>;
+      <span style="color:#75715e">// Note: We only need the first/last node of the cloned nodes.
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// However, we need to keep the reference to the jqlite wrapper as it might be changed later
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">// by a directive with templateUrl when it&#39;s template arrives.
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">block</span>.<span style="color:#a6e22e">clone</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">clone</span>;
+      <span style="color:#a6e22e">nextBlockMap</span>[<span style="color:#a6e22e">block</span>.<span style="color:#a6e22e">id</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">block</span>;
+    });
+  }
+}
+<span style="color:#a6e22e">lastBlockMap</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">nextBlockMap</span>;</code></pre></div>
+<p>对于新item，将新生成的scope应用到template上生成相应的元素，并插入DOM中。同时设置<code>previousNode</code>为新生成的元素，并将scope等相关信息保存至<code>nextBlockMap</code>数组中。</p>
+
+<p>最后将nextBlockMap的值赋给lastBlockMap，结束本次循环。</p>
+
+<p>以上就是对ngRepeat代码的简要分析，顺手画了一个简单说明ngRepeat工作方式的流程图。可以与上文的分析结合来看:</p>
+
+<p><img src="https://loveky.github.io/img/How-ngRepeat-works.png" alt="" /></p>
+
+<p>如果有任何问题，欢迎留言讨论。</p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://loveky.github.io/tags/angularjs"><span class="tag">AngularJS</span></a></li>
+        
+          <li><a href="https://loveky.github.io/tags/javascript"><span class="tag">JavaScript</span></a></li>
+        
+          <li><a href="https://loveky.github.io/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB"><span class="tag">源码阅读</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        This post was published <strong>1424</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "loveky" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 loveky的流水账</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\[','\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="https://loveky.github.io/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>

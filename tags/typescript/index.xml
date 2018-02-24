@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Typescript on loveky的流水账</title>
+    <link>https://loveky.github.io/tags/typescript/</link>
+    <description>Recent content in Typescript on loveky的流水账</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 12 May 2017 14:09:43 +0800</lastBuildDate>
+    
+	<atom:link href="https://loveky.github.io/tags/typescript/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>[译] 为何TypeScript愈发流行了？</title>
+      <link>https://loveky.github.io/2017/05/12/translate-why-typescript-getting-popular/</link>
+      <pubDate>Fri, 12 May 2017 14:09:43 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2017/05/12/translate-why-typescript-getting-popular/</guid>
+      <description>在掘金翻译计划里翻译的一篇文章。感觉对自己挺有启发的。分享给大家。
+  原文地址：Why TypeScript Is Growing More Popular 原文作者：Mary Branscombe 校对者：Aladdin-ADD Germxu   为何 TypeScript 这么流行呢？许多主流的开发框架依赖于它，它还能提高开发者在不断变化的 JavaScript 世界中的生产力。
+在最近的 Stack Overflow 开发者调查以及年度 RedMonk 编程语言排名中都显示 TypeScript —— 由微软发起的结合了编译高级 JavaScript 特性与静态类型检查及工具的开源项目 —— 正在达到新的人气高度。通过为 JavaScript 提供最基本的检查语法，TypeScript 允许开发者对他们的代码进行类型检查，这可以暴露 bug 并改善大型 JavaScript 代码库的结构和文档。
+参与了 Stack Overflow 调查的开发者中有 9.5% 的人正在使用 TypeScript，这使得 TypeScript 成为了第九流行的编程语言，排名在 Ruby 之前，用户量是 Perl 的两倍。此次 Stack Overflow 调查中的受访者来自不同领域，使用最广泛的两种语言是 JavaScript 和 SQL，这说明此次调查并非只针对前端开发。事实上，TypeScript 程序员出现在了参与 Stack Overflow 调查的所有 4 种工作角色中：web 开发者、桌面开发者、系统管理员与 DevOps 以及数据科学家。
+RedMonk 的排名将 Stack Overflow 的数据与 GitHub 上的 pull request 结合起来试图理解开发者的想法以及他们正在使用什么。TypeScript 同样受到了开发者的欢迎，排名从第 26 位上升到了第 17 位。其中一部分原因是 TypeScript 在 Stack Overflow 上关注度的提升，但主要还是因为在 GitHub 上参与的开发者在不断增多。</description>
+    </item>
+    
+  </channel>
+</rss>

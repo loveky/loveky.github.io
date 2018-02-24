@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ruby on loveky的流水账</title>
+    <link>https://loveky.github.io/tags/ruby/</link>
+    <description>Recent content in Ruby on loveky的流水账</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 06 Dec 2013 23:01:52 +0800</lastBuildDate>
+    
+	<atom:link href="https://loveky.github.io/tags/ruby/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>搭建属于自己的travis pro</title>
+      <link>https://loveky.github.io/2013/12/06/travis-pro/</link>
+      <pubDate>Fri, 06 Dec 2013 23:01:52 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2013/12/06/travis-pro/</guid>
+      <description>Travis是一个众所周知的持续集成服务提供商，免费为开源项目提供持续集成服务。但是对于闭源项目/private repo需要购买travis pro服务才能使用。对于小团队，每月129刀的最低消费实在是一笔不小的开支，因此便有了本文。
+为什么要做这件事？  首先，我们是一群有情(jie)节(cao)的程序猿。我们要对自己的代码负责，保证所有上线的代码都是经过测试的。所有Pull Request的code要经过team member的revew并跑通测试。
+ 其次，我们是一群节(diao)俭(si)的程序猿。Travis Pro每个月129刀的最低消费让我们望(xia)而(niao)却(le)步(!)。  要搭建这样一台持续集成服务器，需要哪些东西？  一台linux主机 (本文中使用的是linode上的Ubuntu 12.04) 一个GitHub账号 (加为你repo的collaborator或是team的member)  如何配置？ Step1 安装Jenkins，非Ubuntu系统安装Jenkins请参考Jenkins官方文档
+wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add - sudo echo &amp;#39;deb http://pkg.jenkins-ci.org/debian binary/&amp;#39; &amp;gt;&amp;gt; /etc/apt/sources.list sudo apt-get update sudo apt-get install jenkins Setp2 为jenkins用户安装rvm
+sudo su - jenkins curl -L https://get.rvm.io | bash -s stable --ruby=1.9.3 Setp3 安装Xvfb。(如果你的测试不需要用模拟的DISPLAY，那你可以忽略此步骤)
+我们测试Rails时需要用capybar跑feature spec。有js相关的测试需要启动一个浏览器来执行测试代码，但是linode上的Ubuntu都是没有display的，因此跑feature spec的时候会遇到无法启动浏览器而报错的情况。Xvfb就是用来创建一个虚拟的Display供启动浏览器用的。
+sudo apt-get install xvfb Xvfb :99 -screen 0 1024x768x16 &amp;gt;&amp;gt; /tmp/Xvfb.</description>
+    </item>
+    
+    <item>
+      <title>sidekiq初体验</title>
+      <link>https://loveky.github.io/2013/06/15/try-sidekiq/</link>
+      <pubDate>Sat, 15 Jun 2013 20:56:19 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2013/06/15/try-sidekiq/</guid>
+      <description>今天Kevin讲了background job，提到了Resque和Sidekiq，并推荐我们使用Sidekiq。于是初步体验了一下。
+Sidekiq在其项目主页上写到:
+ What if 1 Sidekiq process could do the work of 20 Resque or DelayedJob processes?
+ 口气不小啊…⊙﹏⊙b
+安装 只需在Gemfile里添加
+gem &#39;sidekiq&#39;  然后执行bundle install即可。
+使用 这里拿课程中的一段真实code举例说明。在该项目中有一个UserController在新用户注册时会发送欢迎邮件，但是此处发送邮件是一个同步的操作，如果你的网络不稳定则用户在点击注册后可能会等很长时间才能看到注册成功的页面，我们要把发送欢迎邮件的操作转换成一个异步的后台任务。使用Sidekiq前的code如下：
+if @user.save AppMailer.send_welcome_email(@user.id).deliver 要把它转为后台任务，只需改为：
+if @user.save AppMailer.delay.send_welcome_email(@user.id) 测试 改完之后在开发环境中测试正常，接着跑rspec发现有3个spec失败，这三个spec内容如下：
+it &amp;#34;sends out email&amp;#34; do expect { post :create, user: Fabricate.attributes_for(:user) }.to change{ ActionMailer::Base.deliveries.size }.by(1) end it &amp;#34;sends to the right recipient&amp;#34; do post :create, user: Fabricate.attributes_for(:user) email = ActionMailer::Base.deliveries.last expect(email.</description>
+    </item>
+    
+  </channel>
+</rss>

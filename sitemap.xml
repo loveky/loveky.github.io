@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://loveky.github.io/archive/</loc>
+    <lastmod>2017-03-15T22:04:39+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/links/</loc>
+    <lastmod>2018-02-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/about/</loc>
+    <lastmod>2017-03-15T22:04:39+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2017/08/31/recommend-reading-201708/</loc>
+    <lastmod>2017-08-31T12:50:35+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2017/08/03/config-eslint-and-stylelint-in-project/</loc>
+    <lastmod>2017-08-03T12:28:51+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2017/07/24/service-worker-101/</loc>
+    <lastmod>2017-07-24T19:44:21+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2017/07/21/translate-five-tips-for-working-with-redux-in-large-applications/</loc>
+    <lastmod>2017-07-21T10:56:47+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2017/06/06/chrome-devtools-command-menu/</loc>
+    <lastmod>2017-06-06T12:36:41+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2017/06/05/translate-node-stream-everything-you-need-to-know/</loc>
+    <lastmod>2017-06-05T23:21:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2017/05/31/regular-expressions-catastrophic-backtracking/</loc>
+    <lastmod>2017-05-31T20:31:05+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2017/05/12/translate-why-typescript-getting-popular/</loc>
+    <lastmod>2017-05-12T14:09:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2017/04/18/translate-how-i-became-better-programmer/</loc>
+    <lastmod>2017-04-18T21:03:26+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2017/04/09/translate-6-reasons-why-javascripts-async-await-blows-promises-away/</loc>
+    <lastmod>2017-04-09T15:05:15+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2017/03/29/webpack-module-ids/</loc>
+    <lastmod>2017-03-29T21:19:24+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2017/03/27/lock-npm-package-version-in-js-project/</loc>
+    <lastmod>2017-03-27T17:57:54+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2017/03/27/react-conf-2017-video/</loc>
+    <lastmod>2017-03-27T10:25:45+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2017/03/26/trip-gardenexpo-park/</loc>
+    <lastmod>2017-03-26T18:25:21+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2017/03/21/config-fiddler-with-ios-https/</loc>
+    <lastmod>2017-03-21T22:12:46+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2017/03/18/mouse-without-borders/</loc>
+    <lastmod>2017-03-18T22:13:24+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2016/12/01/redux-source-src-createstore/</loc>
+    <lastmod>2016-12-01T09:34:21+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2016/08/04/promise-try/</loc>
+    <lastmod>2016-08-04T09:50:06+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2016/07/12/find-time-to-be-a-better-developer/</loc>
+    <lastmod>2016-07-12T09:31:18+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2015/12/28/koa-source-lib-application/</loc>
+    <lastmod>2015-12-28T09:28:02+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2015/12/19/use-es6-in-jdf-projects/</loc>
+    <lastmod>2015-12-19T09:25:59+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2015/12/03/trimpath-syntax/</loc>
+    <lastmod>2015-12-03T09:24:11+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2014/05/04/di-in-angularjs/</loc>
+    <lastmod>2014-05-04T09:16:50+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2014/04/11/angularjs-ng-model/</loc>
+    <lastmod>2014-04-11T09:12:46+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2014/04/11/angularjs-controller/</loc>
+    <lastmod>2014-04-11T09:10:26+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2014/04/02/angularjs-ngrepeat/</loc>
+    <lastmod>2014-04-02T07:56:17+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2014/04/01/angularjs-directive-compile-link/</loc>
+    <lastmod>2014-04-01T07:53:38+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2014/02/21/use-css3-to-simulate-stop-animation/</loc>
+    <lastmod>2014-02-21T07:46:06+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2014/02/17/farewell-shanghai/</loc>
+    <lastmod>2014-02-17T07:42:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2013/12/18/git-clean/</loc>
+    <lastmod>2013-12-18T07:39:30+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2013/12/06/travis-pro/</loc>
+    <lastmod>2013-12-06T23:01:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2013/11/27/git-rerere/</loc>
+    <lastmod>2013-11-27T22:55:17+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2013/06/15/try-sidekiq/</loc>
+    <lastmod>2013-06-15T20:56:19+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/tags/angularjs/</loc>
+    <lastmod>2014-05-04T09:16:50+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/tags/css3/</loc>
+    <lastmod>2014-02-21T07:46:06+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/tags/es6/</loc>
+    <lastmod>2017-04-09T15:05:15+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/tags/git/</loc>
+    <lastmod>2013-12-18T07:39:30+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/tags/javascript/</loc>
+    <lastmod>2017-08-03T12:28:51+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/tags/jenkins/</loc>
+    <lastmod>2013-12-06T23:01:52+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/tags/koa/</loc>
+    <lastmod>2015-12-28T09:28:02+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/post/</loc>
+    <lastmod>2017-08-31T12:50:35+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/tags/pwa/</loc>
+    <lastmod>2017-07-24T19:44:21+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/tags/react/</loc>
+    <lastmod>2017-07-21T10:56:47+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/tags/redux/</loc>
+    <lastmod>2017-07-21T10:56:47+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/tags/ruby/</loc>
+    <lastmod>2013-12-06T23:01:52+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/tags/</loc>
+    <lastmod>2014-05-04T09:16:50+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/tags/typescript/</loc>
+    <lastmod>2017-05-12T14:09:43+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/tags/webpack/</loc>
+    <lastmod>2017-03-29T21:19:24+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/</loc>
+    <lastmod>2017-03-15T22:04:39+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/tags/%E5%8A%A8%E7%94%BB/</loc>
+    <lastmod>2014-02-21T07:46:06+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/tags/%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2017-06-06T12:36:41+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/tags/%E6%B5%8B%E8%AF%95/</loc>
+    <lastmod>2013-12-06T23:01:52+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/tags/%E6%B8%B8%E8%AE%B0/</loc>
+    <lastmod>2017-03-26T18:25:21+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/</loc>
+    <lastmod>2016-12-01T09:34:21+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/tags/%E7%94%9F%E6%B4%BB/</loc>
+    <lastmod>2017-03-26T18:25:21+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/tags/%E7%BF%BB%E8%AF%91/</loc>
+    <lastmod>2017-07-21T10:56:47+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/tags/%E8%81%8C%E4%B8%9A%E7%94%9F%E6%B6%AF/</loc>
+    <lastmod>2017-04-18T21:03:26+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/tags/%E8%B0%83%E8%AF%95/</loc>
+    <lastmod>2017-03-21T22:12:46+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

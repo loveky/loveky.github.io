@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>React on loveky的流水账</title>
+    <link>https://loveky.github.io/tags/react/</link>
+    <description>Recent content in React on loveky的流水账</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 21 Jul 2017 10:56:47 +0800</lastBuildDate>
+    
+	<atom:link href="https://loveky.github.io/tags/react/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>[译] 在大型应用中使用 Redux 的五个技巧</title>
+      <link>https://loveky.github.io/2017/07/21/translate-five-tips-for-working-with-redux-in-large-applications/</link>
+      <pubDate>Fri, 21 Jul 2017 10:56:47 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2017/07/21/translate-five-tips-for-working-with-redux-in-large-applications/</guid>
+      <description>Redux 是一个很棒的用于管理应用程序“状态”的工具。单向数据流以及对不可变数据的关注使得推断状态的变化变得很简单。每次状态变化都由一个 action 触发，这会导致 reducer 函数返回一个变更后的新状态。由于客户要在我们的平台上管理或发布广告资源，在 AppNexus 使用 Redux 创建的很多用户界面都需要处理大量数据以及非常复杂的交互。在开发这些界面的过程中，我们发现了一些有用的规则和技巧以维持 Redux 易于管理。以下的几点讨论应该可以帮助到任何在大型，数据密集型应用中使用 Redux 的开发者：
+ 第一点: 在存储和访问状态时使用索引和选择器 第二点: 把数据对象，对数据对象的修改以及其它 UI 状态区分开 第三点: 在单页应用的不同页面间共享数据，以及何时不该这么做 第四点: 在状态中的不同节点复用通用的 reducer 函数 第五点: 连接 React 组件与 Redux 状态的最佳实践  1. 使用索引保存数据，使用选择器读取数据 选择正确的数据结构可以对程序的结构和性能产生很大影响。存储来自 API 的可序列化数据可以极大的受益于索引的使用。索引是指一个 JavaScript 对象，其键是我们要存储的数据对象的 id，其值则是这些数据对象自身。这种模式和使用 hashmap 存储数据非常类似，在查询效率方面也有相同的优势。这一点对于精通 Redux 的人来说不足为奇。实际上，Redux 的作者 Dan Abramov 在它的 Redux 教程中就推荐了这种数据结构。
+设想你有一组从 REST API 获取的数据对象，例如来自 /users 服务的数据。假设我们决定直接将这个普通数组存储在状态中，就像在响应中那样。当我们需要获取一个特定用户对象时会怎样呢？我们需要遍历状态中的所有用户。如果用户很多，这可能会是一个代价高昂的操作。如果我们想跟踪用户的一小部分，例如选中和未选中的用户呢？我们要么需要把数据保存在两个数组中，要么就要跟踪这些选中和未选中用户在主数组中的索引（译者注：此处指的是普通意义上的数组索引）。
+然而，我们决定重构代码改用索引的方式存储数据。我们可以在 reducer 中以如下的方式存储数据：
+{ &amp;#34;usersById&amp;#34;: { 123: { id: 123, name: &amp;#34;Jane Doe&amp;#34;, email: &amp;#34;jdoe@example.</description>
+    </item>
+    
+    <item>
+      <title>React Conf 2017视频 百度网盘地址</title>
+      <link>https://loveky.github.io/2017/03/27/react-conf-2017-video/</link>
+      <pubDate>Mon, 27 Mar 2017 10:25:45 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2017/03/27/react-conf-2017-video/</guid>
+      <description>React Conf 2017的全部视频已经在YouTube上放出来了。为了方便在家里的电视上播放，就全部下载了一套。顺便上传了百度网盘一份。感兴趣的可以看看哦。全部720p。
+下载地址：
+http://pan.baidu.com/s/1gfl5FzX</description>
+    </item>
+    
+  </channel>
+</rss>

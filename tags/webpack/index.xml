@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Webpack on loveky的流水账</title>
+    <link>https://loveky.github.io/tags/webpack/</link>
+    <description>Recent content in Webpack on loveky的流水账</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 29 Mar 2017 21:19:24 +0800</lastBuildDate>
+    
+	<atom:link href="https://loveky.github.io/tags/webpack/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Webpack2中的NamedModulesPlugin与HashedModuleIdsPlugin</title>
+      <link>https://loveky.github.io/2017/03/29/webpack-module-ids/</link>
+      <pubDate>Wed, 29 Mar 2017 21:19:24 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2017/03/29/webpack-module-ids/</guid>
+      <description>要讨论Webpack 2中新增的这两个plugin的功能，还要先从使用Webpack打包的项目的前端资源缓存方案说起。
+通常在使用了Webpack的项目中我们会使用CommonsChunkPlugin来将所有依赖的第三方包打包到一个名为vender的chunk中。与此同时，为了避免每次更改项目代码时导致vender chunk的chunkHash改变，我们还会单独生成一个manifest chunk。
+举个例子，假设我们有一个项目，项目中入口文件为index.js。其内容如下：
+import add from &amp;#39;./src/add&amp;#39;; import leftPad from &amp;#39;left-pad&amp;#39;; import jsonp from &amp;#39;jsonp&amp;#39;; add(1, 2); 通常我们的webpack.config.js文件就会有类似如下的配置：
+const path = require(&amp;#39;path&amp;#39;); const webpack = require(&amp;#39;webpack&amp;#39;); module.exports = { entry: { &amp;#39;app&amp;#39;: &amp;#39;./index.js&amp;#39;, &amp;#39;vender&amp;#39;: [&amp;#39;left-pad&amp;#39;, &amp;#39;jsonp&amp;#39;] }, output: { filename: &amp;#39;[name].[chunkHash].js&amp;#39;, path: path.resolve(__dirname, &amp;#39;build&amp;#39;) }, resolve: { extensions: [&amp;#39;.js&amp;#39;] }, module: { ... }, plugins:[ new webpack.optimize.CommonsChunkPlugin({ name: [&amp;#39;vender&amp;#39;, &amp;#39;manifest&amp;#39;], minChunks: Infinity, }) ] }; 这时，通过Webpack打包，会生成三个文件：
+假设我们修改了./src/add.js文件，重新打包，会得到：</description>
+    </item>
+    
+  </channel>
+</rss>

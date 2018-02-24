@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Css3 on loveky的流水账</title>
+    <link>https://loveky.github.io/tags/css3/</link>
+    <description>Recent content in Css3 on loveky的流水账</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 21 Feb 2014 07:46:06 +0800</lastBuildDate>
+    
+	<atom:link href="https://loveky.github.io/tags/css3/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>使用CSS3实现逐格动画</title>
+      <link>https://loveky.github.io/2014/02/21/use-css3-to-simulate-stop-animation/</link>
+      <pubDate>Fri, 21 Feb 2014 07:46:06 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2014/02/21/use-css3-to-simulate-stop-animation/</guid>
+      <description>首先我们有这样一张照片：
+照片长度为1184px，高度为75px，共分为24格。
+首先我们将DIV大小设置成单格照片的大小，49x75。这样在初始状态下看到的就是第一格的照片。 接下来定义的是最终状态也就是最后一格的状态，通过偏移量背景调整到最后一格。
+最后就是定义动画效果，在下面的设置中时长2秒，动画会无限循环下去。
+@keyframes wave { to { background-position: -1184px 0 } } @-webkit-keyframes wave { to { background-position: -1184px 0 } } #hahaha { margin: 50px auto; width: 49px; height: 75px; background: url(&amp;#39;https://raw.github.com/loveky/loveky.github.io/master/assets/images/css3-stop-animation-background.png&amp;#39;) 0 0; -webkit-animation: wave 2s infinite steps(24); animation: 2s wave infinite steps(24); } 效果如下:
+ 由于照片是自己剪辑拼成的，所以偏移量不是太精确。。。</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>在项目中启用 ESLint 与 Stylelint 检查</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="loveky" />
+  <meta name="description" content="多人参与的项目中，经常会多人交叉编辑多个文件。这就导致了各个文件中充斥着各种编码风格。
+最最常见的就有：
+ 使用空格还是Tab 一次缩进是 2 个空格还是 4 个空格 还是 8 个空格 字符串使用单引号还是双引号 JavaScript 一行结尾到底要不要加分号 关键字前后要不要加空格 等等等等  不同风格混杂在一起极大的影响代码的可读性与质量。因此在多人项目中维护一致的代码风格就很重要了。
+本文就简单介绍一下如何通过 ESLint 和 Stylelint 为代码库配置针对 JavaScript 与 CSS（SCSS）的代码风格检查。
+配置 ESLint  安装 eslint
+yarn add --dev eslint // or npm install --save-dev eslint 创建配置文件
+./node_modules/.bin/eslint --init  该命令会在项目目录中创建一个 .eslintrc.json 文件。默认生成的配置文件可能看起来是这个样子：
+{ &amp;quot;rules&amp;quot;: { &amp;quot;semi&amp;quot;: [&amp;quot;error&amp;quot;, &amp;quot;always&amp;quot;], &amp;quot;quotes&amp;quot;: [&amp;quot;error&amp;quot;, &amp;quot;double&amp;quot;] } }  rules 里定义的就是你想要检查的规则了。例如上边示例中就配置了分号和引号的使用。
+完整的配置文档可以在这里找到。
+ 配置 npm script
+配置好以后就可以通过命令" />
+
+  
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@loveky_" />
+    <meta name="twitter:title" content="在项目中启用 ESLint 与 Stylelint 检查" />
+    <meta name="twitter:description" content="多人参与的项目中，经常会多人交叉编辑多个文件。这就导致了各个文件中充斥着各种编码风格。
+最最常见的就有：
+ 使用空格还是Tab 一次缩进是 2 个空格还是 4 个空格 还是 8 个空格 字符串使用单引号还是双引号 JavaScript 一行结尾到底要不要加分号 关键字前后要不要加空格 等等等等  不同风格混杂在一起极大的影响代码的可读性与质量。因此在多人项目中维护一致的代码风格就很重要了。
+本文就简单介绍一下如何通过 ESLint 和 Stylelint 为代码库配置针对 JavaScript 与 CSS（SCSS）的代码风格检查。
+配置 ESLint  安装 eslint
+yarn add --dev eslint // or npm install --save-dev eslint 创建配置文件
+./node_modules/.bin/eslint --init  该命令会在项目目录中创建一个 .eslintrc.json 文件。默认生成的配置文件可能看起来是这个样子：
+{ &amp;quot;rules&amp;quot;: { &amp;quot;semi&amp;quot;: [&amp;quot;error&amp;quot;, &amp;quot;always&amp;quot;], &amp;quot;quotes&amp;quot;: [&amp;quot;error&amp;quot;, &amp;quot;double&amp;quot;] } }  rules 里定义的就是你想要检查的规则了。例如上边示例中就配置了分号和引号的使用。
+完整的配置文档可以在这里找到。
+ 配置 npm script
+配置好以后就可以通过命令" />
+    <meta name="twitter:image" content="https://loveky.github.io/img/avatar.jpg" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="在项目中启用 ESLint 与 Stylelint 检查" />
+  <meta property="og:description" content="多人参与的项目中，经常会多人交叉编辑多个文件。这就导致了各个文件中充斥着各种编码风格。
+最最常见的就有：
+ 使用空格还是Tab 一次缩进是 2 个空格还是 4 个空格 还是 8 个空格 字符串使用单引号还是双引号 JavaScript 一行结尾到底要不要加分号 关键字前后要不要加空格 等等等等  不同风格混杂在一起极大的影响代码的可读性与质量。因此在多人项目中维护一致的代码风格就很重要了。
+本文就简单介绍一下如何通过 ESLint 和 Stylelint 为代码库配置针对 JavaScript 与 CSS（SCSS）的代码风格检查。
+配置 ESLint  安装 eslint
+yarn add --dev eslint // or npm install --save-dev eslint 创建配置文件
+./node_modules/.bin/eslint --init  该命令会在项目目录中创建一个 .eslintrc.json 文件。默认生成的配置文件可能看起来是这个样子：
+{ &amp;quot;rules&amp;quot;: { &amp;quot;semi&amp;quot;: [&amp;quot;error&amp;quot;, &amp;quot;always&amp;quot;], &amp;quot;quotes&amp;quot;: [&amp;quot;error&amp;quot;, &amp;quot;double&amp;quot;] } }  rules 里定义的就是你想要检查的规则了。例如上边示例中就配置了分号和引号的使用。
+完整的配置文档可以在这里找到。
+ 配置 npm script
+配置好以后就可以通过命令" />
+  <meta property="og:url" content="https://loveky.github.io/2017/08/03/config-eslint-and-stylelint-in-project/" />
+  <meta property="og:image" content="https://loveky.github.io/img/avatar.jpg" />
+
+
+
+
+<meta name="generator" content="Hugo 0.36.1" />
+
+
+<link rel="canonical" href="https://loveky.github.io/2017/08/03/config-eslint-and-stylelint-in-project/" />
+<link rel="alternative" href="https://loveky.github.io/index.xml" title="loveky的流水账" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="loveky的流水账" />
+<meta name="msapplication-tooltip" content="loveky的流水账" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://loveky.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://loveky.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://loveky.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://loveky.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://loveky.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://loveky.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://loveky.github.io/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://loveky.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">loveky的流水账</h2>
+  
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://loveky.github.io/">首页</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/tags/">标签</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/archive/">归档</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/links/">链接</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/about/">关于我</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:ylzcylx@gmail.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/loveky" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/loveky_" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//www.zhihu.com/people/loveky" title="Zhihu"><span class="icon icon-zhihu"></span></a>
+      </li>
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://loveky.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">在项目中启用 ESLint 与 Stylelint 检查</h1>
+      <p class="post-meta">@loveky · Aug 3, 2017 · 2 min read</p>
+    </header>
+    <article class="post-content">
+
+<p>多人参与的项目中，经常会多人交叉编辑多个文件。这就导致了各个文件中充斥着各种编码风格。</p>
+
+<p>最最常见的就有：</p>
+
+<ul>
+<li>使用空格还是Tab</li>
+<li>一次缩进是 2 个空格还是 4 个空格 还是 8 个空格</li>
+<li>字符串使用单引号还是双引号</li>
+<li>JavaScript 一行结尾到底要不要加分号</li>
+<li>关键字前后要不要加空格</li>
+<li>等等等等</li>
+</ul>
+
+<p><img src="http://img12.360buyimg.com/uba/jfs/t6022/215/7744894545/87816/9f165c8c/5982a4eeNb64a52ea.png" alt="" /></p>
+
+<p>不同风格混杂在一起极大的影响代码的可读性与质量。因此在多人项目中维护一致的代码风格就很重要了。</p>
+
+<p>本文就简单介绍一下如何通过 ESLint 和 Stylelint 为代码库配置针对 JavaScript 与 CSS（SCSS）的代码风格检查。</p>
+
+<h2 id="配置-eslint">配置 ESLint</h2>
+
+<ol>
+<li><p>安装 <code>eslint</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">yarn add --dev eslint
+// or
+npm install --save-dev eslint</code></pre></div></li>
+
+<li><p>创建配置文件</p>
+
+<pre><code>./node_modules/.bin/eslint --init
+</code></pre>
+
+<p>该命令会在项目目录中创建一个 <code>.eslintrc.json</code> 文件。默认生成的配置文件可能看起来是这个样子：</p>
+
+<pre><code>{
+    &quot;rules&quot;: {
+        &quot;semi&quot;: [&quot;error&quot;, &quot;always&quot;],
+        &quot;quotes&quot;: [&quot;error&quot;, &quot;double&quot;]
+    }
+}
+</code></pre>
+
+<p><code>rules</code> 里定义的就是你想要检查的规则了。例如上边示例中就配置了分号和引号的使用。</p>
+
+<p>完整的配置文档可以在<a href="http://eslint.org/docs/user-guide/configuring">这里</a>找到。</p></li>
+
+<li><p>配置 npm script</p>
+
+<p>配置好以后就可以通过命令</p>
+
+<pre><code>./node_modules/.bin/eslint yourfile.js
+</code></pre>
+
+<p>来执行检查了。每次都输入这么长串的命令有点反人类。所以还是加到 npm script 里。</p>
+
+<pre><code>&quot;eslint&quot;: &quot;eslint src/js&quot;
+</code></pre>
+
+<p>这样以后可以通过</p>
+
+<pre><code>npm run eslint
+// or
+yarn run eslint
+</code></pre>
+
+<p>来执行了。</p></li>
+
+<li><p>引入 airbnb 风格的代码检查</p>
+
+<p>通过前三步已经可以正常使用 eslint 了。但是你需要针对很多详细的规则配置以生成一套自己的代码规范检查机制。更糟糕的是，当团队中有多名成员时可能每个人都有自己的习惯，很难统一，谁也不能说服其他人。</p>
+
+<p>针对以上情况，比较简单的方法就是直接引入大厂的代码风格。这里我们选择<a href="https://github.com/airbnb/javascript">Airbnb 的 JavaScript 代码规范</a>。npm 中已经有了该规范的 eslint 配置版本。我们只需引入项目中即可。</p>
+
+<p>airbnb 规范在 npm 中有两个版本</p>
+
+<ul>
+<li><code>eslint-config-airbnb-base</code> 包含了针对 ES6+ 代码的检查</li>
+<li><code>eslint-config-airbnb</code> 在 <code>eslint-config-airbnb-base</code> 的基础上增加了对 react 和 jsx 语法的检查。
+<br /></li>
+</ul>
+
+<p>以上两种根据自己实际情况选择即可。以下以 <code>eslint-config-airbnb</code> 为例演示。</p>
+
+<p>如果你使用 yarn，那么只需运行：</p>
+
+<pre><code>// 先安装依赖
+yarn add --dev eslint-config-airbnb-base eslint-plugin-import eslint-plugin-react eslint-plugin-jsx-a11y
+    
+// 安装 eslint-config-airbnb
+yarn add --dev eslint-config-airbnb
+</code></pre>
+
+<p>如果你使用 npm，那么你需要先查看依赖包版本：</p>
+
+<pre><code>npm info &quot;eslint-config-airbnb@latest&quot; peerDependencies
+</code></pre>
+
+<p>得到输出：</p>
+
+<pre><code>{ eslint: '^3.19.0 || ^4.3.0',
+  'eslint-plugin-jsx-a11y': '^5.1.1',
+  'eslint-plugin-import': '^2.7.0',
+  'eslint-plugin-react': '^7.1.0' }
+</code></pre>
+
+<p>然后按照以上条件安装依赖包。</p>
+
+<p>最后安装 <code>eslint-config-airbnb</code>:</p>
+
+<pre><code>npm install --save-dev eslint-config-airbnb`
+</code></pre>
+
+<p>安装完成后，在 <code>.eslintrc.json</code> 中添加配置项：</p>
+
+<pre><code>&quot;extends&quot;: &quot;airbnb&quot;
+</code></pre>
+
+<p>就大功告成啦。</p></li>
+</ol>
+
+<h2 id="配置-stylelint">配置 Stylelint</h2>
+
+<ol>
+<li><p>安装 Stylelint 及插件</p>
+
+<pre><code>yarn add --dev stylelint stylelint-order
+</code></pre>
+
+<p>这里除了安装了 stylelint 自身外，还安装了一个 stylelint-order 插件。该插件的作用是强制你按照某个顺序编写 css。例如先写定位，再写盒模型，再写内容区样式，最后写 CSS3 相关属性。这样可以极大的保证我们代码的可读性。</p></li>
+
+<li><p>配置 Stylelint 规则</p>
+
+<p>这一点和 ESLint 很像。二者都只是提供了工具与规则。但如何配置这些规则完全取决于使用者。所以我们要根据需要自己引入或配置规则。</p>
+
+<p>这里我们为 Stylelint 选择了官方的代码风格 <code>stylelint-config-standard</code>。该风格是 Stylelint 的维护者汲取了 GitHub、Google、Airbnb 多家之长生成的。</p>
+
+<p>关于 stylelint-order 插件，官方并没有推荐配置。在 npm 上可以搜到<a href="https://www.npmjs.com/search?q=stylelint+order+config">几份社区维护的配置</a>。我最终选择了 <code>stylelint-config-recess-order</code></p>
+
+<pre><code>yarn add --dev stylelint-config-standard stylelint-config-recess-order
+</code></pre>
+
+<p>然后编辑配置文件 <code>.stylelintrc.json</code> 导入我们安装的配置：</p>
+
+<pre><code>{
+  &quot;extends&quot;: [&quot;stylelint-config-standard&quot;, &quot;stylelint-config-recess-order&quot;],
+  &quot;rules&quot;: {
+    &quot;at-rule-no-unknown&quot;: [true, {&quot;ignoreAtRules&quot; :[
+      &quot;mixin&quot;, &quot;extend&quot;, &quot;content&quot;
+    ]}]
+  }
+}
+</code></pre>
+
+<p>配置文件中单独配置 <code>at-rule-no-unknown</code> 是为了让 Stylelint 支持 SCSS 语法中的 <code>mixin</code>、<code>extend</code>、<code>content</code> 语法。</p></li>
+
+<li><p>配置 npm script</p>
+
+<p>在 package.json 中加入：</p>
+
+<pre><code>&quot;stylelint&quot;: &quot;stylelint src/css/**/*.scss src/css/**/*.css&quot;
+</code></pre>
+
+<p>就可以啦。</p></li>
+</ol>
+
+<h2 id="小结">小结</h2>
+
+<p>最后可以配置一条 npm script 命令同时执行 JavaScript 与 CSS 检查：</p>
+
+<pre><code>&quot;lint&quot;: &quot;run-p eslint stylelint
+</code></pre>
+
+<p>这里使用了 <a href="https://www.npmjs.com/package/npm-run-all">npm-run-all</a> 模块中的 <code>run-p</code> 命令<strong>并行</strong>执行两个任务。</p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://loveky.github.io/tags/javascript"><span class="tag">JavaScript</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        This post was published <strong>205</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "loveky" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 loveky的流水账</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\[','\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="https://loveky.github.io/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>

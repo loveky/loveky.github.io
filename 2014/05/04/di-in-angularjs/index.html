@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>AngularJS中的依赖注入</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="loveky" />
+  <meta name="description" content="本文译自https://docs.angularjs.org/guide/di
+依赖注入 依赖注入(DI)是一种解决组件如何获取其依赖这一问题的设计模式。
+Angular injector子系统负责创建组件，解决它们的依赖，并按要求将它们提供给其他组件。
+如果想深入了解DI，可以查看依赖注入的Wikipedia以及Martin Fowler的这篇Inversion of Control。
+DI in a Nutshell 一个组件要想获取它的依赖可以通过以下三种途径：
+ 直接创建这个依赖的一个实例，通常使用new操作符
+ 通过全局变量查找已经被创建的依赖
+ 依赖可以作为参数传递给需要它的组件
+  前两种获取依赖的方式并不理想，因为这会导致依赖关系被硬编码进代码中。这会导致更新依赖关系变得很复杂。在测试时尤其如此，我们通常会提供mock过的依赖关系以隔离不同组件间的测试，硬编码会导致每次测试都需要修改相关的源码。
+相比之下，第三种方式是最可行的，因为它将解决依赖关系的责任从组件中移除。依赖只是简单的作为参数传递给组件：
+function SomeClass(greeter) { this.greeter = greeter; } SomeClass.prototype.doSomething = function(name) { this.greeter.greet(name); } 在上边的例子中，SomeClass并不关心如何创建或找到greeter，它只是在初始化时从参数列表里取出需要的依赖即可。
+但这样做的问题是，寻找/创建依赖的责任被转交给了调用SomeClass的代码。
+为了统一管理依赖关系，每个Angular应用都有一个injector。injector是一个服务定位器，它负责查找或创建依赖。
+下面是一个使用injector服务的例子：
+// Provide the wiring information in a module var myModule = angular.module(&amp;#39;myModule&amp;#39;, []); 下面的代码告诉injector如何创建greeter服务。需要注意的是greeter又依赖于$window服务。greeter实际上是一个包含greet方法的对象。
+myModule.factory(&amp;#39;greeter&amp;#39;, function($window) { return { greet: function(text) { $window.alert(text); } }; }); 下面的代码演示了如何创建一个injector并通过它来请求greeter服务:
+var injector = angular." />
+
+  
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@loveky_" />
+    <meta name="twitter:title" content="AngularJS中的依赖注入" />
+    <meta name="twitter:description" content="本文译自https://docs.angularjs.org/guide/di
+依赖注入 依赖注入(DI)是一种解决组件如何获取其依赖这一问题的设计模式。
+Angular injector子系统负责创建组件，解决它们的依赖，并按要求将它们提供给其他组件。
+如果想深入了解DI，可以查看依赖注入的Wikipedia以及Martin Fowler的这篇Inversion of Control。
+DI in a Nutshell 一个组件要想获取它的依赖可以通过以下三种途径：
+ 直接创建这个依赖的一个实例，通常使用new操作符
+ 通过全局变量查找已经被创建的依赖
+ 依赖可以作为参数传递给需要它的组件
+  前两种获取依赖的方式并不理想，因为这会导致依赖关系被硬编码进代码中。这会导致更新依赖关系变得很复杂。在测试时尤其如此，我们通常会提供mock过的依赖关系以隔离不同组件间的测试，硬编码会导致每次测试都需要修改相关的源码。
+相比之下，第三种方式是最可行的，因为它将解决依赖关系的责任从组件中移除。依赖只是简单的作为参数传递给组件：
+function SomeClass(greeter) { this.greeter = greeter; } SomeClass.prototype.doSomething = function(name) { this.greeter.greet(name); } 在上边的例子中，SomeClass并不关心如何创建或找到greeter，它只是在初始化时从参数列表里取出需要的依赖即可。
+但这样做的问题是，寻找/创建依赖的责任被转交给了调用SomeClass的代码。
+为了统一管理依赖关系，每个Angular应用都有一个injector。injector是一个服务定位器，它负责查找或创建依赖。
+下面是一个使用injector服务的例子：
+// Provide the wiring information in a module var myModule = angular.module(&amp;#39;myModule&amp;#39;, []); 下面的代码告诉injector如何创建greeter服务。需要注意的是greeter又依赖于$window服务。greeter实际上是一个包含greet方法的对象。
+myModule.factory(&amp;#39;greeter&amp;#39;, function($window) { return { greet: function(text) { $window.alert(text); } }; }); 下面的代码演示了如何创建一个injector并通过它来请求greeter服务:
+var injector = angular." />
+    <meta name="twitter:image" content="https://loveky.github.io/img/avatar.jpg" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="AngularJS中的依赖注入" />
+  <meta property="og:description" content="本文译自https://docs.angularjs.org/guide/di
+依赖注入 依赖注入(DI)是一种解决组件如何获取其依赖这一问题的设计模式。
+Angular injector子系统负责创建组件，解决它们的依赖，并按要求将它们提供给其他组件。
+如果想深入了解DI，可以查看依赖注入的Wikipedia以及Martin Fowler的这篇Inversion of Control。
+DI in a Nutshell 一个组件要想获取它的依赖可以通过以下三种途径：
+ 直接创建这个依赖的一个实例，通常使用new操作符
+ 通过全局变量查找已经被创建的依赖
+ 依赖可以作为参数传递给需要它的组件
+  前两种获取依赖的方式并不理想，因为这会导致依赖关系被硬编码进代码中。这会导致更新依赖关系变得很复杂。在测试时尤其如此，我们通常会提供mock过的依赖关系以隔离不同组件间的测试，硬编码会导致每次测试都需要修改相关的源码。
+相比之下，第三种方式是最可行的，因为它将解决依赖关系的责任从组件中移除。依赖只是简单的作为参数传递给组件：
+function SomeClass(greeter) { this.greeter = greeter; } SomeClass.prototype.doSomething = function(name) { this.greeter.greet(name); } 在上边的例子中，SomeClass并不关心如何创建或找到greeter，它只是在初始化时从参数列表里取出需要的依赖即可。
+但这样做的问题是，寻找/创建依赖的责任被转交给了调用SomeClass的代码。
+为了统一管理依赖关系，每个Angular应用都有一个injector。injector是一个服务定位器，它负责查找或创建依赖。
+下面是一个使用injector服务的例子：
+// Provide the wiring information in a module var myModule = angular.module(&amp;#39;myModule&amp;#39;, []); 下面的代码告诉injector如何创建greeter服务。需要注意的是greeter又依赖于$window服务。greeter实际上是一个包含greet方法的对象。
+myModule.factory(&amp;#39;greeter&amp;#39;, function($window) { return { greet: function(text) { $window.alert(text); } }; }); 下面的代码演示了如何创建一个injector并通过它来请求greeter服务:
+var injector = angular." />
+  <meta property="og:url" content="https://loveky.github.io/2014/05/04/di-in-angularjs/" />
+  <meta property="og:image" content="https://loveky.github.io/img/avatar.jpg" />
+
+
+
+
+<meta name="generator" content="Hugo 0.36.1" />
+
+
+<link rel="canonical" href="https://loveky.github.io/2014/05/04/di-in-angularjs/" />
+<link rel="alternative" href="https://loveky.github.io/index.xml" title="loveky的流水账" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="loveky的流水账" />
+<meta name="msapplication-tooltip" content="loveky的流水账" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://loveky.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://loveky.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://loveky.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://loveky.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://loveky.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://loveky.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://loveky.github.io/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://loveky.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">loveky的流水账</h2>
+  
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://loveky.github.io/">首页</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/tags/">标签</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/archive/">归档</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/links/">链接</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/about/">关于我</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:ylzcylx@gmail.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/loveky" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/loveky_" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//www.zhihu.com/people/loveky" title="Zhihu"><span class="icon icon-zhihu"></span></a>
+      </li>
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://loveky.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">AngularJS中的依赖注入</h1>
+      <p class="post-meta">@loveky · May 4, 2014 · 2 min read</p>
+    </header>
+    <article class="post-content">
+
+<p>本文译自<a href="https://docs.angularjs.org/guide/di">https://docs.angularjs.org/guide/di</a></p>
+
+<h3 id="依赖注入">依赖注入</h3>
+
+<p>依赖注入(DI)是一种解决组件如何获取其依赖这一问题的设计模式。<br />
+Angular injector子系统负责创建组件，解决它们的依赖，并按要求将它们提供给其他组件。<br />
+如果想深入了解DI，可以查看<a href="http://en.wikipedia.org/wiki/Dependency_injection">依赖注入的Wikipedia</a>以及Martin Fowler的这篇<a href="http://martinfowler.com/articles/injection.html">Inversion of Control</a>。</p>
+
+<hr />
+
+<h3 id="di-in-a-nutshell">DI in a Nutshell</h3>
+
+<p>一个组件要想获取它的依赖可以通过以下三种途径：</p>
+
+<ul>
+<li>直接创建这个依赖的一个实例，通常使用<code>new</code>操作符<br /></li>
+<li>通过全局变量查找已经被创建的依赖<br /></li>
+<li>依赖可以作为参数传递给需要它的组件<br /></li>
+</ul>
+
+<p>前两种获取依赖的方式并不理想，因为这会导致依赖关系被硬编码进代码中。这会导致更新依赖关系变得很复杂。在测试时尤其如此，我们通常会提供mock过的依赖关系以隔离不同组件间的测试，硬编码会导致每次测试都需要修改相关的源码。</p>
+
+<p>相比之下，第三种方式是最可行的，因为它将解决依赖关系的责任从组件中移除。依赖只是简单的作为参数传递给组件：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">SomeClass</span>(<span style="color:#a6e22e">greeter</span>) {
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">greeter</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">greeter</span>;
+}
+
+<span style="color:#a6e22e">SomeClass</span>.<span style="color:#a6e22e">prototype</span>.<span style="color:#a6e22e">doSomething</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">name</span>) {
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">greeter</span>.<span style="color:#a6e22e">greet</span>(<span style="color:#a6e22e">name</span>);
+}</code></pre></div>
+<p>在上边的例子中，<code>SomeClass</code>并不关心如何创建或找到<code>greeter</code>，它只是在初始化时从参数列表里取出需要的依赖即可。<br />
+但这样做的问题是，寻找/创建依赖的责任被转交给了调用<code>SomeClass</code>的代码。</p>
+
+<p>为了统一管理依赖关系，每个Angular应用都有一个<a href="https://docs.angularjs.org/api/ng/function/angular.injector">injector</a>。<code>injector</code>是一个服务定位器，它负责查找或创建依赖。</p>
+
+<p>下面是一个使用<code>injector</code>服务的例子：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// Provide the wiring information in a module
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">myModule</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">angular</span>.<span style="color:#a6e22e">module</span>(<span style="color:#e6db74">&#39;myModule&#39;</span>, []);</code></pre></div>
+<p><img src="https://docs.angularjs.org/img/guide/concepts-module-injector.png" alt="Alt text" /></p>
+
+<p>下面的代码告诉injector如何创建<code>greeter</code>服务。需要注意的是<code>greeter</code>又依赖于<code>$window</code>服务。<code>greeter</code>实际上是一个包含<code>greet</code>方法的对象。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">myModule</span>.<span style="color:#a6e22e">factory</span>(<span style="color:#e6db74">&#39;greeter&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">$window</span>) {
+  <span style="color:#66d9ef">return</span> {
+    <span style="color:#a6e22e">greet</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">text</span>) {
+      <span style="color:#a6e22e">$window</span>.<span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">text</span>);
+    }
+  };
+});</code></pre></div>
+<p>下面的代码演示了如何创建一个<code>injector</code>并通过它来请求<code>greeter</code>服务:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">injector</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">angular</span>.<span style="color:#a6e22e">injector</span>([<span style="color:#e6db74">&#39;myModule&#39;</span>, <span style="color:#e6db74">&#39;ng&#39;</span>]);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">greeter</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">injector</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;greeter&#39;</span>);</code></pre></div>
+<p>向外部索要依赖服务解决了硬编码的问题，但是这也意味着<code>injector</code>需要在应用内部到处传递(这违背了<a href="http://en.wikipedia.org/wiki/Law_of_Demeter">Law of Demeter</a>)。为解决这个问题，我们在HTML模板中使用一种声明，以此将创建组件的责任交给<code>injector</code>。示例如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">ng-controller</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;MyController&#34;</span>&gt;
+  &lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">ng-click</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sayHello()&#34;</span>&gt;Hello&lt;/<span style="color:#f92672">button</span>&gt;
+&lt;/<span style="color:#f92672">div</span>&gt;</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">MyController</span>(<span style="color:#a6e22e">$scope</span>, <span style="color:#a6e22e">greeter</span>) {
+  <span style="color:#a6e22e">$scope</span>.<span style="color:#a6e22e">sayHello</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>() {
+    <span style="color:#a6e22e">greeter</span>.<span style="color:#a6e22e">greet</span>(<span style="color:#e6db74">&#39;Hello World&#39;</span>);
+  };
+}</code></pre></div>
+<p>当Angular处理HTML到<code>ng-controller</code>时，它会调用<code>injector</code>生成一个controler的实例:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">injector</span>.<span style="color:#a6e22e">instantiate</span>(<span style="color:#a6e22e">MyController</span>); <span style="color:#960050;background-color:#1e0010">// 同时会处理MyController的依赖</span></code></pre></div>
+<p>所有这些都是自动完成的。通过使用<code>ng-controller</code>来调用injector创建controller实例可以达到既解决了controller的依赖，又不需要将injector暴露给controller的目的。</p>
+
+<p>这就是最终的解决方案。应用程序只需要声明它依赖的服务而不需要与injector打交道，这种组织代码的方法并不违背<code>Law of Demeter</code>。</p>
+
+<hr />
+
+<h3 id="依赖声明">依赖声明</h3>
+
+<h4 id="injector如何知道需要给组件提供那些依赖">injector如何知道需要给组件提供那些依赖？</h4>
+
+<p>程序的开发人员需要明确的声明依赖以便<code>injector</code>决定如何解决依赖关系。在Angular中，有三种方式可以声明一个组件所依赖的服务：</p>
+
+<ul>
+<li>隐式的从函数参数名中推断</li>
+<li>使用<code>$inject</code>属性声明</li>
+<li>使用数组声明</li>
+</ul>
+
+<h4 id="隐式依赖">隐式依赖</h4>
+
+<p>最简单获取依赖的方式就是假定函数的参数名就是依赖的名字:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">MyController</span>(<span style="color:#a6e22e">$scope</span>, <span style="color:#a6e22e">greeter</span>) {
+  <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>}</code></pre></div>
+<p>给定一个函数，<code>injector</code>可以通过检查它的参数名来推断出那些服务需要被注入。在上边的例子中，<code>$scope</code>和<code>greeter</code>就是需要被注入给MyController的两个服务的名字。</p>
+
+<p>虽然这种方式简单易懂，但它并不适用于使用了JavaScript压缩工具/混淆工具的场景，因为那些工具会将函数的参数名重命名。这使得这种方式只适用于原型开发或是演示程序。</p>
+
+<h4 id="inject属性声明">$inject属性声明</h4>
+
+<p>为了在允许压缩工具重命名函数参数的前提下还能注入正确的服务，函数需要使用<code>$inject</code>属性来声明依赖。<code>$inject</code>是一个包含被注入服务名字的数组。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">MyController</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">renamed$scope</span>, <span style="color:#a6e22e">renamedGreeter</span>) {
+  ...
+}
+<span style="color:#a6e22e">MyController</span>[<span style="color:#e6db74">&#39;$inject&#39;</span>] <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;$scope&#39;</span>, <span style="color:#e6db74">&#39;greeter&#39;</span>];</code></pre></div>
+<p>在这方式中，<code>$inject</code>数组中服务的顺序需要与函数参数名中服务的顺序保持一致。以上边的示例代码为例，<code>$scope</code>服务会被注入到<code>renamed$scope</code>中，<code>greeter</code>会被注入到<code>renamedGreeter</code>中。这里的顺序一定要保持对应。</p>
+
+<p>由于这种方式将声明信息作为属性赋给一个函数，它比较适合定义Controller。</p>
+
+<h4 id="数组声明">数组声明</h4>
+
+<p>使用<code>$inject</code>属性的方式声明依赖在定义directives或services的时候并不是太方便，因为这些组件是通过factory方法定义的。</p>
+
+<p>比如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">someModule</span>.<span style="color:#a6e22e">factory</span>(<span style="color:#e6db74">&#39;greeter&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">$window</span>) {
+  <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>});</code></pre></div>
+<p>会导致代码膨胀为以下的形式(需要额外定义一个临时变量)：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">greeterFactory</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">renamed$window</span>) {
+  <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>};
+
+<span style="color:#a6e22e">greeterFactory</span>.<span style="color:#a6e22e">$inject</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;$window&#39;</span>];
+
+<span style="color:#a6e22e">someModule</span>.<span style="color:#a6e22e">factory</span>(<span style="color:#e6db74">&#39;greeter&#39;</span>, <span style="color:#a6e22e">greeterFactory</span>);</code></pre></div>
+<p>为了避免这种情况，第三种声明方式允许你以如下方式声明：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">someModule</span>.<span style="color:#a6e22e">factory</span>(<span style="color:#e6db74">&#39;greeter&#39;</span>, [<span style="color:#e6db74">&#39;$window&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">renamed$window</span>) {
+  <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>}]);</code></pre></div>
+<p>在这里，我们没有简单的把一个factory作为第二个参数，取而代之的是一个包含一系列服务名的字符串以及一个函数的数组。</p>
+
+<p>以上三种方式可以互换，且可以在Angular系统中任何支持依赖注入的地方使用。</p>
+
+<hr />
+
+<h3 id="哪些地方可以使用依赖注入">哪些地方可以使用依赖注入？</h3>
+
+<p>依赖注入的使用在Angular相当常见。你可以在定义组件或是为一个模块提供<code>run</code>/<code>config</code>块时使用：<br />
+- 组件，比如service，directive，filter和animation，这些由可注入的factory方法定义的组件可以将service作为依赖注入。<br />
+- <code>run</code>或<code>config</code>方法接收一个函数作为参数，这个函数也可以把services作为依赖注入。<br />
+- Controller由构造函数定义，构造函数可以注入service作为依赖，同时还有一些特殊依赖也可以被注入到Controller的构造函数中。</p>
+
+<h4 id="factory方法">Factory方法</h4>
+
+<p>Factory方法用来创造Angular中的绝大部分对象，比如directive，service以及filter。factory方法会向module注册，声明factory方法的推荐做法是：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">angular</span>.<span style="color:#a6e22e">module</span>(<span style="color:#e6db74">&#39;myModule&#39;</span>, [])
+  .<span style="color:#a6e22e">factory</span>(<span style="color:#e6db74">&#39;serviceId&#39;</span>, [<span style="color:#e6db74">&#39;depService&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">depService</span>) {
+    ...
+  }])
+  .<span style="color:#a6e22e">directive</span>(<span style="color:#e6db74">&#39;directiveName&#39;</span>, [<span style="color:#e6db74">&#39;depService&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">depService</span>) {
+    ...
+  }])
+  .<span style="color:#a6e22e">filter</span>(<span style="color:#e6db74">&#39;filterName&#39;</span>, [<span style="color:#e6db74">&#39;depService&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">depService</span>) {
+    ...
+  }]);</code></pre></div>
+<h4 id="module方法">Module方法</h4>
+
+<p>我们可以通过<code>run</code>方法和<code>config</code>方法来指定一个模块在配置阶段和运行阶段要执行的代码。这些方法就像factory方法一样可以注入依赖：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">angular</span>.<span style="color:#a6e22e">module</span>(<span style="color:#e6db74">&#39;myModule&#39;</span>, [])
+  .<span style="color:#a6e22e">config</span>([<span style="color:#e6db74">&#39;depProvider&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">depProvider</span>){
+    ...
+  }])
+  .<span style="color:#a6e22e">run</span>([<span style="color:#e6db74">&#39;depService&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">depService</span>) {
+    ...
+  }]);</code></pre></div>
+<h4 id="controller">Controller</h4>
+
+<p>Controller是负责为页面元素提供应用逻辑的构造函数。定义Controller的推荐方式是使用数组声明：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">someModule</span>.<span style="color:#a6e22e">controller</span>(<span style="color:#e6db74">&#39;MyController&#39;</span>, [<span style="color:#e6db74">&#39;$scope&#39;</span>, <span style="color:#e6db74">&#39;dep1&#39;</span>, <span style="color:#e6db74">&#39;dep2&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">$scope</span>, <span style="color:#a6e22e">dep1</span>, <span style="color:#a6e22e">dep2</span>) {
+  ...
+  <span style="color:#a6e22e">$scope</span>.<span style="color:#a6e22e">aMethod</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>() {
+    ...
+  }
+  ...
+}]);</code></pre></div>
+<p>这样既避免了创建全局函数又可以不受代码压缩的影响。<br />
+与service不同的是，一个应用中可以有同一个Controller的多个实例。每一个<code>ng-controller</code>语句都会创建一个新的实例。<br />
+此外，还可以向Controller注入以下依赖：</p>
+
+<ul>
+<li><code>$scope</code>：Controller总是与DOM中某个元素相关联，因此都有一个对应的scope用来隔离访问。其他组件，比如service只能访问<code>$rootScope</code>服务。<br /></li>
+<li><code>$route</code>：如果一个Controller作为路由的一部分被实例化，那么所有被解析为路由一部分的值都会通过<code>$route</code>注入到Controller中。</li>
+</ul>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://loveky.github.io/tags/angularjs"><span class="tag">AngularJS</span></a></li>
+        
+          <li><a href="https://loveky.github.io/tags/javascript"><span class="tag">JavaScript</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        This post was published <strong>1392</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "loveky" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 loveky的流水账</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\[','\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="https://loveky.github.io/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>

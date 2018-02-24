@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>调试 on loveky的流水账</title>
+    <link>https://loveky.github.io/tags/%E8%B0%83%E8%AF%95/</link>
+    <description>Recent content in 调试 on loveky的流水账</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 21 Mar 2017 22:12:46 +0800</lastBuildDate>
+    
+	<atom:link href="https://loveky.github.io/tags/%E8%B0%83%E8%AF%95/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>配置Fiddler拦截iOS/Andorid的https请求</title>
+      <link>https://loveky.github.io/2017/03/21/config-fiddler-with-ios-https/</link>
+      <pubDate>Tue, 21 Mar 2017 22:12:46 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2017/03/21/config-fiddler-with-ios-https/</guid>
+      <description>Fiddler可以配置用来拦截https请求。但默认配置下仅支持拦截PC上的请求。在移动端上的https请求会因为证书问题而失败。如下图所示：
+要解决这个问题，只需要在iOS/Android系统上安装一个安全证书即可。具体步骤如下：
+ 访问http://www.telerik.com/fiddler/add-ons，下载并安装CertMaker for iOS and Android插件。
+ 安装完成后重启Fiddler。
+ 重启后浏览器访问http://ipv4.fiddler:8888，如果看到如下内容，表示安装成功。
+ 在手机浏览器（iOS建议Safari）里打开前边提到的链接，点击页面中最后一个链接FiddlerRoot certificate。下载完后会提示如下页面：
+点击安装，弹出安全认证，要求输入密码。输入后出现以下页面：
+继续点击安装。安装成功提示如下：
+  到这里，所有的配置工作就全部做完了。现在再次访问https页面，已经可以正常打开了。</description>
+    </item>
+    
+  </channel>
+</rss>

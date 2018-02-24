@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>sidekiq初体验</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="loveky" />
+  <meta name="description" content="今天Kevin讲了background job，提到了Resque和Sidekiq，并推荐我们使用Sidekiq。于是初步体验了一下。
+Sidekiq在其项目主页上写到:
+ What if 1 Sidekiq process could do the work of 20 Resque or DelayedJob processes?
+ 口气不小啊…⊙﹏⊙b
+安装 只需在Gemfile里添加
+gem &#39;sidekiq&#39;  然后执行bundle install即可。
+使用 这里拿课程中的一段真实code举例说明。在该项目中有一个UserController在新用户注册时会发送欢迎邮件，但是此处发送邮件是一个同步的操作，如果你的网络不稳定则用户在点击注册后可能会等很长时间才能看到注册成功的页面，我们要把发送欢迎邮件的操作转换成一个异步的后台任务。使用Sidekiq前的code如下：
+if @user.save AppMailer.send_welcome_email(@user.id).deliver 要把它转为后台任务，只需改为：
+if @user.save AppMailer.delay.send_welcome_email(@user.id) 测试 改完之后在开发环境中测试正常，接着跑rspec发现有3个spec失败，这三个spec内容如下：
+it &amp;#34;sends out email&amp;#34; do expect { post :create, user: Fabricate.attributes_for(:user) }.to change{ ActionMailer::Base.deliveries.size }.by(1) end it &amp;#34;sends to the right recipient&amp;#34; do post :create, user: Fabricate.attributes_for(:user) email = ActionMailer::Base.deliveries.last expect(email." />
+
+  
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@loveky_" />
+    <meta name="twitter:title" content="sidekiq初体验" />
+    <meta name="twitter:description" content="今天Kevin讲了background job，提到了Resque和Sidekiq，并推荐我们使用Sidekiq。于是初步体验了一下。
+Sidekiq在其项目主页上写到:
+ What if 1 Sidekiq process could do the work of 20 Resque or DelayedJob processes?
+ 口气不小啊…⊙﹏⊙b
+安装 只需在Gemfile里添加
+gem &#39;sidekiq&#39;  然后执行bundle install即可。
+使用 这里拿课程中的一段真实code举例说明。在该项目中有一个UserController在新用户注册时会发送欢迎邮件，但是此处发送邮件是一个同步的操作，如果你的网络不稳定则用户在点击注册后可能会等很长时间才能看到注册成功的页面，我们要把发送欢迎邮件的操作转换成一个异步的后台任务。使用Sidekiq前的code如下：
+if @user.save AppMailer.send_welcome_email(@user.id).deliver 要把它转为后台任务，只需改为：
+if @user.save AppMailer.delay.send_welcome_email(@user.id) 测试 改完之后在开发环境中测试正常，接着跑rspec发现有3个spec失败，这三个spec内容如下：
+it &amp;#34;sends out email&amp;#34; do expect { post :create, user: Fabricate.attributes_for(:user) }.to change{ ActionMailer::Base.deliveries.size }.by(1) end it &amp;#34;sends to the right recipient&amp;#34; do post :create, user: Fabricate.attributes_for(:user) email = ActionMailer::Base.deliveries.last expect(email." />
+    <meta name="twitter:image" content="https://loveky.github.io/img/avatar.jpg" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="sidekiq初体验" />
+  <meta property="og:description" content="今天Kevin讲了background job，提到了Resque和Sidekiq，并推荐我们使用Sidekiq。于是初步体验了一下。
+Sidekiq在其项目主页上写到:
+ What if 1 Sidekiq process could do the work of 20 Resque or DelayedJob processes?
+ 口气不小啊…⊙﹏⊙b
+安装 只需在Gemfile里添加
+gem &#39;sidekiq&#39;  然后执行bundle install即可。
+使用 这里拿课程中的一段真实code举例说明。在该项目中有一个UserController在新用户注册时会发送欢迎邮件，但是此处发送邮件是一个同步的操作，如果你的网络不稳定则用户在点击注册后可能会等很长时间才能看到注册成功的页面，我们要把发送欢迎邮件的操作转换成一个异步的后台任务。使用Sidekiq前的code如下：
+if @user.save AppMailer.send_welcome_email(@user.id).deliver 要把它转为后台任务，只需改为：
+if @user.save AppMailer.delay.send_welcome_email(@user.id) 测试 改完之后在开发环境中测试正常，接着跑rspec发现有3个spec失败，这三个spec内容如下：
+it &amp;#34;sends out email&amp;#34; do expect { post :create, user: Fabricate.attributes_for(:user) }.to change{ ActionMailer::Base.deliveries.size }.by(1) end it &amp;#34;sends to the right recipient&amp;#34; do post :create, user: Fabricate.attributes_for(:user) email = ActionMailer::Base.deliveries.last expect(email." />
+  <meta property="og:url" content="https://loveky.github.io/2013/06/15/try-sidekiq/" />
+  <meta property="og:image" content="https://loveky.github.io/img/avatar.jpg" />
+
+
+
+
+<meta name="generator" content="Hugo 0.36.1" />
+
+
+<link rel="canonical" href="https://loveky.github.io/2013/06/15/try-sidekiq/" />
+<link rel="alternative" href="https://loveky.github.io/index.xml" title="loveky的流水账" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="loveky的流水账" />
+<meta name="msapplication-tooltip" content="loveky的流水账" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://loveky.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://loveky.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://loveky.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://loveky.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://loveky.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://loveky.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://loveky.github.io/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://loveky.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">loveky的流水账</h2>
+  
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://loveky.github.io/">首页</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/tags/">标签</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/archive/">归档</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/links/">链接</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/about/">关于我</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:ylzcylx@gmail.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/loveky" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/loveky_" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//www.zhihu.com/people/loveky" title="Zhihu"><span class="icon icon-zhihu"></span></a>
+      </li>
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://loveky.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">sidekiq初体验</h1>
+      <p class="post-meta">@loveky · Jun 15, 2013 · 1 min read</p>
+    </header>
+    <article class="post-content">
+
+<p>今天Kevin讲了background job，提到了Resque和Sidekiq，并推荐我们使用Sidekiq。于是初步体验了一下。</p>
+
+<p>Sidekiq在其<a href="http://sidekiq.org/">项目主页</a>上写到:</p>
+
+<blockquote>
+<p>What if 1 Sidekiq process could do the work of 20 Resque or DelayedJob processes?</p>
+</blockquote>
+
+<p>口气不小啊…⊙﹏⊙b</p>
+
+<h3 id="安装">安装</h3>
+
+<p>只需在Gemfile里添加</p>
+
+<pre><code>gem 'sidekiq'   
+</code></pre>
+
+<p>然后执行<code>bundle install</code>即可。</p>
+
+<h3 id="使用">使用</h3>
+
+<p>这里拿课程中的一段真实code举例说明。在该项目中有一个UserController在新用户注册时会发送欢迎邮件，但是此处发送邮件是一个同步的操作，如果你的网络不稳定则用户在点击<code>注册</code>后可能会等很长时间才能看到注册成功的页面，我们要把发送欢迎邮件的操作转换成一个异步的后台任务。使用Sidekiq前的code如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">if</span> @user<span style="color:#f92672">.</span>save
+    <span style="color:#66d9ef">AppMailer</span><span style="color:#f92672">.</span>send_welcome_email(@user<span style="color:#f92672">.</span>id)<span style="color:#f92672">.</span>deliver</code></pre></div>
+<p>要把它转为后台任务，只需改为：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">if</span> @user<span style="color:#f92672">.</span>save
+  <span style="color:#66d9ef">AppMailer</span><span style="color:#f92672">.</span>delay<span style="color:#f92672">.</span>send_welcome_email(@user<span style="color:#f92672">.</span>id)</code></pre></div>
+<h3 id="测试">测试</h3>
+
+<p>改完之后在开发环境中测试正常，接着跑<code>rspec</code>发现有3个spec失败，这三个spec内容如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">it <span style="color:#e6db74">&#34;sends out email&#34;</span> <span style="color:#66d9ef">do</span>
+    expect {
+        post <span style="color:#e6db74">:create</span>, <span style="color:#e6db74">user</span>: <span style="color:#66d9ef">Fabricate</span><span style="color:#f92672">.</span>attributes_for(<span style="color:#e6db74">:user</span>)
+    }<span style="color:#f92672">.</span>to change{ <span style="color:#66d9ef">ActionMailer</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Base</span><span style="color:#f92672">.</span>deliveries<span style="color:#f92672">.</span>size }<span style="color:#f92672">.</span>by(<span style="color:#ae81ff">1</span><span style="color:#f92672"></span>)
+<span style="color:#66d9ef">end</span>
+
+it <span style="color:#e6db74">&#34;sends to the right recipient&#34;</span> <span style="color:#66d9ef">do</span>
+    post <span style="color:#e6db74">:create</span>, <span style="color:#e6db74">user</span>: <span style="color:#66d9ef">Fabricate</span><span style="color:#f92672">.</span>attributes_for(<span style="color:#e6db74">:user</span>)
+    email <span style="color:#f92672">=</span> <span style="color:#66d9ef">ActionMailer</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Base</span><span style="color:#f92672">.</span>deliveries<span style="color:#f92672">.</span>last
+    expect(email<span style="color:#f92672">.</span>to)<span style="color:#f92672">.</span>to match_array(<span style="color:#f92672">[</span><span style="color:#66d9ef">User</span><span style="color:#f92672">.</span>last<span style="color:#f92672">.</span>email<span style="color:#f92672">]</span>)
+<span style="color:#66d9ef">end</span>
+
+it <span style="color:#e6db74">&#34;send with the right content&#34;</span> <span style="color:#66d9ef">do</span>
+    post <span style="color:#e6db74">:create</span>, <span style="color:#e6db74">user</span>: <span style="color:#66d9ef">Fabricate</span><span style="color:#f92672">.</span>attributes_for(<span style="color:#e6db74">:user</span>)
+    email <span style="color:#f92672">=</span> <span style="color:#66d9ef">ActionMailer</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Base</span><span style="color:#f92672">.</span>deliveries<span style="color:#f92672">.</span>last
+    expect(email<span style="color:#f92672">.</span>body)<span style="color:#f92672">.</span>to <span style="color:#66d9ef">include</span>(<span style="color:#66d9ef">User</span><span style="color:#f92672">.</span>last<span style="color:#f92672">.</span>full_name)
+<span style="color:#66d9ef">end</span></code></pre></div>
+<p>第一个spec用于测试create操作是否在ActionMailer的deliver queue里创建了一条新纪录<br />
+第二个spec用于测试发出的邮件是否发给了用户注册时提供的地址<br />
+第三个spec用于测试邮件body中是否包含指定的关键字</p>
+
+<p>这里测试失败是因为同步操作变成了异步操作，在spec中模拟post操作后，Rspec立即去查看ActionMailer的queue，而这时异步的Sidekiq任务还没有执行，所以queue是空的。因此Rspec认为邮件并没有被发出去，所以3个spec失败了。</p>
+
+<p>知道原因后解决问题就简单了，我们需要Sidekiq在test环境中不要异步执行后台任务，而是同步的执行。要实现这个需求，只需在spec_helper.rb中添加一行<code>require 'sidekiq/testing/inline'</code>即可。详情可参考Sidekiq的<a href="https://github.com/mperham/sidekiq/wiki/Testing">Wiki</a></p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://loveky.github.io/tags/ruby"><span class="tag">Ruby</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        This post was published <strong>1714</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "loveky" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 loveky的流水账</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\[','\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="https://loveky.github.io/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>

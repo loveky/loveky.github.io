@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>[译] TrimPath模板引擎语法</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="loveky" />
+  <meta name="description" content="本文翻译自JavaScript Template Syntax
+表达式与表达式修饰符  ${expr} ${expr|modifier} ${expr|modifier1|modifier2|...|modifierN} ${expr|modifier1:argExpr1_1} ${expr|modifier1:argExpr1_1,argExpr1_2,...,argExpr1_N} ${expr|modifier1:argExpr1_1,argExpr1_2|...|modifierN:argExprN_1,argExprN_2,...,argExprN_M}   expr可以是不包含右花括号}的任何合法JavaScript表达式 修饰符的格式是modifierName[:argExpr1[,argExpr2[,argExprN]]]  argExpr可以是任何合法的expr    Examples: ${customer.firstName} ${customer.firstName|capitalize} ${customer.firstName|default:&amp;quot;no name&amp;quot;|capitalize} ${article.getCreationDate()|default:new Date()|toCalenderControl:&amp;quot;YYYY.MM.DD&amp;quot;,true,&amp;quot;Creation Date&amp;quot;} ${(lastQuarter.calcRevenue() - fixedCosts) / 1000000}  这里有一份内置的修饰符列表，你也可以通过TrimPath提供的API来创建自定义的修饰符。
+表达式还可以写成${% customer.firstName %}这种形式，多出的%字符允许你的表达式中出现花括号}。例如：
+ Visit our ${% emitLink(&#39;Solutions and Products&#39;, { color: &#39;red&#39;, blink: false }) %}  表达式中的空白字符是可选的，你也可以写成下面的格式：
+ ${%customer.firstName%} ${%customer.firstName|capitalize%}  声明 声明标签可以嵌套使用。
+控制流  {if testExpr} {elseif testExpr} {else} {/if}   testExpr可以是任何不包含}的JavaScript表达式 testExpr不需要被(和)包围  示例：" />
+
+  
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@loveky_" />
+    <meta name="twitter:title" content="[译] TrimPath模板引擎语法" />
+    <meta name="twitter:description" content="本文翻译自JavaScript Template Syntax
+表达式与表达式修饰符  ${expr} ${expr|modifier} ${expr|modifier1|modifier2|...|modifierN} ${expr|modifier1:argExpr1_1} ${expr|modifier1:argExpr1_1,argExpr1_2,...,argExpr1_N} ${expr|modifier1:argExpr1_1,argExpr1_2|...|modifierN:argExprN_1,argExprN_2,...,argExprN_M}   expr可以是不包含右花括号}的任何合法JavaScript表达式 修饰符的格式是modifierName[:argExpr1[,argExpr2[,argExprN]]]  argExpr可以是任何合法的expr    Examples: ${customer.firstName} ${customer.firstName|capitalize} ${customer.firstName|default:&amp;quot;no name&amp;quot;|capitalize} ${article.getCreationDate()|default:new Date()|toCalenderControl:&amp;quot;YYYY.MM.DD&amp;quot;,true,&amp;quot;Creation Date&amp;quot;} ${(lastQuarter.calcRevenue() - fixedCosts) / 1000000}  这里有一份内置的修饰符列表，你也可以通过TrimPath提供的API来创建自定义的修饰符。
+表达式还可以写成${% customer.firstName %}这种形式，多出的%字符允许你的表达式中出现花括号}。例如：
+ Visit our ${% emitLink(&#39;Solutions and Products&#39;, { color: &#39;red&#39;, blink: false }) %}  表达式中的空白字符是可选的，你也可以写成下面的格式：
+ ${%customer.firstName%} ${%customer.firstName|capitalize%}  声明 声明标签可以嵌套使用。
+控制流  {if testExpr} {elseif testExpr} {else} {/if}   testExpr可以是任何不包含}的JavaScript表达式 testExpr不需要被(和)包围  示例：" />
+    <meta name="twitter:image" content="https://loveky.github.io/img/avatar.jpg" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="[译] TrimPath模板引擎语法" />
+  <meta property="og:description" content="本文翻译自JavaScript Template Syntax
+表达式与表达式修饰符  ${expr} ${expr|modifier} ${expr|modifier1|modifier2|...|modifierN} ${expr|modifier1:argExpr1_1} ${expr|modifier1:argExpr1_1,argExpr1_2,...,argExpr1_N} ${expr|modifier1:argExpr1_1,argExpr1_2|...|modifierN:argExprN_1,argExprN_2,...,argExprN_M}   expr可以是不包含右花括号}的任何合法JavaScript表达式 修饰符的格式是modifierName[:argExpr1[,argExpr2[,argExprN]]]  argExpr可以是任何合法的expr    Examples: ${customer.firstName} ${customer.firstName|capitalize} ${customer.firstName|default:&amp;quot;no name&amp;quot;|capitalize} ${article.getCreationDate()|default:new Date()|toCalenderControl:&amp;quot;YYYY.MM.DD&amp;quot;,true,&amp;quot;Creation Date&amp;quot;} ${(lastQuarter.calcRevenue() - fixedCosts) / 1000000}  这里有一份内置的修饰符列表，你也可以通过TrimPath提供的API来创建自定义的修饰符。
+表达式还可以写成${% customer.firstName %}这种形式，多出的%字符允许你的表达式中出现花括号}。例如：
+ Visit our ${% emitLink(&#39;Solutions and Products&#39;, { color: &#39;red&#39;, blink: false }) %}  表达式中的空白字符是可选的，你也可以写成下面的格式：
+ ${%customer.firstName%} ${%customer.firstName|capitalize%}  声明 声明标签可以嵌套使用。
+控制流  {if testExpr} {elseif testExpr} {else} {/if}   testExpr可以是任何不包含}的JavaScript表达式 testExpr不需要被(和)包围  示例：" />
+  <meta property="og:url" content="https://loveky.github.io/2015/12/03/trimpath-syntax/" />
+  <meta property="og:image" content="https://loveky.github.io/img/avatar.jpg" />
+
+
+
+
+<meta name="generator" content="Hugo 0.36.1" />
+
+
+<link rel="canonical" href="https://loveky.github.io/2015/12/03/trimpath-syntax/" />
+<link rel="alternative" href="https://loveky.github.io/index.xml" title="loveky的流水账" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="loveky的流水账" />
+<meta name="msapplication-tooltip" content="loveky的流水账" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://loveky.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://loveky.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://loveky.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://loveky.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://loveky.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://loveky.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://loveky.github.io/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://loveky.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">loveky的流水账</h2>
+  
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://loveky.github.io/">首页</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/tags/">标签</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/archive/">归档</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/links/">链接</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/about/">关于我</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:ylzcylx@gmail.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/loveky" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/loveky_" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//www.zhihu.com/people/loveky" title="Zhihu"><span class="icon icon-zhihu"></span></a>
+      </li>
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://loveky.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">[译] TrimPath模板引擎语法</h1>
+      <p class="post-meta">@loveky · Dec 3, 2015 · 3 min read</p>
+    </header>
+    <article class="post-content">
+
+<p>本文翻译自<a href="https://code.google.com/p/trimpath/wiki/JavaScriptTemplateSyntax">JavaScript Template Syntax</a></p>
+
+<h2 id="表达式与表达式修饰符">表达式与表达式修饰符</h2>
+
+<pre><code>  ${expr}
+  ${expr|modifier}
+  ${expr|modifier1|modifier2|...|modifierN}
+  ${expr|modifier1:argExpr1_1}
+  ${expr|modifier1:argExpr1_1,argExpr1_2,...,argExpr1_N}
+  ${expr|modifier1:argExpr1_1,argExpr1_2|...|modifierN:argExprN_1,argExprN_2,...,argExprN_M}
+</code></pre>
+
+<ul>
+<li><code>expr</code>可以是不包含右花括号<code>}</code>的任何合法JavaScript表达式</li>
+<li>修饰符的格式是<code>modifierName[:argExpr1[,argExpr2[,argExprN]]]</code>
+
+<ul>
+<li><code>argExpr</code>可以是任何合法的<code>expr</code></li>
+</ul></li>
+</ul>
+
+<pre><code>  Examples:
+  ${customer.firstName}
+  ${customer.firstName|capitalize}
+  ${customer.firstName|default:&quot;no name&quot;|capitalize}
+  ${article.getCreationDate()|default:new Date()|toCalenderControl:&quot;YYYY.MM.DD&quot;,true,&quot;Creation Date&quot;}
+  ${(lastQuarter.calcRevenue() - fixedCosts) / 1000000}
+</code></pre>
+
+<p>这里有一份<a href="http://code.google.com/p/trimpath/wiki/JavaScriptTemplateModifiers">内置的修饰符列表</a>，你也可以通过TrimPath提供的<a href="http://code.google.com/p/trimpath/wiki/JavaScriptTemplateAPI">API</a>来创建自定义的修饰符。</p>
+
+<p>表达式还可以写成<code>${% customer.firstName %}</code>这种形式，多出的<code>%</code>字符允许你的表达式中出现花括号<code>}</code>。例如：</p>
+
+<pre><code>  Visit our ${% emitLink('Solutions and Products', 
+                            { color: 'red', blink: false }) %} 
+</code></pre>
+
+<p>表达式中的空白字符是可选的，你也可以写成下面的格式：</p>
+
+<pre><code>  ${%customer.firstName%}
+  ${%customer.firstName|capitalize%}
+</code></pre>
+
+<h2 id="声明">声明</h2>
+
+<p>声明标签可以嵌套使用。</p>
+
+<h3 id="控制流">控制流</h3>
+
+<pre><code>  {if testExpr} 
+    {elseif testExpr}
+    {else}
+  {/if}
+</code></pre>
+
+<ul>
+<li><code>testExpr</code>可以是任何不包含<code>}</code>的JavaScript表达式</li>
+<li><code>testExpr</code>不需要被<code>(</code>和<code>)</code>包围</li>
+</ul>
+
+<p>示例：</p>
+
+<pre><code>  {if customer != null &amp;&amp; customer.balance &gt; 1000}
+    We love you!
+  {/if}
+
+  {if user.karma &gt; 100}
+      Welcome to the Black Sun.
+  {elseif user.isHero}
+      Sir, yes sir!  Welcome!
+      {if user.lastName == &quot;Yen&quot;}
+         Fancy some apple pie, sir?
+      {/if}
+  {/if}
+</code></pre>
+
+<pre><code>  &lt;a href=&quot;/login{if returnURL != null &amp;&amp; returnURL != 'main'}?goto=${returnURL}{/if}&quot;&gt;Login&lt;/a&gt;
+</code></pre>
+
+<p>TrimPath引擎还定义了一个帮助方法叫做<code>defined(str)</code>，它可以检查给定的参数是否是JavaScript中的<code>undefined</code>值。通过它可以很方便的判断某个值是否被定义：</p>
+
+<pre><code>  {if defined('adminMessage')}
+    System Administrator Important NOTICE: ${adminMessage}
+  {/if}
+</code></pre>
+
+<h3 id="循环">循环</h3>
+
+<pre><code>  {for varName in listExpr}
+  {/for}
+
+
+  {for varName in listExpr}
+    ...循环主体...
+  {forelse}
+    ...当listExpr的值是null或者长度为0时执行此区域...
+  {/for}
+</code></pre>
+
+<ul>
+<li><code>varName</code>可以是任何合法的JavaScript变量名称</li>
+<li><code>listExpr</code>是一个JavaScirpt表达式，它执行结果必须是数组，对象或是null值中的1种。<code>listExpr</code>只会被执行一次。</li>
+</ul>
+
+<p>循环过程中可以访问2个额外的变量：<br />
+- <code>__LIST__varName</code> - 保存了<code>listExpr</code>的执行结果
+- <code>varName_index</code> - 保存了循环过程中当前值对应的索引或是键名。</p>
+
+<p>示例：</p>
+
+<pre><code>  {for x in customer.getRecentOrders()}
+    ${x_index} : ${x.orderNumber} &lt;br/&gt;
+  {forelse}
+    You have no recent orders.
+  {/for}
+
+ 以下是与上边代码功能相同的伪代码
+  var __LIST__x = customer.getRecentOrders();
+  if (__LIST__x != null &amp;&amp; __LIST__x.length &gt; 0) {
+    for (var x_index in __LIST__x) {
+      var x = __LIST__x[x_index];
+      ${x_index} : {$x.orderNumber} &lt;br/&gt;
+    }
+  } else {
+    You have no recent orders.
+  }
+</code></pre>
+
+<h3 id="变量声明">变量声明</h3>
+
+<pre><code>  {var varName}
+  {var varName = varInitExpr}
+</code></pre>
+
+<ul>
+<li><code>varName</code>可以是任何合法的JavaScript变量名</li>
+<li><code>varinitExpr</code>不可以包含<code>}</code></li>
+</ul>
+
+<p>示例：</p>
+
+<pre><code> {var temp = crypto.generateRandomPrime(4096)}
+  Your prime is ${temp}.  
+</code></pre>
+
+<h3 id="宏声明">宏声明</h3>
+
+<pre><code>  {macro macroName(arg1, arg2, ...argN)}
+    ...body of the macro...
+  {/macro}
+</code></pre>
+
+<ul>
+<li>一个宏就像是一个JavaScript函数，只是宏的主体是另一个模板而不是JavaScript代码。
+
+<ul>
+<li>也就是说宏的主体可以包含TrimPath表达式和声明。</li>
+</ul></li>
+<li><code>macroName</code>可以是任何合法的JavaScript变量名。</li>
+<li>宏执行后的返回值是一个字符串。</li>
+<li>可以通过<code>${macroName()}</code>的形式调用一个宏。</li>
+</ul>
+
+<p>示例：</p>
+
+<pre><code>  {macro htmlList(list, optionalListType)}
+    {var listType = optionalListType != null ? optionalListType : &quot;ul&quot;}
+    &lt;${listType}&gt;
+      {for item in list}     
+        &lt;li&gt;${item}&lt;/li&gt;
+      {/for}
+    &lt;/${listType}&gt;
+  {/macro}
+
+ 使用宏
+  ${htmlList([ 1, 2, 3])}
+  ${htmlList([ &quot;Purple State&quot;, &quot;Blue State&quot;, &quot;Red State&quot; ], &quot;ol&quot;)}
+  {var saved = htmlList([ 100, 200, 300 ])}
+  ${saved} and ${saved}
+</code></pre>
+
+<p>默认情况下，宏只能在定义它的模板中使用。如果你想导出一个宏以便在其他模板中复用，一种方法就是把保存一份宏的引用到<code>contentObject</code>中(<code>contentObject</code>就是你调用<code>template.process</code>方法时传递的参数)。在调用<code>process</code>方法前先设置<code>'contextObject['exported'] = {};</code>，然后可以在末班中通过这种方法获得宏的引用：</p>
+
+<pre><code> {macro userName(user)}
+    {if user.aliasName != null &amp;&amp; user.aliasName.length &gt; 0}
+      ${user.aliasName}
+    {else}
+      ${user.login}
+    {/if}
+  {/macro}
+  ${exported.userName = userName |eat}
+</code></pre>
+
+<p>你也可以直接设置<code>contextObject['exported'] = contextObject;</code>，这样做也可以工作，但是会造成循环引用。</p>
+
+<h3 id="cdata文本块">CDATA文本块</h3>
+
+<pre><code>  {cdata}
+    ...此区域内的文本不会被引擎解析...
+  {/cdata}
+
+  {cdata EOF}
+    ...此区域内的文本不会被引擎解析...
+  EOF
+</code></pre>
+
+<p>你可以使用<code>{cdata EOF}...EOF</code>或是<code>{cdata}...{/cdata}</code>这2中语法来告诉模板引擎忽略对特定文本块的处理。这些文本块会被直接输出，其中包含的任何标签都不会被解析。当你需要通过JavaScript模板生成其他JavaScript模板时会非常方便。
+- <code>EOF</code>可以是任何不包含<code>}</code>的标记字符串。标记字符串用来标示一个文本块的结束。
+- 文本块可以包含换行符，输出时模板引擎会保留这些换行。</p>
+
+<p>示例：</p>
+
+<pre><code>Hello, ${user.firstName}.
+An example of expression markup in JST looks like...
+{cdata END_OF_THE_CDATA_SECTION}
+ ${customer.firstName} ${customer.lastName}
+END_OF_THE_CDATA_SECTION
+...which shows a customer's name.
+
+Let me repeat that...
+{cdata}
+ ${customer.firstName} ${customer.lastName}
+{/cdata}
+...will show a customer's name.
+</code></pre>
+
+<p>以上模板会输出以下内容：</p>
+
+<pre><code>Hello, Steve.
+An example of expression markup in JST looks like...
+
+ ${customer.firstName} ${customer.lastName}
+
+...which shows a customer's name.
+
+Let me repeat that...
+
+ ${customer.firstName} ${customer.lastName}
+
+...will show a customer's name.
+</code></pre>
+
+<h3 id="嵌入的javascript">嵌入的JavaScript</h3>
+
+<h4 id="eval代码块">eval代码块</h4>
+
+<pre><code>  {eval}
+    ...模板引擎解析模板时将执行此区域代码...
+  {/eval
+
+  {eval EOF}
+    ...模板引擎解析模板时将执行此区域代码...
+  EOF
+</code></pre>
+
+<p><code>EOF</code>可以是任何不包含<code>}</code>的文本。
+<code>{eval}</code>块可以用来在模板中定义多行的JavaScript事件处理函数。例如：</p>
+
+<pre><code>  {eval} 
+    sel_onchange = function() {
+     ...事件处理函数定义...;
+    }
+  {/eval}
+</code></pre>
+
+<p>需要注意的是，在上边的事例中我们_<strong>没有</strong>_使用<code>var</code>关键字来声明变量，例如<code>var sel_onchange = function() {...}</code>。这是为了保证<code>sel_onchange</code>在全局作用域中以便可以被事件处理机制访问到。</p>
+
+<h4 id="minify块">minify块</h4>
+
+<pre><code>  {minify}
+    ...此处可以写多行代码，模板引擎输出时会合并成一行...
+  {/minify 
+
+  {minify EOF}
+    ...此处可以写多行代码，模板引擎输出时会合并成一行...
+  EOF
+</code></pre>
+
+<p><code>{minify}</code>块允许你在HTML属性中嵌入多行的JavaScript或CSS代码。对JavaScript来说，这可以很方便的编写多行的事件处理函数。例如：</p>
+
+<pre><code>  &lt;select onchange=&quot;{minify}
+     ...复杂的多行事件处理逻辑...;
+     this.enabled = false;
+  {/minify}&quot;&gt;
+
+  &lt;select onchange=&quot;{minify END_OF_JS}
+     ...复杂的多行事件处理逻辑...;
+     this.enabled = false;
+  END_OF_JS&quot;&gt;
+</code></pre>
+
+<p>对应CSS来说，<code>{minify}</code>允许你方便的嵌入多行行内样式代码，例如：</p>
+
+<pre><code>&lt;div id=&quot;commentPanel&quot;
+     style=&quot;{minify}
+              display:none; 
+              margin: 1em;
+              border: 1px solid #333;
+              background: #eee;
+              padding: 1em;
+            {/minify}&quot;&gt;
+&lt;/div&gt;
+</code></pre>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://loveky.github.io/tags/javascript"><span class="tag">JavaScript</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        This post was published <strong>814</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "loveky" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 loveky的流水账</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\[','\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="https://loveky.github.io/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>

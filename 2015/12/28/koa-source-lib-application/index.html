@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>koa框架源码阅读笔记 之 lib/application.js</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="loveky" />
+  <meta name="description" content="最近在学习ES6 Generator特性时发现了koa这个基于Generator的Web框架，它可以让开发者以一种“同步的方式”编写包含各种异步请求的Web应用。下面是关于它的一段中文介绍：
+ 由 Express 原班人马打造的 koa，致力于成为一个更小、更健壮、更富有表现力的 Web 框架。使用 koa 编写 web 应用，通过组合不同的 generator，可以免除重复繁琐的回调函数嵌套，并极大地提升常用错误处理效率。Koa 不在内核方法中绑定任何中间件，它仅仅提供了一个轻量优雅的函数库，使得编写 Web 应用变得得心应手。
+ 从介绍中可以看出这又是一个小而美的框架。到GitHub项目页面上看了一下发现源码里只有4个JS文件，总代码量只有1571行(以2015年12月26日最新稳定版1.1.2为准)。于是决定把代码clone下来学习一下，本篇会先从整个框架的入口文件lib/application.js说起。
+总体说明 lib/application.js文件export出的是一个构造函数，用来创建一个koa应用。一个koa应用最常用的方法有2个： - listen(port) 执行listen后会通过http.createServer启动一个服务器并监听指定端口 - use(middleware) 注册一个中间件，一个koa应用可以注册多个中间件， 处理请求时会按照中间件注册的顺序执行这些中间件。
+更多详细信息可以参考GitHub文档页面。
+代码注释 function Application() { if (!(this instanceof Application)) return new Application; this.env = process.env.NODE_ENV || &amp;#39;development&amp;#39;; this.subdomainOffset = 2; this.middleware = []; this.proxy = false; this.context = Object.create(context); this.request = Object.create(request); this.response = Object.create(response); } 以上就是Application构造函数的定义，很简洁，主要做了以下几件事情：
+- 通过instanceof判断来支持不带new关键字的调用。 - 设置应用运行环境，会从环境变量NODE_ENV读取，默认值为development - 声明this." />
+
+  
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@loveky_" />
+    <meta name="twitter:title" content="koa框架源码阅读笔记 之 lib/application.js" />
+    <meta name="twitter:description" content="最近在学习ES6 Generator特性时发现了koa这个基于Generator的Web框架，它可以让开发者以一种“同步的方式”编写包含各种异步请求的Web应用。下面是关于它的一段中文介绍：
+ 由 Express 原班人马打造的 koa，致力于成为一个更小、更健壮、更富有表现力的 Web 框架。使用 koa 编写 web 应用，通过组合不同的 generator，可以免除重复繁琐的回调函数嵌套，并极大地提升常用错误处理效率。Koa 不在内核方法中绑定任何中间件，它仅仅提供了一个轻量优雅的函数库，使得编写 Web 应用变得得心应手。
+ 从介绍中可以看出这又是一个小而美的框架。到GitHub项目页面上看了一下发现源码里只有4个JS文件，总代码量只有1571行(以2015年12月26日最新稳定版1.1.2为准)。于是决定把代码clone下来学习一下，本篇会先从整个框架的入口文件lib/application.js说起。
+总体说明 lib/application.js文件export出的是一个构造函数，用来创建一个koa应用。一个koa应用最常用的方法有2个： - listen(port) 执行listen后会通过http.createServer启动一个服务器并监听指定端口 - use(middleware) 注册一个中间件，一个koa应用可以注册多个中间件， 处理请求时会按照中间件注册的顺序执行这些中间件。
+更多详细信息可以参考GitHub文档页面。
+代码注释 function Application() { if (!(this instanceof Application)) return new Application; this.env = process.env.NODE_ENV || &amp;#39;development&amp;#39;; this.subdomainOffset = 2; this.middleware = []; this.proxy = false; this.context = Object.create(context); this.request = Object.create(request); this.response = Object.create(response); } 以上就是Application构造函数的定义，很简洁，主要做了以下几件事情：
+- 通过instanceof判断来支持不带new关键字的调用。 - 设置应用运行环境，会从环境变量NODE_ENV读取，默认值为development - 声明this." />
+    <meta name="twitter:image" content="https://loveky.github.io/img/avatar.jpg" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="koa框架源码阅读笔记 之 lib/application.js" />
+  <meta property="og:description" content="最近在学习ES6 Generator特性时发现了koa这个基于Generator的Web框架，它可以让开发者以一种“同步的方式”编写包含各种异步请求的Web应用。下面是关于它的一段中文介绍：
+ 由 Express 原班人马打造的 koa，致力于成为一个更小、更健壮、更富有表现力的 Web 框架。使用 koa 编写 web 应用，通过组合不同的 generator，可以免除重复繁琐的回调函数嵌套，并极大地提升常用错误处理效率。Koa 不在内核方法中绑定任何中间件，它仅仅提供了一个轻量优雅的函数库，使得编写 Web 应用变得得心应手。
+ 从介绍中可以看出这又是一个小而美的框架。到GitHub项目页面上看了一下发现源码里只有4个JS文件，总代码量只有1571行(以2015年12月26日最新稳定版1.1.2为准)。于是决定把代码clone下来学习一下，本篇会先从整个框架的入口文件lib/application.js说起。
+总体说明 lib/application.js文件export出的是一个构造函数，用来创建一个koa应用。一个koa应用最常用的方法有2个： - listen(port) 执行listen后会通过http.createServer启动一个服务器并监听指定端口 - use(middleware) 注册一个中间件，一个koa应用可以注册多个中间件， 处理请求时会按照中间件注册的顺序执行这些中间件。
+更多详细信息可以参考GitHub文档页面。
+代码注释 function Application() { if (!(this instanceof Application)) return new Application; this.env = process.env.NODE_ENV || &amp;#39;development&amp;#39;; this.subdomainOffset = 2; this.middleware = []; this.proxy = false; this.context = Object.create(context); this.request = Object.create(request); this.response = Object.create(response); } 以上就是Application构造函数的定义，很简洁，主要做了以下几件事情：
+- 通过instanceof判断来支持不带new关键字的调用。 - 设置应用运行环境，会从环境变量NODE_ENV读取，默认值为development - 声明this." />
+  <meta property="og:url" content="https://loveky.github.io/2015/12/28/koa-source-lib-application/" />
+  <meta property="og:image" content="https://loveky.github.io/img/avatar.jpg" />
+
+
+
+
+<meta name="generator" content="Hugo 0.36.1" />
+
+
+<link rel="canonical" href="https://loveky.github.io/2015/12/28/koa-source-lib-application/" />
+<link rel="alternative" href="https://loveky.github.io/index.xml" title="loveky的流水账" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="loveky的流水账" />
+<meta name="msapplication-tooltip" content="loveky的流水账" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://loveky.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://loveky.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://loveky.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://loveky.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://loveky.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://loveky.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://loveky.github.io/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://loveky.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">loveky的流水账</h2>
+  
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://loveky.github.io/">首页</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/tags/">标签</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/archive/">归档</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/links/">链接</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/about/">关于我</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:ylzcylx@gmail.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/loveky" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/loveky_" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//www.zhihu.com/people/loveky" title="Zhihu"><span class="icon icon-zhihu"></span></a>
+      </li>
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://loveky.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">koa框架源码阅读笔记 之 lib/application.js</h1>
+      <p class="post-meta">@loveky · Dec 28, 2015 · 2 min read</p>
+    </header>
+    <article class="post-content">
+
+<p>最近在学习ES6 Generator特性时发现了koa这个基于Generator的Web框架，它可以让开发者以一种“同步的方式”编写包含各种异步请求的Web应用。下面是关于它的一段中文介绍：</p>
+
+<blockquote>
+<p>由 Express 原班人马打造的 koa，致力于成为一个更小、更健壮、更富有表现力的 Web 框架。使用 koa 编写 web 应用，通过组合不同的 generator，可以免除重复繁琐的回调函数嵌套，并极大地提升常用错误处理效率。Koa 不在内核方法中绑定任何中间件，它仅仅提供了一个轻量优雅的函数库，使得编写 Web 应用变得得心应手。</p>
+</blockquote>
+
+<p>从介绍中可以看出这又是一个小而美的框架。到<a href="https://github.com/koajs/koa">GitHub项目页面</a>上看了一下发现源码里只有<a href="https://github.com/koajs/koa/tree/1.1.2/lib">4个JS文件</a>，总代码量只有1571行(以2015年12月26日最新稳定版1.1.2为准)。于是决定把代码clone下来学习一下，本篇会先从整个框架的入口文件<code>lib/application.js</code>说起。</p>
+
+<h3 id="总体说明">总体说明</h3>
+
+<p><code>lib/application.js</code>文件export出的是一个构造函数，用来创建一个koa应用。一个koa应用最常用的方法有2个：
+- <code>listen(port)</code> 执行listen后会通过<code>http.createServer</code>启动一个服务器并监听指定端口
+- <code>use(middleware)</code> 注册一个中间件，一个koa应用可以注册多个中间件， 处理请求时会按照中间件注册的顺序执行这些中间件。</p>
+
+<p>更多详细信息可以参考<a href="https://github.com/koajs/koa/blob/master/docs/api/index.md">GitHub文档页面</a>。</p>
+
+<h3 id="代码注释">代码注释</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">Application</span>() {
+  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>(<span style="color:#66d9ef">this</span> <span style="color:#66d9ef">instanceof</span> <span style="color:#a6e22e">Application</span>)) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Application</span>;
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">env</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">NODE_ENV</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#39;development&#39;</span>;
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">subdomainOffset</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">middleware</span> <span style="color:#f92672">=</span> [];
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">proxy</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">context</span> <span style="color:#f92672">=</span> Object.<span style="color:#a6e22e">create</span>(<span style="color:#a6e22e">context</span>);
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">request</span> <span style="color:#f92672">=</span> Object.<span style="color:#a6e22e">create</span>(<span style="color:#a6e22e">request</span>);
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> Object.<span style="color:#a6e22e">create</span>(<span style="color:#a6e22e">response</span>);
+}</code></pre></div>
+<p>以上就是<code>Application</code>构造函数的定义，很简洁，主要做了以下几件事情：<br />
+- 通过<code>instanceof</code>判断来支持不带<code>new</code>关键字的调用。
+- 设置应用运行环境，会从环境变量<code>NODE_ENV</code>读取，默认值为<code>development</code>
+- 声明<code>this.middleware</code>属性，默认为空数组，用来保存所有注册的中间件
+- 创建了<code>this.context</code>, <code>this.request</code>, <code>this.response</code> 对象，分别继承自koa项目里<code>lib</code>目录下对应文件export出来的对象。需要注意的是，这3个在<code>this</code>上的属性仍然只是<code>prototype</code>。每当一个请求到来时，koa会以这些对象为原型创建出与每个请求对应的<code>context</code>, <code>request</code>以及<code>response</code>对象。这样处理的好处是<code>lib/request.js</code>文件中定义的是koa框架级别的方法。<code>this.request</code>对象上我们可以定义项目级别里每个request需要用到的方法，属性。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">Object.<span style="color:#a6e22e">setPrototypeOf</span>(<span style="color:#a6e22e">Application</span>.<span style="color:#a6e22e">prototype</span>, <span style="color:#a6e22e">Emitter</span>.<span style="color:#a6e22e">prototype</span>);</code></pre></div>
+<p>在koa应用的原型链上追加一级<code>Emitter.prototype</code>，方便事件处理。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">listen</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(){
+  <span style="color:#a6e22e">debug</span>(<span style="color:#e6db74">&#39;listen&#39;</span>);
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">server</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">createServer</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">callback</span>());
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">listen</span>.<span style="color:#a6e22e">apply</span>(<span style="color:#a6e22e">server</span>, <span style="color:#a6e22e">arguments</span>);
+};</code></pre></div>
+<p><code>listen</code>方法会创建一个<a href="https://nodejs.org/dist/latest-v4.x/docs/api/http.html#http_class_http_server">http.Server</a>实例，并将所有参数转给这个<code>http.Server</code>实例的listen方法。这里需要注意的是，koa应用的<code>listen</code>方法是可以调用多次的。可以通过多以调用<code>listen</code>方法来创建多个事例监听在不同端口上。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">inspect</span> <span style="color:#f92672">=</span>
+<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">toJSON</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(){
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">only</span>(<span style="color:#66d9ef">this</span>, [
+    <span style="color:#e6db74">&#39;subdomainOffset&#39;</span>,
+    <span style="color:#e6db74">&#39;proxy&#39;</span>,
+    <span style="color:#e6db74">&#39;env&#39;</span>
+  ]);
+};</code></pre></div>
+<p>覆写koa应用的<code>toJSON</code>方法，并创建别名<code>inspect</code>。通过代码可以看出，在把koa应用以JSON格式输出时只会输出这个应用的<code>subdomainOffset</code>, <code>proxy</code>和<code>env</code>这三条信息。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">fn</span>){
+  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">experimental</span>) {
+    <span style="color:#75715e">// es7 async functions are allowed
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">assert</span>(<span style="color:#a6e22e">fn</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#e6db74">&#39;GeneratorFunction&#39;</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">fn</span>.<span style="color:#a6e22e">constructor</span>.<span style="color:#a6e22e">name</span>, <span style="color:#e6db74">&#39;app.use() requires a generator function&#39;</span>);
+  }
+  <span style="color:#a6e22e">debug</span>(<span style="color:#e6db74">&#39;use %s&#39;</span>, <span style="color:#a6e22e">fn</span>.<span style="color:#a6e22e">_name</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">fn</span>.<span style="color:#a6e22e">name</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#39;-&#39;</span>);
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">middleware</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">fn</span>);
+  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>;
+};</code></pre></div>
+<p><code>app.use</code>方法用来注册一个中间件，默认传入的参数必须是一个Generator，否则报错。如果开启了<code>experimental</code>选项，则不再检查传入参数的类型，而是利用ES7中的<code>async/await</code>特性进行流程控制。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">callback</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(){
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">fn</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">experimental</span>
+    <span style="color:#f92672">?</span> <span style="color:#a6e22e">compose_es7</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">middleware</span>)
+    <span style="color:#f92672">:</span> <span style="color:#a6e22e">co</span>.<span style="color:#a6e22e">wrap</span>(<span style="color:#a6e22e">compose</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">middleware</span>));
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">self</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>;
+
+  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">listeners</span>(<span style="color:#e6db74">&#39;error&#39;</span>).<span style="color:#a6e22e">length</span>) <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;error&#39;</span>, <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onerror</span>);
+
+  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>){
+    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">statusCode</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">404</span>;
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">ctx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">self</span>.<span style="color:#a6e22e">createContext</span>(<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>);
+    <span style="color:#a6e22e">onFinished</span>(<span style="color:#a6e22e">res</span>, <span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">onerror</span>);
+    <span style="color:#a6e22e">fn</span>.<span style="color:#a6e22e">call</span>(<span style="color:#a6e22e">ctx</span>).<span style="color:#a6e22e">then</span>(<span style="color:#66d9ef">function</span> () {
+      <span style="color:#a6e22e">respond</span>.<span style="color:#a6e22e">call</span>(<span style="color:#a6e22e">ctx</span>);
+    }).<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">onerror</span>);
+  }
+};</code></pre></div>
+<p><code>app.callback</code>用来根据当前的<code>middleware</code>队列生成一个callback，该callback会在<code>app.listen</code>操作中创建<code>http.Server</code>时作为参数传递给新创建的Server实例，用来处理客户端请求。</p>
+
+<p>第2至4行根据中间件队列生成一个普通函数<code>fn</code>，执行<code>fn</code>会返回一个Promise。如果中间件执行的过程中遇到错误，这个promise会被reject。在创建<code>fn</code>时依旧会判断<code>experimental</code>参数是否启用。如果该参数启用，则利用<a href="https://github.com/thenables/composition">composition</a>模块进行转换。否则使用<a href="https://github.com/tj/co">co</a> + <a href="https://github.com/koajs/compose">koa-compose</a> 转换。</p>
+
+<p>第7行判断当前应用是否注册了错误处理函数，如果没有则使用koa框架默认的默认值。</p>
+
+<p>第9-16行则是实际处理请求的方法，接受一个request和一个response对象。首先koa会将node默认的request和response对象封装成一个koa的<code>context</code>对象。这个<code>context</code>对象就是我们中间件函数中的this，这样就可以很方便的访问与请求相关的信息。接着通过<a href="https://github.com/jshttp/on-finished">on-finished</a>模块给当前请求注册一个callback，当处理该请求的过程中遇到错误时，该callback会根据错误信息进行一些状态设置，比如404，500状态码。最后就是调用<code>fn</code>方法开始处理请求。如果顺利执行，则会调用<code>respond</code>方法对response做最后处理，如果执行遇到错误，则执行<code>context</code>的<code>onerror</code>方法处理。</p>
+
+<p><code>app.createContext</code>方法用于创建与一个请求对应的<code>context</code>对象。内容基本是一些属性的设置，此处不再详述。代码参考<a href="https://github.com/koajs/koa/blob/1.1.2/lib/application.js#L144-L160">GitHub页面</a>。
+<code>app.onerror</code>为koa默认的错误处理函数。逻辑很简单，不再详述。代码参考<a href="https://github.com/koajs/koa/blob/1.1.2/lib/application.js#L169-L181">GitHub页面</a>。</p>
+
+<p>最后的<code>respond</code>方法是一个helper方法，用来辅助设置一些response的信息。由于函数体较长，我们分段来看。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">respond</span>() {
+  <span style="color:#75715e">// allow bypassing koa
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">false</span> <span style="color:#f92672">===</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">respond</span>) <span style="color:#66d9ef">return</span>;
+
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">res</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">res</span>;
+  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">headersSent</span> <span style="color:#f92672">||</span> <span style="color:#f92672">!</span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">writable</span>) <span style="color:#66d9ef">return</span>;</code></pre></div>
+<p>如果<code>context</code>对象的<code>respond</code>属性为<code>false</code>，则不执行该函数的逻辑。
+接下来判断此响应的头部是否已经发出或是该响应是否不可写，如果任何一个条件为真，则跳过此函数逻辑。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">body</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">body</span>;
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">code</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">status</span>;
+
+  <span style="color:#75715e">// ignore body
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">statuses</span>.<span style="color:#a6e22e">empty</span>[<span style="color:#a6e22e">code</span>]) {
+    <span style="color:#75715e">// strip headers
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">body</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
+  }</code></pre></div>
+<p>利用<a href="https://github.com/jshttp/statuses">statuses</a>判断此响应的状态码是否对应一个空响应体（例如204,304）。如果为真，则直接返回空响应。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">  <span style="color:#66d9ef">if</span> (<span style="color:#e6db74">&#39;HEAD&#39;</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">method</span>) {
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">isJSON</span>(<span style="color:#a6e22e">body</span>)) <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">byteLength</span>(<span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">body</span>));
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
+  }</code></pre></div>
+<p>如果是<code>HEAD</code>请求并且对应的响应资源是一个JSON对象，则通过<code>JSON.stringify</code>计算响应体长度。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">  <span style="color:#75715e">// status body
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">null</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">body</span>) {
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">type</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;text&#39;</span>;
+    <span style="color:#a6e22e">body</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">message</span> <span style="color:#f92672">||</span> String(<span style="color:#a6e22e">code</span>);
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">byteLength</span>(<span style="color:#a6e22e">body</span>);
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>(<span style="color:#a6e22e">body</span>);
+  }</code></pre></div>
+<p>如果响应体为空，则设置一个默认的响应内容并设置响应体长度。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">  <span style="color:#75715e">// responses
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">isBuffer</span>(<span style="color:#a6e22e">body</span>)) <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>(<span style="color:#a6e22e">body</span>);
+  <span style="color:#66d9ef">if</span> (<span style="color:#e6db74">&#39;string&#39;</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">body</span>) <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>(<span style="color:#a6e22e">body</span>);
+  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">body</span> <span style="color:#66d9ef">instanceof</span> <span style="color:#a6e22e">Stream</span>) <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">res</span>);
+
+  <span style="color:#75715e">// body: json
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">body</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">body</span>);
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">byteLength</span>(<span style="color:#a6e22e">body</span>);
+  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>(<span style="color:#a6e22e">body</span>);
+}</code></pre></div>
+<p>最后是针对不同类型的响应体进行处理，如Buffer, 字符串, Stream 和 JSON。</p>
+
+<p>以上就是<code>lib/applicaton.js</code>的主要代码的注释了，其实只有几个方法而已，是不是很简单？</p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://loveky.github.io/tags/javascript"><span class="tag">JavaScript</span></a></li>
+        
+          <li><a href="https://loveky.github.io/tags/koa"><span class="tag">Koa</span></a></li>
+        
+          <li><a href="https://loveky.github.io/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB"><span class="tag">源码阅读</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        This post was published <strong>789</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "loveky" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 loveky的流水账</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\[','\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="https://loveky.github.io/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>

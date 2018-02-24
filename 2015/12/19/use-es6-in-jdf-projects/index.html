@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>在JDF项目中使用ES6新特性</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="loveky" />
+  <meta name="description" content="Note: 目前虽然JDF已经支持使用ES6开发脚本，但线上使用还在前期摸索阶段，请大家根据自己项目实际情况评估使用情况
+最近利用业余时间给JDF增加了ES6代码的支持。背后的原理是在项目构建阶段利用Babel将.babel文件转译成ES5代码。关于Babel的更多使用方法可以参考其官网的配置文档。
+下面开始正式介绍在利用ES6特性开发前的准备工作: - 升级JDF到最新版本（&amp;gt;= 1.8.2） - 进入JDF项目目录，安装基本的Babel preset和plugin。关于preset和plugin的更多说明请参考文档
+npm install babel-preset-es2015 npm install babel-plugin-transform-es3-member-expression-literals npm install babel-plugin-transform-es3-property-literals  配置项目的.gitignore文件，忽略node_modules目录。在文件中添加以下内容：  **/node_modules/   引入es6-base.js(包含 es5-shim和babel-polyfill)  至此，所有的准备工作就完成了。接下来就可以利用ES6的各种新特性开发了。需要注意的是所有包含了ES6特性的脚本文件扩展名必须是.babel，否则JDF是不会对其进行编译的。
+最后是一份简单的FAQ：
+Q: ES6都有哪些新特性，有没有推荐的学习资料？ 当然有，中文版的有阮一峰出品的ECMAScript 6入门。 英文的有： - ES6 In Depth来自Mozilla团队博客的一系列文章，每篇讲解一个新特性。建议按时间顺序阅读。 - Understanding ECMAScript 6来自Nicholas C. Zakas大神的一本ES6小书。
+Q: 我想使用额外的Babel plugin或preset该怎样配置？ 只需在package.json中指定需要额外引入的plugin或preset，例如：
+&amp;#34;babel&amp;#34;: { &amp;#34;plugins&amp;#34;: [&amp;#34;syntax-async-functions&amp;#34;,&amp;#34;transform-regenerator&amp;#34;], &amp;#34;presets&amp;#34;: [&amp;#34;stage-0&amp;#34;] } 并在JDF项目的目录中安装相关npm package即可。
+Q: .babel文件编译出来的代码我看不懂，出了问题如何调试呢？ 我们看到的经过Babel转译后的JS是这样的： 这里包含了大量的Babel生成的代码，非常不利于调试。不过不用担心，JDF在本地开发模式中启用了sourceMap，你只需在Chrome开发者工具中的Sources Tab中在你要调试的JS文件目录下找到同名的.babel文件即可。相关JS中的报错信息，都会被映射到转译前的.babel文件的对应位置。
+关于sourceMap的更多信息请参考这里。" />
+
+  
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@loveky_" />
+    <meta name="twitter:title" content="在JDF项目中使用ES6新特性" />
+    <meta name="twitter:description" content="Note: 目前虽然JDF已经支持使用ES6开发脚本，但线上使用还在前期摸索阶段，请大家根据自己项目实际情况评估使用情况
+最近利用业余时间给JDF增加了ES6代码的支持。背后的原理是在项目构建阶段利用Babel将.babel文件转译成ES5代码。关于Babel的更多使用方法可以参考其官网的配置文档。
+下面开始正式介绍在利用ES6特性开发前的准备工作: - 升级JDF到最新版本（&amp;gt;= 1.8.2） - 进入JDF项目目录，安装基本的Babel preset和plugin。关于preset和plugin的更多说明请参考文档
+npm install babel-preset-es2015 npm install babel-plugin-transform-es3-member-expression-literals npm install babel-plugin-transform-es3-property-literals  配置项目的.gitignore文件，忽略node_modules目录。在文件中添加以下内容：  **/node_modules/   引入es6-base.js(包含 es5-shim和babel-polyfill)  至此，所有的准备工作就完成了。接下来就可以利用ES6的各种新特性开发了。需要注意的是所有包含了ES6特性的脚本文件扩展名必须是.babel，否则JDF是不会对其进行编译的。
+最后是一份简单的FAQ：
+Q: ES6都有哪些新特性，有没有推荐的学习资料？ 当然有，中文版的有阮一峰出品的ECMAScript 6入门。 英文的有： - ES6 In Depth来自Mozilla团队博客的一系列文章，每篇讲解一个新特性。建议按时间顺序阅读。 - Understanding ECMAScript 6来自Nicholas C. Zakas大神的一本ES6小书。
+Q: 我想使用额外的Babel plugin或preset该怎样配置？ 只需在package.json中指定需要额外引入的plugin或preset，例如：
+&amp;#34;babel&amp;#34;: { &amp;#34;plugins&amp;#34;: [&amp;#34;syntax-async-functions&amp;#34;,&amp;#34;transform-regenerator&amp;#34;], &amp;#34;presets&amp;#34;: [&amp;#34;stage-0&amp;#34;] } 并在JDF项目的目录中安装相关npm package即可。
+Q: .babel文件编译出来的代码我看不懂，出了问题如何调试呢？ 我们看到的经过Babel转译后的JS是这样的： 这里包含了大量的Babel生成的代码，非常不利于调试。不过不用担心，JDF在本地开发模式中启用了sourceMap，你只需在Chrome开发者工具中的Sources Tab中在你要调试的JS文件目录下找到同名的.babel文件即可。相关JS中的报错信息，都会被映射到转译前的.babel文件的对应位置。
+关于sourceMap的更多信息请参考这里。" />
+    <meta name="twitter:image" content="https://loveky.github.io/img/avatar.jpg" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="在JDF项目中使用ES6新特性" />
+  <meta property="og:description" content="Note: 目前虽然JDF已经支持使用ES6开发脚本，但线上使用还在前期摸索阶段，请大家根据自己项目实际情况评估使用情况
+最近利用业余时间给JDF增加了ES6代码的支持。背后的原理是在项目构建阶段利用Babel将.babel文件转译成ES5代码。关于Babel的更多使用方法可以参考其官网的配置文档。
+下面开始正式介绍在利用ES6特性开发前的准备工作: - 升级JDF到最新版本（&amp;gt;= 1.8.2） - 进入JDF项目目录，安装基本的Babel preset和plugin。关于preset和plugin的更多说明请参考文档
+npm install babel-preset-es2015 npm install babel-plugin-transform-es3-member-expression-literals npm install babel-plugin-transform-es3-property-literals  配置项目的.gitignore文件，忽略node_modules目录。在文件中添加以下内容：  **/node_modules/   引入es6-base.js(包含 es5-shim和babel-polyfill)  至此，所有的准备工作就完成了。接下来就可以利用ES6的各种新特性开发了。需要注意的是所有包含了ES6特性的脚本文件扩展名必须是.babel，否则JDF是不会对其进行编译的。
+最后是一份简单的FAQ：
+Q: ES6都有哪些新特性，有没有推荐的学习资料？ 当然有，中文版的有阮一峰出品的ECMAScript 6入门。 英文的有： - ES6 In Depth来自Mozilla团队博客的一系列文章，每篇讲解一个新特性。建议按时间顺序阅读。 - Understanding ECMAScript 6来自Nicholas C. Zakas大神的一本ES6小书。
+Q: 我想使用额外的Babel plugin或preset该怎样配置？ 只需在package.json中指定需要额外引入的plugin或preset，例如：
+&amp;#34;babel&amp;#34;: { &amp;#34;plugins&amp;#34;: [&amp;#34;syntax-async-functions&amp;#34;,&amp;#34;transform-regenerator&amp;#34;], &amp;#34;presets&amp;#34;: [&amp;#34;stage-0&amp;#34;] } 并在JDF项目的目录中安装相关npm package即可。
+Q: .babel文件编译出来的代码我看不懂，出了问题如何调试呢？ 我们看到的经过Babel转译后的JS是这样的： 这里包含了大量的Babel生成的代码，非常不利于调试。不过不用担心，JDF在本地开发模式中启用了sourceMap，你只需在Chrome开发者工具中的Sources Tab中在你要调试的JS文件目录下找到同名的.babel文件即可。相关JS中的报错信息，都会被映射到转译前的.babel文件的对应位置。
+关于sourceMap的更多信息请参考这里。" />
+  <meta property="og:url" content="https://loveky.github.io/2015/12/19/use-es6-in-jdf-projects/" />
+  <meta property="og:image" content="https://loveky.github.io/img/avatar.jpg" />
+
+
+
+
+<meta name="generator" content="Hugo 0.36.1" />
+
+
+<link rel="canonical" href="https://loveky.github.io/2015/12/19/use-es6-in-jdf-projects/" />
+<link rel="alternative" href="https://loveky.github.io/index.xml" title="loveky的流水账" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="loveky的流水账" />
+<meta name="msapplication-tooltip" content="loveky的流水账" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://loveky.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://loveky.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://loveky.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://loveky.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://loveky.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://loveky.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://loveky.github.io/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://loveky.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">loveky的流水账</h2>
+  
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://loveky.github.io/">首页</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/tags/">标签</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/archive/">归档</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/links/">链接</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/about/">关于我</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:ylzcylx@gmail.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/loveky" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/loveky_" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//www.zhihu.com/people/loveky" title="Zhihu"><span class="icon icon-zhihu"></span></a>
+      </li>
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://loveky.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">在JDF项目中使用ES6新特性</h1>
+      <p class="post-meta">@loveky · Dec 19, 2015 · 1 min read</p>
+    </header>
+    <article class="post-content"><p><em>Note: 目前虽然JDF已经支持使用ES6开发脚本，但线上使用还在前期摸索阶段，请大家根据自己项目实际情况评估使用情况</em></p>
+
+<p>最近利用业余时间给JDF增加了ES6代码的支持。背后的原理是在项目构建阶段利用<a href="http://babeljs.io/">Babel</a>将<code>.babel</code>文件转译成ES5代码。关于Babel的更多使用方法可以参考其官网的<a href="http://babeljs.io/docs/setup/">配置文档</a>。</p>
+
+<p>下面开始正式介绍在利用ES6特性开发前的准备工作:
+- 升级JDF到最新版本（&gt;= 1.8.2）
+- 进入JDF项目目录，安装基本的Babel <code>preset</code>和<code>plugin</code>。关于<code>preset</code>和<code>plugin</code>的更多说明请参考<a href="http://babeljs.io/docs/plugins/">文档</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">npm install babel-preset-es2015
+npm install babel-plugin-transform-es3-member-expression-literals
+npm install babel-plugin-transform-es3-property-literals</code></pre></div>
+<ul>
+<li>配置项目的<code>.gitignore</code>文件，忽略<code>node_modules</code>目录。在文件中添加以下内容：</li>
+</ul>
+
+<pre><code>**/node_modules/
+</code></pre>
+
+<ul>
+<li>引入<a href="http://misc.360buyimg.com/product/module/es6-base.js">es6-base.js</a>(包含 <a href="https://github.com/es-shims/es5-shim">es5-shim</a>和<a href="http://babeljs.io/docs/usage/polyfill/">babel-polyfill</a>)</li>
+</ul>
+
+<p>至此，所有的准备工作就完成了。接下来就可以利用ES6的各种新特性开发了。需要注意的是所有包含了ES6特性的脚本文件扩展名<strong>必须</strong>是<code>.babel</code>，否则JDF是不会对其进行编译的。</p>
+
+<p>最后是一份简单的FAQ：</p>
+
+<p><strong>Q: ES6都有哪些新特性，有没有推荐的学习资料？</strong>
+当然有，中文版的有阮一峰出品的<a href="http://es6.ruanyifeng.com/">ECMAScript 6入门</a>。
+英文的有：
+- <a href="https://hacks.mozilla.org/category/es6-in-depth/">ES6 In Depth</a>来自Mozilla团队博客的一系列文章，每篇讲解一个新特性。建议按时间顺序阅读。
+- <a href="https://leanpub.com/understandinges6/read">Understanding ECMAScript 6</a>来自<code>Nicholas C. Zakas</code>大神的一本ES6小书。</p>
+
+<p><strong>Q: 我想使用额外的Babel plugin或preset该怎样配置？</strong>
+只需在<code>package.json</code>中指定需要额外引入的plugin或preset，例如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">    <span style="color:#e6db74">&#34;babel&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> {
+        <span style="color:#f92672">&#34;plugins&#34;</span>: [<span style="color:#e6db74">&#34;syntax-async-functions&#34;</span>,<span style="color:#e6db74">&#34;transform-regenerator&#34;</span>],
+        <span style="color:#f92672">&#34;presets&#34;</span>: [<span style="color:#e6db74">&#34;stage-0&#34;</span>]
+    }</code></pre></div>
+<p>并在JDF项目的目录中安装相关npm package即可。</p>
+
+<p><strong>Q: .babel文件编译出来的代码我看不懂，出了问题如何调试呢？</strong>
+我们看到的经过Babel转译后的JS是这样的：
+<img src="https://cloud.githubusercontent.com/assets/1198651/11910739/b04b0a34-a638-11e5-85d9-8edd13f1d0d8.png" alt="此处输入图片的描述" /></p>
+
+<p>这里包含了大量的Babel生成的代码，非常不利于调试。不过不用担心，JDF在本地开发模式中启用了<code>sourceMap</code>，你只需在Chrome开发者工具中的<code>Sources</code> Tab中在你要调试的JS文件目录下找到同名的<code>.babel</code>文件即可。相关JS中的报错信息，都会被映射到转译前的<code>.babel</code>文件的对应位置。</p>
+
+<p>关于<code>sourceMap</code>的更多信息请参考<a href="http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html">这里</a>。</p>
+
+<p><img src="https://cloud.githubusercontent.com/assets/1198651/11910740/b04c7090-a638-11e5-956e-5a2dd23414ad.png" alt="此处输入图片的描述" /></p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://loveky.github.io/tags/javascript"><span class="tag">JavaScript</span></a></li>
+        
+          <li><a href="https://loveky.github.io/tags/es6"><span class="tag">ES6</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        This post was published <strong>798</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "loveky" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 loveky的流水账</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\[','\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="https://loveky.github.io/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>

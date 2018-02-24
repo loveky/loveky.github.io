@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on loveky的流水账</title>
+    <link>https://loveky.github.io/post/</link>
+    <description>Recent content in Posts on loveky的流水账</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 31 Aug 2017 12:50:35 +0800</lastBuildDate>
+    
+	<atom:link href="https://loveky.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>2017年8月每日一文节目回看</title>
+      <link>https://loveky.github.io/2017/08/31/recommend-reading-201708/</link>
+      <pubDate>Thu, 31 Aug 2017 12:50:35 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2017/08/31/recommend-reading-201708/</guid>
+      <description>从上个月底开始坚持每天为组内的小伙伴推荐一篇技术文章。内容涵盖各种前端话题，比如 React, Node.js, ES6, React Native, 职业生涯等等。一来可以开阔小伙伴们的视野，二来可以锻炼小伙伴们的英文阅读能力。
+从这个月开始，每月最后一天会把当月推荐过的文章列表归档出来。大家可以选择自己感兴趣的话题阅读啦。
+ 20170831 Keep Your Bundle Size Under Control 20170830 Understand async/await better 20170828 How to get the most out of the JavaScript console 20170824 ASYNC/AWAIT WILL MAKE YOUR CODE SIMPLER 20170823 Error handling Promises in JavaScript 20170822 Singletons versus Dependency Injection 20170821 Working with Environment Variables in Node.js 20170818 Rx.js: Operators, Part I 20170817 How to use Memoize to cache JavaScript function results and speed up your code 20170816 Building A Simple AI Chatbot With Web Speech API And Node.</description>
+    </item>
+    
+    <item>
+      <title>在项目中启用 ESLint 与 Stylelint 检查</title>
+      <link>https://loveky.github.io/2017/08/03/config-eslint-and-stylelint-in-project/</link>
+      <pubDate>Thu, 03 Aug 2017 12:28:51 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2017/08/03/config-eslint-and-stylelint-in-project/</guid>
+      <description>多人参与的项目中，经常会多人交叉编辑多个文件。这就导致了各个文件中充斥着各种编码风格。
+最最常见的就有：
+ 使用空格还是Tab 一次缩进是 2 个空格还是 4 个空格 还是 8 个空格 字符串使用单引号还是双引号 JavaScript 一行结尾到底要不要加分号 关键字前后要不要加空格 等等等等  不同风格混杂在一起极大的影响代码的可读性与质量。因此在多人项目中维护一致的代码风格就很重要了。
+本文就简单介绍一下如何通过 ESLint 和 Stylelint 为代码库配置针对 JavaScript 与 CSS（SCSS）的代码风格检查。
+配置 ESLint  安装 eslint
+yarn add --dev eslint // or npm install --save-dev eslint 创建配置文件
+./node_modules/.bin/eslint --init  该命令会在项目目录中创建一个 .eslintrc.json 文件。默认生成的配置文件可能看起来是这个样子：
+{ &amp;quot;rules&amp;quot;: { &amp;quot;semi&amp;quot;: [&amp;quot;error&amp;quot;, &amp;quot;always&amp;quot;], &amp;quot;quotes&amp;quot;: [&amp;quot;error&amp;quot;, &amp;quot;double&amp;quot;] } }  rules 里定义的就是你想要检查的规则了。例如上边示例中就配置了分号和引号的使用。
+完整的配置文档可以在这里找到。
+ 配置 npm script
+配置好以后就可以通过命令</description>
+    </item>
+    
+    <item>
+      <title>Service Worker 基础知识</title>
+      <link>https://loveky.github.io/2017/07/24/service-worker-101/</link>
+      <pubDate>Mon, 24 Jul 2017 19:44:21 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2017/07/24/service-worker-101/</guid>
+      <description>本文旨在帮你快速了解 service worker 的基本知识点，让你对 service worker 有一个大致的了解。为以后开发一个简单的 PWA 应用打下基础。
+关于 service worker 的几个基本知识点  它是一个可编程的网络代理，让你可以控制页面请求的处理方式。 它是一个 JavaScript Worker，因此它无法直接操作 DOM。但可以通过 postMessage 接口与页面通信。同时，service worker 中的代码不会阻塞页面响应。 它在闲置时被终止，在需要时被启动。并不是常驻内存。因此你不能在 onfetch 或是 onmessage 回调中依赖全局状态。 被设计成完全异步。因此在 service worker 中无法使用同步 API （例如同步 XHR，localStorage等）。接口重度依赖于 promise。 只能在 HTTPS 页面加载（唯一的例外：localhost/127.0.0.1，方便调试）。  Service worker 的作用域 一个 service worker 的默认作用域是这个 service worker 脚本所在的目录。例如 https://example.com/sw.js 脚本默认就是 https://example.com 下的所有页面。
+你也可以在注册 service worker 时明确指定作用域：
+navigator.serviceWorker.register(&amp;#39;sw.js&amp;#39;, { scope: &amp;#39;./abc&amp;#39; }); 假设以上代码在 https://example.com 页面里执行，则意味着该 service worker 的作用域就是 https://example.</description>
+    </item>
+    
+    <item>
+      <title>[译] 在大型应用中使用 Redux 的五个技巧</title>
+      <link>https://loveky.github.io/2017/07/21/translate-five-tips-for-working-with-redux-in-large-applications/</link>
+      <pubDate>Fri, 21 Jul 2017 10:56:47 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2017/07/21/translate-five-tips-for-working-with-redux-in-large-applications/</guid>
+      <description>Redux 是一个很棒的用于管理应用程序“状态”的工具。单向数据流以及对不可变数据的关注使得推断状态的变化变得很简单。每次状态变化都由一个 action 触发，这会导致 reducer 函数返回一个变更后的新状态。由于客户要在我们的平台上管理或发布广告资源，在 AppNexus 使用 Redux 创建的很多用户界面都需要处理大量数据以及非常复杂的交互。在开发这些界面的过程中，我们发现了一些有用的规则和技巧以维持 Redux 易于管理。以下的几点讨论应该可以帮助到任何在大型，数据密集型应用中使用 Redux 的开发者：
+ 第一点: 在存储和访问状态时使用索引和选择器 第二点: 把数据对象，对数据对象的修改以及其它 UI 状态区分开 第三点: 在单页应用的不同页面间共享数据，以及何时不该这么做 第四点: 在状态中的不同节点复用通用的 reducer 函数 第五点: 连接 React 组件与 Redux 状态的最佳实践  1. 使用索引保存数据，使用选择器读取数据 选择正确的数据结构可以对程序的结构和性能产生很大影响。存储来自 API 的可序列化数据可以极大的受益于索引的使用。索引是指一个 JavaScript 对象，其键是我们要存储的数据对象的 id，其值则是这些数据对象自身。这种模式和使用 hashmap 存储数据非常类似，在查询效率方面也有相同的优势。这一点对于精通 Redux 的人来说不足为奇。实际上，Redux 的作者 Dan Abramov 在它的 Redux 教程中就推荐了这种数据结构。
+设想你有一组从 REST API 获取的数据对象，例如来自 /users 服务的数据。假设我们决定直接将这个普通数组存储在状态中，就像在响应中那样。当我们需要获取一个特定用户对象时会怎样呢？我们需要遍历状态中的所有用户。如果用户很多，这可能会是一个代价高昂的操作。如果我们想跟踪用户的一小部分，例如选中和未选中的用户呢？我们要么需要把数据保存在两个数组中，要么就要跟踪这些选中和未选中用户在主数组中的索引（译者注：此处指的是普通意义上的数组索引）。
+然而，我们决定重构代码改用索引的方式存储数据。我们可以在 reducer 中以如下的方式存储数据：
+{ &amp;#34;usersById&amp;#34;: { 123: { id: 123, name: &amp;#34;Jane Doe&amp;#34;, email: &amp;#34;jdoe@example.</description>
+    </item>
+    
+    <item>
+      <title>Chrome 开发者工具中的命令菜单</title>
+      <link>https://loveky.github.io/2017/06/06/chrome-devtools-command-menu/</link>
+      <pubDate>Tue, 06 Jun 2017 12:36:41 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2017/06/06/chrome-devtools-command-menu/</guid>
+      <description>大家对命令菜单(Command Menu)应该都不陌生。目前主流的编辑器中都内置了对该功能的支持。在 Sublime Text 和 Visual Studio Code 中你都可以通过快捷键 Ctrl + Shift + P 呼出命令菜单（在 Mac 上是 Cmd + Shift + P）。
+在呼出的菜单中输入关键字选择自己需要的命令（支持模糊搜索哦），按回车即可执行命令。极大的提高了效率。
+举个例子，以下的操作是为文件设置 JavaScript 的语法高亮：
+很方便吧。
+如果你已经习惯了这种操作方式，那么今天要告诉你一个好消息。Chrome 开发者工具现在也支持命令菜单了！激活的方式还是 Ctrl + Shift + P。
+激活后，长这个样子：
+熟悉的配方，熟悉的味道。有木有！
+滚动菜单，查看支持的命令，基本涵盖了我们日常开发用到的所有功能。
+举几个实用的小例子吧(这些例子不同命令菜单一样可以实现，但命令菜单可以极大的提高效率)。
+1. 搜索所有资源文件 激活命令菜单，输入 search，选择 Search all files，回车。在弹出的输入框中输入关键字就可以在所有页面引入的资源文件中搜索该关键字了。还支持正则表达式哦。
+2. 禁用/开启页面 JavaScript 激活命令菜单，输入 js，选择 Disable JavaScript。再次选择，即可开启。
+3. 隐藏 HTML 中的注释 激活命令菜单，输入 comment，选择 Hide HTML Comments。
+更多快捷功能，自己去发现吧！</description>
+    </item>
+    
+    <item>
+      <title>[译] Node.js 流: 你需要知道的一切</title>
+      <link>https://loveky.github.io/2017/06/05/translate-node-stream-everything-you-need-to-know/</link>
+      <pubDate>Mon, 05 Jun 2017 23:21:53 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2017/06/05/translate-node-stream-everything-you-need-to-know/</guid>
+      <description>图片来源
+Node.js 中的流有着难以使用，更难以理解的名声。现在我有一个好消息告诉你：事情已经不再是这样了。
+很长时间以来，开发人员创造了许许多多的软件包为的就是可以更简单的使用流。但是在本文中，我会把重点放在原生的 Node.js 流 API上。
+ “流是 Node 中最棒的，同时也是最被误解的想法。”
+— Dominic Tarr
+ 流到底是什么呢？ 流是数据的集合 —— 就像数组或字符串一样。区别在于流中的数据可能不会立刻就全部可用，并且你无需一次性的把这些数据全部放入内存。这使得流在操作大量数据或是数据从外部来源逐段发送过来的时候变得非常有用。
+然而，流的作用并不仅限于操作大量数据。它还带给我们组合代码的能力。就像我们可以通过管道连接几个简单的 Linux 命令以组合出强大的功能一样，我们可以利用流在 Node 中做同样的事。
+Linux 命令的组合性
+const grep = ... // 一个 grep 命令输出的 stream const wc = ... // 一个 wc 命令输入的 stream grep.pipe(wc) Node 中许多内建的模块都实现了流接口：
+截屏来自于我的 Pluralsight 课程 —— 高级 Node.js
+上边的列表中有一些 Node.js 原生的对象，这些对象也是可以读写的流。这些对象中的一部分是既可读、又可写的流，例如 TCP sockets，zlib 以及 crypto。
+需要注意的是这些对象是紧密关联的。虽然一个 HTTP 响应在客户端是一个可读流，但在服务器端它却是一个可写流。这是因为在 HTTP 的情况中，我们基本上是从一个对象（http.IncomingMessage）读取数据，向另一个对象写入数据（http.ServerResponse）。
+还需要注意的是 stdio 流（stdin，stdout，stderr）在子进程中有着与父进程中相反的类型。这使得在子进程中从父进程的 stdio 流中读取或写入数据变得非常简单。</description>
+    </item>
+    
+    <item>
+      <title>正则表达式中的悲观回溯</title>
+      <link>https://loveky.github.io/2017/05/31/regular-expressions-catastrophic-backtracking/</link>
+      <pubDate>Wed, 31 May 2017 20:31:05 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2017/05/31/regular-expressions-catastrophic-backtracking/</guid>
+      <description>前几天有小伙伴来求救说页面上有一个 input 框，随着用户不断输入内容，页面响应会越来越慢直到完全失去响应。
+简单沟通过后得知具体场景是这样的：
+ input 框中允许用户输入一连串逗号分隔的商品id 在用户输入的过程中实时检测用户输入的内容是否符合规则，若不符合则给出提示信息  小伙伴的解决方案也很直接：
+ 给 input 框绑定 keyup 事件。 在 keyup 事件回调函数中通过正则表达式判断是否符合规则，决定是否展示提示信息。  经过反复验证得到如下规律：
+ 用户在输入商品 id 的过程中（连续输入多个数字）不会卡顿 当用户输入逗号时，出现卡顿。随着输入商品 id 的数量增加，卡顿越来越明显，直至浏览器失去响应。  于是打开 Chrome 开发者工具，选择 Performance (原 Timeline) 标签页。将整个过程记录下来，得到如下时间线：
+其中黄色宽条表示 JavaScript 主线程的执行情况。连续的黄条越长，表示单次 JavaScript 运行的时间越长。也就意味着 UI 失去响应的时间越长。这一点从截图中的蓝色框中也可以得到印证。蓝色框中的红色长条表示浏览器一帧（一次渲染）所需要的时间。
+那么到底是 JavaScript 中的哪些代码占中了这么长 CPU 时间呢？我们在底部的选项卡中选中 Bottom-Up ，按 Total Time 降序排列。得到如下结果：
+可以看出，72.% 的 CPU 时间用在了一条正则表达式上。你肯定想到了，这就是小伙伴用来检查用户输入是否合法的正则表达式。
+完整的正则表达式是这样的：
+/^\s*((\d+(\,|，)\d+)*|(\d+))\s*$/ 接着去 regex101 上测试一下，测试数据如下，由 10 个商品 ID 组成的字符串：
+123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789  执行结果如下：</description>
+    </item>
+    
+    <item>
+      <title>[译] 为何TypeScript愈发流行了？</title>
+      <link>https://loveky.github.io/2017/05/12/translate-why-typescript-getting-popular/</link>
+      <pubDate>Fri, 12 May 2017 14:09:43 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2017/05/12/translate-why-typescript-getting-popular/</guid>
+      <description>在掘金翻译计划里翻译的一篇文章。感觉对自己挺有启发的。分享给大家。
+  原文地址：Why TypeScript Is Growing More Popular 原文作者：Mary Branscombe 校对者：Aladdin-ADD Germxu   为何 TypeScript 这么流行呢？许多主流的开发框架依赖于它，它还能提高开发者在不断变化的 JavaScript 世界中的生产力。
+在最近的 Stack Overflow 开发者调查以及年度 RedMonk 编程语言排名中都显示 TypeScript —— 由微软发起的结合了编译高级 JavaScript 特性与静态类型检查及工具的开源项目 —— 正在达到新的人气高度。通过为 JavaScript 提供最基本的检查语法，TypeScript 允许开发者对他们的代码进行类型检查，这可以暴露 bug 并改善大型 JavaScript 代码库的结构和文档。
+参与了 Stack Overflow 调查的开发者中有 9.5% 的人正在使用 TypeScript，这使得 TypeScript 成为了第九流行的编程语言，排名在 Ruby 之前，用户量是 Perl 的两倍。此次 Stack Overflow 调查中的受访者来自不同领域，使用最广泛的两种语言是 JavaScript 和 SQL，这说明此次调查并非只针对前端开发。事实上，TypeScript 程序员出现在了参与 Stack Overflow 调查的所有 4 种工作角色中：web 开发者、桌面开发者、系统管理员与 DevOps 以及数据科学家。
+RedMonk 的排名将 Stack Overflow 的数据与 GitHub 上的 pull request 结合起来试图理解开发者的想法以及他们正在使用什么。TypeScript 同样受到了开发者的欢迎，排名从第 26 位上升到了第 17 位。其中一部分原因是 TypeScript 在 Stack Overflow 上关注度的提升，但主要还是因为在 GitHub 上参与的开发者在不断增多。</description>
+    </item>
+    
+    <item>
+      <title>[译] 我是如何成为一名更优秀的程序员的</title>
+      <link>https://loveky.github.io/2017/04/18/translate-how-i-became-better-programmer/</link>
+      <pubDate>Tue, 18 Apr 2017 21:03:26 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2017/04/18/translate-how-i-became-better-programmer/</guid>
+      <description>&lt;p&gt;原文地址：&lt;a href=&#34;http://jlongster.com/How-I-Became-Better-Programmer&#34;&gt;http://jlongster.com/How-I-Became-Better-Programmer&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;译者注：本文作者 &lt;a href=&#34;http://jlongster.com/&#34;&gt;James Long&lt;/a&gt;，前 Mozilla 工程师，NodeJS, ReactJS 社区活跃开发者。NodeJS 著名模板引擎 &lt;a href=&#34;https://mozilla.github.io/nunjucks/&#34;&gt;Nunjucks&lt;/a&gt; 作者，JavaScript 格式化工具 &lt;a href=&#34;https://github.com/prettier/prettier&#34;&gt;Prettier&lt;/a&gt; 作者。在 Mozilla 工作 6 年后离开，年仅 32 岁自己创业开公司。其人生经历值得大部分程序员学习。&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;在React Conf上有几位朋友咨询我如何成为一名更优秀的程序员。由于某种原因，人们认为我是一个值得倾听的高级程序员。所以我想有必要把我这些年编程路上的『心路历程』写下来。&lt;/p&gt;
+
+&lt;p&gt;关于我的一些详细信息：我现年32岁，有10年以上扎实的工作经验。直到最近几年我才对自己所做的工作充满信心。即使是现在，我也在不断质疑自己。问题在于，这种质疑并不会消失，所以你要做的就是无视它，不断的解决问题，不断的积累经验。&lt;/p&gt;
+
+&lt;p&gt;首先我要说明的是以下提到的只是一些帮你提升技能的小贴士。最终你还是需要找到一条最适合你自己的路。这些只是我发现对我有帮助的点。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>[译] 6个Async/Await完胜Promise的原因</title>
+      <link>https://loveky.github.io/2017/04/09/translate-6-reasons-why-javascripts-async-await-blows-promises-away/</link>
+      <pubDate>Sun, 09 Apr 2017 15:05:15 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2017/04/09/translate-6-reasons-why-javascripts-async-await-blows-promises-away/</guid>
+      <description>原文地址：https://hackernoon.com/6-reasons-why-javascripts-async-await-blows-promises-away-tutorial-c7ec10518dd9
+友情提醒：NodeJS自从7.6版开始已经内置了对async/await的支持。如果你还没用过该特性，那么接下来我会给出一系列的原因解释为何你应该立即开始使用它并且会结合示例代码说明。
+async/await快速入门 为了让还没听说过这个特性的小伙伴们有一个大致了解，以下是一些关于该特性的简要介绍：
+ async/await是一种编写异步代码的新方法。在这之前编写异步代码使用的是回调函数和promise。 async/await实际是建立在promise之上的。因此你不能把它和回调函数搭配使用。 async/await和promise一样，是非阻塞的。 async/await可以使异步代码在形式上更接近于同步代码。这就是它最大的价值。  语法 假设有一个getJSON方法，它返回一个promise，该promise会被resolve为一个JSON对象。我们想要调用该方法，输出得到的JSON对象，最后返回&amp;quot;done&amp;quot;。
+以下是使用promise的实现方式：
+const makeRequest = () =&amp;gt; getJSON() .then(data =&amp;gt; { console.log(data) return &amp;#34;done&amp;#34; }) makeRequest() 使用async/await则是这样的：
+const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &amp;#34;done&amp;#34; } makeRequest() 使用async/await时有以下几个区别：
+ 在定义函数时我们使用了async关键字。await关键字只能在使用async定义的函数的内部使用。所有async函数都会返回一个promise，该promise最终resolve的值就是你在函数中return的内容。 由于第一点中的原因，你不能在顶级作用域中await一个函数。因为顶级作用域不是一个async方法。
+// this will not work in top level // await makeRequest()  // this will work makeRequest().then((result) =&amp;gt; { // do something }) await getJSON()意味着直到getJSON()返回的promise在resolve之后，console.</description>
+    </item>
+    
+    <item>
+      <title>Webpack2中的NamedModulesPlugin与HashedModuleIdsPlugin</title>
+      <link>https://loveky.github.io/2017/03/29/webpack-module-ids/</link>
+      <pubDate>Wed, 29 Mar 2017 21:19:24 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2017/03/29/webpack-module-ids/</guid>
+      <description>要讨论Webpack 2中新增的这两个plugin的功能，还要先从使用Webpack打包的项目的前端资源缓存方案说起。
+通常在使用了Webpack的项目中我们会使用CommonsChunkPlugin来将所有依赖的第三方包打包到一个名为vender的chunk中。与此同时，为了避免每次更改项目代码时导致vender chunk的chunkHash改变，我们还会单独生成一个manifest chunk。
+举个例子，假设我们有一个项目，项目中入口文件为index.js。其内容如下：
+import add from &amp;#39;./src/add&amp;#39;; import leftPad from &amp;#39;left-pad&amp;#39;; import jsonp from &amp;#39;jsonp&amp;#39;; add(1, 2); 通常我们的webpack.config.js文件就会有类似如下的配置：
+const path = require(&amp;#39;path&amp;#39;); const webpack = require(&amp;#39;webpack&amp;#39;); module.exports = { entry: { &amp;#39;app&amp;#39;: &amp;#39;./index.js&amp;#39;, &amp;#39;vender&amp;#39;: [&amp;#39;left-pad&amp;#39;, &amp;#39;jsonp&amp;#39;] }, output: { filename: &amp;#39;[name].[chunkHash].js&amp;#39;, path: path.resolve(__dirname, &amp;#39;build&amp;#39;) }, resolve: { extensions: [&amp;#39;.js&amp;#39;] }, module: { ... }, plugins:[ new webpack.optimize.CommonsChunkPlugin({ name: [&amp;#39;vender&amp;#39;, &amp;#39;manifest&amp;#39;], minChunks: Infinity, }) ] }; 这时，通过Webpack打包，会生成三个文件：
+假设我们修改了./src/add.js文件，重新打包，会得到：</description>
+    </item>
+    
+    <item>
+      <title>在JavaScript项目中锁定npm依赖包版本</title>
+      <link>https://loveky.github.io/2017/03/27/lock-npm-package-version-in-js-project/</link>
+      <pubDate>Mon, 27 Mar 2017 17:57:54 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2017/03/27/lock-npm-package-version-in-js-project/</guid>
+      <description>问题 最近在项目中遇到这样一个问题，webpack生成的vender包的哈希值在我和同事的电脑上不一致。由于之前已经配置过了CommonsChunkPlugin（配置如下），所以我们期望的结果是在不同环境下构建出的文件哈希值应该是一致的。
+注：只给出了和本文内容相关的配置项
+module.exports = { entry: { app: &amp;#39;./src/js/app.jsx&amp;#39;, vender: [ &amp;#39;classnames&amp;#39;, &amp;#39;react&amp;#39;, &amp;#39;react-dom&amp;#39;, &amp;#39;redux&amp;#39;, &amp;#39;react-redux&amp;#39;, &amp;#39;redux-promise-middleware&amp;#39;, &amp;#39;updeep&amp;#39;, &amp;#39;axios&amp;#39;, &amp;#39;jdc-rc-list&amp;#39;, &amp;#39;react-router&amp;#39;, &amp;#39;react-router-redux&amp;#39; ] }, output: { path: path.resolve(__dirname, &amp;#39;./build/js/&amp;#39;), filename: (isDevelopmentEnvironment ? &amp;#39;[name].bundle.js&amp;#39; : &amp;#39;[name].[chunkhash].js&amp;#39;), chunkFilename: (isDevelopmentEnvironment ? &amp;#39;[name].bundle.js&amp;#39; : &amp;#39;[name].[chunkhash].js&amp;#39;) }, plugins: [ new webpack.optimize.CommonsChunkPlugin({ name: [&amp;#39;vender&amp;#39;, &amp;#39;manifest&amp;#39;], minChunks: Infinity, }) ] }; 调查 经过多次验证发现，我们在各自的电脑上多次构建出来的哈希值可以保持一致，只是在两台电脑上不一致。考虑到vender中打包的都是第三方依赖，于是猜测是两台电脑上安装的依赖包不同。接着对比了两人的package.json中的dependencies，完全一致。
+考虑到package.json文件中包版本中的^符号匹配的范围比较大。参考npm官方给出的解释：
+^1.2.3 := &amp;gt;=1.2.3 &amp;lt;2.0.0 ^0.2.3 := &amp;gt;=0.2.3 &amp;lt;0.3.0 ^0.0.3 := &amp;gt;=0.0.3 &amp;lt;0.</description>
+    </item>
+    
+    <item>
+      <title>React Conf 2017视频 百度网盘地址</title>
+      <link>https://loveky.github.io/2017/03/27/react-conf-2017-video/</link>
+      <pubDate>Mon, 27 Mar 2017 10:25:45 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2017/03/27/react-conf-2017-video/</guid>
+      <description>React Conf 2017的全部视频已经在YouTube上放出来了。为了方便在家里的电视上播放，就全部下载了一套。顺便上传了百度网盘一份。感兴趣的可以看看哦。全部720p。
+下载地址：
+http://pan.baidu.com/s/1gfl5FzX</description>
+    </item>
+    
+    <item>
+      <title>园博园一日游</title>
+      <link>https://loveky.github.io/2017/03/26/trip-gardenexpo-park/</link>
+      <pubDate>Sun, 26 Mar 2017 18:25:21 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2017/03/26/trip-gardenexpo-park/</guid>
+      <description> 来北京快3年了，之前每次坐高铁回家都会路过园博园。每次透过车窗看到园里漂亮的风景，总会和老婆商量着什么时候来。可惜我住在大东边，园博园在帝都西南角，每次想到坐地铁要2个多小时就放弃了。现在有车了，出行方便了，却又总也想不起来了。昨天还是老婆提议：『我们明天去园博园啊？！』于是俩人一拍即合，来一场说走就走的春游。
+订票 确定要去，马上在携程上定了两张门票。原价20，携程上18。（点此订票）注意：携程上买的电子票只能在园区三号门的售票处换票。这点千万注意。
+出发 今天早起看天气，格外给力。天很蓝，云很白。吃过早饭，8:40从家出发。一路畅通，只用1个小时就把五环跑了半圈，到达目的地。
+到达导航终点遇到了第一个问题，百度地图上搜到位于长顺一路上的停车场都是临时停车场，现在已经关闭了。于是掉头往园区正门开去，一路上有不少车在掉头。看来是不少人都中招了。不过好消息是园区正门有保安在指挥，正门再往西一点点就是正式停车场了。
+蓝色圈圈就是停车场的位置。
+停好车，背上包往园区正门走。换票很方便，把携程发来的取票码出示给工作人员就好了，购买特价票(包括电子票)必须要出示相关证件哦。排在我前面的一个大姐买了老人票但是没带证件，只好退票重新买。另外一个要注意的就是，园区不允许携带宠物进入。
+入园 正门门口
+入园后，园区内部是由许多馆/园组成的。比如一进门看到的鄂尔多斯馆、合肥园、荆门园等等。都是以省市或古地名命名的。或大或小，各有特色。随便放几张照片感受下：
+晋中园 晋中园内的戏台 合肥园门口的牌楼 粤秀 各种园实在太多，我们自己走的也只是很小一部分，就不一一列举了。有兴趣还是亲自去看一看。下面说三个重点推荐的景观吧。
+附一个园区地图（可以右键新窗口打开查看大图）
+北京园 北京园应该是园博园里最大的一个园了，毕竟是首都嘛。建筑风格也保持了皇家建筑的大气，威严。
+北京园内的主要建筑：聚景阁 古都北京山川形胜写意 忆江南 这里可以说是今天行程最大的收获了。出乎意外的美。置身其中，仿佛一下子去到了江南某个小城的私家园里之中。
+永定塔 永定塔位于园内西北部的半山腰上，是园区的最高点，也是我今天走到的最远的位置。老婆在逛完忆江南后就走不动了，找了个长凳休息。于是我开启了暴走模式，直奔永定塔。
+终于来到山下，拾阶而上，一路没什么人。 离塔越来越近 途径文源亭 文源亭后是两条铁道，时不时还会有货运列车经过。 在文源亭远眺北京城，可以看到中央电视塔，国贸。这天气，视野真的很不错。 继续上山，偶然发现的隧道。从文字上也看的出很有历史啦。前面提到的两条铁轨就穿过这里从永定塔下穿行而过。 终于来到塔下，可惜并不对外开放。只能在外边看看啦。 餐饮 从永定塔下来已经是下午1点了，还没吃午饭。于是一边往大门走一边找吃的。然而并没有什么收获，要么是路边小亭子里吃泡面，要么是去少数几个餐厅里吃。看到一个吉祥馄炖，走进去看了看就出来了。环境很一般，很多人在打扑克牌，比较吵。上一个菜价单供参考：
+最后午饭在石景山华联的呷哺呷哺解决的。从园博园开车过去大约20分钟左右。可选择的的餐馆也很多。比园区里的那些餐饮靠谱多了。
+费用小计 最后附一个今天的费用小计，供参考：
+ 园博园停车：20（5元/小时） 园博园门票：36（18元/人） 华联停车：6元 呷哺呷哺：74元  </description>
+    </item>
+    
+    <item>
+      <title>配置Fiddler拦截iOS/Andorid的https请求</title>
+      <link>https://loveky.github.io/2017/03/21/config-fiddler-with-ios-https/</link>
+      <pubDate>Tue, 21 Mar 2017 22:12:46 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2017/03/21/config-fiddler-with-ios-https/</guid>
+      <description>Fiddler可以配置用来拦截https请求。但默认配置下仅支持拦截PC上的请求。在移动端上的https请求会因为证书问题而失败。如下图所示：
+要解决这个问题，只需要在iOS/Android系统上安装一个安全证书即可。具体步骤如下：
+ 访问http://www.telerik.com/fiddler/add-ons，下载并安装CertMaker for iOS and Android插件。
+ 安装完成后重启Fiddler。
+ 重启后浏览器访问http://ipv4.fiddler:8888，如果看到如下内容，表示安装成功。
+ 在手机浏览器（iOS建议Safari）里打开前边提到的链接，点击页面中最后一个链接FiddlerRoot certificate。下载完后会提示如下页面：
+点击安装，弹出安全认证，要求输入密码。输入后出现以下页面：
+继续点击安装。安装成功提示如下：
+  到这里，所有的配置工作就全部做完了。现在再次访问https页面，已经可以正常打开了。</description>
+    </item>
+    
+    <item>
+      <title>键盘鼠标共享神器 Mouse without Borders</title>
+      <link>https://loveky.github.io/2017/03/18/mouse-without-borders/</link>
+      <pubDate>Sat, 18 Mar 2017 22:13:24 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2017/03/18/mouse-without-borders/</guid>
+      <description>如果你像我一样办公桌上有2台或以上的电脑(比如一个台式机，一个笔记本)，那么有个问题一定在困扰着你。那就是两台电脑有各自的一套键鼠设备。来回切换使用两台电脑的时候要在两套键鼠设备之前切换，非常不方便。同时，两套设备还会占据办工作上很大的空间。
+今天要分享一个神器帮你解决这个问题，那就是微软出品的Mouse without Borders。通过它，你可以利用一套键鼠设备在若干台(最多4台)电脑之前无缝切换。就好像是在两个连接在同一个电脑的两个显示器之间切换一样方便。
+使用方法  下载并安装Mouse without Borders，需要连接的两台电脑上都要安装。 下载地址
+ 在两台电脑上都启动程序。会看到如下的欢迎界面
+在第一台电脑上点击NO，看到如下页面。记下这里的SECURITY CODE。 在第二台电脑上点击YES，输入之前记下的SECURITY CODE和主机名。点击LINK。
+连接成功后会出现以下提示界面:
+ 按需修改配置。配置界面如下。通常默认配置已经够用了。如果确有需要按需调整即可。
+  功能，特色 Mouse without Borders的主要特色有：
+ 一套键鼠控制多台设备 各台设备间完全平等，可以使用任意一台主机的键鼠控制任意其他主机 各台主机间共享剪切板内的内容，随意复制粘贴（支持复制文件） 支持在主机间拖拽复制文件 可以截取任意一台设备上屏幕的内容(Ctrl+Shift+S进入截屏模式，鼠标拖拽选择截屏区域，在本地打开画图工具，Ctrl+V即可看到截图内容)  缺点 我的能想到的唯一缺点就是不支持跨平台，仅支持Windows操作系统。毕竟是Microsoft出品。。。
+类似产品 Synergy 功能与Mouse without Borders类似。主要区别在于，与Mouse without Borders相比:
+优点：
+ 跨平台 支持Windows Linux Mac  缺点：
+ 有服务器，客户端的概念。只能使用服务器的键鼠控制其他主机 不支持在主机间复制粘贴文件或拖拽复制文件（官方宣传支持该功能，但始终复制不成功） 不支持截取其它主机的屏幕  综上，如果你需要跨平台，那么没得选，只能Synergy。否则果断选择Mouse without Borders。</description>
+    </item>
+    
+    <item>
+      <title>Redux 3.6.0 源码阅读 之 src/createStore.js</title>
+      <link>https://loveky.github.io/2016/12/01/redux-source-src-createstore/</link>
+      <pubDate>Thu, 01 Dec 2016 09:34:21 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2016/12/01/redux-source-src-createstore/</guid>
+      <description>嗯，就是学习一下，读读源码。顺便把源码里的文档翻译了一下并添加了一些简单的注释。
+本文对应的文件是src/createStore.js
+import isPlainObject from &amp;#39;lodash/isPlainObject&amp;#39; import $$observable from &amp;#39;symbol-observable&amp;#39; /** * ActionTypes里定义的是Redux保留的私有action。 * 对于任何未知的action，你必须返回store的当前状态。 * 如果传入的当前状态是undefined，你必须返回store的初始状态。 * 不要在应用代码中直接引用这些action。 */ export var ActionTypes = { INIT: &amp;#39;@@redux/INIT&amp;#39; } /** * createStore方法用于创建一个保存程序状态的store。 * 改变store中数据的唯一方法是调用store的`dispatch()`方法。 * * 你的应用中应该只有一个store。为了将程序状态中不同部分的变更逻辑 * 组合在一起，你可以通过`combineReducers`方法将多个reducer组合成一个reducer。 * * @param {Function} reducer 一个返回应用下一状态的函数，入参是程序的当前状态以及 * 要发送的action。 * * @param {any} [preloadedState] store的初始状态。你可以选择性的为store指定一个 * 初始状态。 * 如果你使用了`combineReducers`方法来生成最终的reducer。那么这个初始状态对象的 * 结构必须与调用`combineReducers`方法时传入的参数的结构保持对应关系。 * * @param {Function} enhancer store增强器。你可以选择性的传入一个增强函数来扩展 * store的功能，例如中间件，时间旅行，持久化等。Redux自带的唯一一个增强器是 * `applyMiddleware()`方法。 * * @returns {Store} 返回一个可以读取状态，发送action以及订阅变更通知的Redux store。 */ export default function createStore(reducer, preloadedState, enhancer) { // 如果只传入reducer和enhancer，则store的初始状态为undefined  if (typeof preloadedState === &amp;#39;function&amp;#39; &amp;amp;&amp;amp; typeof enhancer === &amp;#39;undefined&amp;#39;) { enhancer = preloadedState preloadedState = undefined } // enhancer必须是一个函数  if (typeof enhancer !</description>
+    </item>
+    
+    <item>
+      <title>[译]什么是Promise.try</title>
+      <link>https://loveky.github.io/2016/08/04/promise-try/</link>
+      <pubDate>Thu, 04 Aug 2016 09:50:06 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2016/08/04/promise-try/</guid>
+      <description>原文地址 http://cryto.net/~joepie91/blog/2016/05/11/what-is-promise-try-and-why-does-it-matter/
+在#Node.js#频道里经常困扰大家的一个话题是Bluebird提供的Promise.try方法。大家并不清楚该方法的功能也不知道为何要使用它。同时，几乎所有的关于Promsie的指南中针对该方法错误的演示使得这种情况没有任何改善。
+在本文中，我会尝试解释究竟什么是Promise.try以及为何你应该使用它。我假设你已经对Promise有所了解并且知道.then在Promise中的作用。
+即使你在使用一个不同的Promsie实现(例如ES6 Promise)，本文还是可以帮到你。文章末尾我会解释如何在非Bluebird环境中实现相同的功能。
+究竟什么是Promise.try呢？ 简单来说，除了不需要跟在一个前置Promise之后以外，Promise.try很像.then。这么说还是有一些含糊不清，所以让我们先看一个示例。
+以下是一段典型的Promise使用场景：
+function getUsername(userId) { return database.users.get({id: userId}) .then(function(user) { return user.name; }); }  到目前为止，一切顺利。我们假设database.users.get会返回一个Promise，并且该Promise最终会返回一个带有name属性的对象。
+以下是同样的代码，但是引入了Promise.try：
+var Promise = require(&amp;quot;bluebird&amp;quot;); function getUsername(userId) { return Promise.try(function() { return database.users.get({id: userID}); }).then(function(user) { return user.name; }); }  可以看到，我们的调用链以Promise.try而不是database.users.get开始。像使用.then一样，我们执行Promise.try方法并传递给它一个直接返回database.users.get调用的函数。
+这样做有什么意义呢？ 以上的代码看起来似乎是多余的。但实际上它有以下几个优点：
+ 更好的错误处理 同步代码中的异常不论出现在何处都会以rejection的形式向Promise链后端传递。 更好的兼容性 你可以始终使用你自己喜欢的Promise实现，而不用担心第三方代码在使用哪个。 更好的代码阅读体验 所有的代码在水平方向上将处于同一个缩进层级，这将使你阅读代码变得更容易。  接下来我会逐一介绍这些优点：
+1. 更好的错误处理 Promise的一个被大力宣扬的优点就是用户可以用同一种方式同时处理同步异常和异步异常 —— 同步异常会被捕获并且会作为一个rejected Promise向后传递。但事实真的是这样吗？让我们看看以下这个上文示例的小变种：
+function getUsername(userId) { return database.users.get({id: userId}) .then(function(user) { return uesr.</description>
+    </item>
+    
+    <item>
+      <title>[译] 寻找时间成为一名更优秀的程序员</title>
+      <link>https://loveky.github.io/2016/07/12/find-time-to-be-a-better-developer/</link>
+      <pubDate>Tue, 12 Jul 2016 09:31:18 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2016/07/12/find-time-to-be-a-better-developer/</guid>
+      <description>原文链接 https://medium.freecodecamp.com/finding-time-to-become-a-better-developer-eebc154881b2#.t1uuonhtf
+没有时间做任何事。这就是你感受，不是吗？没有时间学习你觉得你需要学会以跟上潮流的知识。没有时间回过头去重构那些丑陋的代码。它至少能工作，何况截止日期马上就要到了。没有时间编写单元测试。没有时间为今后要维护你代码的伙计编写文档或注释。没有时间思考。没有时间呼吸。没时间！
+好吧&amp;hellip;如果你能花时间阅读本文，我保证你自己会为那些重要的事找到更多时间。
+我曾经以为成为一名伟大程序员的唯一途径就拼命工作。我的健康，友谊，家庭都因此受到影响。理解以下5个关于时间管理的真相拯救了我。
+1. 你不需要为了赶潮流而学习每一个新事物 你不需要 毫无疑问一个优秀的程序员应该保持不断的学习，但是你把学习的焦点放在哪儿能在很大程度上影响你需要花费的时间。
+ “老的事物已经死去，(终归老去的)新事物万岁！”
+ 首先，不要被出现在那些每37秒就宣布一个新标准的博客上的头条所愚弄。这些新技术，新框架，新特性中的大多数永远都不会被认可与采纳，因此你根本不需要了解它们。那些真正能够脱颖而出的也会经历比博客圈和发明厂商宣传的长的多的时间才会被采用。公司投资于他们的技术栈 —— 和那些小创业公司不一样，他们不可能说变就变。所以，放松一下，你的职业生涯很安全。
+把你的学习聚焦在三方面，以下面列出的顺序为优先级： 1. 基础 —— 当你有了非常扎实的基础知识之后，学习新技能会变得非常容易。举个例子，如果你对JavaScript有着深入的了解，你就可以飞速的掌握任何新的JavaScript框架。如果你深入学习了面向对象编程，你也能快速掌握任何新的面向对象语言。深入学习基础知识会极大的提高你的学习效率。始终把提高对基础知识的掌握放在第一位。 2. 你最常使用的技术栈的最新版本/特性 —— 存在一套你每天都会使用的技术栈。这些是可以帮你养活你及你家人的工具。当这些工具的新版本发布时，投入时间学习是很值得的。 3. 由市场领导者主导的流行技术 —— 如果一个颇具规模的公司，比如Google，Facebook或是Microsoft提出某项新技术并已经开始小有名气，这也值得你的关注。市面上曾经有许多JavaScript框架争夺人们的注意力，然后Angular和React出现了并将那些框架彻底消灭。我不是说今后不会有搅局者出现成为下一个焦点，但实际情况往往是杂牌技术只不过是一些噪音。
+学习时间应该是你日程安排的一部分。每天抽出一点时间来学习。这不需要很长的时间，即使是每天花25分钟阅读和练习也可以快速积累。
+2. 编写优秀的代码比编写糟糕的代码需要更少的时间，但感觉上并不是这样 时间是一个扁圆 你很可能喜欢开发完几个新功能后当你试着运行并且发现似乎可以正常工作时那一刻的感受。但那只是你时间投入的开始。在一个功能上投入的时间包括了后期调试的时间，重构花费的时间以及解决由于开发时的不良设计导致的其它问题的时间。当你开始以这种方式认识你的时间投入时，你会发现，从长远来看，更少的错误和更好的设计是值得投资的。
+你可以做两件事来减少代码中的错误并实现更好的设计。 1. 使用测试驱动开发 首先编写测试，然后编写代码以使测试通过。这不仅会减少bug还会导致更好的设计，因为当你按照可测试的方式组织代码时，你最终会得到更小，更简单的，依赖更少的函数。 2. 使用迭代的设计方式 在你的代码能真正工作之前，不要花时间试图让你的代码变完美。你永远不可能在脑子里把它设计的完全正确。你必须敲击键盘来生成实现预期功能的代码。问题是程序员尝尝犯两个常见的错误：要么时花了太多时间思考而没有足够的时间动手，要么就是不去优化他们最初的方案。遵循最初由Kent Beck提出的口头禅：“make it work, make it right, make it fast” —— 按照话中的顺序。
+3. 7x24的工作不会让你成为英雄，管理预期才会 下班到家，开始工作! 这一条几乎杀了我。我曾经同意并承诺过我老板或客户提出的任何疯狂的时间表。我害怕说“不”。我害怕让任何人失望。为了交付我可以做任何事。我曾经睡在办公桌下，有过多次长达40+小时的马拉松式的编程经历。
+起初我是一颗耀眼的明星。别人对我大加赞赏，我感觉自己像是个英雄。但是我设置了一个不可能实现的预期。不可能长久的像那样工作。最终我开始疲惫不堪，生病并错过截止日期。我开始得到不可靠的名声。这是个坏消息。
+最后我终于明白真正的英雄是那些持续可靠的人。他们说到做到。要成为那样的英雄的唯一途径就是管理预期。
+你需要控制时间表以便总是可以按时交付高质量的工作。起初这会非常困难。这意味着必须说“不”并把需求打回。
+在最开始，你的老板和客户不会被你的拒绝刺激到。但一旦你证明自己是值得信赖的，一切都将开始改变。
+随着时间的推移，其它程序员会迟到，交付马虎的工作或是筋疲力竭变得不可靠。这时你就会成为团队中真正的英雄。事实上，学会这一点让我成为我的领域里最受欢迎的咨询顾问。由于狠抓预期管理，我在质量和时效性方面建立了良好的声誉。
+4. 不是所有花在“改善”代码上的时间都会得到相同的回报 花费时间是一种投资。和所有投资一样，投资回报率是一个合理的期望。你的所得至少应该和投入一样多，希望是越多越好。
+我们已经谈论过“make it work, make it right, make it fast”。这个是不错的口头禅但这里有一个陷阱：“right”并不意味着完美，“fast”也不是说越快越好。</description>
+    </item>
+    
+    <item>
+      <title>koa框架源码阅读笔记 之 lib/application.js</title>
+      <link>https://loveky.github.io/2015/12/28/koa-source-lib-application/</link>
+      <pubDate>Mon, 28 Dec 2015 09:28:02 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2015/12/28/koa-source-lib-application/</guid>
+      <description>最近在学习ES6 Generator特性时发现了koa这个基于Generator的Web框架，它可以让开发者以一种“同步的方式”编写包含各种异步请求的Web应用。下面是关于它的一段中文介绍：
+ 由 Express 原班人马打造的 koa，致力于成为一个更小、更健壮、更富有表现力的 Web 框架。使用 koa 编写 web 应用，通过组合不同的 generator，可以免除重复繁琐的回调函数嵌套，并极大地提升常用错误处理效率。Koa 不在内核方法中绑定任何中间件，它仅仅提供了一个轻量优雅的函数库，使得编写 Web 应用变得得心应手。
+ 从介绍中可以看出这又是一个小而美的框架。到GitHub项目页面上看了一下发现源码里只有4个JS文件，总代码量只有1571行(以2015年12月26日最新稳定版1.1.2为准)。于是决定把代码clone下来学习一下，本篇会先从整个框架的入口文件lib/application.js说起。
+总体说明 lib/application.js文件export出的是一个构造函数，用来创建一个koa应用。一个koa应用最常用的方法有2个： - listen(port) 执行listen后会通过http.createServer启动一个服务器并监听指定端口 - use(middleware) 注册一个中间件，一个koa应用可以注册多个中间件， 处理请求时会按照中间件注册的顺序执行这些中间件。
+更多详细信息可以参考GitHub文档页面。
+代码注释 function Application() { if (!(this instanceof Application)) return new Application; this.env = process.env.NODE_ENV || &amp;#39;development&amp;#39;; this.subdomainOffset = 2; this.middleware = []; this.proxy = false; this.context = Object.create(context); this.request = Object.create(request); this.response = Object.create(response); } 以上就是Application构造函数的定义，很简洁，主要做了以下几件事情：
+- 通过instanceof判断来支持不带new关键字的调用。 - 设置应用运行环境，会从环境变量NODE_ENV读取，默认值为development - 声明this.</description>
+    </item>
+    
+    <item>
+      <title>在JDF项目中使用ES6新特性</title>
+      <link>https://loveky.github.io/2015/12/19/use-es6-in-jdf-projects/</link>
+      <pubDate>Sat, 19 Dec 2015 09:25:59 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2015/12/19/use-es6-in-jdf-projects/</guid>
+      <description>Note: 目前虽然JDF已经支持使用ES6开发脚本，但线上使用还在前期摸索阶段，请大家根据自己项目实际情况评估使用情况
+最近利用业余时间给JDF增加了ES6代码的支持。背后的原理是在项目构建阶段利用Babel将.babel文件转译成ES5代码。关于Babel的更多使用方法可以参考其官网的配置文档。
+下面开始正式介绍在利用ES6特性开发前的准备工作: - 升级JDF到最新版本（&amp;gt;= 1.8.2） - 进入JDF项目目录，安装基本的Babel preset和plugin。关于preset和plugin的更多说明请参考文档
+npm install babel-preset-es2015 npm install babel-plugin-transform-es3-member-expression-literals npm install babel-plugin-transform-es3-property-literals  配置项目的.gitignore文件，忽略node_modules目录。在文件中添加以下内容：  **/node_modules/   引入es6-base.js(包含 es5-shim和babel-polyfill)  至此，所有的准备工作就完成了。接下来就可以利用ES6的各种新特性开发了。需要注意的是所有包含了ES6特性的脚本文件扩展名必须是.babel，否则JDF是不会对其进行编译的。
+最后是一份简单的FAQ：
+Q: ES6都有哪些新特性，有没有推荐的学习资料？ 当然有，中文版的有阮一峰出品的ECMAScript 6入门。 英文的有： - ES6 In Depth来自Mozilla团队博客的一系列文章，每篇讲解一个新特性。建议按时间顺序阅读。 - Understanding ECMAScript 6来自Nicholas C. Zakas大神的一本ES6小书。
+Q: 我想使用额外的Babel plugin或preset该怎样配置？ 只需在package.json中指定需要额外引入的plugin或preset，例如：
+&amp;#34;babel&amp;#34;: { &amp;#34;plugins&amp;#34;: [&amp;#34;syntax-async-functions&amp;#34;,&amp;#34;transform-regenerator&amp;#34;], &amp;#34;presets&amp;#34;: [&amp;#34;stage-0&amp;#34;] } 并在JDF项目的目录中安装相关npm package即可。
+Q: .babel文件编译出来的代码我看不懂，出了问题如何调试呢？ 我们看到的经过Babel转译后的JS是这样的： 这里包含了大量的Babel生成的代码，非常不利于调试。不过不用担心，JDF在本地开发模式中启用了sourceMap，你只需在Chrome开发者工具中的Sources Tab中在你要调试的JS文件目录下找到同名的.babel文件即可。相关JS中的报错信息，都会被映射到转译前的.babel文件的对应位置。
+关于sourceMap的更多信息请参考这里。</description>
+    </item>
+    
+    <item>
+      <title>[译] TrimPath模板引擎语法</title>
+      <link>https://loveky.github.io/2015/12/03/trimpath-syntax/</link>
+      <pubDate>Thu, 03 Dec 2015 09:24:11 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2015/12/03/trimpath-syntax/</guid>
+      <description>本文翻译自JavaScript Template Syntax
+表达式与表达式修饰符  ${expr} ${expr|modifier} ${expr|modifier1|modifier2|...|modifierN} ${expr|modifier1:argExpr1_1} ${expr|modifier1:argExpr1_1,argExpr1_2,...,argExpr1_N} ${expr|modifier1:argExpr1_1,argExpr1_2|...|modifierN:argExprN_1,argExprN_2,...,argExprN_M}   expr可以是不包含右花括号}的任何合法JavaScript表达式 修饰符的格式是modifierName[:argExpr1[,argExpr2[,argExprN]]]  argExpr可以是任何合法的expr    Examples: ${customer.firstName} ${customer.firstName|capitalize} ${customer.firstName|default:&amp;quot;no name&amp;quot;|capitalize} ${article.getCreationDate()|default:new Date()|toCalenderControl:&amp;quot;YYYY.MM.DD&amp;quot;,true,&amp;quot;Creation Date&amp;quot;} ${(lastQuarter.calcRevenue() - fixedCosts) / 1000000}  这里有一份内置的修饰符列表，你也可以通过TrimPath提供的API来创建自定义的修饰符。
+表达式还可以写成${% customer.firstName %}这种形式，多出的%字符允许你的表达式中出现花括号}。例如：
+ Visit our ${% emitLink(&#39;Solutions and Products&#39;, { color: &#39;red&#39;, blink: false }) %}  表达式中的空白字符是可选的，你也可以写成下面的格式：
+ ${%customer.firstName%} ${%customer.firstName|capitalize%}  声明 声明标签可以嵌套使用。
+控制流  {if testExpr} {elseif testExpr} {else} {/if}   testExpr可以是任何不包含}的JavaScript表达式 testExpr不需要被(和)包围  示例：</description>
+    </item>
+    
+    <item>
+      <title>AngularJS中的依赖注入</title>
+      <link>https://loveky.github.io/2014/05/04/di-in-angularjs/</link>
+      <pubDate>Sun, 04 May 2014 09:16:50 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2014/05/04/di-in-angularjs/</guid>
+      <description>本文译自https://docs.angularjs.org/guide/di
+依赖注入 依赖注入(DI)是一种解决组件如何获取其依赖这一问题的设计模式。
+Angular injector子系统负责创建组件，解决它们的依赖，并按要求将它们提供给其他组件。
+如果想深入了解DI，可以查看依赖注入的Wikipedia以及Martin Fowler的这篇Inversion of Control。
+DI in a Nutshell 一个组件要想获取它的依赖可以通过以下三种途径：
+ 直接创建这个依赖的一个实例，通常使用new操作符
+ 通过全局变量查找已经被创建的依赖
+ 依赖可以作为参数传递给需要它的组件
+  前两种获取依赖的方式并不理想，因为这会导致依赖关系被硬编码进代码中。这会导致更新依赖关系变得很复杂。在测试时尤其如此，我们通常会提供mock过的依赖关系以隔离不同组件间的测试，硬编码会导致每次测试都需要修改相关的源码。
+相比之下，第三种方式是最可行的，因为它将解决依赖关系的责任从组件中移除。依赖只是简单的作为参数传递给组件：
+function SomeClass(greeter) { this.greeter = greeter; } SomeClass.prototype.doSomething = function(name) { this.greeter.greet(name); } 在上边的例子中，SomeClass并不关心如何创建或找到greeter，它只是在初始化时从参数列表里取出需要的依赖即可。
+但这样做的问题是，寻找/创建依赖的责任被转交给了调用SomeClass的代码。
+为了统一管理依赖关系，每个Angular应用都有一个injector。injector是一个服务定位器，它负责查找或创建依赖。
+下面是一个使用injector服务的例子：
+// Provide the wiring information in a module var myModule = angular.module(&amp;#39;myModule&amp;#39;, []); 下面的代码告诉injector如何创建greeter服务。需要注意的是greeter又依赖于$window服务。greeter实际上是一个包含greet方法的对象。
+myModule.factory(&amp;#39;greeter&amp;#39;, function($window) { return { greet: function(text) { $window.alert(text); } }; }); 下面的代码演示了如何创建一个injector并通过它来请求greeter服务:
+var injector = angular.</description>
+    </item>
+    
+    <item>
+      <title>AngularJS源码阅读之ngModel</title>
+      <link>https://loveky.github.io/2014/04/11/angularjs-ng-model/</link>
+      <pubDate>Fri, 11 Apr 2014 09:12:46 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2014/04/11/angularjs-ng-model/</guid>
+      <description>数据的双向绑定可能是Angular最为人们熟知的特性之一。举个最简单的例子 
+可以在result页面中看到，每当在input中输入时，$scope中对应model的值也改变了。反之，当用户点击Set按钮在$scope中更新了model的值时，input输入框中的内容也对应更新了。
+所有的这些魔法只需要我们在input元素上指定一个ng-model属性。可见ng-model这个directive是双向绑定这一特性不可缺少一点。本文就继续从源代码入手看看ngModel的实现方式以及其它directive是如何与ngModel交互的。
+ngModel被定义在input.js。从名字上可看出，该文件还定义input这个directive，从这点也可以看出ngModel与input之间的紧密关系。
+注: 文中所有涉及到的AngularJS源码均来自angular-1.2.8版本。
+var ngModelDirective = function() { return { require: [&amp;#39;ngModel&amp;#39;, &amp;#39;^?form&amp;#39;], controller: NgModelController, link: function(scope, element, attr, ctrls) { // notify others, especially parent forms  var modelCtrl = ctrls[0], formCtrl = ctrls[1] || nullFormCtrl; formCtrl.$addControl(modelCtrl); scope.$on(&amp;#39;$destroy&amp;#39;, function() { formCtrl.$removeControl(modelCtrl); }); } }; }; 可以看出ngModel依赖于ngModelController以及可选的formController。ngModel在link方法中只做了2件事:
+ 如果声明了ngModel的元素出现在一个form中，那么就向上层form注册自身 注册了$destroy事件的监听器，该事件触发时告知上层form移除对自身的引用  link方法如此简单以至于我们还没看到关于数据绑定的任何信息。看来问题的答案都藏在ngModelController中了。接下来看看ngModelController中都发生了什么。
+var NgModelController = [&amp;#39;$scope&amp;#39;, &amp;#39;$exceptionHandler&amp;#39;, &amp;#39;$attrs&amp;#39;, &amp;#39;$element&amp;#39;, &amp;#39;$parse&amp;#39;, function($scope, $exceptionHandler, $attr, $element, $parse) { this.</description>
+    </item>
+    
+    <item>
+      <title>Angular中的Controller</title>
+      <link>https://loveky.github.io/2014/04/11/angularjs-controller/</link>
+      <pubDate>Fri, 11 Apr 2014 09:10:26 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2014/04/11/angularjs-controller/</guid>
+      <description>在Angular中，一个Controller是一个JavaScript构造函数。当一个Controller通过ng-controller附加到某个DOM元素上时，Angular会使用相应Controller的构造函数来初始化一个新的Controller对象。一个新的child scope会被创建并作为可注入的参数(就是我们看到的$scope)传递给该Controller的构造函数。
+使用Controller：
+ 为$scope对象设置初始状态
+ 为$scope对象添加行为
+  不要使用Controller:
+ 修改DOM —— Controllers应该只负责业务逻辑。将任何UI的逻辑放进Controller都会极大地破坏其可测试性。Angular中可以使用数据绑定用来更新页面中的数据或使用directive来封装DOM操作。 格式化input数据 —— 使用angular form controls 过滤输出数据 —— 使用Angular中的filter机制 跨Controller之间的代码或状态共享 —— 使用Angular中的service机制 管理其他组件的生命周期  </description>
+    </item>
+    
+    <item>
+      <title>AngularJS源码阅读之ngRepeat</title>
+      <link>https://loveky.github.io/2014/04/02/angularjs-ngrepeat/</link>
+      <pubDate>Wed, 02 Apr 2014 07:56:17 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2014/04/02/angularjs-ngrepeat/</guid>
+      <description>注: 文中所有涉及到的AngularJS源码均来自angular-1.2.8版本。
+注2: 本文结构为一段代码配一段说明，代码在上，说明在下。
+从3月3号到现在，进入新公司也有1个月了。过去这一个月里主要负责公司内部某个DevOps工具开发过程中的前端部分。由于涉及到较多的网页交互，该项目的前端部分使用了AngularJS这个框架。本人这正好借助这个机会进一步了解了AngularJS的相关知识。
+这两天项目主体完成，准备上线，算是有了一些自由时间，正好借此机会学习一下AngularJS内部的实现机制。
+本篇来说说最常见的directive之一 ngRepeat
+该文件的整体结构如下：
+var ngRepeatDirective = [&amp;#39;$parse&amp;#39;, &amp;#39;$animate&amp;#39;, function($parse, $animate) { var NG_REMOVED = &amp;#39;$$NG_REMOVED&amp;#39;; var ngRepeatMinErr = minErr(&amp;#39;ngRepeat&amp;#39;); return { transclude: &amp;#39;element&amp;#39;, priority: 1000, terminal: true, $$tlb: true, link: function($scope, $element, $attr, ctrl, $transclude){ ..... } }; function getBlockStart(block) { return block.clone[0]; } function getBlockEnd(block) { return block.clone[block.clone.length - 1]; } }]; ngRepeatDirective是一个数组，它会被传递给directive方法用来生成ngRepeat这个directive。可以看到ngRepeat依赖于$parse和$animate两个服务。$parse用来将字符串解析成javascript函数。$animate用来给DOM改变附加上动画效果。文件最后声明了两个helper方法，会在稍后的分析中介绍到。
+接下来把最大的篇幅交给这个directive的核心——link方法。
+var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]+?)\s+in\s+([\s\S]+?)(?:\s+track\s+by\s+([\s\S]+?))?\s*$/), trackByExp, trackByExpGetter, trackByIdExpFn, trackByIdArrayFn, trackByIdObjFn, lhs, rhs, valueIdentifier, keyIdentifier, hashFnLocals = {$id: hashKey}; if (!</description>
+    </item>
+    
+    <item>
+      <title>AngularJS Directive之compile与link</title>
+      <link>https://loveky.github.io/2014/04/01/angularjs-directive-compile-link/</link>
+      <pubDate>Tue, 01 Apr 2014 07:53:38 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2014/04/01/angularjs-directive-compile-link/</guid>
+      <description>刚开始学习AngularJS Directive时，总是不太能搞明白compile和link两个属性的含义和区别。最近写的多一些，读的资料也多了一些，渐渐有了一些理解，简单记录下来：
+compile属性是一个函数。该函数会针对每一个directive的实例执行一次，在compile阶段：
+ 不能访问scope
+ 元素还没有被插入document
+ 可以修改template，最终结果会被angular缓存
+  link属性可以有两种配置方式。 link属性可以被设置为一个对象，包含pre, post两个属性，分别对应一个函数(preLink, postLink)。preList，postLink的区别在于执行顺序。preLink是自顶向下的，先父节点，后子节点，postLink正好相反。
+.directive{ return { link: { pre: function preLink(){ ... }, post: function postLink() { ... } } } } link属性也可以被直接设置为一个函数，则默认相当于设置了postLink函数。
+.directive{ return { link: function link(){ ... } } } 等于
+.directive{ return { link: { post: function post() { ... } } } }  由此可见，如果直接将link属性设置为一个函数，则link阶段的执行顺序是自底向上的。
+link阶段会针对每一个被RENDERED的directive实例执行一次。此阶段：
+ 可以访问scope(因为controller已经初始化完成)
+ 元素已经被插入document中
+ 不可以修改template(angular会直接使用之前缓存的内容)
+  如果定义了compile属性则link属性会被忽略。</description>
+    </item>
+    
+    <item>
+      <title>使用CSS3实现逐格动画</title>
+      <link>https://loveky.github.io/2014/02/21/use-css3-to-simulate-stop-animation/</link>
+      <pubDate>Fri, 21 Feb 2014 07:46:06 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2014/02/21/use-css3-to-simulate-stop-animation/</guid>
+      <description>首先我们有这样一张照片：
+照片长度为1184px，高度为75px，共分为24格。
+首先我们将DIV大小设置成单格照片的大小，49x75。这样在初始状态下看到的就是第一格的照片。 接下来定义的是最终状态也就是最后一格的状态，通过偏移量背景调整到最后一格。
+最后就是定义动画效果，在下面的设置中时长2秒，动画会无限循环下去。
+@keyframes wave { to { background-position: -1184px 0 } } @-webkit-keyframes wave { to { background-position: -1184px 0 } } #hahaha { margin: 50px auto; width: 49px; height: 75px; background: url(&amp;#39;https://raw.github.com/loveky/loveky.github.io/master/assets/images/css3-stop-animation-background.png&amp;#39;) 0 0; -webkit-animation: wave 2s infinite steps(24); animation: 2s wave infinite steps(24); } 效果如下:
+ 由于照片是自己剪辑拼成的，所以偏移量不是太精确。。。</description>
+    </item>
+    
+    <item>
+      <title>再出发，写在离开之前</title>
+      <link>https://loveky.github.io/2014/02/17/farewell-shanghai/</link>
+      <pubDate>Mon, 17 Feb 2014 07:42:53 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2014/02/17/farewell-shanghai/</guid>
+      <description> 从2011年12月12号到2014年2月28号，不知不觉在上海这座城市度过了798天。
+在来eBay之前，我还没用过Git，更没听说过ClearCase 打算离开第一家公司时还没想过今后要做什么，只是厌倦了日复一日没有任何技术含量的工作已经对公司前景非常不看好。当时就是在这样一个迷茫的环境中开始骑驴找马的过程，整个过程并不漫长，只面试里 两家。第一家是苏州一个叫玩啥e族的网站，职位是系统工程师，负责服务器维护，不过在一面之后便杳无音讯。原因大概是因为没啥实际经验。也难怪，在第一家公司虽然也是做系统管理员，但都是客户要做什么就照着文档一步一步敲命令，学到的东西非常有限。第二次面试便是George帮忙联系的上海CSC外派eBay的机会。当时没用过Git，更没听说过ClearCase，并且第一次知道还有SCM这样的工作。不过很巧，eBay当时并没有考虑找一名非常有经验的工程师，而是准备找一个“白板”慢慢培养。也许这也算是缘分，在抱着《Git权威指南》突击了几天后，我居然通过了面试&amp;ndash;我当时完全没有抱希望。
+海绵吸水般的半年 来到eBay，全新的工作内容，全新的技术，全新的环境。对什么都很新鲜，对什么任务都很热情，每天第一个到，最后一个走。不仅仅是因为需要花时间学习同时完成工作任务，更是因为eBay这样一个大公司有很多东西都很吸引我，吸引我去了解，学习。渐渐的，了解了Git，学习了ClearCase，渐渐的，也能帮Developer解决一些开发过程中遇到的问题，刚刚进入公司时觉得非常“高精尖”的东西也慢慢变得不再神秘。除了纯粹的技术上的进步，我还了解了向eBay这样的大公司，遍布在全球各个site的工程师是如何协同工作；了解了作为一个support engineer如何帮助客户快速解决开发过程中遇到的问题；了解了美国工程师如何思考，解决问题。而最后这一点，也是我认为在这过去的2年多的时间里对我影响最大的。遇到问题时，不应该只是忙于寻求一个解决方案，更重要的是思考问题背后的事情。重要的不是“我能怎样”，而是“我应该怎样”(Do the right thing)。也许这也算是工程师文化的一部分吧。
+我“被”离职了 好景不常，来到eBay的半年后，我“被”离职了。起因是新上任的VP推出了一条节省开支的策略，清理掉所有他手下的外派人员。于是我又开始了找工作，由于有在eBay的工作经验，这次工作找起来还算顺利，先后拿到了携程，EMC和一家小公司的职位。工作内容分别是构建一套日志分析系统，做EMC产品的技术支持以及perl脚本开发。虽然找到了工作，但当时其实并不想离开。原因是工作刚刚由熟悉到熟练并且对工作内容又很感兴趣，正要更进一步的学习，此时离开难免有些“不过瘾”。大概是出于对我前半年工作的肯定，老板在最后一刻争取到了一个让我多留在eBay几个月的机会，并最终帮我申请到了专为eBay正式员工的名额。也算是有些“因祸得福”吧。
+味道变了 在eBay工作的2年中，每年都有很大的收获。区别在于第一年收获都在工作中，而第二年的收获都在工作之外。在结束了“海绵吸水”似的第一年后，刚刚过去的这一年更多的似乎是各种问题。因为刚到新公司时，所有的精力都在学习和任务上。而等到对工作慢慢熟练之后，精力慢慢转移到对工作本身的思考上来。其实，很多事情是禁不住思考的，每当发现工作中有的事情不是在do the right thing时，我都会如实的讲给manager。所以我一直认为，“唯命是从”的员工不是好员工，因为你没有承担自己思考，反馈的义务。工作并不单单是把事情搞定那么简单。make it work以后更要make it right.
+Ruby? Rails? 没错，不得不提的主题。过去一年里的业余时间都是围绕他俩展开的。12年年底开始接触Ruby，相较于Perl而言，Ruby更fasion更“性感“更自然。接着我接触到了Sinatra，可以写一些简单的页面。再后来接触到了大名鼎鼎的Rails，并且很快就做出了一个Blog应用。Ruby/Rails的简单，友好深深的吸引着我。接着我开始不满足于自己看书学习了。恰在此时，在RubyChina上看到了xmonkeycn的一个拖延症患者的精益(Lean Startup)实践这篇帖子。于是毫不犹豫的报了茶叶班的中级班，详细的学习了一下Rails，理解了Rails是如何工作的。随后在去年4月份的的RubyTuesday上认识了xmonkeycn。随后帮忙写了一些批量下载照片的脚本 接着便接触到了他的小团队(额外还有1个前端妹子和一个做业务的帅哥)——他们当时正在”密谋“做一些”事情“。就这样，业余时间一边学习茶叶班高级班的课程，一边帮xmonkeycn和他的小伙伴的贡献一些和&amp;rdquo;低级&amp;rdquo;的代码。慢慢的，我知道了TDD，开始写测试了，又慢慢的，渐渐的熟悉了CSS和JS。就这样，每天工作上的”抵触情绪“和业余时间学习，coding获得的满足感形成了巨大的反差。我甚至开始幻想做一名全职Ruby/Rails开发人员。一晃大半年过去了，就这样时间到了13年下半年。由于家庭原因，我开始寻找北京的工作机会，在一系列SCM相关职位面试的经历之后，我不得不考虑Ruby这条道路的可能性有多大。于是尝试性的在RubyChina论坛上看起了招聘的信息，并在13年的最后一个月投出了第一份Ruby Engineer的简历。1个月后，我收到了北京一家互联网公司的offer。虽然公司没有eBay大，待遇也没有上海这边好，但在思考过后，还是接受了这个机会。因为life is too short，为何不把时间放在能让自己快乐的事情上呢？何况，只有happy work，才能出彩。趁着年轻，尽管折腾吧！
+路在脚下，再出发 还有十来天就要离开这座城市，也许在踏上火车的那一刻会有不舍，也许以后很少再有机会回到这里，但终归这里给我留下了很多美好的回忆，感谢所有的同事，朋友，给我的帮助，鼓励。祝一切都好。
+过去的2年多里，我：
+ 感谢我的女朋友，一直没能陪在她身边，有很多亏欠，只希望在以后的日子里慢慢弥补 学会Rails已经一系列相关的技术，并最终转型为一个全职的开发人员 结识了很多好朋友，一直在工作内外给我帮助，不能一一列出姓名，谨祝工作顺利 渐渐的开始锻炼身体，开始跑步 在无人指导的情况下，无师自通，学会了做饭。。。 开始渐渐的学会思考，尝试make it right而不仅仅是make it work 喜欢上了阅读，电子书，纸质书，中文，外文，技术，社科，来者不拒  </description>
+    </item>
+    
+    <item>
+      <title>你可能不知道的git clean</title>
+      <link>https://loveky.github.io/2013/12/18/git-clean/</link>
+      <pubDate>Wed, 18 Dec 2013 07:39:30 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2013/12/18/git-clean/</guid>
+      <description>git clean是干啥的？ git clean可以帮你清理workspace中未被git版本控制的文件，比如临时文件，构建出来的二进制文件。
+使用方法 如果你的clean.requireForce项没有设置为false，那么每次使用git clean时都要加上-f参数
+示例如下，workspace中有2个调试logo时创建的临时png文件，commit之前需要删掉。如果不用git clean的话需要一个一个rm。
+LM-SHC-00355679@17:42:26:~/Angular/pomodoro-time (master) =&amp;gt; git status -s ?? image/logo1.png ?? image/logo2.png 使用git clean可以快速清楚，当临时文件较多时尤其方便。
+LM-SHC-00355679@17:42:30:~/Angular/pomodoro-time (master) =&amp;gt; git clean -f Removing image/logo1.png Removing image/logo2.png 有的时候可能需要将当前workspace打包成zip。但是直接打包会将.gitignore里的文件也打进去。这是git clean也可以帮忙。只需加上-x参数。
+LM-SHC-00355679@17:48:13:~/Angular/pomodoro-time (master) =&amp;gt; cat .gitignore /coverage LM-SHC-00355679@17:48:16:~/Angular/pomodoro-time (master) # -d 参数表示连同目录一起删除 =&amp;gt; git clean -xfd Removing coverage/ LM-SHC-00355679@17:48:25:~/Angular/pomodoro-time (master) =&amp;gt; ls coverage ls: coverage: No such file or directory 以上就是git clean的基本用法啦。下面介绍下git clean的其他可选参数：
+ -n 并不实际执行删除操作，只显示出将被清理的文件列表
+ -X 仅删除.</description>
+    </item>
+    
+    <item>
+      <title>搭建属于自己的travis pro</title>
+      <link>https://loveky.github.io/2013/12/06/travis-pro/</link>
+      <pubDate>Fri, 06 Dec 2013 23:01:52 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2013/12/06/travis-pro/</guid>
+      <description>Travis是一个众所周知的持续集成服务提供商，免费为开源项目提供持续集成服务。但是对于闭源项目/private repo需要购买travis pro服务才能使用。对于小团队，每月129刀的最低消费实在是一笔不小的开支，因此便有了本文。
+为什么要做这件事？  首先，我们是一群有情(jie)节(cao)的程序猿。我们要对自己的代码负责，保证所有上线的代码都是经过测试的。所有Pull Request的code要经过team member的revew并跑通测试。
+ 其次，我们是一群节(diao)俭(si)的程序猿。Travis Pro每个月129刀的最低消费让我们望(xia)而(niao)却(le)步(!)。  要搭建这样一台持续集成服务器，需要哪些东西？  一台linux主机 (本文中使用的是linode上的Ubuntu 12.04) 一个GitHub账号 (加为你repo的collaborator或是team的member)  如何配置？ Step1 安装Jenkins，非Ubuntu系统安装Jenkins请参考Jenkins官方文档
+wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add - sudo echo &amp;#39;deb http://pkg.jenkins-ci.org/debian binary/&amp;#39; &amp;gt;&amp;gt; /etc/apt/sources.list sudo apt-get update sudo apt-get install jenkins Setp2 为jenkins用户安装rvm
+sudo su - jenkins curl -L https://get.rvm.io | bash -s stable --ruby=1.9.3 Setp3 安装Xvfb。(如果你的测试不需要用模拟的DISPLAY，那你可以忽略此步骤)
+我们测试Rails时需要用capybar跑feature spec。有js相关的测试需要启动一个浏览器来执行测试代码，但是linode上的Ubuntu都是没有display的，因此跑feature spec的时候会遇到无法启动浏览器而报错的情况。Xvfb就是用来创建一个虚拟的Display供启动浏览器用的。
+sudo apt-get install xvfb Xvfb :99 -screen 0 1024x768x16 &amp;gt;&amp;gt; /tmp/Xvfb.</description>
+    </item>
+    
+    <item>
+      <title>你可能不知道的git rerere</title>
+      <link>https://loveky.github.io/2013/11/27/git-rerere/</link>
+      <pubDate>Wed, 27 Nov 2013 22:55:17 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2013/11/27/git-rerere/</guid>
+      <description>rerere 是啥的缩写？ rerere = reuse recorded resolution
+rerere是干啥用的？ 它会让Git记住你是如何解决某个文件的两个版本之间的conflict，这样在下次Git遇到同样的文件在相同的两个版本间发生冲突时，可以自动帮你使用相同的方法解决冲突。
+如何启用rerere？ git config --global rerere.enabled true
+或是
+在repo目录里mkdir .git/rr-cache
+不过推荐前者。
+能举例说明吗？ 参考inline的注释。
+$ git init git-rerere-test Initialized empty Git repository in /cygdrive/e/test/git-rerere-test/.git/ $ cd git-rerere-test $ git config rerere.enabled true # 开启rerere功能  $ echo &amp;#34;What fruit do you like?&amp;#34; &amp;gt;&amp;gt; question $ git add . &amp;amp;&amp;amp; git commit -m &amp;#34;initial drop&amp;#34; [master (root-commit) af9fdf9] initial drop 1 files changed, 1 insertions(+), 0 deletions(-) create mode 100644 question $ git branch test # 创建test分支  $ echo &amp;#34;I like orange&amp;#34; &amp;gt;&amp;gt; question $ git add .</description>
+    </item>
+    
+    <item>
+      <title>sidekiq初体验</title>
+      <link>https://loveky.github.io/2013/06/15/try-sidekiq/</link>
+      <pubDate>Sat, 15 Jun 2013 20:56:19 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2013/06/15/try-sidekiq/</guid>
+      <description>今天Kevin讲了background job，提到了Resque和Sidekiq，并推荐我们使用Sidekiq。于是初步体验了一下。
+Sidekiq在其项目主页上写到:
+ What if 1 Sidekiq process could do the work of 20 Resque or DelayedJob processes?
+ 口气不小啊…⊙﹏⊙b
+安装 只需在Gemfile里添加
+gem &#39;sidekiq&#39;  然后执行bundle install即可。
+使用 这里拿课程中的一段真实code举例说明。在该项目中有一个UserController在新用户注册时会发送欢迎邮件，但是此处发送邮件是一个同步的操作，如果你的网络不稳定则用户在点击注册后可能会等很长时间才能看到注册成功的页面，我们要把发送欢迎邮件的操作转换成一个异步的后台任务。使用Sidekiq前的code如下：
+if @user.save AppMailer.send_welcome_email(@user.id).deliver 要把它转为后台任务，只需改为：
+if @user.save AppMailer.delay.send_welcome_email(@user.id) 测试 改完之后在开发环境中测试正常，接着跑rspec发现有3个spec失败，这三个spec内容如下：
+it &amp;#34;sends out email&amp;#34; do expect { post :create, user: Fabricate.attributes_for(:user) }.to change{ ActionMailer::Base.deliveries.size }.by(1) end it &amp;#34;sends to the right recipient&amp;#34; do post :create, user: Fabricate.attributes_for(:user) email = ActionMailer::Base.deliveries.last expect(email.</description>
+    </item>
+    
+  </channel>
+</rss>

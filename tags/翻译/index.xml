@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>翻译 on loveky的流水账</title>
+    <link>https://loveky.github.io/tags/%E7%BF%BB%E8%AF%91/</link>
+    <description>Recent content in 翻译 on loveky的流水账</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 21 Jul 2017 10:56:47 +0800</lastBuildDate>
+    
+	<atom:link href="https://loveky.github.io/tags/%E7%BF%BB%E8%AF%91/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>[译] 在大型应用中使用 Redux 的五个技巧</title>
+      <link>https://loveky.github.io/2017/07/21/translate-five-tips-for-working-with-redux-in-large-applications/</link>
+      <pubDate>Fri, 21 Jul 2017 10:56:47 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2017/07/21/translate-five-tips-for-working-with-redux-in-large-applications/</guid>
+      <description>Redux 是一个很棒的用于管理应用程序“状态”的工具。单向数据流以及对不可变数据的关注使得推断状态的变化变得很简单。每次状态变化都由一个 action 触发，这会导致 reducer 函数返回一个变更后的新状态。由于客户要在我们的平台上管理或发布广告资源，在 AppNexus 使用 Redux 创建的很多用户界面都需要处理大量数据以及非常复杂的交互。在开发这些界面的过程中，我们发现了一些有用的规则和技巧以维持 Redux 易于管理。以下的几点讨论应该可以帮助到任何在大型，数据密集型应用中使用 Redux 的开发者：
+ 第一点: 在存储和访问状态时使用索引和选择器 第二点: 把数据对象，对数据对象的修改以及其它 UI 状态区分开 第三点: 在单页应用的不同页面间共享数据，以及何时不该这么做 第四点: 在状态中的不同节点复用通用的 reducer 函数 第五点: 连接 React 组件与 Redux 状态的最佳实践  1. 使用索引保存数据，使用选择器读取数据 选择正确的数据结构可以对程序的结构和性能产生很大影响。存储来自 API 的可序列化数据可以极大的受益于索引的使用。索引是指一个 JavaScript 对象，其键是我们要存储的数据对象的 id，其值则是这些数据对象自身。这种模式和使用 hashmap 存储数据非常类似，在查询效率方面也有相同的优势。这一点对于精通 Redux 的人来说不足为奇。实际上，Redux 的作者 Dan Abramov 在它的 Redux 教程中就推荐了这种数据结构。
+设想你有一组从 REST API 获取的数据对象，例如来自 /users 服务的数据。假设我们决定直接将这个普通数组存储在状态中，就像在响应中那样。当我们需要获取一个特定用户对象时会怎样呢？我们需要遍历状态中的所有用户。如果用户很多，这可能会是一个代价高昂的操作。如果我们想跟踪用户的一小部分，例如选中和未选中的用户呢？我们要么需要把数据保存在两个数组中，要么就要跟踪这些选中和未选中用户在主数组中的索引（译者注：此处指的是普通意义上的数组索引）。
+然而，我们决定重构代码改用索引的方式存储数据。我们可以在 reducer 中以如下的方式存储数据：
+{ &amp;#34;usersById&amp;#34;: { 123: { id: 123, name: &amp;#34;Jane Doe&amp;#34;, email: &amp;#34;jdoe@example.</description>
+    </item>
+    
+    <item>
+      <title>[译] Node.js 流: 你需要知道的一切</title>
+      <link>https://loveky.github.io/2017/06/05/translate-node-stream-everything-you-need-to-know/</link>
+      <pubDate>Mon, 05 Jun 2017 23:21:53 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2017/06/05/translate-node-stream-everything-you-need-to-know/</guid>
+      <description>图片来源
+Node.js 中的流有着难以使用，更难以理解的名声。现在我有一个好消息告诉你：事情已经不再是这样了。
+很长时间以来，开发人员创造了许许多多的软件包为的就是可以更简单的使用流。但是在本文中，我会把重点放在原生的 Node.js 流 API上。
+ “流是 Node 中最棒的，同时也是最被误解的想法。”
+— Dominic Tarr
+ 流到底是什么呢？ 流是数据的集合 —— 就像数组或字符串一样。区别在于流中的数据可能不会立刻就全部可用，并且你无需一次性的把这些数据全部放入内存。这使得流在操作大量数据或是数据从外部来源逐段发送过来的时候变得非常有用。
+然而，流的作用并不仅限于操作大量数据。它还带给我们组合代码的能力。就像我们可以通过管道连接几个简单的 Linux 命令以组合出强大的功能一样，我们可以利用流在 Node 中做同样的事。
+Linux 命令的组合性
+const grep = ... // 一个 grep 命令输出的 stream const wc = ... // 一个 wc 命令输入的 stream grep.pipe(wc) Node 中许多内建的模块都实现了流接口：
+截屏来自于我的 Pluralsight 课程 —— 高级 Node.js
+上边的列表中有一些 Node.js 原生的对象，这些对象也是可以读写的流。这些对象中的一部分是既可读、又可写的流，例如 TCP sockets，zlib 以及 crypto。
+需要注意的是这些对象是紧密关联的。虽然一个 HTTP 响应在客户端是一个可读流，但在服务器端它却是一个可写流。这是因为在 HTTP 的情况中，我们基本上是从一个对象（http.IncomingMessage）读取数据，向另一个对象写入数据（http.ServerResponse）。
+还需要注意的是 stdio 流（stdin，stdout，stderr）在子进程中有着与父进程中相反的类型。这使得在子进程中从父进程的 stdio 流中读取或写入数据变得非常简单。</description>
+    </item>
+    
+    <item>
+      <title>[译] 为何TypeScript愈发流行了？</title>
+      <link>https://loveky.github.io/2017/05/12/translate-why-typescript-getting-popular/</link>
+      <pubDate>Fri, 12 May 2017 14:09:43 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2017/05/12/translate-why-typescript-getting-popular/</guid>
+      <description>在掘金翻译计划里翻译的一篇文章。感觉对自己挺有启发的。分享给大家。
+  原文地址：Why TypeScript Is Growing More Popular 原文作者：Mary Branscombe 校对者：Aladdin-ADD Germxu   为何 TypeScript 这么流行呢？许多主流的开发框架依赖于它，它还能提高开发者在不断变化的 JavaScript 世界中的生产力。
+在最近的 Stack Overflow 开发者调查以及年度 RedMonk 编程语言排名中都显示 TypeScript —— 由微软发起的结合了编译高级 JavaScript 特性与静态类型检查及工具的开源项目 —— 正在达到新的人气高度。通过为 JavaScript 提供最基本的检查语法，TypeScript 允许开发者对他们的代码进行类型检查，这可以暴露 bug 并改善大型 JavaScript 代码库的结构和文档。
+参与了 Stack Overflow 调查的开发者中有 9.5% 的人正在使用 TypeScript，这使得 TypeScript 成为了第九流行的编程语言，排名在 Ruby 之前，用户量是 Perl 的两倍。此次 Stack Overflow 调查中的受访者来自不同领域，使用最广泛的两种语言是 JavaScript 和 SQL，这说明此次调查并非只针对前端开发。事实上，TypeScript 程序员出现在了参与 Stack Overflow 调查的所有 4 种工作角色中：web 开发者、桌面开发者、系统管理员与 DevOps 以及数据科学家。
+RedMonk 的排名将 Stack Overflow 的数据与 GitHub 上的 pull request 结合起来试图理解开发者的想法以及他们正在使用什么。TypeScript 同样受到了开发者的欢迎，排名从第 26 位上升到了第 17 位。其中一部分原因是 TypeScript 在 Stack Overflow 上关注度的提升，但主要还是因为在 GitHub 上参与的开发者在不断增多。</description>
+    </item>
+    
+    <item>
+      <title>[译] 我是如何成为一名更优秀的程序员的</title>
+      <link>https://loveky.github.io/2017/04/18/translate-how-i-became-better-programmer/</link>
+      <pubDate>Tue, 18 Apr 2017 21:03:26 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2017/04/18/translate-how-i-became-better-programmer/</guid>
+      <description>&lt;p&gt;原文地址：&lt;a href=&#34;http://jlongster.com/How-I-Became-Better-Programmer&#34;&gt;http://jlongster.com/How-I-Became-Better-Programmer&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;译者注：本文作者 &lt;a href=&#34;http://jlongster.com/&#34;&gt;James Long&lt;/a&gt;，前 Mozilla 工程师，NodeJS, ReactJS 社区活跃开发者。NodeJS 著名模板引擎 &lt;a href=&#34;https://mozilla.github.io/nunjucks/&#34;&gt;Nunjucks&lt;/a&gt; 作者，JavaScript 格式化工具 &lt;a href=&#34;https://github.com/prettier/prettier&#34;&gt;Prettier&lt;/a&gt; 作者。在 Mozilla 工作 6 年后离开，年仅 32 岁自己创业开公司。其人生经历值得大部分程序员学习。&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;在React Conf上有几位朋友咨询我如何成为一名更优秀的程序员。由于某种原因，人们认为我是一个值得倾听的高级程序员。所以我想有必要把我这些年编程路上的『心路历程』写下来。&lt;/p&gt;
+
+&lt;p&gt;关于我的一些详细信息：我现年32岁，有10年以上扎实的工作经验。直到最近几年我才对自己所做的工作充满信心。即使是现在，我也在不断质疑自己。问题在于，这种质疑并不会消失，所以你要做的就是无视它，不断的解决问题，不断的积累经验。&lt;/p&gt;
+
+&lt;p&gt;首先我要说明的是以下提到的只是一些帮你提升技能的小贴士。最终你还是需要找到一条最适合你自己的路。这些只是我发现对我有帮助的点。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>[译] 6个Async/Await完胜Promise的原因</title>
+      <link>https://loveky.github.io/2017/04/09/translate-6-reasons-why-javascripts-async-await-blows-promises-away/</link>
+      <pubDate>Sun, 09 Apr 2017 15:05:15 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2017/04/09/translate-6-reasons-why-javascripts-async-await-blows-promises-away/</guid>
+      <description>原文地址：https://hackernoon.com/6-reasons-why-javascripts-async-await-blows-promises-away-tutorial-c7ec10518dd9
+友情提醒：NodeJS自从7.6版开始已经内置了对async/await的支持。如果你还没用过该特性，那么接下来我会给出一系列的原因解释为何你应该立即开始使用它并且会结合示例代码说明。
+async/await快速入门 为了让还没听说过这个特性的小伙伴们有一个大致了解，以下是一些关于该特性的简要介绍：
+ async/await是一种编写异步代码的新方法。在这之前编写异步代码使用的是回调函数和promise。 async/await实际是建立在promise之上的。因此你不能把它和回调函数搭配使用。 async/await和promise一样，是非阻塞的。 async/await可以使异步代码在形式上更接近于同步代码。这就是它最大的价值。  语法 假设有一个getJSON方法，它返回一个promise，该promise会被resolve为一个JSON对象。我们想要调用该方法，输出得到的JSON对象，最后返回&amp;quot;done&amp;quot;。
+以下是使用promise的实现方式：
+const makeRequest = () =&amp;gt; getJSON() .then(data =&amp;gt; { console.log(data) return &amp;#34;done&amp;#34; }) makeRequest() 使用async/await则是这样的：
+const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &amp;#34;done&amp;#34; } makeRequest() 使用async/await时有以下几个区别：
+ 在定义函数时我们使用了async关键字。await关键字只能在使用async定义的函数的内部使用。所有async函数都会返回一个promise，该promise最终resolve的值就是你在函数中return的内容。 由于第一点中的原因，你不能在顶级作用域中await一个函数。因为顶级作用域不是一个async方法。
+// this will not work in top level // await makeRequest()  // this will work makeRequest().then((result) =&amp;gt; { // do something }) await getJSON()意味着直到getJSON()返回的promise在resolve之后，console.</description>
+    </item>
+    
+  </channel>
+</rss>

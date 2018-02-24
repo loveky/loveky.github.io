@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Chrome 开发者工具中的命令菜单</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="loveky" />
+  <meta name="description" content="大家对命令菜单(Command Menu)应该都不陌生。目前主流的编辑器中都内置了对该功能的支持。在 Sublime Text 和 Visual Studio Code 中你都可以通过快捷键 Ctrl &#43; Shift &#43; P 呼出命令菜单（在 Mac 上是 Cmd &#43; Shift &#43; P）。
+在呼出的菜单中输入关键字选择自己需要的命令（支持模糊搜索哦），按回车即可执行命令。极大的提高了效率。
+举个例子，以下的操作是为文件设置 JavaScript 的语法高亮：
+很方便吧。
+如果你已经习惯了这种操作方式，那么今天要告诉你一个好消息。Chrome 开发者工具现在也支持命令菜单了！激活的方式还是 Ctrl &#43; Shift &#43; P。
+激活后，长这个样子：
+熟悉的配方，熟悉的味道。有木有！
+滚动菜单，查看支持的命令，基本涵盖了我们日常开发用到的所有功能。
+举几个实用的小例子吧(这些例子不同命令菜单一样可以实现，但命令菜单可以极大的提高效率)。
+1. 搜索所有资源文件 激活命令菜单，输入 search，选择 Search all files，回车。在弹出的输入框中输入关键字就可以在所有页面引入的资源文件中搜索该关键字了。还支持正则表达式哦。
+2. 禁用/开启页面 JavaScript 激活命令菜单，输入 js，选择 Disable JavaScript。再次选择，即可开启。
+3. 隐藏 HTML 中的注释 激活命令菜单，输入 comment，选择 Hide HTML Comments。
+更多快捷功能，自己去发现吧！" />
+
+  
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@loveky_" />
+    <meta name="twitter:title" content="Chrome 开发者工具中的命令菜单" />
+    <meta name="twitter:description" content="大家对命令菜单(Command Menu)应该都不陌生。目前主流的编辑器中都内置了对该功能的支持。在 Sublime Text 和 Visual Studio Code 中你都可以通过快捷键 Ctrl &#43; Shift &#43; P 呼出命令菜单（在 Mac 上是 Cmd &#43; Shift &#43; P）。
+在呼出的菜单中输入关键字选择自己需要的命令（支持模糊搜索哦），按回车即可执行命令。极大的提高了效率。
+举个例子，以下的操作是为文件设置 JavaScript 的语法高亮：
+很方便吧。
+如果你已经习惯了这种操作方式，那么今天要告诉你一个好消息。Chrome 开发者工具现在也支持命令菜单了！激活的方式还是 Ctrl &#43; Shift &#43; P。
+激活后，长这个样子：
+熟悉的配方，熟悉的味道。有木有！
+滚动菜单，查看支持的命令，基本涵盖了我们日常开发用到的所有功能。
+举几个实用的小例子吧(这些例子不同命令菜单一样可以实现，但命令菜单可以极大的提高效率)。
+1. 搜索所有资源文件 激活命令菜单，输入 search，选择 Search all files，回车。在弹出的输入框中输入关键字就可以在所有页面引入的资源文件中搜索该关键字了。还支持正则表达式哦。
+2. 禁用/开启页面 JavaScript 激活命令菜单，输入 js，选择 Disable JavaScript。再次选择，即可开启。
+3. 隐藏 HTML 中的注释 激活命令菜单，输入 comment，选择 Hide HTML Comments。
+更多快捷功能，自己去发现吧！" />
+    <meta name="twitter:image" content="https://loveky.github.io/img/avatar.jpg" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Chrome 开发者工具中的命令菜单" />
+  <meta property="og:description" content="大家对命令菜单(Command Menu)应该都不陌生。目前主流的编辑器中都内置了对该功能的支持。在 Sublime Text 和 Visual Studio Code 中你都可以通过快捷键 Ctrl &#43; Shift &#43; P 呼出命令菜单（在 Mac 上是 Cmd &#43; Shift &#43; P）。
+在呼出的菜单中输入关键字选择自己需要的命令（支持模糊搜索哦），按回车即可执行命令。极大的提高了效率。
+举个例子，以下的操作是为文件设置 JavaScript 的语法高亮：
+很方便吧。
+如果你已经习惯了这种操作方式，那么今天要告诉你一个好消息。Chrome 开发者工具现在也支持命令菜单了！激活的方式还是 Ctrl &#43; Shift &#43; P。
+激活后，长这个样子：
+熟悉的配方，熟悉的味道。有木有！
+滚动菜单，查看支持的命令，基本涵盖了我们日常开发用到的所有功能。
+举几个实用的小例子吧(这些例子不同命令菜单一样可以实现，但命令菜单可以极大的提高效率)。
+1. 搜索所有资源文件 激活命令菜单，输入 search，选择 Search all files，回车。在弹出的输入框中输入关键字就可以在所有页面引入的资源文件中搜索该关键字了。还支持正则表达式哦。
+2. 禁用/开启页面 JavaScript 激活命令菜单，输入 js，选择 Disable JavaScript。再次选择，即可开启。
+3. 隐藏 HTML 中的注释 激活命令菜单，输入 comment，选择 Hide HTML Comments。
+更多快捷功能，自己去发现吧！" />
+  <meta property="og:url" content="https://loveky.github.io/2017/06/06/chrome-devtools-command-menu/" />
+  <meta property="og:image" content="https://loveky.github.io/img/avatar.jpg" />
+
+
+
+
+<meta name="generator" content="Hugo 0.36.1" />
+
+
+<link rel="canonical" href="https://loveky.github.io/2017/06/06/chrome-devtools-command-menu/" />
+<link rel="alternative" href="https://loveky.github.io/index.xml" title="loveky的流水账" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="loveky的流水账" />
+<meta name="msapplication-tooltip" content="loveky的流水账" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://loveky.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://loveky.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://loveky.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://loveky.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://loveky.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://loveky.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://loveky.github.io/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://loveky.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">loveky的流水账</h2>
+  
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://loveky.github.io/">首页</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/tags/">标签</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/archive/">归档</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/links/">链接</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/about/">关于我</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:ylzcylx@gmail.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/loveky" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/loveky_" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//www.zhihu.com/people/loveky" title="Zhihu"><span class="icon icon-zhihu"></span></a>
+      </li>
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://loveky.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Chrome 开发者工具中的命令菜单</h1>
+      <p class="post-meta">@loveky · Jun 6, 2017 · 1 min read</p>
+    </header>
+    <article class="post-content">
+
+<p><img src="https://img20.360buyimg.com/uba/jfs/t6082/12/1766622189/48691/af9671c9/593616ccNd0864464.png" alt="" /></p>
+
+<p>大家对命令菜单(Command Menu)应该都不陌生。目前主流的编辑器中都内置了对该功能的支持。在 <a href="https://www.sublimetext.com/2">Sublime Text</a> 和 <a href="https://code.visualstudio.com/">Visual Studio Code</a> 中你都可以通过快捷键 <code>Ctrl + Shift + P</code> 呼出命令菜单（在 Mac 上是 <code>Cmd + Shift + P</code>）。</p>
+
+<p>在呼出的菜单中输入关键字选择自己需要的命令（支持模糊搜索哦），按回车即可执行命令。极大的提高了效率。</p>
+
+<p>举个例子，以下的操作是为文件设置 JavaScript 的语法高亮：</p>
+
+<p><img src="https://img13.360buyimg.com/uba/jfs/t5971/180/1835273249/111089/cfbb32da/59361a09N189d3777.gif" alt="" /></p>
+
+<p>很方便吧。</p>
+
+<p>如果你已经习惯了这种操作方式，那么今天要告诉你一个好消息。Chrome 开发者工具现在也支持命令菜单了！激活的方式还是 <code>Ctrl + Shift + P</code>。</p>
+
+<p>激活后，长这个样子：</p>
+
+<p><img src="https://img20.360buyimg.com/uba/jfs/t5587/13/3032821959/24138/d2ccfea9/59361cc0N5e29dad5.png" alt="" /></p>
+
+<p>熟悉的配方，熟悉的味道。有木有！</p>
+
+<p>滚动菜单，查看支持的命令，基本涵盖了我们日常开发用到的所有功能。</p>
+
+<p>举几个实用的小例子吧(这些例子不同命令菜单一样可以实现，但命令菜单可以极大的提高效率)。</p>
+
+<h4 id="1-搜索所有资源文件">1. 搜索所有资源文件</h4>
+
+<p>激活命令菜单，输入 <code>search</code>，选择 <code>Search all files</code>，回车。在弹出的输入框中输入关键字就可以在所有页面引入的资源文件中搜索该关键字了。还支持正则表达式哦。</p>
+
+<p><img src="https://img20.360buyimg.com/uba/jfs/t5884/66/3011477750/437561/528b38ae/59361e87Nac5afb85.gif" alt="" /></p>
+
+<h4 id="2-禁用-开启页面-javascript">2. 禁用/开启页面 JavaScript</h4>
+
+<p>激活命令菜单，输入 <code>js</code>，选择 <code>Disable JavaScript</code>。再次选择，即可开启。</p>
+
+<p><img src="https://img14.360buyimg.com/uba/jfs/t6112/111/1750036494/341884/89a23909/59362f7cN1a24233d.gif" alt="" /></p>
+
+<h4 id="3-隐藏-html-中的注释">3. 隐藏 HTML 中的注释</h4>
+
+<p>激活命令菜单，输入 <code>comment</code>，选择 <code>Hide HTML Comments</code>。</p>
+
+<p><img src="https://img30.360buyimg.com/uba/jfs/t5908/274/1824233060/83308/ce2e1911/5936310aN21d08148.gif" alt="" /></p>
+
+<p>更多快捷功能，自己去发现吧！</p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://loveky.github.io/tags/%E5%B7%A5%E5%85%B7"><span class="tag">工具</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        This post was published <strong>263</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "loveky" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 loveky的流水账</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\[','\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="https://loveky.github.io/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>
