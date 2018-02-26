@@ -236,7 +236,7 @@
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2017/08/03/config-eslint-and-stylelint-in-project/" class="post-link">在项目中启用 ESLint 与 Stylelint 检查</a></h3>
-    <p class="post-meta">@loveky · Aug 3, 2017 · 2 min read</p>
+    <p class="post-meta">@loveky · Aug 3, 2017</p>
   </header>
   
   <p class="post-summary">多人参与的项目中，经常会多人交叉编辑多个文件。这就导致了各个文件中充斥着各种编码风格。
@@ -251,7 +251,7 @@ yarn add --dev eslint // or npm install --save-dev eslint 创建配置文件
  配置 npm script
 配置好以后就可以通过命令</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2017/08/03/config-eslint-and-stylelint-in-project/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2017/08/03/config-eslint-and-stylelint-in-project/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -259,7 +259,7 @@ yarn add --dev eslint // or npm install --save-dev eslint 创建配置文件
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2017/07/24/service-worker-101/" class="post-link">Service Worker 基础知识</a></h3>
-    <p class="post-meta">@loveky · Jul 24, 2017 · 2 min read</p>
+    <p class="post-meta">@loveky · Jul 24, 2017</p>
   </header>
   
   <p class="post-summary">本文旨在帮你快速了解 service worker 的基本知识点，让你对 service worker 有一个大致的了解。为以后开发一个简单的 PWA 应用打下基础。
@@ -267,7 +267,7 @@ yarn add --dev eslint // or npm install --save-dev eslint 创建配置文件
 你也可以在注册 service worker 时明确指定作用域：
 navigator.serviceWorker.register(&#39;sw.js&#39;, { scope: &#39;./abc&#39; }); 假设以上代码在 https://example.com 页面里执行，则意味着该 service worker 的作用域就是 https://example.</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2017/07/24/service-worker-101/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2017/07/24/service-worker-101/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -275,7 +275,7 @@ navigator.serviceWorker.register(&#39;sw.js&#39;, { scope: &#39;./abc&#39; }); �
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2017/07/21/translate-five-tips-for-working-with-redux-in-large-applications/" class="post-link">[译] 在大型应用中使用 Redux 的五个技巧</a></h3>
-    <p class="post-meta">@loveky · Jul 21, 2017 · 5 min read</p>
+    <p class="post-meta">@loveky · Jul 21, 2017</p>
   </header>
   
   <p class="post-summary">Redux 是一个很棒的用于管理应用程序“状态”的工具。单向数据流以及对不可变数据的关注使得推断状态的变化变得很简单。每次状态变化都由一个 action 触发，这会导致 reducer 函数返回一个变更后的新状态。由于客户要在我们的平台上管理或发布广告资源，在 AppNexus 使用 Redux 创建的很多用户界面都需要处理大量数据以及非常复杂的交互。在开发这些界面的过程中，我们发现了一些有用的规则和技巧以维持 Redux 易于管理。以下的几点讨论应该可以帮助到任何在大型，数据密集型应用中使用 Redux 的开发者：
@@ -284,7 +284,7 @@ navigator.serviceWorker.register(&#39;sw.js&#39;, { scope: &#39;./abc&#39; }); �
 然而，我们决定重构代码改用索引的方式存储数据。我们可以在 reducer 中以如下的方式存储数据：
 { &#34;usersById&#34;: { 123: { id: 123, name: &#34;Jane Doe&#34;, email: &#34;jdoe@example.</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2017/07/21/translate-five-tips-for-working-with-redux-in-large-applications/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2017/07/21/translate-five-tips-for-working-with-redux-in-large-applications/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -292,7 +292,7 @@ navigator.serviceWorker.register(&#39;sw.js&#39;, { scope: &#39;./abc&#39; }); �
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2017/06/05/translate-node-stream-everything-you-need-to-know/" class="post-link">[译] Node.js 流: 你需要知道的一切</a></h3>
-    <p class="post-meta">@loveky · Jun 5, 2017 · 5 min read</p>
+    <p class="post-meta">@loveky · Jun 5, 2017</p>
   </header>
   
   <p class="post-summary">图片来源
@@ -309,7 +309,7 @@ const grep = ... // 一个 grep 命令输出的 stream const wc = ... // 一个 
 需要注意的是这些对象是紧密关联的。虽然一个 HTTP 响应在客户端是一个可读流，但在服务器端它却是一个可写流。这是因为在 HTTP 的情况中，我们基本上是从一个对象（http.IncomingMessage）读取数据，向另一个对象写入数据（http.ServerResponse）。
 还需要注意的是 stdio 流（stdin，stdout，stderr）在子进程中有着与父进程中相反的类型。这使得在子进程中从父进程的 stdio 流中读取或写入数据变得非常简单。</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2017/06/05/translate-node-stream-everything-you-need-to-know/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2017/06/05/translate-node-stream-everything-you-need-to-know/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -317,7 +317,7 @@ const grep = ... // 一个 grep 命令输出的 stream const wc = ... // 一个 
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2017/05/31/regular-expressions-catastrophic-backtracking/" class="post-link">正则表达式中的悲观回溯</a></h3>
-    <p class="post-meta">@loveky · May 31, 2017 · 2 min read</p>
+    <p class="post-meta">@loveky · May 31, 2017</p>
   </header>
   
   <p class="post-summary">前几天有小伙伴来求救说页面上有一个 input 框，随着用户不断输入内容，页面响应会越来越慢直到完全失去响应。
@@ -332,7 +332,7 @@ const grep = ... // 一个 grep 命令输出的 stream const wc = ... // 一个 
 /^\s*((\d&#43;(\,|，)\d&#43;)*|(\d&#43;))\s*$/ 接着去 regex101 上测试一下，测试数据如下，由 10 个商品 ID 组成的字符串：
 123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789  执行结果如下：</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2017/05/31/regular-expressions-catastrophic-backtracking/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2017/05/31/regular-expressions-catastrophic-backtracking/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -340,7 +340,7 @@ const grep = ... // 一个 grep 命令输出的 stream const wc = ... // 一个 
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2017/04/09/translate-6-reasons-why-javascripts-async-await-blows-promises-away/" class="post-link">[译] 6个Async/Await完胜Promise的原因</a></h3>
-    <p class="post-meta">@loveky · Apr 9, 2017 · 2 min read</p>
+    <p class="post-meta">@loveky · Apr 9, 2017</p>
   </header>
   
   <p class="post-summary">原文地址：https://hackernoon.com/6-reasons-why-javascripts-async-await-blows-promises-away-tutorial-c7ec10518dd9
@@ -353,7 +353,7 @@ const makeRequest = async () =&gt; { console.log(await getJSON()) return &#34;do
  在定义函数时我们使用了async关键字。await关键字只能在使用async定义的函数的内部使用。所有async函数都会返回一个promise，该promise最终resolve的值就是你在函数中return的内容。 由于第一点中的原因，你不能在顶级作用域中await一个函数。因为顶级作用域不是一个async方法。
 // this will not work in top level // await makeRequest()  // this will work makeRequest().then((result) =&gt; { // do something }) await getJSON()意味着直到getJSON()返回的promise在resolve之后，console.</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2017/04/09/translate-6-reasons-why-javascripts-async-await-blows-promises-away/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2017/04/09/translate-6-reasons-why-javascripts-async-await-blows-promises-away/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -361,7 +361,7 @@ const makeRequest = async () =&gt; { console.log(await getJSON()) return &#34;do
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2017/03/29/webpack-module-ids/" class="post-link">Webpack2中的NamedModulesPlugin与HashedModuleIdsPlugin</a></h3>
-    <p class="post-meta">@loveky · Mar 29, 2017 · 1 min read</p>
+    <p class="post-meta">@loveky · Mar 29, 2017</p>
   </header>
   
   <p class="post-summary">要讨论Webpack 2中新增的这两个plugin的功能，还要先从使用Webpack打包的项目的前端资源缓存方案说起。
@@ -371,7 +371,7 @@ import add from &#39;./src/add&#39;; import leftPad from &#39;left-pad&#39;; imp
 const path = require(&#39;path&#39;); const webpack = require(&#39;webpack&#39;); module.exports = { entry: { &#39;app&#39;: &#39;./index.js&#39;, &#39;vender&#39;: [&#39;left-pad&#39;, &#39;jsonp&#39;] }, output: { filename: &#39;[name].[chunkHash].js&#39;, path: path.resolve(__dirname, &#39;build&#39;) }, resolve: { extensions: [&#39;.js&#39;] }, module: { ... }, plugins:[ new webpack.optimize.CommonsChunkPlugin({ name: [&#39;vender&#39;, &#39;manifest&#39;], minChunks: Infinity, }) ] }; 这时，通过Webpack打包，会生成三个文件：
 假设我们修改了./src/add.js文件，重新打包，会得到：</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2017/03/29/webpack-module-ids/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2017/03/29/webpack-module-ids/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -379,7 +379,7 @@ const path = require(&#39;path&#39;); const webpack = require(&#39;webpack&#39;)
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2017/03/27/lock-npm-package-version-in-js-project/" class="post-link">在JavaScript项目中锁定npm依赖包版本</a></h3>
-    <p class="post-meta">@loveky · Mar 27, 2017 · 1 min read</p>
+    <p class="post-meta">@loveky · Mar 27, 2017</p>
   </header>
   
   <p class="post-summary">问题 最近在项目中遇到这样一个问题，webpack生成的vender包的哈希值在我和同事的电脑上不一致。由于之前已经配置过了CommonsChunkPlugin（配置如下），所以我们期望的结果是在不同环境下构建出的文件哈希值应该是一致的。
@@ -388,7 +388,7 @@ module.exports = { entry: { app: &#39;./src/js/app.jsx&#39;, vender: [ &#39;clas
 考虑到package.json文件中包版本中的^符号匹配的范围比较大。参考npm官方给出的解释：
 ^1.2.3 := &gt;=1.2.3 &lt;2.0.0 ^0.2.3 := &gt;=0.2.3 &lt;0.3.0 ^0.0.3 := &gt;=0.0.3 &lt;0.</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2017/03/27/lock-npm-package-version-in-js-project/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2017/03/27/lock-npm-package-version-in-js-project/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -396,14 +396,14 @@ module.exports = { entry: { app: &#39;./src/js/app.jsx&#39;, vender: [ &#39;clas
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2017/03/27/react-conf-2017-video/" class="post-link">React Conf 2017视频 百度网盘地址</a></h3>
-    <p class="post-meta">@loveky · Mar 27, 2017 · 1 min read</p>
+    <p class="post-meta">@loveky · Mar 27, 2017</p>
   </header>
   
   <p class="post-summary">React Conf 2017的全部视频已经在YouTube上放出来了。为了方便在家里的电视上播放，就全部下载了一套。顺便上传了百度网盘一份。感兴趣的可以看看哦。全部720p。
 下载地址：
 http://pan.baidu.com/s/1gfl5FzX</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2017/03/27/react-conf-2017-video/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2017/03/27/react-conf-2017-video/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -411,14 +411,14 @@ http://pan.baidu.com/s/1gfl5FzX</p>
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2016/12/01/redux-source-src-createstore/" class="post-link">Redux 3.6.0 源码阅读 之 src/createStore.js</a></h3>
-    <p class="post-meta">@loveky · Dec 1, 2016 · 3 min read</p>
+    <p class="post-meta">@loveky · Dec 1, 2016</p>
   </header>
   
   <p class="post-summary">嗯，就是学习一下，读读源码。顺便把源码里的文档翻译了一下并添加了一些简单的注释。
 本文对应的文件是src/createStore.js
 import isPlainObject from &#39;lodash/isPlainObject&#39; import $$observable from &#39;symbol-observable&#39; /** * ActionTypes里定义的是Redux保留的私有action。 * 对于任何未知的action，你必须返回store的当前状态。 * 如果传入的当前状态是undefined，你必须返回store的初始状态。 * 不要在应用代码中直接引用这些action。 */ export var ActionTypes = { INIT: &#39;@@redux/INIT&#39; } /** * createStore方法用于创建一个保存程序状态的store。 * 改变store中数据的唯一方法是调用store的`dispatch()`方法。 * * 你的应用中应该只有一个store。为了将程序状态中不同部分的变更逻辑 * 组合在一起，你可以通过`combineReducers`方法将多个reducer组合成一个reducer。 * * @param {Function} reducer 一个返回应用下一状态的函数，入参是程序的当前状态以及 * 要发送的action。 * * @param {any} [preloadedState] store的初始状态。你可以选择性的为store指定一个 * 初始状态。 * 如果你使用了`combineReducers`方法来生成最终的reducer。那么这个初始状态对象的 * 结构必须与调用`combineReducers`方法时传入的参数的结构保持对应关系。 * * @param {Function} enhancer store增强器。你可以选择性的传入一个增强函数来扩展 * store的功能，例如中间件，时间旅行，持久化等。Redux自带的唯一一个增强器是 * `applyMiddleware()`方法。 * * @returns {Store} 返回一个可以读取状态，发送action以及订阅变更通知的Redux store。 */ export default function createStore(reducer, preloadedState, enhancer) { // 如果只传入reducer和enhancer，则store的初始状态为undefined  if (typeof preloadedState === &#39;function&#39; &amp;&amp; typeof enhancer === &#39;undefined&#39;) { enhancer = preloadedState preloadedState = undefined } // enhancer必须是一个函数  if (typeof enhancer !</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2016/12/01/redux-source-src-createstore/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2016/12/01/redux-source-src-createstore/">阅读全文 →</a>
   </footer>
 </article>
 

@@ -239,7 +239,7 @@
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2013/12/06/travis-pro/" class="post-link">搭建属于自己的travis pro</a></h3>
-    <p class="post-meta">@loveky · Dec 6, 2013 · 1 min read</p>
+    <p class="post-meta">@loveky · Dec 6, 2013</p>
   </header>
   
   <p class="post-summary">Travis是一个众所周知的持续集成服务提供商，免费为开源项目提供持续集成服务。但是对于闭源项目/private repo需要购买travis pro服务才能使用。对于小团队，每月129刀的最低消费实在是一笔不小的开支，因此便有了本文。
@@ -250,7 +250,7 @@ sudo su - jenkins curl -L https://get.rvm.io | bash -s stable --ruby=1.9.3 Setp3
 我们测试Rails时需要用capybar跑feature spec。有js相关的测试需要启动一个浏览器来执行测试代码，但是linode上的Ubuntu都是没有display的，因此跑feature spec的时候会遇到无法启动浏览器而报错的情况。Xvfb就是用来创建一个虚拟的Display供启动浏览器用的。
 sudo apt-get install xvfb Xvfb :99 -screen 0 1024x768x16 &gt;&gt; /tmp/Xvfb.</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2013/12/06/travis-pro/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2013/12/06/travis-pro/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -258,7 +258,7 @@ sudo apt-get install xvfb Xvfb :99 -screen 0 1024x768x16 &gt;&gt; /tmp/Xvfb.</p>
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2013/11/27/git-rerere/" class="post-link">你可能不知道的git rerere</a></h3>
-    <p class="post-meta">@loveky · Nov 27, 2013 · 3 min read</p>
+    <p class="post-meta">@loveky · Nov 27, 2013</p>
   </header>
   
   <p class="post-summary">rerere 是啥的缩写？ rerere = reuse recorded resolution
@@ -270,7 +270,7 @@ rerere是干啥用的？ 它会让Git记住你是如何解决某个文件的两�
 能举例说明吗？ 参考inline的注释。
 $ git init git-rerere-test Initialized empty Git repository in /cygdrive/e/test/git-rerere-test/.git/ $ cd git-rerere-test $ git config rerere.enabled true # 开启rerere功能  $ echo &#34;What fruit do you like?&#34; &gt;&gt; question $ git add . &amp;&amp; git commit -m &#34;initial drop&#34; [master (root-commit) af9fdf9] initial drop 1 files changed, 1 insertions(&#43;), 0 deletions(-) create mode 100644 question $ git branch test # 创建test分支  $ echo &#34;I like orange&#34; &gt;&gt; question $ git add .</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2013/11/27/git-rerere/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2013/11/27/git-rerere/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -278,7 +278,7 @@ $ git init git-rerere-test Initialized empty Git repository in /cygdrive/e/test/
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2013/06/15/try-sidekiq/" class="post-link">sidekiq初体验</a></h3>
-    <p class="post-meta">@loveky · Jun 15, 2013 · 1 min read</p>
+    <p class="post-meta">@loveky · Jun 15, 2013</p>
   </header>
   
   <p class="post-summary">今天Kevin讲了background job，提到了Resque和Sidekiq，并推荐我们使用Sidekiq。于是初步体验了一下。
@@ -292,7 +292,7 @@ if @user.save AppMailer.send_welcome_email(@user.id).deliver 要把它转为后�
 if @user.save AppMailer.delay.send_welcome_email(@user.id) 测试 改完之后在开发环境中测试正常，接着跑rspec发现有3个spec失败，这三个spec内容如下：
 it &#34;sends out email&#34; do expect { post :create, user: Fabricate.attributes_for(:user) }.to change{ ActionMailer::Base.deliveries.size }.by(1) end it &#34;sends to the right recipient&#34; do post :create, user: Fabricate.attributes_for(:user) email = ActionMailer::Base.deliveries.last expect(email.</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2013/06/15/try-sidekiq/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2013/06/15/try-sidekiq/">阅读全文 →</a>
   </footer>
 </article>
 

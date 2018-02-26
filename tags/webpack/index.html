@@ -236,7 +236,7 @@
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2017/03/29/webpack-module-ids/" class="post-link">Webpack2中的NamedModulesPlugin与HashedModuleIdsPlugin</a></h3>
-    <p class="post-meta">@loveky · Mar 29, 2017 · 1 min read</p>
+    <p class="post-meta">@loveky · Mar 29, 2017</p>
   </header>
   
   <p class="post-summary">要讨论Webpack 2中新增的这两个plugin的功能，还要先从使用Webpack打包的项目的前端资源缓存方案说起。
@@ -246,7 +246,7 @@ import add from &#39;./src/add&#39;; import leftPad from &#39;left-pad&#39;; imp
 const path = require(&#39;path&#39;); const webpack = require(&#39;webpack&#39;); module.exports = { entry: { &#39;app&#39;: &#39;./index.js&#39;, &#39;vender&#39;: [&#39;left-pad&#39;, &#39;jsonp&#39;] }, output: { filename: &#39;[name].[chunkHash].js&#39;, path: path.resolve(__dirname, &#39;build&#39;) }, resolve: { extensions: [&#39;.js&#39;] }, module: { ... }, plugins:[ new webpack.optimize.CommonsChunkPlugin({ name: [&#39;vender&#39;, &#39;manifest&#39;], minChunks: Infinity, }) ] }; 这时，通过Webpack打包，会生成三个文件：
 假设我们修改了./src/add.js文件，重新打包，会得到：</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2017/03/29/webpack-module-ids/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2017/03/29/webpack-module-ids/">阅读全文 →</a>
   </footer>
 </article>
 

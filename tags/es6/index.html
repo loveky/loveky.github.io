@@ -236,7 +236,7 @@
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2017/04/09/translate-6-reasons-why-javascripts-async-await-blows-promises-away/" class="post-link">[译] 6个Async/Await完胜Promise的原因</a></h3>
-    <p class="post-meta">@loveky · Apr 9, 2017 · 2 min read</p>
+    <p class="post-meta">@loveky · Apr 9, 2017</p>
   </header>
   
   <p class="post-summary">原文地址：https://hackernoon.com/6-reasons-why-javascripts-async-await-blows-promises-away-tutorial-c7ec10518dd9
@@ -249,7 +249,7 @@ const makeRequest = async () =&gt; { console.log(await getJSON()) return &#34;do
  在定义函数时我们使用了async关键字。await关键字只能在使用async定义的函数的内部使用。所有async函数都会返回一个promise，该promise最终resolve的值就是你在函数中return的内容。 由于第一点中的原因，你不能在顶级作用域中await一个函数。因为顶级作用域不是一个async方法。
 // this will not work in top level // await makeRequest()  // this will work makeRequest().then((result) =&gt; { // do something }) await getJSON()意味着直到getJSON()返回的promise在resolve之后，console.</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2017/04/09/translate-6-reasons-why-javascripts-async-await-blows-promises-away/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2017/04/09/translate-6-reasons-why-javascripts-async-await-blows-promises-away/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -257,7 +257,7 @@ const makeRequest = async () =&gt; { console.log(await getJSON()) return &#34;do
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2016/08/04/promise-try/" class="post-link">[译]什么是Promise.try</a></h3>
-    <p class="post-meta">@loveky · Aug 4, 2016 · 2 min read</p>
+    <p class="post-meta">@loveky · Aug 4, 2016</p>
   </header>
   
   <p class="post-summary">原文地址 http://cryto.net/~joepie91/blog/2016/05/11/what-is-promise-try-and-why-does-it-matter/
@@ -274,7 +274,7 @@ var Promise = require(&#34;bluebird&#34;); function getUsername(userId) { return
 1. 更好的错误处理 Promise的一个被大力宣扬的优点就是用户可以用同一种方式同时处理同步异常和异步异常 —— 同步异常会被捕获并且会作为一个rejected Promise向后传递。但事实真的是这样吗？让我们看看以下这个上文示例的小变种：
 function getUsername(userId) { return database.users.get({id: userId}) .then(function(user) { return uesr.</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2016/08/04/promise-try/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2016/08/04/promise-try/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -282,7 +282,7 @@ function getUsername(userId) { return database.users.get({id: userId}) .then(fun
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2015/12/19/use-es6-in-jdf-projects/" class="post-link">在JDF项目中使用ES6新特性</a></h3>
-    <p class="post-meta">@loveky · Dec 19, 2015 · 1 min read</p>
+    <p class="post-meta">@loveky · Dec 19, 2015</p>
   </header>
   
   <p class="post-summary">Note: 目前虽然JDF已经支持使用ES6开发脚本，但线上使用还在前期摸索阶段，请大家根据自己项目实际情况评估使用情况
@@ -296,7 +296,7 @@ Q: 我想使用额外的Babel plugin或preset该怎样配置？ 只需在package
 Q: .babel文件编译出来的代码我看不懂，出了问题如何调试呢？ 我们看到的经过Babel转译后的JS是这样的： 这里包含了大量的Babel生成的代码，非常不利于调试。不过不用担心，JDF在本地开发模式中启用了sourceMap，你只需在Chrome开发者工具中的Sources Tab中在你要调试的JS文件目录下找到同名的.babel文件即可。相关JS中的报错信息，都会被映射到转译前的.babel文件的对应位置。
 关于sourceMap的更多信息请参考这里。</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2015/12/19/use-es6-in-jdf-projects/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2015/12/19/use-es6-in-jdf-projects/">阅读全文 →</a>
   </footer>
 </article>
 

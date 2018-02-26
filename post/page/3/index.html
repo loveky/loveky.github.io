@@ -239,7 +239,7 @@
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2015/12/19/use-es6-in-jdf-projects/" class="post-link">在JDF项目中使用ES6新特性</a></h3>
-    <p class="post-meta">@loveky · Dec 19, 2015 · 1 min read</p>
+    <p class="post-meta">@loveky · Dec 19, 2015</p>
   </header>
   
   <p class="post-summary">Note: 目前虽然JDF已经支持使用ES6开发脚本，但线上使用还在前期摸索阶段，请大家根据自己项目实际情况评估使用情况
@@ -253,7 +253,7 @@ Q: 我想使用额外的Babel plugin或preset该怎样配置？ 只需在package
 Q: .babel文件编译出来的代码我看不懂，出了问题如何调试呢？ 我们看到的经过Babel转译后的JS是这样的： 这里包含了大量的Babel生成的代码，非常不利于调试。不过不用担心，JDF在本地开发模式中启用了sourceMap，你只需在Chrome开发者工具中的Sources Tab中在你要调试的JS文件目录下找到同名的.babel文件即可。相关JS中的报错信息，都会被映射到转译前的.babel文件的对应位置。
 关于sourceMap的更多信息请参考这里。</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2015/12/19/use-es6-in-jdf-projects/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2015/12/19/use-es6-in-jdf-projects/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -261,7 +261,7 @@ Q: .babel文件编译出来的代码我看不懂，出了问题如何调试呢�
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2015/12/03/trimpath-syntax/" class="post-link">[译] TrimPath模板引擎语法</a></h3>
-    <p class="post-meta">@loveky · Dec 3, 2015 · 3 min read</p>
+    <p class="post-meta">@loveky · Dec 3, 2015</p>
   </header>
   
   <p class="post-summary">本文翻译自JavaScript Template Syntax
@@ -271,7 +271,7 @@ Q: .babel文件编译出来的代码我看不懂，出了问题如何调试呢�
  ${%customer.firstName%} ${%customer.firstName|capitalize%}  声明 声明标签可以嵌套使用。
 控制流  {if testExpr} {elseif testExpr} {else} {/if}   testExpr可以是任何不包含}的JavaScript表达式 testExpr不需要被(和)包围  示例：</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2015/12/03/trimpath-syntax/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2015/12/03/trimpath-syntax/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -279,7 +279,7 @@ Q: .babel文件编译出来的代码我看不懂，出了问题如何调试呢�
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2014/05/04/di-in-angularjs/" class="post-link">AngularJS中的依赖注入</a></h3>
-    <p class="post-meta">@loveky · May 4, 2014 · 2 min read</p>
+    <p class="post-meta">@loveky · May 4, 2014</p>
   </header>
   
   <p class="post-summary">本文译自https://docs.angularjs.org/guide/di
@@ -300,7 +300,7 @@ function SomeClass(greeter) { this.greeter = greeter; } SomeClass.prototype.doSo
 myModule.factory(&#39;greeter&#39;, function($window) { return { greet: function(text) { $window.alert(text); } }; }); 下面的代码演示了如何创建一个injector并通过它来请求greeter服务:
 var injector = angular.</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2014/05/04/di-in-angularjs/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2014/05/04/di-in-angularjs/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -308,7 +308,7 @@ var injector = angular.</p>
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2014/04/11/angularjs-ng-model/" class="post-link">AngularJS源码阅读之ngModel</a></h3>
-    <p class="post-meta">@loveky · Apr 11, 2014 · 3 min read</p>
+    <p class="post-meta">@loveky · Apr 11, 2014</p>
   </header>
   
   <p class="post-summary">数据的双向绑定可能是Angular最为人们熟知的特性之一。举个最简单的例子 
@@ -320,7 +320,7 @@ var ngModelDirective = function() { return { require: [&#39;ngModel&#39;, &#39;^
  如果声明了ngModel的元素出现在一个form中，那么就向上层form注册自身 注册了$destroy事件的监听器，该事件触发时告知上层form移除对自身的引用  link方法如此简单以至于我们还没看到关于数据绑定的任何信息。看来问题的答案都藏在ngModelController中了。接下来看看ngModelController中都发生了什么。
 var NgModelController = [&#39;$scope&#39;, &#39;$exceptionHandler&#39;, &#39;$attrs&#39;, &#39;$element&#39;, &#39;$parse&#39;, function($scope, $exceptionHandler, $attr, $element, $parse) { this.</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2014/04/11/angularjs-ng-model/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2014/04/11/angularjs-ng-model/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -328,7 +328,7 @@ var NgModelController = [&#39;$scope&#39;, &#39;$exceptionHandler&#39;, &#39;$at
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2014/04/11/angularjs-controller/" class="post-link">Angular中的Controller</a></h3>
-    <p class="post-meta">@loveky · Apr 11, 2014 · 1 min read</p>
+    <p class="post-meta">@loveky · Apr 11, 2014</p>
   </header>
   
   <p class="post-summary">在Angular中，一个Controller是一个JavaScript构造函数。当一个Controller通过ng-controller附加到某个DOM元素上时，Angular会使用相应Controller的构造函数来初始化一个新的Controller对象。一个新的child scope会被创建并作为可注入的参数(就是我们看到的$scope)传递给该Controller的构造函数。
@@ -338,7 +338,7 @@ var NgModelController = [&#39;$scope&#39;, &#39;$exceptionHandler&#39;, &#39;$at
   不要使用Controller:
  修改DOM —— Controllers应该只负责业务逻辑。将任何UI的逻辑放进Controller都会极大地破坏其可测试性。Angular中可以使用数据绑定用来更新页面中的数据或使用directive来封装DOM操作。 格式化input数据 —— 使用angular form controls 过滤输出数据 —— 使用Angular中的filter机制 跨Controller之间的代码或状态共享 —— 使用Angular中的service机制 管理其他组件的生命周期  </p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2014/04/11/angularjs-controller/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2014/04/11/angularjs-controller/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -346,7 +346,7 @@ var NgModelController = [&#39;$scope&#39;, &#39;$exceptionHandler&#39;, &#39;$at
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2014/04/02/angularjs-ngrepeat/" class="post-link">AngularJS源码阅读之ngRepeat</a></h3>
-    <p class="post-meta">@loveky · Apr 2, 2014 · 4 min read</p>
+    <p class="post-meta">@loveky · Apr 2, 2014</p>
   </header>
   
   <p class="post-summary">注: 文中所有涉及到的AngularJS源码均来自angular-1.2.8版本。
@@ -359,7 +359,7 @@ var ngRepeatDirective = [&#39;$parse&#39;, &#39;$animate&#39;, function($parse, 
 接下来把最大的篇幅交给这个directive的核心——link方法。
 var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]&#43;?)\s&#43;in\s&#43;([\s\S]&#43;?)(?:\s&#43;track\s&#43;by\s&#43;([\s\S]&#43;?))?\s*$/), trackByExp, trackByExpGetter, trackByIdExpFn, trackByIdArrayFn, trackByIdObjFn, lhs, rhs, valueIdentifier, keyIdentifier, hashFnLocals = {$id: hashKey}; if (!</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2014/04/02/angularjs-ngrepeat/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2014/04/02/angularjs-ngrepeat/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -367,7 +367,7 @@ var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]&#43;?
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2014/04/01/angularjs-directive-compile-link/" class="post-link">AngularJS Directive之compile与link</a></h3>
-    <p class="post-meta">@loveky · Apr 1, 2014 · 1 min read</p>
+    <p class="post-meta">@loveky · Apr 1, 2014</p>
   </header>
   
   <p class="post-summary">刚开始学习AngularJS Directive时，总是不太能搞明白compile和link两个属性的含义和区别。最近写的多一些，读的资料也多了一些，渐渐有了一些理解，简单记录下来：
@@ -385,7 +385,7 @@ link阶段会针对每一个被RENDERED的directive实例执行一次。此阶�
  不可以修改template(angular会直接使用之前缓存的内容)
   如果定义了compile属性则link属性会被忽略。</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2014/04/01/angularjs-directive-compile-link/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2014/04/01/angularjs-directive-compile-link/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -393,7 +393,7 @@ link阶段会针对每一个被RENDERED的directive实例执行一次。此阶�
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2014/02/21/use-css3-to-simulate-stop-animation/" class="post-link">使用CSS3实现逐格动画</a></h3>
-    <p class="post-meta">@loveky · Feb 21, 2014 · 1 min read</p>
+    <p class="post-meta">@loveky · Feb 21, 2014</p>
   </header>
   
   <p class="post-summary">首先我们有这样一张照片：
@@ -403,7 +403,7 @@ link阶段会针对每一个被RENDERED的directive实例执行一次。此阶�
 @keyframes wave { to { background-position: -1184px 0 } } @-webkit-keyframes wave { to { background-position: -1184px 0 } } #hahaha { margin: 50px auto; width: 49px; height: 75px; background: url(&#39;https://raw.github.com/loveky/loveky.github.io/master/assets/images/css3-stop-animation-background.png&#39;) 0 0; -webkit-animation: wave 2s infinite steps(24); animation: 2s wave infinite steps(24); } 效果如下:
  由于照片是自己剪辑拼成的，所以偏移量不是太精确。。。</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2014/02/21/use-css3-to-simulate-stop-animation/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2014/02/21/use-css3-to-simulate-stop-animation/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -411,7 +411,7 @@ link阶段会针对每一个被RENDERED的directive实例执行一次。此阶�
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2014/02/17/farewell-shanghai/" class="post-link">再出发，写在离开之前</a></h3>
-    <p class="post-meta">@loveky · Feb 17, 2014 · 1 min read</p>
+    <p class="post-meta">@loveky · Feb 17, 2014</p>
   </header>
   
   <p class="post-summary"> 从2011年12月12号到2014年2月28号，不知不觉在上海这座城市度过了798天。
@@ -424,7 +424,7 @@ Ruby? Rails? 没错，不得不提的主题。过去一年里的业余时间都�
 过去的2年多里，我：
  感谢我的女朋友，一直没能陪在她身边，有很多亏欠，只希望在以后的日子里慢慢弥补 学会Rails已经一系列相关的技术，并最终转型为一个全职的开发人员 结识了很多好朋友，一直在工作内外给我帮助，不能一一列出姓名，谨祝工作顺利 渐渐的开始锻炼身体，开始跑步 在无人指导的情况下，无师自通，学会了做饭。。。 开始渐渐的学会思考，尝试make it right而不仅仅是make it work 喜欢上了阅读，电子书，纸质书，中文，外文，技术，社科，来者不拒  </p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2014/02/17/farewell-shanghai/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2014/02/17/farewell-shanghai/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -432,7 +432,7 @@ Ruby? Rails? 没错，不得不提的主题。过去一年里的业余时间都�
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2013/12/18/git-clean/" class="post-link">你可能不知道的git clean</a></h3>
-    <p class="post-meta">@loveky · Dec 18, 2013 · 1 min read</p>
+    <p class="post-meta">@loveky · Dec 18, 2013</p>
   </header>
   
   <p class="post-summary">git clean是干啥的？ git clean可以帮你清理workspace中未被git版本控制的文件，比如临时文件，构建出来的二进制文件。
@@ -444,7 +444,7 @@ LM-SHC-00355679@17:48:13:~/Angular/pomodoro-time (master) =&gt; cat .gitignore /
  -n 并不实际执行删除操作，只显示出将被清理的文件列表
  -X 仅删除.</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2013/12/18/git-clean/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2013/12/18/git-clean/">阅读全文 →</a>
   </footer>
 </article>
 

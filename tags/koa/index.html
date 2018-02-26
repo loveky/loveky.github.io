@@ -236,7 +236,7 @@
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2015/12/28/koa-source-lib-application/" class="post-link">koa框架源码阅读笔记 之 lib/application.js</a></h3>
-    <p class="post-meta">@loveky · Dec 28, 2015 · 2 min read</p>
+    <p class="post-meta">@loveky · Dec 28, 2015</p>
   </header>
   
   <p class="post-summary">最近在学习ES6 Generator特性时发现了koa这个基于Generator的Web框架，它可以让开发者以一种“同步的方式”编写包含各种异步请求的Web应用。下面是关于它的一段中文介绍：
@@ -247,7 +247,7 @@
 代码注释 function Application() { if (!(this instanceof Application)) return new Application; this.env = process.env.NODE_ENV || &#39;development&#39;; this.subdomainOffset = 2; this.middleware = []; this.proxy = false; this.context = Object.create(context); this.request = Object.create(request); this.response = Object.create(response); } 以上就是Application构造函数的定义，很简洁，主要做了以下几件事情：
 - 通过instanceof判断来支持不带new关键字的调用。 - 设置应用运行环境，会从环境变量NODE_ENV读取，默认值为development - 声明this.</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2015/12/28/koa-source-lib-application/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2015/12/28/koa-source-lib-application/">阅读全文 →</a>
   </footer>
 </article>
 

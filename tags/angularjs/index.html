@@ -236,7 +236,7 @@
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2014/05/04/di-in-angularjs/" class="post-link">AngularJS中的依赖注入</a></h3>
-    <p class="post-meta">@loveky · May 4, 2014 · 2 min read</p>
+    <p class="post-meta">@loveky · May 4, 2014</p>
   </header>
   
   <p class="post-summary">本文译自https://docs.angularjs.org/guide/di
@@ -257,7 +257,7 @@ function SomeClass(greeter) { this.greeter = greeter; } SomeClass.prototype.doSo
 myModule.factory(&#39;greeter&#39;, function($window) { return { greet: function(text) { $window.alert(text); } }; }); 下面的代码演示了如何创建一个injector并通过它来请求greeter服务:
 var injector = angular.</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2014/05/04/di-in-angularjs/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2014/05/04/di-in-angularjs/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -265,7 +265,7 @@ var injector = angular.</p>
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2014/04/11/angularjs-ng-model/" class="post-link">AngularJS源码阅读之ngModel</a></h3>
-    <p class="post-meta">@loveky · Apr 11, 2014 · 3 min read</p>
+    <p class="post-meta">@loveky · Apr 11, 2014</p>
   </header>
   
   <p class="post-summary">数据的双向绑定可能是Angular最为人们熟知的特性之一。举个最简单的例子 
@@ -277,7 +277,7 @@ var ngModelDirective = function() { return { require: [&#39;ngModel&#39;, &#39;^
  如果声明了ngModel的元素出现在一个form中，那么就向上层form注册自身 注册了$destroy事件的监听器，该事件触发时告知上层form移除对自身的引用  link方法如此简单以至于我们还没看到关于数据绑定的任何信息。看来问题的答案都藏在ngModelController中了。接下来看看ngModelController中都发生了什么。
 var NgModelController = [&#39;$scope&#39;, &#39;$exceptionHandler&#39;, &#39;$attrs&#39;, &#39;$element&#39;, &#39;$parse&#39;, function($scope, $exceptionHandler, $attr, $element, $parse) { this.</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2014/04/11/angularjs-ng-model/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2014/04/11/angularjs-ng-model/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -285,7 +285,7 @@ var NgModelController = [&#39;$scope&#39;, &#39;$exceptionHandler&#39;, &#39;$at
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2014/04/11/angularjs-controller/" class="post-link">Angular中的Controller</a></h3>
-    <p class="post-meta">@loveky · Apr 11, 2014 · 1 min read</p>
+    <p class="post-meta">@loveky · Apr 11, 2014</p>
   </header>
   
   <p class="post-summary">在Angular中，一个Controller是一个JavaScript构造函数。当一个Controller通过ng-controller附加到某个DOM元素上时，Angular会使用相应Controller的构造函数来初始化一个新的Controller对象。一个新的child scope会被创建并作为可注入的参数(就是我们看到的$scope)传递给该Controller的构造函数。
@@ -295,7 +295,7 @@ var NgModelController = [&#39;$scope&#39;, &#39;$exceptionHandler&#39;, &#39;$at
   不要使用Controller:
  修改DOM —— Controllers应该只负责业务逻辑。将任何UI的逻辑放进Controller都会极大地破坏其可测试性。Angular中可以使用数据绑定用来更新页面中的数据或使用directive来封装DOM操作。 格式化input数据 —— 使用angular form controls 过滤输出数据 —— 使用Angular中的filter机制 跨Controller之间的代码或状态共享 —— 使用Angular中的service机制 管理其他组件的生命周期  </p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2014/04/11/angularjs-controller/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2014/04/11/angularjs-controller/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -303,7 +303,7 @@ var NgModelController = [&#39;$scope&#39;, &#39;$exceptionHandler&#39;, &#39;$at
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2014/04/02/angularjs-ngrepeat/" class="post-link">AngularJS源码阅读之ngRepeat</a></h3>
-    <p class="post-meta">@loveky · Apr 2, 2014 · 4 min read</p>
+    <p class="post-meta">@loveky · Apr 2, 2014</p>
   </header>
   
   <p class="post-summary">注: 文中所有涉及到的AngularJS源码均来自angular-1.2.8版本。
@@ -316,7 +316,7 @@ var ngRepeatDirective = [&#39;$parse&#39;, &#39;$animate&#39;, function($parse, 
 接下来把最大的篇幅交给这个directive的核心——link方法。
 var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]&#43;?)\s&#43;in\s&#43;([\s\S]&#43;?)(?:\s&#43;track\s&#43;by\s&#43;([\s\S]&#43;?))?\s*$/), trackByExp, trackByExpGetter, trackByIdExpFn, trackByIdArrayFn, trackByIdObjFn, lhs, rhs, valueIdentifier, keyIdentifier, hashFnLocals = {$id: hashKey}; if (!</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2014/04/02/angularjs-ngrepeat/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2014/04/02/angularjs-ngrepeat/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -324,7 +324,7 @@ var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]&#43;?
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2014/04/01/angularjs-directive-compile-link/" class="post-link">AngularJS Directive之compile与link</a></h3>
-    <p class="post-meta">@loveky · Apr 1, 2014 · 1 min read</p>
+    <p class="post-meta">@loveky · Apr 1, 2014</p>
   </header>
   
   <p class="post-summary">刚开始学习AngularJS Directive时，总是不太能搞明白compile和link两个属性的含义和区别。最近写的多一些，读的资料也多了一些，渐渐有了一些理解，简单记录下来：
@@ -342,7 +342,7 @@ link阶段会针对每一个被RENDERED的directive实例执行一次。此阶�
  不可以修改template(angular会直接使用之前缓存的内容)
   如果定义了compile属性则link属性会被忽略。</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2014/04/01/angularjs-directive-compile-link/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2014/04/01/angularjs-directive-compile-link/">阅读全文 →</a>
   </footer>
 </article>
 

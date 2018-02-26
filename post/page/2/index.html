@@ -239,7 +239,7 @@
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2017/03/29/webpack-module-ids/" class="post-link">Webpack2中的NamedModulesPlugin与HashedModuleIdsPlugin</a></h3>
-    <p class="post-meta">@loveky · Mar 29, 2017 · 1 min read</p>
+    <p class="post-meta">@loveky · Mar 29, 2017</p>
   </header>
   
   <p class="post-summary">要讨论Webpack 2中新增的这两个plugin的功能，还要先从使用Webpack打包的项目的前端资源缓存方案说起。
@@ -249,7 +249,7 @@ import add from &#39;./src/add&#39;; import leftPad from &#39;left-pad&#39;; imp
 const path = require(&#39;path&#39;); const webpack = require(&#39;webpack&#39;); module.exports = { entry: { &#39;app&#39;: &#39;./index.js&#39;, &#39;vender&#39;: [&#39;left-pad&#39;, &#39;jsonp&#39;] }, output: { filename: &#39;[name].[chunkHash].js&#39;, path: path.resolve(__dirname, &#39;build&#39;) }, resolve: { extensions: [&#39;.js&#39;] }, module: { ... }, plugins:[ new webpack.optimize.CommonsChunkPlugin({ name: [&#39;vender&#39;, &#39;manifest&#39;], minChunks: Infinity, }) ] }; 这时，通过Webpack打包，会生成三个文件：
 假设我们修改了./src/add.js文件，重新打包，会得到：</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2017/03/29/webpack-module-ids/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2017/03/29/webpack-module-ids/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -257,7 +257,7 @@ const path = require(&#39;path&#39;); const webpack = require(&#39;webpack&#39;)
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2017/03/27/lock-npm-package-version-in-js-project/" class="post-link">在JavaScript项目中锁定npm依赖包版本</a></h3>
-    <p class="post-meta">@loveky · Mar 27, 2017 · 1 min read</p>
+    <p class="post-meta">@loveky · Mar 27, 2017</p>
   </header>
   
   <p class="post-summary">问题 最近在项目中遇到这样一个问题，webpack生成的vender包的哈希值在我和同事的电脑上不一致。由于之前已经配置过了CommonsChunkPlugin（配置如下），所以我们期望的结果是在不同环境下构建出的文件哈希值应该是一致的。
@@ -266,7 +266,7 @@ module.exports = { entry: { app: &#39;./src/js/app.jsx&#39;, vender: [ &#39;clas
 考虑到package.json文件中包版本中的^符号匹配的范围比较大。参考npm官方给出的解释：
 ^1.2.3 := &gt;=1.2.3 &lt;2.0.0 ^0.2.3 := &gt;=0.2.3 &lt;0.3.0 ^0.0.3 := &gt;=0.0.3 &lt;0.</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2017/03/27/lock-npm-package-version-in-js-project/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2017/03/27/lock-npm-package-version-in-js-project/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -274,14 +274,14 @@ module.exports = { entry: { app: &#39;./src/js/app.jsx&#39;, vender: [ &#39;clas
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2017/03/27/react-conf-2017-video/" class="post-link">React Conf 2017视频 百度网盘地址</a></h3>
-    <p class="post-meta">@loveky · Mar 27, 2017 · 1 min read</p>
+    <p class="post-meta">@loveky · Mar 27, 2017</p>
   </header>
   
   <p class="post-summary">React Conf 2017的全部视频已经在YouTube上放出来了。为了方便在家里的电视上播放，就全部下载了一套。顺便上传了百度网盘一份。感兴趣的可以看看哦。全部720p。
 下载地址：
 http://pan.baidu.com/s/1gfl5FzX</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2017/03/27/react-conf-2017-video/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2017/03/27/react-conf-2017-video/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -289,7 +289,7 @@ http://pan.baidu.com/s/1gfl5FzX</p>
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2017/03/26/trip-gardenexpo-park/" class="post-link">园博园一日游</a></h3>
-    <p class="post-meta">@loveky · Mar 26, 2017 · 1 min read</p>
+    <p class="post-meta">@loveky · Mar 26, 2017</p>
   </header>
   
   <p class="post-summary"> 来北京快3年了，之前每次坐高铁回家都会路过园博园。每次透过车窗看到园里漂亮的风景，总会和老婆商量着什么时候来。可惜我住在大东边，园博园在帝都西南角，每次想到坐地铁要2个多小时就放弃了。现在有车了，出行方便了，却又总也想不起来了。昨天还是老婆提议：『我们明天去园博园啊？！』于是俩人一拍即合，来一场说走就走的春游。
@@ -310,7 +310,7 @@ http://pan.baidu.com/s/1gfl5FzX</p>
 费用小计 最后附一个今天的费用小计，供参考：
  园博园停车：20（5元/小时） 园博园门票：36（18元/人） 华联停车：6元 呷哺呷哺：74元  </p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2017/03/26/trip-gardenexpo-park/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2017/03/26/trip-gardenexpo-park/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -318,7 +318,7 @@ http://pan.baidu.com/s/1gfl5FzX</p>
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2017/03/21/config-fiddler-with-ios-https/" class="post-link">配置Fiddler拦截iOS/Andorid的https请求</a></h3>
-    <p class="post-meta">@loveky · Mar 21, 2017 · 1 min read</p>
+    <p class="post-meta">@loveky · Mar 21, 2017</p>
   </header>
   
   <p class="post-summary">Fiddler可以配置用来拦截https请求。但默认配置下仅支持拦截PC上的请求。在移动端上的https请求会因为证书问题而失败。如下图所示：
@@ -331,7 +331,7 @@ http://pan.baidu.com/s/1gfl5FzX</p>
 继续点击安装。安装成功提示如下：
   到这里，所有的配置工作就全部做完了。现在再次访问https页面，已经可以正常打开了。</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2017/03/21/config-fiddler-with-ios-https/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2017/03/21/config-fiddler-with-ios-https/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -339,7 +339,7 @@ http://pan.baidu.com/s/1gfl5FzX</p>
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2017/03/18/mouse-without-borders/" class="post-link">键盘鼠标共享神器 Mouse without Borders</a></h3>
-    <p class="post-meta">@loveky · Mar 18, 2017 · 1 min read</p>
+    <p class="post-meta">@loveky · Mar 18, 2017</p>
   </header>
   
   <p class="post-summary">如果你像我一样办公桌上有2台或以上的电脑(比如一个台式机，一个笔记本)，那么有个问题一定在困扰着你。那就是两台电脑有各自的一套键鼠设备。来回切换使用两台电脑的时候要在两套键鼠设备之前切换，非常不方便。同时，两套设备还会占据办工作上很大的空间。
@@ -356,7 +356,7 @@ http://pan.baidu.com/s/1gfl5FzX</p>
  跨平台 支持Windows Linux Mac  缺点：
  有服务器，客户端的概念。只能使用服务器的键鼠控制其他主机 不支持在主机间复制粘贴文件或拖拽复制文件（官方宣传支持该功能，但始终复制不成功） 不支持截取其它主机的屏幕  综上，如果你需要跨平台，那么没得选，只能Synergy。否则果断选择Mouse without Borders。</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2017/03/18/mouse-without-borders/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2017/03/18/mouse-without-borders/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -364,14 +364,14 @@ http://pan.baidu.com/s/1gfl5FzX</p>
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2016/12/01/redux-source-src-createstore/" class="post-link">Redux 3.6.0 源码阅读 之 src/createStore.js</a></h3>
-    <p class="post-meta">@loveky · Dec 1, 2016 · 3 min read</p>
+    <p class="post-meta">@loveky · Dec 1, 2016</p>
   </header>
   
   <p class="post-summary">嗯，就是学习一下，读读源码。顺便把源码里的文档翻译了一下并添加了一些简单的注释。
 本文对应的文件是src/createStore.js
 import isPlainObject from &#39;lodash/isPlainObject&#39; import $$observable from &#39;symbol-observable&#39; /** * ActionTypes里定义的是Redux保留的私有action。 * 对于任何未知的action，你必须返回store的当前状态。 * 如果传入的当前状态是undefined，你必须返回store的初始状态。 * 不要在应用代码中直接引用这些action。 */ export var ActionTypes = { INIT: &#39;@@redux/INIT&#39; } /** * createStore方法用于创建一个保存程序状态的store。 * 改变store中数据的唯一方法是调用store的`dispatch()`方法。 * * 你的应用中应该只有一个store。为了将程序状态中不同部分的变更逻辑 * 组合在一起，你可以通过`combineReducers`方法将多个reducer组合成一个reducer。 * * @param {Function} reducer 一个返回应用下一状态的函数，入参是程序的当前状态以及 * 要发送的action。 * * @param {any} [preloadedState] store的初始状态。你可以选择性的为store指定一个 * 初始状态。 * 如果你使用了`combineReducers`方法来生成最终的reducer。那么这个初始状态对象的 * 结构必须与调用`combineReducers`方法时传入的参数的结构保持对应关系。 * * @param {Function} enhancer store增强器。你可以选择性的传入一个增强函数来扩展 * store的功能，例如中间件，时间旅行，持久化等。Redux自带的唯一一个增强器是 * `applyMiddleware()`方法。 * * @returns {Store} 返回一个可以读取状态，发送action以及订阅变更通知的Redux store。 */ export default function createStore(reducer, preloadedState, enhancer) { // 如果只传入reducer和enhancer，则store的初始状态为undefined  if (typeof preloadedState === &#39;function&#39; &amp;&amp; typeof enhancer === &#39;undefined&#39;) { enhancer = preloadedState preloadedState = undefined } // enhancer必须是一个函数  if (typeof enhancer !</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2016/12/01/redux-source-src-createstore/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2016/12/01/redux-source-src-createstore/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -379,7 +379,7 @@ import isPlainObject from &#39;lodash/isPlainObject&#39; import $$observable fro
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2016/08/04/promise-try/" class="post-link">[译]什么是Promise.try</a></h3>
-    <p class="post-meta">@loveky · Aug 4, 2016 · 2 min read</p>
+    <p class="post-meta">@loveky · Aug 4, 2016</p>
   </header>
   
   <p class="post-summary">原文地址 http://cryto.net/~joepie91/blog/2016/05/11/what-is-promise-try-and-why-does-it-matter/
@@ -396,7 +396,7 @@ var Promise = require(&#34;bluebird&#34;); function getUsername(userId) { return
 1. 更好的错误处理 Promise的一个被大力宣扬的优点就是用户可以用同一种方式同时处理同步异常和异步异常 —— 同步异常会被捕获并且会作为一个rejected Promise向后传递。但事实真的是这样吗？让我们看看以下这个上文示例的小变种：
 function getUsername(userId) { return database.users.get({id: userId}) .then(function(user) { return uesr.</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2016/08/04/promise-try/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2016/08/04/promise-try/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -404,7 +404,7 @@ function getUsername(userId) { return database.users.get({id: userId}) .then(fun
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2016/07/12/find-time-to-be-a-better-developer/" class="post-link">[译] 寻找时间成为一名更优秀的程序员</a></h3>
-    <p class="post-meta">@loveky · Jul 12, 2016 · 1 min read</p>
+    <p class="post-meta">@loveky · Jul 12, 2016</p>
   </header>
   
   <p class="post-summary">原文链接 https://medium.freecodecamp.com/finding-time-to-become-a-better-developer-eebc154881b2#.t1uuonhtf
@@ -427,7 +427,7 @@ function getUsername(userId) { return database.users.get({id: userId}) .then(fun
 4. 不是所有花在“改善”代码上的时间都会得到相同的回报 花费时间是一种投资。和所有投资一样，投资回报率是一个合理的期望。你的所得至少应该和投入一样多，希望是越多越好。
 我们已经谈论过“make it work, make it right, make it fast”。这个是不错的口头禅但这里有一个陷阱：“right”并不意味着完美，“fast”也不是说越快越好。</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2016/07/12/find-time-to-be-a-better-developer/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2016/07/12/find-time-to-be-a-better-developer/">阅读全文 →</a>
   </footer>
 </article>
 
@@ -435,7 +435,7 @@ function getUsername(userId) { return database.users.get({id: userId}) .then(fun
         <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2015/12/28/koa-source-lib-application/" class="post-link">koa框架源码阅读笔记 之 lib/application.js</a></h3>
-    <p class="post-meta">@loveky · Dec 28, 2015 · 2 min read</p>
+    <p class="post-meta">@loveky · Dec 28, 2015</p>
   </header>
   
   <p class="post-summary">最近在学习ES6 Generator特性时发现了koa这个基于Generator的Web框架，它可以让开发者以一种“同步的方式”编写包含各种异步请求的Web应用。下面是关于它的一段中文介绍：
@@ -446,7 +446,7 @@ function getUsername(userId) { return database.users.get({id: userId}) .then(fun
 代码注释 function Application() { if (!(this instanceof Application)) return new Application; this.env = process.env.NODE_ENV || &#39;development&#39;; this.subdomainOffset = 2; this.middleware = []; this.proxy = false; this.context = Object.create(context); this.request = Object.create(request); this.response = Object.create(response); } 以上就是Application构造函数的定义，很简洁，主要做了以下几件事情：
 - 通过instanceof判断来支持不带new关键字的调用。 - 设置应用运行环境，会从环境变量NODE_ENV读取，默认值为development - 声明this.</p>
   <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2015/12/28/koa-source-lib-application/">Read More →</a>
+    <a class="read-more" href="https://loveky.github.io/2015/12/28/koa-source-lib-application/">阅读全文 →</a>
   </footer>
 </article>
 
