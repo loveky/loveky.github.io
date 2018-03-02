@@ -244,6 +244,28 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2018/02/26/tree-shaking-and-pkg.module/" class="post-link">聊聊 package.json 文件中的 module 字段</a></h3>
+    <p class="post-meta">@loveky · Feb 26, 2018</p>
+  </header>
+  
+    <img class="post-cover" src="https://img20.360buyimg.com/uba/s300x300_jfs/t17089/325/597783451/1511979/fc44792d/5a98bbdeNa28cd04a.jpg" alt="聊聊 package.json 文件中的 module 字段">
+  
+  <p class="post-summary">本文来和大家聊聊 pkg.module 字段的功能以及使用场景。
+在谈 pkg.module 之前，让我们先来了解一个和它有着紧密关系的概念 —— Tree Shaking。
+什么是 Tree Shaking？ 让我们通过两个小例子来了解。
+假设我们有以下两个文件：
+// math.js exports.add1 = function (x) { return x &#43; 1; } exports.add2 = function (x) { return x &#43; 2; }// app.js import { add1 } from &#39;./math&#39;; add1(100); app.js 文件通过 import 引入了 math.js 中的 add1 方法。
+我们通过 webpack 命令打包：
+webpack --entry ./app.js --output-filename app.bunble.js 在生成的 app.bundle.js 文件中我们可以看到以下内容：
+这里我们可以看到虽然我们只用到了 math.js 文件中的 add1 方法，但是在最终生成的 bundle 文件中却包含了 add1 和 add2 两个方法。这是为什么呢？</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2018/02/26/tree-shaking-and-pkg.module/">阅读全文 →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2017/03/29/webpack-module-ids/" class="post-link">Webpack2中的NamedModulesPlugin与HashedModuleIdsPlugin</a></h3>
     <p class="post-meta">@loveky · Mar 29, 2017</p>
   </header>

@@ -240,6 +240,28 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2018/02/26/tree-shaking-and-pkg.module/" class="post-link">聊聊 package.json 文件中的 module 字段</a></h3>
+    <p class="post-meta">@loveky · Feb 26, 2018</p>
+  </header>
+  
+    <img class="post-cover" src="https://img20.360buyimg.com/uba/s300x300_jfs/t17089/325/597783451/1511979/fc44792d/5a98bbdeNa28cd04a.jpg" alt="聊聊 package.json 文件中的 module 字段">
+  
+  <p class="post-summary">本文来和大家聊聊 pkg.module 字段的功能以及使用场景。
+在谈 pkg.module 之前，让我们先来了解一个和它有着紧密关系的概念 —— Tree Shaking。
+什么是 Tree Shaking？ 让我们通过两个小例子来了解。
+假设我们有以下两个文件：
+// math.js exports.add1 = function (x) { return x &#43; 1; } exports.add2 = function (x) { return x &#43; 2; }// app.js import { add1 } from &#39;./math&#39;; add1(100); app.js 文件通过 import 引入了 math.js 中的 add1 方法。
+我们通过 webpack 命令打包：
+webpack --entry ./app.js --output-filename app.bunble.js 在生成的 app.bundle.js 文件中我们可以看到以下内容：
+这里我们可以看到虽然我们只用到了 math.js 文件中的 add1 方法，但是在最终生成的 bundle 文件中却包含了 add1 和 add2 两个方法。这是为什么呢？</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2018/02/26/tree-shaking-and-pkg.module/">阅读全文 →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2017/08/31/recommend-reading-201708/" class="post-link">2017年8月每日一文节目回看</a></h3>
     <p class="post-meta">@loveky · Aug 31, 2017</p>
   </header>
@@ -414,27 +436,6 @@ RedMonk 的排名将 Stack Overflow 的数据与 GitHub 上的 pull request 结�
 </p>
   <footer class="post-footer">
     <a class="read-more" href="https://loveky.github.io/2017/04/18/translate-how-i-became-better-programmer/">阅读全文 →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://loveky.github.io/2017/04/09/translate-6-reasons-why-javascripts-async-await-blows-promises-away/" class="post-link">[译] 6个Async/Await完胜Promise的原因</a></h3>
-    <p class="post-meta">@loveky · Apr 9, 2017</p>
-  </header>
-  
-  <p class="post-summary">原文地址：https://hackernoon.com/6-reasons-why-javascripts-async-await-blows-promises-away-tutorial-c7ec10518dd9
-友情提醒：NodeJS自从7.6版开始已经内置了对async/await的支持。如果你还没用过该特性，那么接下来我会给出一系列的原因解释为何你应该立即开始使用它并且会结合示例代码说明。
-async/await快速入门 为了让还没听说过这个特性的小伙伴们有一个大致了解，以下是一些关于该特性的简要介绍：
- async/await是一种编写异步代码的新方法。在这之前编写异步代码使用的是回调函数和promise。 async/await实际是建立在promise之上的。因此你不能把它和回调函数搭配使用。 async/await和promise一样，是非阻塞的。 async/await可以使异步代码在形式上更接近于同步代码。这就是它最大的价值。  语法 假设有一个getJSON方法，它返回一个promise，该promise会被resolve为一个JSON对象。我们想要调用该方法，输出得到的JSON对象，最后返回&#34;done&#34;。
-以下是使用promise的实现方式：
-const makeRequest = () =&gt; getJSON() .then(data =&gt; { console.log(data) return &#34;done&#34; }) makeRequest() 使用async/await则是这样的：
-const makeRequest = async () =&gt; { console.log(await getJSON()) return &#34;done&#34; } makeRequest() 使用async/await时有以下几个区别：
- 在定义函数时我们使用了async关键字。await关键字只能在使用async定义的函数的内部使用。所有async函数都会返回一个promise，该promise最终resolve的值就是你在函数中return的内容。 由于第一点中的原因，你不能在顶级作用域中await一个函数。因为顶级作用域不是一个async方法。
-// this will not work in top level // await makeRequest()  // this will work makeRequest().then((result) =&gt; { // do something }) await getJSON()意味着直到getJSON()返回的promise在resolve之后，console.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2017/04/09/translate-6-reasons-why-javascripts-async-await-blows-promises-away/">阅读全文 →</a>
   </footer>
 </article>
 

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>聊聊 package.json 文件中的 module 字段</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="loveky" />
+  <meta name="description" content="本文来和大家聊聊 pkg.module 字段的功能以及使用场景。
+在谈 pkg.module 之前，让我们先来了解一个和它有着紧密关系的概念 —— Tree Shaking。
+什么是 Tree Shaking？ 让我们通过两个小例子来了解。
+假设我们有以下两个文件：
+// math.js exports.add1 = function (x) { return x &#43; 1; } exports.add2 = function (x) { return x &#43; 2; }// app.js import { add1 } from &amp;#39;./math&amp;#39;; add1(100); app.js 文件通过 import 引入了 math.js 中的 add1 方法。
+我们通过 webpack 命令打包：
+webpack --entry ./app.js --output-filename app.bunble.js 在生成的 app.bundle.js 文件中我们可以看到以下内容：
+这里我们可以看到虽然我们只用到了 math.js 文件中的 add1 方法，但是在最终生成的 bundle 文件中却包含了 add1 和 add2 两个方法。这是为什么呢？" />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@loveky_" />
+    <meta name="twitter:title" content="聊聊 package.json 文件中的 module 字段" />
+    <meta name="twitter:description" content="本文来和大家聊聊 pkg.module 字段的功能以及使用场景。
+在谈 pkg.module 之前，让我们先来了解一个和它有着紧密关系的概念 —— Tree Shaking。
+什么是 Tree Shaking？ 让我们通过两个小例子来了解。
+假设我们有以下两个文件：
+// math.js exports.add1 = function (x) { return x &#43; 1; } exports.add2 = function (x) { return x &#43; 2; }// app.js import { add1 } from &amp;#39;./math&amp;#39;; add1(100); app.js 文件通过 import 引入了 math.js 中的 add1 方法。
+我们通过 webpack 命令打包：
+webpack --entry ./app.js --output-filename app.bunble.js 在生成的 app.bundle.js 文件中我们可以看到以下内容：
+这里我们可以看到虽然我们只用到了 math.js 文件中的 add1 方法，但是在最终生成的 bundle 文件中却包含了 add1 和 add2 两个方法。这是为什么呢？" />
+    <meta name="twitter:image" content="https://img20.360buyimg.com/uba/s300x300_jfs/t17089/325/597783451/1511979/fc44792d/5a98bbdeNa28cd04a.jpg" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="聊聊 package.json 文件中的 module 字段" />
+  <meta property="og:description" content="本文来和大家聊聊 pkg.module 字段的功能以及使用场景。
+在谈 pkg.module 之前，让我们先来了解一个和它有着紧密关系的概念 —— Tree Shaking。
+什么是 Tree Shaking？ 让我们通过两个小例子来了解。
+假设我们有以下两个文件：
+// math.js exports.add1 = function (x) { return x &#43; 1; } exports.add2 = function (x) { return x &#43; 2; }// app.js import { add1 } from &amp;#39;./math&amp;#39;; add1(100); app.js 文件通过 import 引入了 math.js 中的 add1 方法。
+我们通过 webpack 命令打包：
+webpack --entry ./app.js --output-filename app.bunble.js 在生成的 app.bundle.js 文件中我们可以看到以下内容：
+这里我们可以看到虽然我们只用到了 math.js 文件中的 add1 方法，但是在最终生成的 bundle 文件中却包含了 add1 和 add2 两个方法。这是为什么呢？" />
+  <meta property="og:url" content="https://loveky.github.io/2018/02/26/tree-shaking-and-pkg.module/" />
+  <meta property="og:image" content="https://img20.360buyimg.com/uba/s300x300_jfs/t17089/325/597783451/1511979/fc44792d/5a98bbdeNa28cd04a.jpg" />
+
+
+
+
+<meta name="generator" content="Hugo 0.36.1" />
+
+
+<link rel="canonical" href="https://loveky.github.io/2018/02/26/tree-shaking-and-pkg.module/" />
+<link rel="alternative" href="https://loveky.github.io/index.xml" title="loveky的流水账" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="loveky的流水账" />
+<meta name="msapplication-tooltip" content="loveky的流水账" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://loveky.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://loveky.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://loveky.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://loveky.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://loveky.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://loveky.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://loveky.github.io/css/bundle.css" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-114966753-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-114966753-1');
+</script>
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://loveky.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">loveky的流水账</h2>
+  
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://loveky.github.io/">首页</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/tags/">标签</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/archive/">归档</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/links/">链接</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/about/">关于我</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:ylzcylx@gmail.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/loveky" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/loveky_" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//www.zhihu.com/people/loveky" title="Zhihu"><span class="icon icon-zhihu"></span></a>
+      </li>
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://loveky.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">聊聊 package.json 文件中的 module 字段</h1>
+      <p class="post-meta">@loveky · Feb 26, 2018 · 2 min read</p>
+    </header>
+    <article class="post-content">
+
+<p><img src="https://img20.360buyimg.com/uba/s800x800_jfs/t17089/325/597783451/1511979/fc44792d/5a98bbdeNa28cd04a.jpg" alt="" /></p>
+
+<p>本文来和大家聊聊 <code>pkg.module</code> 字段的功能以及使用场景。</p>
+
+<p>在谈 <code>pkg.module</code> 之前，让我们先来了解一个和它有着紧密关系的概念 —— <code>Tree Shaking</code>。</p>
+
+<h3 id="什么是-tree-shaking">什么是 Tree Shaking？</h3>
+
+<p>让我们通过两个小例子来了解。</p>
+
+<p>假设我们有以下两个文件：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// math.js
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">exports</span>.<span style="color:#a6e22e">add1</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">x</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+}
+
+<span style="color:#a6e22e">exports</span>.<span style="color:#a6e22e">add2</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">x</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>;
+}</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// app.js
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> {
+    <span style="color:#a6e22e">add1</span>
+} <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./math&#39;</span>;
+
+<span style="color:#a6e22e">add1</span>(<span style="color:#ae81ff">100</span>);</code></pre></div>
+<p><code>app.js</code> 文件通过 import 引入了 <code>math.js</code> 中的 <code>add1</code> 方法。</p>
+
+<p>我们通过 webpack 命令打包：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">webpack --entry ./app.js --output-filename app.bunble.js</code></pre></div>
+<p>在生成的 <code>app.bundle.js</code> 文件中我们可以看到以下内容：</p>
+
+<p><img src="https://img30.360buyimg.com/uba/jfs/t18415/188/499433586/54285/5926602e/5a8fbbd8Nd02f8a38.png" alt="" /></p>
+
+<p>这里我们可以看到虽然我们只用到了 <code>math.js</code> 文件中的 <code>add1</code> 方法，但是在最终生成的 bundle 文件中却包含了 <code>add1</code> 和 <code>add2</code> 两个方法。这是为什么呢？</p>
+
+<p>这是因为在 <a href="http://www.commonjs.org/specs/modules/1.0/">CommonJS 规范</a>（<code>math.js</code> 文件的模块格式即为 CommonJS）中，模块只能通过 <code>exports</code> 对象向外暴露属性。所有要暴露的方法、变量等都只能作为 <code>exports</code> 对象的一个属性出现。</p>
+
+<p>由于在 JavaScript 中访问对象的属性是在是太灵活了，例如：</p>
+
+<p><img src="https://img14.360buyimg.com/uba/jfs/t18682/164/503667125/4310/9245849/5a8fbff7Ne6a3d57d.png" alt="" /></p>
+
+<p>所以打包工具并不知道我们代码中最终会用到模块中的哪些方法。为了安全起见，整个模块的代码都被包含在了最终生成的 bundle 中。</p>
+
+<p>随着 ES6 规范的出现，这个问题得到了解决。ES6 定义了一套基于 <code>import</code>、<code>export</code> 操作符的模块规范。它与 CommonJS 规范最大的区别在 ES6 中的 <code>import</code> 和 <code>export</code> 都是<strong>静态的</strong>。静态意味着一个模块要暴露或引入的所有方法在编译阶段就全部确定了，之后不能再改变。这样做的好处就是打包工具在打包阶段就可以分析出代码中用到了某个模块中的哪几个方法。其它没有用到的方法就可以从最终的 bundle 文件中剔除掉。这样既可以减少 bundle 文件的大小，又可以提高脚本的执行速度。这个机制就叫做 <strong>Tree Shaking</strong>。是不是很形象。</p>
+
+<p><img src="https://img30.360buyimg.com/uba/jfs/t16393/186/2031883071/3761493/896c517a/5a98bc11N20f2272a.gif" alt="" /></p>
+
+<p>让我们把 <code>math.js</code> 改写成 ES6 的模块格式来看一下实际效果：</p>
+
+<pre><code>// math.js
+export function add1 (x) {
+    return x + 1;
+}
+
+export function add2 (x) {
+    return x + 2;
+}
+</code></pre>
+
+<p>再次使用 webpack 打包。查看生成的 bundle 文件：</p>
+
+<p><img src="https://img14.360buyimg.com/uba/jfs/t14260/72/2221437995/51502/401eb319/5a8fc454N3d8c33ea.png" alt="" /></p>
+
+<p>我们可以注意到原来直接定义在 <code>exports</code> 对象上的两个方法现在都成了两个函数声明，并且只有 <code>add1</code> 方法被添加到了模块向外暴露的对象上。同时 webpack 还在注释中告诉我们 <code>add2</code> 方法没有被其它模块用到。配合 <a href="https://github.com/webpack-contrib/uglifyjs-webpack-plugin">uglifyjs-webpack-plugin</a>，就可以很轻松的把它从最终的 bundle 文件中移除。</p>
+
+<p>关于 Tree Shaking 我们已经说得差不多了。你可能会想这和我们今天要聊的 <code>pkg.module</code> 字段有什么关系呢？</p>
+
+<p>其实只需要进一步思考一个问题。假如我们是一个 npm 包的开发者，我们该如何发布我们的包以便于使用者在使用我们包的时候也可以利用 Tree Shaking 机制呢？</p>
+
+<h3 id="如何发布一个支持-tree-shaking-机制的-npm-包">如何发布一个支持 Tree Shaking 机制的 npm 包？</h3>
+
+<p>你可能很容易想到直接把 <code>pkg.main</code> 指向我们 ES6 格式的源码文件不就可以了吗？但仔细想想这样做会带来两个问题：</p>
+
+<ol>
+<li>通常人们在使用打包工具的 babel 插件编译代码时都会屏蔽掉 <code>node_modules</code> 目录下的文件。因为按照约定大家发布到 npm 的模块代码都是基于 ES5 规范的，因此配置 babel 插件屏蔽 <code>node_modules</code> 目录可以极大的提高编译速度。但用户如果使用了我们发布的基于 ES6 规范的包就必须配置复杂的屏蔽规则以便把我们的包加入编译的白名单。</li>
+<li>如果用户是在 NodeJS 环境使用我们的包，那么极有可能连打包这一步骤都没有。如果用户的 NodeJS 环境又恰巧不支持 ES6 模块规范，那么就会导致代码报错。</li>
+</ol>
+
+<p>基于以上两点我们可以确定 <code>pkg.main</code> 字段指向的应该是编译后生成的 ES5 版本的代码。</p>
+
+<p>既然利用现有字段这条路走不通，那很自然的就会想到引入一个新字段来解决问题。这就是本文要说的 <code>pkg.module</code>字段。</p>
+
+<p>综合前文讨论的结果，<code>pkg.module</code> 字段要指向的应该是一个<strong>基于 ES6 模块规范</strong>的<strong>使用ES5语法</strong>书写的模块。</p>
+
+<p>听起来是不是比较拗口？基于 ES6 模块规范是为了用户在使用我们的包时可以享受 Tree Shaking 带来的好处；使用 ES5 语法书写是为了用户在配置 babel 插件时可以放心的屏蔽 <code>node_modules</code> 目录。</p>
+
+<p>我们的 <code>package.json</code> 文件中看起来会是这个样子：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">{
+  <span style="color:#e6db74">&#34;main&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;dist/dist.js&#34;</span>,
+  <span style="color:#e6db74">&#34;module&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;dist/dist.es.js&#34;</span>
+}</code></pre></div>
+<p>相当于在一个包内同时发布了两种模块规范的版本。</p>
+
+<p>当打包工具遇到我们的模块时：</p>
+
+<ol>
+<li>如果它已经支持 <code>pkg.module</code> 字段则会优先使用 ES6 模块规范的版本，这样可以启用 Tree Shaking 机制。</li>
+<li>如果它还不识别 <code>pkg.module</code> 字段则会使用我们已经编译成 CommonJS 规范的版本，也不会阻碍打包流程。</li>
+</ol>
+
+<p>是不是很完美？</p>
+
+<h3 id="写在最后">写在最后</h3>
+
+<p>要构建一个满足 <code>pkg.module</code> 字段要求的包其实很简单。如果你是使用 <a href="https://rollupjs.org/">Rollup</a> 打包代码， 那么只需要把 output 的格式设置为 <code>es</code> 就可以啦。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// rollup.config.js
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> {
+  ...,
+  <span style="color:#a6e22e">output</span><span style="color:#f92672">:</span> {
+    <span style="color:#a6e22e">file</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;bundle.es.js&#39;</span>,
+    <span style="color:#a6e22e">format</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;es&#39;</span>
+  }
+};</code></pre></div>
+<p>目前 <code>pkg.module</code> 还只是一个提案，并不是 package.json 文件标准格式的一部分。但它极有可能会成为标准的一部分，因为它目前已经是事实上的标准了（最早由 <a href="https://rollupjs.org/">Rollup</a>提出，<a href="https://webpack.js.org">Webpack</a>也已支持）。</p>
+
+<p><strong>参考链接：</strong></p>
+
+<ul>
+<li><a href="https://rollupjs.org/guide/en#tree-shaking">https://rollupjs.org/guide/en#tree-shaking</a></li>
+<li><a href="https://webpack.js.org/guides/tree-shaking/">https://webpack.js.org/guides/tree-shaking/</a></li>
+<li><a href="https://github.com/rollup/rollup/wiki/pkg.module">https://github.com/rollup/rollup/wiki/pkg.module</a></li>
+<li><a href="https://rollupjs.org/guide/en#core-functionality">https://rollupjs.org/guide/en#core-functionality</a></li>
+<li><a href="http://2ality.com/2017/04/setting-up-multi-platform-packages.html">http://2ality.com/2017/04/setting-up-multi-platform-packages.html</a></li>
+</ul>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://loveky.github.io/tags/es6"><span class="tag">ES6</span></a></li>
+        
+          <li><a href="https://loveky.github.io/tags/npm"><span class="tag">Npm</span></a></li>
+        
+          <li><a href="https://loveky.github.io/tags/webpack"><span class="tag">Webpack</span></a></li>
+        
+          <li><a href="https://loveky.github.io/tags/rollup"><span class="tag">Rollup</span></a></li>
+        
+          <li><a href="https://loveky.github.io/tags/tree-shaking"><span class="tag">Tree Shaking</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        
+      </p>
+    </footer>
+    <div style="text-align:center">
+      <p>如果你觉得这篇文章对你有所帮助，可以微信扫码请作者喝杯咖啡哦~</p>
+      <img width="300" height="300" src="https://loveky.github.io/img/wechat-reward-new.jpg"/>
+  </div>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "loveky" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 loveky的流水账</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+
+
+<script src="https://loveky.github.io/js/bundle.js"></script>
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?301a286a5bea7d926e284c27f79bd221";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+  </body>
+</html>

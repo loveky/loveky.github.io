@@ -18,6 +18,11 @@
   </url>
   
   <url>
+    <loc>https://loveky.github.io/2018/02/26/tree-shaking-and-pkg.module/</loc>
+    <lastmod>2018-02-26T10:44:38+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://loveky.github.io/2017/08/31/recommend-reading-201708/</loc>
     <lastmod>2017-08-31T12:50:35+08:00</lastmod>
   </url>
@@ -201,7 +206,7 @@
   
   <url>
     <loc>https://loveky.github.io/tags/es6/</loc>
-    <lastmod>2017-04-09T15:05:15+08:00</lastmod>
+    <lastmod>2018-02-26T10:44:38+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -230,8 +235,14 @@
   </url>
   
   <url>
+    <loc>https://loveky.github.io/tags/npm/</loc>
+    <lastmod>2018-02-26T10:44:38+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://loveky.github.io/post/</loc>
-    <lastmod>2017-08-31T12:50:35+08:00</lastmod>
+    <lastmod>2018-02-26T10:44:38+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -254,6 +265,12 @@
   </url>
   
   <url>
+    <loc>https://loveky.github.io/tags/rollup/</loc>
+    <lastmod>2018-02-26T10:44:38+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://loveky.github.io/tags/ruby/</loc>
     <lastmod>2013-12-06T23:01:52+08:00</lastmod>
     <priority>0</priority>
@@ -266,6 +283,12 @@
   </url>
   
   <url>
+    <loc>https://loveky.github.io/tags/tree-shaking/</loc>
+    <lastmod>2018-02-26T10:44:38+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://loveky.github.io/tags/typescript/</loc>
     <lastmod>2017-05-12T14:09:43+08:00</lastmod>
     <priority>0</priority>
@@ -273,7 +296,7 @@
   
   <url>
     <loc>https://loveky.github.io/tags/webpack/</loc>
-    <lastmod>2017-03-29T21:19:24+08:00</lastmod>
+    <lastmod>2018-02-26T10:44:38+08:00</lastmod>
     <priority>0</priority>
   </url>
   

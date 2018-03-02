@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tree Shaking on loveky的流水账</title>
+    <link>https://loveky.github.io/tags/tree-shaking/</link>
+    <description>Recent content in Tree Shaking on loveky的流水账</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 26 Feb 2018 10:44:38 +0800</lastBuildDate>
+    
+	<atom:link href="https://loveky.github.io/tags/tree-shaking/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>聊聊 package.json 文件中的 module 字段</title>
+      <link>https://loveky.github.io/2018/02/26/tree-shaking-and-pkg.module/</link>
+      <pubDate>Mon, 26 Feb 2018 10:44:38 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2018/02/26/tree-shaking-and-pkg.module/</guid>
+      <description>本文来和大家聊聊 pkg.module 字段的功能以及使用场景。
+在谈 pkg.module 之前，让我们先来了解一个和它有着紧密关系的概念 —— Tree Shaking。
+什么是 Tree Shaking？ 让我们通过两个小例子来了解。
+假设我们有以下两个文件：
+// math.js exports.add1 = function (x) { return x + 1; } exports.add2 = function (x) { return x + 2; }// app.js import { add1 } from &amp;#39;./math&amp;#39;; add1(100); app.js 文件通过 import 引入了 math.js 中的 add1 方法。
+我们通过 webpack 命令打包：
+webpack --entry ./app.js --output-filename app.bunble.js 在生成的 app.bundle.js 文件中我们可以看到以下内容：
+这里我们可以看到虽然我们只用到了 math.js 文件中的 add1 方法，但是在最终生成的 bundle 文件中却包含了 add1 和 add2 两个方法。这是为什么呢？</description>
+    </item>
+    
+  </channel>
+</rss>
