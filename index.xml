@@ -42,6 +42,19 @@
     </item>
     
     <item>
+      <title>React 全新的 Context API</title>
+      <link>https://loveky.github.io/2018/03/05/react-new-context-api/</link>
+      <pubDate>Mon, 05 Mar 2018 10:01:15 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2018/03/05/react-new-context-api/</guid>
+      <description>Context API 可以说是 React 中最有趣的一个特性了。一方面很多流行的框架（例如react-redux、mobx-react、react-router等）都在使用它；另一方面官方文档中却不推荐我们使用它。在 Context API 的文档中有下面这段话：
+ The vast majority of applications do not need to use context.
+If you want your application to be stable, don&amp;rsquo;t use context. It is an experimental API and it is likely to break in future releases of React.
+ 为何会出现这种情况呢？这还得让我们从现有版本 Context API 要解决的问题已经它自身的缺陷说起。
+现有版本 Context API 的使用场景以及缺陷 我们都知道在 React 中父子组件可以通过 props 自顶向下的传递数据。但是当组件深度嵌套时，从顶层组件向最内层组件传递数据就不那么方便了。手动在每一层组件上逐级传递 prop 不仅书写起来很繁琐同时还会为夹在中间的组件引入不必要的 prop。这时 Context API 就派上用场了。你只需要在外层组件上声明要传递给子组件的 Context：</description>
+    </item>
+    
+    <item>
       <title>聊聊 package.json 文件中的 module 字段</title>
       <link>https://loveky.github.io/2018/02/26/tree-shaking-and-pkg.module/</link>
       <pubDate>Mon, 26 Feb 2018 10:44:38 +0800</pubDate>
