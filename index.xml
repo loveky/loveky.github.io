@@ -38,7 +38,26 @@
       <description>前端小学生，现居帝都。目前就职于京东从事前端开发工作。
 刚毕业时在一家小型IT服务公司从事运维工作。之后到上海，加入了 eBay 中国研发中心从事 SCM 工程师的工作。期间为了开发一些内部服务开始接触 Ruby on Rails 框架。最终在14年以一名 RoR 工程师的身份加入了 Rakuten 中国研发中心，负责开发公司内部的自动化运维平台。由于是内部系统，所以同时也负责前端页面的开发，并渐渐的把工作重心移到了前端。15 年 4 月正式加入京东用户体验设计部，开始了全新的前端旅程。
 目前在京东主要负责京东商城 PC 端黄金购物流程以及京东 APP 内部分 React Native 页面的开发工作。
-如无特殊说明，本站全部文章均为原创。转载时请注明出处，非常感谢。</description>
+工作中顺手开发几个 Chrome 插件：
+ DNS Flusher 一键清理 DNS 缓存 Which Host 在页面上展示对应域名实际请求的 IP  平时主要用到以下技术/工具：
+ jQuery / React / React Native Redux / Mobx / Axios SeaJS / Webpack / Rollup / Babel Jest / Mocha / Chai / Sison ESLint Git / GitLab / GitHub Fiddler / Wireshark / Chrome Dev Tools VSCode  京东 JDC 常年招聘靠谱的前端工程师，有意的小伙伴请发简历至 eWx6Y3lseEBnbWFpbC5jb20=</description>
+    </item>
+    
+    <item>
+      <title>为 GitLab 代码库配置 Specific Runner</title>
+      <link>https://loveky.github.io/2018/03/29/setup-gitlab-specific-runner/</link>
+      <pubDate>Thu, 29 Mar 2018 22:23:51 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2018/03/29/setup-gitlab-specific-runner/</guid>
+      <description>最近要为团队内一个项目搭建持续集成。项目代码托管在公司内部的 GitLab 上，于是很自然的选择使用 GitLab 自带的 CI/CD 功能。
+在 GitLab 的 CI/CD 流程中具体执行任务的节点叫做 runner。GitLab 中有两种类型的 runner：
+ Shared Runners 由 GitLab 管理员配置的公有 runner。多个项目公用。作为开发人员无需配置，可以直接使用。 Specific Runners 开发人员为每个代码库单独配置的专属 runner。只能执行所属代码库的任务。需要开发人员手动搭建。  由于我厂的 GitLab 并没有配置任何 Shared Runner。所以只能选择在自己的台式机上手动搭建。
+具体流程如下：
+Step 1 下载 runner 可执行文件 根据你的环境下载 x86 或者 amd64 版本。
+创建 D:\GitLab-Runner 目录，将刚刚下载好的文件复制到该目录并重命名为 gitlab-runner.exe。
+Step 2 以管理员身份运行 Git Bash Step 3 访问代码库的配置页获取配置信息 进入代码库主页，依次点击 Settings =&amp;gt; CI / CD =&amp;gt; Runners settings。
+这里展开的信息中有两个字段需要我们记下来。分别是一个 URL 和一个 Token。
+Step 4 注册 runner 进入 D:\GitLab-Runner 目录执行命令：</description>
     </item>
     
     <item>

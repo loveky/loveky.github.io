@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>为 GitLab 代码库配置 Specific Runner</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="loveky" />
+  <meta name="description" content="最近要为团队内一个项目搭建持续集成。项目代码托管在公司内部的 GitLab 上，于是很自然的选择使用 GitLab 自带的 CI/CD 功能。
+在 GitLab 的 CI/CD 流程中具体执行任务的节点叫做 runner。GitLab 中有两种类型的 runner：
+ Shared Runners 由 GitLab 管理员配置的公有 runner。多个项目公用。作为开发人员无需配置，可以直接使用。 Specific Runners 开发人员为每个代码库单独配置的专属 runner。只能执行所属代码库的任务。需要开发人员手动搭建。  由于我厂的 GitLab 并没有配置任何 Shared Runner。所以只能选择在自己的台式机上手动搭建。
+具体流程如下：
+Step 1 下载 runner 可执行文件 根据你的环境下载 x86 或者 amd64 版本。
+创建 D:\GitLab-Runner 目录，将刚刚下载好的文件复制到该目录并重命名为 gitlab-runner.exe。
+Step 2 以管理员身份运行 Git Bash Step 3 访问代码库的配置页获取配置信息 进入代码库主页，依次点击 Settings =&amp;gt; CI / CD =&amp;gt; Runners settings。
+这里展开的信息中有两个字段需要我们记下来。分别是一个 URL 和一个 Token。
+Step 4 注册 runner 进入 D:\GitLab-Runner 目录执行命令：" />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@loveky_" />
+    <meta name="twitter:title" content="为 GitLab 代码库配置 Specific Runner" />
+    <meta name="twitter:description" content="最近要为团队内一个项目搭建持续集成。项目代码托管在公司内部的 GitLab 上，于是很自然的选择使用 GitLab 自带的 CI/CD 功能。
+在 GitLab 的 CI/CD 流程中具体执行任务的节点叫做 runner。GitLab 中有两种类型的 runner：
+ Shared Runners 由 GitLab 管理员配置的公有 runner。多个项目公用。作为开发人员无需配置，可以直接使用。 Specific Runners 开发人员为每个代码库单独配置的专属 runner。只能执行所属代码库的任务。需要开发人员手动搭建。  由于我厂的 GitLab 并没有配置任何 Shared Runner。所以只能选择在自己的台式机上手动搭建。
+具体流程如下：
+Step 1 下载 runner 可执行文件 根据你的环境下载 x86 或者 amd64 版本。
+创建 D:\GitLab-Runner 目录，将刚刚下载好的文件复制到该目录并重命名为 gitlab-runner.exe。
+Step 2 以管理员身份运行 Git Bash Step 3 访问代码库的配置页获取配置信息 进入代码库主页，依次点击 Settings =&amp;gt; CI / CD =&amp;gt; Runners settings。
+这里展开的信息中有两个字段需要我们记下来。分别是一个 URL 和一个 Token。
+Step 4 注册 runner 进入 D:\GitLab-Runner 目录执行命令：" />
+    <meta name="twitter:image" content="https://img20.360buyimg.com/uba/s300x300_jfs/t17554/226/1118288536/70645/2284a85f/5abcf960Nd57ab1ab.png" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="为 GitLab 代码库配置 Specific Runner" />
+  <meta property="og:description" content="最近要为团队内一个项目搭建持续集成。项目代码托管在公司内部的 GitLab 上，于是很自然的选择使用 GitLab 自带的 CI/CD 功能。
+在 GitLab 的 CI/CD 流程中具体执行任务的节点叫做 runner。GitLab 中有两种类型的 runner：
+ Shared Runners 由 GitLab 管理员配置的公有 runner。多个项目公用。作为开发人员无需配置，可以直接使用。 Specific Runners 开发人员为每个代码库单独配置的专属 runner。只能执行所属代码库的任务。需要开发人员手动搭建。  由于我厂的 GitLab 并没有配置任何 Shared Runner。所以只能选择在自己的台式机上手动搭建。
+具体流程如下：
+Step 1 下载 runner 可执行文件 根据你的环境下载 x86 或者 amd64 版本。
+创建 D:\GitLab-Runner 目录，将刚刚下载好的文件复制到该目录并重命名为 gitlab-runner.exe。
+Step 2 以管理员身份运行 Git Bash Step 3 访问代码库的配置页获取配置信息 进入代码库主页，依次点击 Settings =&amp;gt; CI / CD =&amp;gt; Runners settings。
+这里展开的信息中有两个字段需要我们记下来。分别是一个 URL 和一个 Token。
+Step 4 注册 runner 进入 D:\GitLab-Runner 目录执行命令：" />
+  <meta property="og:url" content="https://loveky.github.io/2018/03/29/setup-gitlab-specific-runner/" />
+  <meta property="og:image" content="https://img20.360buyimg.com/uba/s300x300_jfs/t17554/226/1118288536/70645/2284a85f/5abcf960Nd57ab1ab.png" />
+
+
+
+
+<meta name="generator" content="Hugo 0.36.1" />
+
+
+<link rel="canonical" href="https://loveky.github.io/2018/03/29/setup-gitlab-specific-runner/" />
+<link rel="alternative" href="https://loveky.github.io/index.xml" title="loveky的流水账" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="loveky的流水账" />
+<meta name="msapplication-tooltip" content="loveky的流水账" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://loveky.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://loveky.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://loveky.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://loveky.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://loveky.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://loveky.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://loveky.github.io/css/bundle.css" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-114966753-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-114966753-1');
+</script>
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://loveky.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">loveky的流水账</h2>
+  
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://loveky.github.io/">首页</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/tags/">标签</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/archive/">归档</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/links/">链接</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/about/">关于我</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:eWx6Y3lseEBnbWFpbC5jb20=" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/loveky" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/loveky_" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//www.zhihu.com/people/loveky" title="Zhihu"><span class="icon icon-zhihu"></span></a>
+      </li>
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://loveky.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">为 GitLab 代码库配置 Specific Runner</h1>
+      <p class="post-meta">@loveky · Mar 29, 2018 · 1 min read</p>
+    </header>
+    <article class="post-content">
+
+<p><img src="https://img20.360buyimg.com/uba/s800x800_jfs/t17554/226/1118288536/70645/2284a85f/5abcf960Nd57ab1ab.png" alt="" /></p>
+
+<p>最近要为团队内一个项目搭建持续集成。项目代码托管在公司内部的 GitLab 上，于是很自然的选择使用 GitLab 自带的 <a href="https://about.gitlab.com/features/gitlab-ci-cd/">CI/CD</a> 功能。</p>
+
+<p>在 GitLab 的 CI/CD 流程中具体执行任务的节点叫做 <a href="https://docs.gitlab.com/runner/">runner</a>。GitLab 中有两种类型的 runner：</p>
+
+<ul>
+<li><strong>Shared Runners</strong> 由 GitLab 管理员配置的公有 runner。多个项目公用。作为开发人员无需配置，可以直接使用。</li>
+<li><strong>Specific Runners</strong> 开发人员为每个代码库单独配置的专属 runner。只能执行所属代码库的任务。需要开发人员手动搭建。</li>
+</ul>
+
+<p>由于我厂的 GitLab 并没有配置任何 Shared Runner。所以只能选择在自己的台式机上手动搭建。</p>
+
+<p>具体流程如下：</p>
+
+<h3 id="step-1-下载-runner-可执行文件">Step 1 下载 runner 可执行文件</h3>
+
+<p>根据你的环境下载 <a href="https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-windows-386.exe">x86</a> 或者 <a href="https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-windows-amd64.exe">amd64</a> 版本。</p>
+
+<p>创建 <code>D:\GitLab-Runner</code> 目录，将刚刚下载好的文件复制到该目录并重命名为 <code>gitlab-runner.exe</code>。</p>
+
+<h3 id="step-2-以管理员身份运行-git-bash">Step 2 以管理员身份运行 Git Bash</h3>
+
+<p><img src="//img11.360buyimg.com/uba/jfs/t19333/151/1144689530/33276/96cbeb89/5abcec1aN05f731f4.png" alt="" /></p>
+
+<h3 id="step-3-访问代码库的配置页获取配置信息">Step 3 访问代码库的配置页获取配置信息</h3>
+
+<p>进入代码库主页，依次点击 <code>Settings</code> =&gt; <code>CI / CD</code> =&gt; <code>Runners settings</code>。</p>
+
+<p><img src="http://img20.360buyimg.com/uba/jfs/t17662/48/1152218252/59751/c88150c3/5abceec7N97e2c0d5.png" alt="" /></p>
+
+<p>这里展开的信息中有两个字段需要我们记下来。分别是一个 URL 和一个 Token。</p>
+
+<p><img src="http://img30.360buyimg.com/uba/jfs/t18862/233/1129371104/19463/7b456673/5abcef91Nd5f5d6f2.png" alt="" /></p>
+
+<h3 id="step-4-注册-runner">Step 4 注册 runner</h3>
+
+<p>进入 <code>D:\GitLab-Runner</code> 目录执行命令：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./gitlab-runner.exe register</code></pre></div>
+<p>执行完后会进入一个交互式的配置流程，你需要回答以下问题：</p>
+
+<ul>
+<li><code>Please enter the gitlab-ci coordinator URL</code>：填入上一步获取的 URL</li>
+<li><code>Please enter the gitlab-ci token for this runner</code>：填入上一步获取的 Token</li>
+<li><code>Please enter the gitlab-ci description for this runner</code>：给你的 runner 起一个名字</li>
+<li><code>Please enter the gitlab-ci tags for this runner (comma separated)</code>：GitLab 允许我们给 runner 设置标签，设置好后该 runner 只会执行拥有相同标签的任务。由于我们的 runner 只为我们自己的代码库服务，所以此处不做过多配置。留空即可。</li>
+<li><code>Whether to lock Runner to current project</code>：该 runner 是否应该锁定在当前项目上。由于我们是自己用，选 <code>true</code> 即可。</li>
+<li><code>Please enter the executor: ssh, docker+machine, docker-ssh+machine, kubernetes, docker, parallels, virtualbox, docker-ssh, shell: docker</code>：选择任务执行环境，我们选择最简单的 <code>shell</code>。</li>
+</ul>
+
+<h3 id="step-5-验证服务已启动">Step 5 验证服务已启动</h3>
+
+<p><code>register</code> 流程执行完成后，系统服务中会多出一项。</p>
+
+<p><img src="http://img30.360buyimg.com/uba/jfs/t17461/278/1135640889/10918/8ac3484e/5abcf4b4N9427f5ca.jpg" alt="" /></p>
+
+<p>检查该服务状态，确保已启动。</p>
+
+<p>回到第 3 步的页面，刷新。即可看到新配置的 runner。</p>
+
+<p><img src="http://img11.360buyimg.com/uba/jfs/t16855/359/1100518148/6875/fe7792e0/5abcf54bN23660029.png" alt="" /></p>
+
+<p>至此，一个 Specific Runner 的配置就全部完成了。</p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://loveky.github.io/tags/%E5%B7%A5%E5%85%B7"><span class="tag">工具</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        
+      </p>
+    </footer>
+    <div style="text-align:center">
+      <p>如果你觉得这篇文章对你有所帮助，可以微信扫码请作者喝杯咖啡哦~</p>
+      <img width="300" height="300" src="https://loveky.github.io/img/wechat-reward-new.jpg"/>
+  </div>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "loveky" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 loveky的流水账</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+
+
+<script src="https://loveky.github.io/js/bundle.js"></script>
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?301a286a5bea7d926e284c27f79bd221";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+  </body>
+</html>

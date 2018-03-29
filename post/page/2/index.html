@@ -180,7 +180,7 @@
 
       
       <li class="social-item">
-        <a href="mailto:ylzcylx@gmail.com" title="Email"><span class="icon icon-email"></span></a>
+        <a href="mailto:eWx6Y3lseEBnbWFpbC5jb20=" title="Email"><span class="icon icon-email"></span></a>
       </li>
 
       
@@ -244,6 +244,23 @@
     </header>
     
     
+      
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2017/05/12/translate-why-typescript-getting-popular/" class="post-link">[译] 为何TypeScript愈发流行了？</a></h3>
+    <p class="post-meta">@loveky · May 12, 2017</p>
+  </header>
+  
+  <p class="post-summary">在掘金翻译计划里翻译的一篇文章。感觉对自己挺有启发的。分享给大家。
+  原文地址：Why TypeScript Is Growing More Popular 原文作者：Mary Branscombe 校对者：Aladdin-ADD Germxu   为何 TypeScript 这么流行呢？许多主流的开发框架依赖于它，它还能提高开发者在不断变化的 JavaScript 世界中的生产力。
+在最近的 Stack Overflow 开发者调查以及年度 RedMonk 编程语言排名中都显示 TypeScript —— 由微软发起的结合了编译高级 JavaScript 特性与静态类型检查及工具的开源项目 —— 正在达到新的人气高度。通过为 JavaScript 提供最基本的检查语法，TypeScript 允许开发者对他们的代码进行类型检查，这可以暴露 bug 并改善大型 JavaScript 代码库的结构和文档。
+参与了 Stack Overflow 调查的开发者中有 9.5% 的人正在使用 TypeScript，这使得 TypeScript 成为了第九流行的编程语言，排名在 Ruby 之前，用户量是 Perl 的两倍。此次 Stack Overflow 调查中的受访者来自不同领域，使用最广泛的两种语言是 JavaScript 和 SQL，这说明此次调查并非只针对前端开发。事实上，TypeScript 程序员出现在了参与 Stack Overflow 调查的所有 4 种工作角色中：web 开发者、桌面开发者、系统管理员与 DevOps 以及数据科学家。
+RedMonk 的排名将 Stack Overflow 的数据与 GitHub 上的 pull request 结合起来试图理解开发者的想法以及他们正在使用什么。TypeScript 同样受到了开发者的欢迎，排名从第 26 位上升到了第 17 位。其中一部分原因是 TypeScript 在 Stack Overflow 上关注度的提升，但主要还是因为在 GitHub 上参与的开发者在不断增多。</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2017/05/12/translate-why-typescript-getting-popular/">阅读全文 →</a>
+  </footer>
+</article>
+
       
         <article class="post-entry">
   <header class="post-header">
@@ -421,31 +438,6 @@ http://pan.baidu.com/s/1gfl5FzX</p>
 import isPlainObject from &#39;lodash/isPlainObject&#39; import $$observable from &#39;symbol-observable&#39; /** * ActionTypes里定义的是Redux保留的私有action。 * 对于任何未知的action，你必须返回store的当前状态。 * 如果传入的当前状态是undefined，你必须返回store的初始状态。 * 不要在应用代码中直接引用这些action。 */ export var ActionTypes = { INIT: &#39;@@redux/INIT&#39; } /** * createStore方法用于创建一个保存程序状态的store。 * 改变store中数据的唯一方法是调用store的`dispatch()`方法。 * * 你的应用中应该只有一个store。为了将程序状态中不同部分的变更逻辑 * 组合在一起，你可以通过`combineReducers`方法将多个reducer组合成一个reducer。 * * @param {Function} reducer 一个返回应用下一状态的函数，入参是程序的当前状态以及 * 要发送的action。 * * @param {any} [preloadedState] store的初始状态。你可以选择性的为store指定一个 * 初始状态。 * 如果你使用了`combineReducers`方法来生成最终的reducer。那么这个初始状态对象的 * 结构必须与调用`combineReducers`方法时传入的参数的结构保持对应关系。 * * @param {Function} enhancer store增强器。你可以选择性的传入一个增强函数来扩展 * store的功能，例如中间件，时间旅行，持久化等。Redux自带的唯一一个增强器是 * `applyMiddleware()`方法。 * * @returns {Store} 返回一个可以读取状态，发送action以及订阅变更通知的Redux store。 */ export default function createStore(reducer, preloadedState, enhancer) { // 如果只传入reducer和enhancer，则store的初始状态为undefined  if (typeof preloadedState === &#39;function&#39; &amp;&amp; typeof enhancer === &#39;undefined&#39;) { enhancer = preloadedState preloadedState = undefined } // enhancer必须是一个函数  if (typeof enhancer !</p>
   <footer class="post-footer">
     <a class="read-more" href="https://loveky.github.io/2016/12/01/redux-source-src-createstore/">阅读全文 →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://loveky.github.io/2016/08/04/promise-try/" class="post-link">[译]什么是Promise.try</a></h3>
-    <p class="post-meta">@loveky · Aug 4, 2016</p>
-  </header>
-  
-  <p class="post-summary">原文地址 http://cryto.net/~joepie91/blog/2016/05/11/what-is-promise-try-and-why-does-it-matter/
-在#Node.js#频道里经常困扰大家的一个话题是Bluebird提供的Promise.try方法。大家并不清楚该方法的功能也不知道为何要使用它。同时，几乎所有的关于Promsie的指南中针对该方法错误的演示使得这种情况没有任何改善。
-在本文中，我会尝试解释究竟什么是Promise.try以及为何你应该使用它。我假设你已经对Promise有所了解并且知道.then在Promise中的作用。
-即使你在使用一个不同的Promsie实现(例如ES6 Promise)，本文还是可以帮到你。文章末尾我会解释如何在非Bluebird环境中实现相同的功能。
-究竟什么是Promise.try呢？ 简单来说，除了不需要跟在一个前置Promise之后以外，Promise.try很像.then。这么说还是有一些含糊不清，所以让我们先看一个示例。
-以下是一段典型的Promise使用场景：
-function getUsername(userId) { return database.users.get({id: userId}) .then(function(user) { return user.name; }); }  到目前为止，一切顺利。我们假设database.users.get会返回一个Promise，并且该Promise最终会返回一个带有name属性的对象。
-以下是同样的代码，但是引入了Promise.try：
-var Promise = require(&#34;bluebird&#34;); function getUsername(userId) { return Promise.try(function() { return database.users.get({id: userID}); }).then(function(user) { return user.name; }); }  可以看到，我们的调用链以Promise.try而不是database.users.get开始。像使用.then一样，我们执行Promise.try方法并传递给它一个直接返回database.users.get调用的函数。
-这样做有什么意义呢？ 以上的代码看起来似乎是多余的。但实际上它有以下几个优点：
- 更好的错误处理 同步代码中的异常不论出现在何处都会以rejection的形式向Promise链后端传递。 更好的兼容性 你可以始终使用你自己喜欢的Promise实现，而不用担心第三方代码在使用哪个。 更好的代码阅读体验 所有的代码在水平方向上将处于同一个缩进层级，这将使你阅读代码变得更容易。  接下来我会逐一介绍这些优点：
-1. 更好的错误处理 Promise的一个被大力宣扬的优点就是用户可以用同一种方式同时处理同步异常和异步异常 —— 同步异常会被捕获并且会作为一个rejected Promise向后传递。但事实真的是这样吗？让我们看看以下这个上文示例的小变种：
-function getUsername(userId) { return database.users.get({id: userId}) .then(function(user) { return uesr.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2016/08/04/promise-try/">阅读全文 →</a>
   </footer>
 </article>
 

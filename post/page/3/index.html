@@ -180,7 +180,7 @@
 
       
       <li class="social-item">
-        <a href="mailto:ylzcylx@gmail.com" title="Email"><span class="icon icon-email"></span></a>
+        <a href="mailto:eWx6Y3lseEBnbWFpbC5jb20=" title="Email"><span class="icon icon-email"></span></a>
       </li>
 
       
@@ -244,6 +244,31 @@
     </header>
     
     
+      
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2016/08/04/promise-try/" class="post-link">[译]什么是Promise.try</a></h3>
+    <p class="post-meta">@loveky · Aug 4, 2016</p>
+  </header>
+  
+  <p class="post-summary">原文地址 http://cryto.net/~joepie91/blog/2016/05/11/what-is-promise-try-and-why-does-it-matter/
+在#Node.js#频道里经常困扰大家的一个话题是Bluebird提供的Promise.try方法。大家并不清楚该方法的功能也不知道为何要使用它。同时，几乎所有的关于Promsie的指南中针对该方法错误的演示使得这种情况没有任何改善。
+在本文中，我会尝试解释究竟什么是Promise.try以及为何你应该使用它。我假设你已经对Promise有所了解并且知道.then在Promise中的作用。
+即使你在使用一个不同的Promsie实现(例如ES6 Promise)，本文还是可以帮到你。文章末尾我会解释如何在非Bluebird环境中实现相同的功能。
+究竟什么是Promise.try呢？ 简单来说，除了不需要跟在一个前置Promise之后以外，Promise.try很像.then。这么说还是有一些含糊不清，所以让我们先看一个示例。
+以下是一段典型的Promise使用场景：
+function getUsername(userId) { return database.users.get({id: userId}) .then(function(user) { return user.name; }); }  到目前为止，一切顺利。我们假设database.users.get会返回一个Promise，并且该Promise最终会返回一个带有name属性的对象。
+以下是同样的代码，但是引入了Promise.try：
+var Promise = require(&#34;bluebird&#34;); function getUsername(userId) { return Promise.try(function() { return database.users.get({id: userID}); }).then(function(user) { return user.name; }); }  可以看到，我们的调用链以Promise.try而不是database.users.get开始。像使用.then一样，我们执行Promise.try方法并传递给它一个直接返回database.users.get调用的函数。
+这样做有什么意义呢？ 以上的代码看起来似乎是多余的。但实际上它有以下几个优点：
+ 更好的错误处理 同步代码中的异常不论出现在何处都会以rejection的形式向Promise链后端传递。 更好的兼容性 你可以始终使用你自己喜欢的Promise实现，而不用担心第三方代码在使用哪个。 更好的代码阅读体验 所有的代码在水平方向上将处于同一个缩进层级，这将使你阅读代码变得更容易。  接下来我会逐一介绍这些优点：
+1. 更好的错误处理 Promise的一个被大力宣扬的优点就是用户可以用同一种方式同时处理同步异常和异步异常 —— 同步异常会被捕获并且会作为一个rejected Promise向后传递。但事实真的是这样吗？让我们看看以下这个上文示例的小变种：
+function getUsername(userId) { return database.users.get({id: userId}) .then(function(user) { return uesr.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2016/08/04/promise-try/">阅读全文 →</a>
+  </footer>
+</article>
+
       
         <article class="post-entry">
   <header class="post-header">
@@ -445,24 +470,6 @@ link阶段会针对每一个被RENDERED的directive实例执行一次。此阶�
   如果定义了compile属性则link属性会被忽略。</p>
   <footer class="post-footer">
     <a class="read-more" href="https://loveky.github.io/2014/04/01/angularjs-directive-compile-link/">阅读全文 →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://loveky.github.io/2014/02/21/use-css3-to-simulate-stop-animation/" class="post-link">使用CSS3实现逐格动画</a></h3>
-    <p class="post-meta">@loveky · Feb 21, 2014</p>
-  </header>
-  
-  <p class="post-summary">首先我们有这样一张照片：
-照片长度为1184px，高度为75px，共分为24格。
-首先我们将DIV大小设置成单格照片的大小，49x75。这样在初始状态下看到的就是第一格的照片。 接下来定义的是最终状态也就是最后一格的状态，通过偏移量背景调整到最后一格。
-最后就是定义动画效果，在下面的设置中时长2秒，动画会无限循环下去。
-@keyframes wave { to { background-position: -1184px 0 } } @-webkit-keyframes wave { to { background-position: -1184px 0 } } #hahaha { margin: 50px auto; width: 49px; height: 75px; background: url(&#39;https://raw.github.com/loveky/loveky.github.io/master/assets/images/css3-stop-animation-background.png&#39;) 0 0; -webkit-animation: wave 2s infinite steps(24); animation: 2s wave infinite steps(24); } 效果如下:
- 由于照片是自己剪辑拼成的，所以偏移量不是太精确。。。</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2014/02/21/use-css3-to-simulate-stop-animation/">阅读全文 →</a>
   </footer>
 </article>
 

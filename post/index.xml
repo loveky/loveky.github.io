@@ -6,10 +6,27 @@
     <description>Recent content in Posts on loveky的流水账</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 05 Mar 2018 10:01:15 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 29 Mar 2018 22:23:51 +0800</lastBuildDate>
     
 	<atom:link href="https://loveky.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>为 GitLab 代码库配置 Specific Runner</title>
+      <link>https://loveky.github.io/2018/03/29/setup-gitlab-specific-runner/</link>
+      <pubDate>Thu, 29 Mar 2018 22:23:51 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2018/03/29/setup-gitlab-specific-runner/</guid>
+      <description>最近要为团队内一个项目搭建持续集成。项目代码托管在公司内部的 GitLab 上，于是很自然的选择使用 GitLab 自带的 CI/CD 功能。
+在 GitLab 的 CI/CD 流程中具体执行任务的节点叫做 runner。GitLab 中有两种类型的 runner：
+ Shared Runners 由 GitLab 管理员配置的公有 runner。多个项目公用。作为开发人员无需配置，可以直接使用。 Specific Runners 开发人员为每个代码库单独配置的专属 runner。只能执行所属代码库的任务。需要开发人员手动搭建。  由于我厂的 GitLab 并没有配置任何 Shared Runner。所以只能选择在自己的台式机上手动搭建。
+具体流程如下：
+Step 1 下载 runner 可执行文件 根据你的环境下载 x86 或者 amd64 版本。
+创建 D:\GitLab-Runner 目录，将刚刚下载好的文件复制到该目录并重命名为 gitlab-runner.exe。
+Step 2 以管理员身份运行 Git Bash Step 3 访问代码库的配置页获取配置信息 进入代码库主页，依次点击 Settings =&amp;gt; CI / CD =&amp;gt; Runners settings。
+这里展开的信息中有两个字段需要我们记下来。分别是一个 URL 和一个 Token。
+Step 4 注册 runner 进入 D:\GitLab-Runner 目录执行命令：</description>
+    </item>
     
     <item>
       <title>React 全新的 Context API</title>
