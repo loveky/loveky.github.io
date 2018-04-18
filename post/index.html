@@ -245,6 +245,46 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2018/04/18/time-to-upgrade-nvm-windows/" class="post-link">是时候升级一下你的 nvm-windows 了</a></h3>
+    <p class="post-meta">@loveky · Apr 18, 2018</p>
+  </header>
+  
+    <img class="post-cover" src="https://img30.360buyimg.com/uba/s300x300_jfs/t17713/272/1820376607/38449/a06696c8/5ad7545eNac82d0be.jpg" alt="是时候升级一下你的 nvm-windows 了">
+  
+  <p class="post-summary">一直以来都使用 nvm-windows 来管理 Node 版本。从没出过问题。今天团队小伙伴来反馈我们的一个内部命令行工具在 Node 6.10.0 上无法安装。于是决定安装一个 6.10.0 调查一下。
+于是执行：
+nvm install v6.10.0 结果输出：
+$ nvm install v6.10.0 Node.js vv6.10.0 is not yet released or available. 似乎是哪里不对了。
+于是下意识的 nvm ls available 一下看看：
+$ nvm ls available Showing the 15 latest available releases. STABLE | UNSTABLE --------------------------- v8.9.1 | v8.7.0 v8.9.0 | v7.9.0 v8.8.1 | v7.7.4 v8.8.0 | v7.7.3 v7.10.1 | v7.7.2 v7.10.0 | v7.7.1 v7.8.0 | v7.7.0 v6.12.0 | v6.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2018/04/18/time-to-upgrade-nvm-windows/">阅读全文 →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2018/04/02/write-unit-test-for-react-part1-choose-test-framwork/" class="post-link">为 React 编写单元测试之一 —— 测试框架的选择</a></h3>
+    <p class="post-meta">@loveky · Apr 2, 2018</p>
+  </header>
+  
+    <img class="post-cover" src="https://img10.360buyimg.com/uba/s300x300_jfs/t16669/130/1802409257/334415/68808646/5ad75b8dN54ece703.png" alt="为 React 编写单元测试之一 —— 测试框架的选择">
+  
+  <p class="post-summary">最近和小伙伴们在尝试做把项目中经常用到的 React 组件整理成一套 React 组件库。为了保证代码质量且方便日后维护，我们决定为组件编写单元测试。接下来几篇文章会聊聊在这个过程中我们遇到的问题以及一些思考。
+正文开始 要写单元测试，首先面临的一个问题就是“我该使用哪个测试框架”？
+如果你去 Google 上搜索“how to test react component”，在结果页面中你大概会来来回回看到以下几个名词/概念：
+ Jest Enzyme Mocha全家桶（套餐内容大概率是：Mocha &#43; Chai &#43; Sinon &#43; Istanbul） react-test-renderer react-dom/test-utils  首先让我们来看看这些库的功能和定位，然后再来做选择。
+🃏 Jest Jest 是 Facebook 开发的一款 JavaScript 测试框架。在 Facebook 内部广泛用来测试各种 JavaScript 代码。其官网上主要列出了以下几个特点：
+ 轻松上手  使用 create-react-app 或是 react-native init 创建的项目已经默认集成了 Jest 现有项目，只需创建一个名为 __test__ 的目录，然后在该目录中创建以 .spec.js 或 .test.js 结尾的文件即可  内置强大的断言与 mock 功能 内置测试覆盖率统计功能 内置 Snapshot 机制  虽然 Jest 官网介绍中多次 React，但实际上 Jest 并不是和 React 绑定的。你可以使用它测试任何 JavaScript 项目。</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2018/04/02/write-unit-test-for-react-part1-choose-test-framwork/">阅读全文 →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2018/03/29/setup-gitlab-specific-runner/" class="post-link">为 GitLab 代码库配置 Specific Runner</a></h3>
     <p class="post-meta">@loveky · Mar 29, 2018</p>
   </header>
@@ -399,54 +439,6 @@ navigator.serviceWorker.register(&#39;sw.js&#39;, { scope: &#39;./abc&#39; }); �
 更多快捷功能，自己去发现吧！</p>
   <footer class="post-footer">
     <a class="read-more" href="https://loveky.github.io/2017/06/06/chrome-devtools-command-menu/">阅读全文 →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://loveky.github.io/2017/06/05/translate-node-stream-everything-you-need-to-know/" class="post-link">[译] Node.js 流: 你需要知道的一切</a></h3>
-    <p class="post-meta">@loveky · Jun 5, 2017</p>
-  </header>
-  
-  <p class="post-summary">图片来源
-Node.js 中的流有着难以使用，更难以理解的名声。现在我有一个好消息告诉你：事情已经不再是这样了。
-很长时间以来，开发人员创造了许许多多的软件包为的就是可以更简单的使用流。但是在本文中，我会把重点放在原生的 Node.js 流 API上。
- “流是 Node 中最棒的，同时也是最被误解的想法。”
-— Dominic Tarr
- 流到底是什么呢？ 流是数据的集合 —— 就像数组或字符串一样。区别在于流中的数据可能不会立刻就全部可用，并且你无需一次性的把这些数据全部放入内存。这使得流在操作大量数据或是数据从外部来源逐段发送过来的时候变得非常有用。
-然而，流的作用并不仅限于操作大量数据。它还带给我们组合代码的能力。就像我们可以通过管道连接几个简单的 Linux 命令以组合出强大的功能一样，我们可以利用流在 Node 中做同样的事。
-Linux 命令的组合性
-const grep = ... // 一个 grep 命令输出的 stream const wc = ... // 一个 wc 命令输入的 stream grep.pipe(wc) Node 中许多内建的模块都实现了流接口：
-截屏来自于我的 Pluralsight 课程 —— 高级 Node.js
-上边的列表中有一些 Node.js 原生的对象，这些对象也是可以读写的流。这些对象中的一部分是既可读、又可写的流，例如 TCP sockets，zlib 以及 crypto。
-需要注意的是这些对象是紧密关联的。虽然一个 HTTP 响应在客户端是一个可读流，但在服务器端它却是一个可写流。这是因为在 HTTP 的情况中，我们基本上是从一个对象（http.IncomingMessage）读取数据，向另一个对象写入数据（http.ServerResponse）。
-还需要注意的是 stdio 流（stdin，stdout，stderr）在子进程中有着与父进程中相反的类型。这使得在子进程中从父进程的 stdio 流中读取或写入数据变得非常简单。</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2017/06/05/translate-node-stream-everything-you-need-to-know/">阅读全文 →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://loveky.github.io/2017/05/31/regular-expressions-catastrophic-backtracking/" class="post-link">正则表达式中的悲观回溯</a></h3>
-    <p class="post-meta">@loveky · May 31, 2017</p>
-  </header>
-  
-  <p class="post-summary">前几天有小伙伴来求救说页面上有一个 input 框，随着用户不断输入内容，页面响应会越来越慢直到完全失去响应。
-简单沟通过后得知具体场景是这样的：
- input 框中允许用户输入一连串逗号分隔的商品id 在用户输入的过程中实时检测用户输入的内容是否符合规则，若不符合则给出提示信息  小伙伴的解决方案也很直接：
- 给 input 框绑定 keyup 事件。 在 keyup 事件回调函数中通过正则表达式判断是否符合规则，决定是否展示提示信息。  经过反复验证得到如下规律：
- 用户在输入商品 id 的过程中（连续输入多个数字）不会卡顿 当用户输入逗号时，出现卡顿。随着输入商品 id 的数量增加，卡顿越来越明显，直至浏览器失去响应。  于是打开 Chrome 开发者工具，选择 Performance (原 Timeline) 标签页。将整个过程记录下来，得到如下时间线：
-其中黄色宽条表示 JavaScript 主线程的执行情况。连续的黄条越长，表示单次 JavaScript 运行的时间越长。也就意味着 UI 失去响应的时间越长。这一点从截图中的蓝色框中也可以得到印证。蓝色框中的红色长条表示浏览器一帧（一次渲染）所需要的时间。
-那么到底是 JavaScript 中的哪些代码占中了这么长 CPU 时间呢？我们在底部的选项卡中选中 Bottom-Up ，按 Total Time 降序排列。得到如下结果：
-可以看出，72.% 的 CPU 时间用在了一条正则表达式上。你肯定想到了，这就是小伙伴用来检查用户输入是否合法的正则表达式。
-完整的正则表达式是这样的：
-/^\s*((\d&#43;(\,|，)\d&#43;)*|(\d&#43;))\s*$/ 接着去 regex101 上测试一下，测试数据如下，由 10 个商品 ID 组成的字符串：
-123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789  执行结果如下：</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2017/05/31/regular-expressions-catastrophic-backtracking/">阅读全文 →</a>
   </footer>
 </article>
 

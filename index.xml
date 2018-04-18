@@ -44,6 +44,34 @@
     </item>
     
     <item>
+      <title>是时候升级一下你的 nvm-windows 了</title>
+      <link>https://loveky.github.io/2018/04/18/time-to-upgrade-nvm-windows/</link>
+      <pubDate>Wed, 18 Apr 2018 22:18:58 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2018/04/18/time-to-upgrade-nvm-windows/</guid>
+      <description>一直以来都使用 nvm-windows 来管理 Node 版本。从没出过问题。今天团队小伙伴来反馈我们的一个内部命令行工具在 Node 6.10.0 上无法安装。于是决定安装一个 6.10.0 调查一下。
+于是执行：
+nvm install v6.10.0 结果输出：
+$ nvm install v6.10.0 Node.js vv6.10.0 is not yet released or available. 似乎是哪里不对了。
+于是下意识的 nvm ls available 一下看看：
+$ nvm ls available Showing the 15 latest available releases. STABLE | UNSTABLE --------------------------- v8.9.1 | v8.7.0 v8.9.0 | v7.9.0 v8.8.1 | v7.7.4 v8.8.0 | v7.7.3 v7.10.1 | v7.7.2 v7.10.0 | v7.7.1 v7.8.0 | v7.7.0 v6.12.0 | v6.</description>
+    </item>
+    
+    <item>
+      <title>为 React 编写单元测试之一 —— 测试框架的选择</title>
+      <link>https://loveky.github.io/2018/04/02/write-unit-test-for-react-part1-choose-test-framwork/</link>
+      <pubDate>Mon, 02 Apr 2018 22:48:27 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2018/04/02/write-unit-test-for-react-part1-choose-test-framwork/</guid>
+      <description>最近和小伙伴们在尝试做把项目中经常用到的 React 组件整理成一套 React 组件库。为了保证代码质量且方便日后维护，我们决定为组件编写单元测试。接下来几篇文章会聊聊在这个过程中我们遇到的问题以及一些思考。
+正文开始 要写单元测试，首先面临的一个问题就是“我该使用哪个测试框架”？
+如果你去 Google 上搜索“how to test react component”，在结果页面中你大概会来来回回看到以下几个名词/概念：
+ Jest Enzyme Mocha全家桶（套餐内容大概率是：Mocha + Chai + Sinon + Istanbul） react-test-renderer react-dom/test-utils  首先让我们来看看这些库的功能和定位，然后再来做选择。
+🃏 Jest Jest 是 Facebook 开发的一款 JavaScript 测试框架。在 Facebook 内部广泛用来测试各种 JavaScript 代码。其官网上主要列出了以下几个特点：
+ 轻松上手  使用 create-react-app 或是 react-native init 创建的项目已经默认集成了 Jest 现有项目，只需创建一个名为 __test__ 的目录，然后在该目录中创建以 .spec.js 或 .test.js 结尾的文件即可  内置强大的断言与 mock 功能 内置测试覆盖率统计功能 内置 Snapshot 机制  虽然 Jest 官网介绍中多次 React，但实际上 Jest 并不是和 React 绑定的。你可以使用它测试任何 JavaScript 项目。</description>
+    </item>
+    
+    <item>
       <title>为 GitLab 代码库配置 Specific Runner</title>
       <link>https://loveky.github.io/2018/03/29/setup-gitlab-specific-runner/</link>
       <pubDate>Thu, 29 Mar 2018 22:23:51 +0800</pubDate>

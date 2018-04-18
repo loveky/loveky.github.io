@@ -18,6 +18,16 @@
   </url>
   
   <url>
+    <loc>https://loveky.github.io/2018/04/18/time-to-upgrade-nvm-windows/</loc>
+    <lastmod>2018-04-18T22:18:58+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/2018/04/02/write-unit-test-for-react-part1-choose-test-framwork/</loc>
+    <lastmod>2018-04-02T22:48:27+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://loveky.github.io/2018/03/29/setup-gitlab-specific-runner/</loc>
     <lastmod>2018-03-29T22:23:51+08:00</lastmod>
   </url>
@@ -252,7 +262,7 @@
   
   <url>
     <loc>https://loveky.github.io/post/</loc>
-    <lastmod>2018-03-29T22:23:51+08:00</lastmod>
+    <lastmod>2018-04-18T22:18:58+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -264,7 +274,7 @@
   
   <url>
     <loc>https://loveky.github.io/tags/react/</loc>
-    <lastmod>2018-03-05T10:01:15+08:00</lastmod>
+    <lastmod>2018-04-02T22:48:27+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -324,13 +334,13 @@
   
   <url>
     <loc>https://loveky.github.io/tags/%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2018-03-29T22:23:51+08:00</lastmod>
+    <lastmod>2018-04-18T22:18:58+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://loveky.github.io/tags/%E6%B5%8B%E8%AF%95/</loc>
-    <lastmod>2013-12-06T23:01:52+08:00</lastmod>
+    <lastmod>2018-04-02T22:48:27+08:00</lastmod>
     <priority>0</priority>
   </url>
   

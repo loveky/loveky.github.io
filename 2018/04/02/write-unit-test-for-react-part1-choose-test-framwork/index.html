@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>为 React 编写单元测试之一 —— 测试框架的选择</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="loveky" />
+  <meta name="description" content="最近和小伙伴们在尝试做把项目中经常用到的 React 组件整理成一套 React 组件库。为了保证代码质量且方便日后维护，我们决定为组件编写单元测试。接下来几篇文章会聊聊在这个过程中我们遇到的问题以及一些思考。
+正文开始 要写单元测试，首先面临的一个问题就是“我该使用哪个测试框架”？
+如果你去 Google 上搜索“how to test react component”，在结果页面中你大概会来来回回看到以下几个名词/概念：
+ Jest Enzyme Mocha全家桶（套餐内容大概率是：Mocha &#43; Chai &#43; Sinon &#43; Istanbul） react-test-renderer react-dom/test-utils  首先让我们来看看这些库的功能和定位，然后再来做选择。
+🃏 Jest Jest 是 Facebook 开发的一款 JavaScript 测试框架。在 Facebook 内部广泛用来测试各种 JavaScript 代码。其官网上主要列出了以下几个特点：
+ 轻松上手  使用 create-react-app 或是 react-native init 创建的项目已经默认集成了 Jest 现有项目，只需创建一个名为 __test__ 的目录，然后在该目录中创建以 .spec.js 或 .test.js 结尾的文件即可  内置强大的断言与 mock 功能 内置测试覆盖率统计功能 内置 Snapshot 机制  虽然 Jest 官网介绍中多次 React，但实际上 Jest 并不是和 React 绑定的。你可以使用它测试任何 JavaScript 项目。" />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@loveky_" />
+    <meta name="twitter:title" content="为 React 编写单元测试之一 —— 测试框架的选择" />
+    <meta name="twitter:description" content="最近和小伙伴们在尝试做把项目中经常用到的 React 组件整理成一套 React 组件库。为了保证代码质量且方便日后维护，我们决定为组件编写单元测试。接下来几篇文章会聊聊在这个过程中我们遇到的问题以及一些思考。
+正文开始 要写单元测试，首先面临的一个问题就是“我该使用哪个测试框架”？
+如果你去 Google 上搜索“how to test react component”，在结果页面中你大概会来来回回看到以下几个名词/概念：
+ Jest Enzyme Mocha全家桶（套餐内容大概率是：Mocha &#43; Chai &#43; Sinon &#43; Istanbul） react-test-renderer react-dom/test-utils  首先让我们来看看这些库的功能和定位，然后再来做选择。
+🃏 Jest Jest 是 Facebook 开发的一款 JavaScript 测试框架。在 Facebook 内部广泛用来测试各种 JavaScript 代码。其官网上主要列出了以下几个特点：
+ 轻松上手  使用 create-react-app 或是 react-native init 创建的项目已经默认集成了 Jest 现有项目，只需创建一个名为 __test__ 的目录，然后在该目录中创建以 .spec.js 或 .test.js 结尾的文件即可  内置强大的断言与 mock 功能 内置测试覆盖率统计功能 内置 Snapshot 机制  虽然 Jest 官网介绍中多次 React，但实际上 Jest 并不是和 React 绑定的。你可以使用它测试任何 JavaScript 项目。" />
+    <meta name="twitter:image" content="https://img10.360buyimg.com/uba/s300x300_jfs/t16669/130/1802409257/334415/68808646/5ad75b8dN54ece703.png" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="为 React 编写单元测试之一 —— 测试框架的选择" />
+  <meta property="og:description" content="最近和小伙伴们在尝试做把项目中经常用到的 React 组件整理成一套 React 组件库。为了保证代码质量且方便日后维护，我们决定为组件编写单元测试。接下来几篇文章会聊聊在这个过程中我们遇到的问题以及一些思考。
+正文开始 要写单元测试，首先面临的一个问题就是“我该使用哪个测试框架”？
+如果你去 Google 上搜索“how to test react component”，在结果页面中你大概会来来回回看到以下几个名词/概念：
+ Jest Enzyme Mocha全家桶（套餐内容大概率是：Mocha &#43; Chai &#43; Sinon &#43; Istanbul） react-test-renderer react-dom/test-utils  首先让我们来看看这些库的功能和定位，然后再来做选择。
+🃏 Jest Jest 是 Facebook 开发的一款 JavaScript 测试框架。在 Facebook 内部广泛用来测试各种 JavaScript 代码。其官网上主要列出了以下几个特点：
+ 轻松上手  使用 create-react-app 或是 react-native init 创建的项目已经默认集成了 Jest 现有项目，只需创建一个名为 __test__ 的目录，然后在该目录中创建以 .spec.js 或 .test.js 结尾的文件即可  内置强大的断言与 mock 功能 内置测试覆盖率统计功能 内置 Snapshot 机制  虽然 Jest 官网介绍中多次 React，但实际上 Jest 并不是和 React 绑定的。你可以使用它测试任何 JavaScript 项目。" />
+  <meta property="og:url" content="https://loveky.github.io/2018/04/02/write-unit-test-for-react-part1-choose-test-framwork/" />
+  <meta property="og:image" content="https://img10.360buyimg.com/uba/s300x300_jfs/t16669/130/1802409257/334415/68808646/5ad75b8dN54ece703.png" />
+
+
+
+
+<meta name="generator" content="Hugo 0.36.1" />
+
+
+<link rel="canonical" href="https://loveky.github.io/2018/04/02/write-unit-test-for-react-part1-choose-test-framwork/" />
+<link rel="alternative" href="https://loveky.github.io/index.xml" title="loveky的流水账" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="loveky的流水账" />
+<meta name="msapplication-tooltip" content="loveky的流水账" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://loveky.github.io/img/favicon.ico" />
+<link rel="icon" sizes="192x192" href="https://loveky.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://loveky.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://loveky.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://loveky.github.io/css/bundle.css" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-114966753-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-114966753-1');
+</script>
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://loveky.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">loveky的流水账</h2>
+  
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://loveky.github.io/">首页</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/tags/">标签</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/archive/">归档</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/links/">链接</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/about/">关于我</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:eWx6Y3lseEBnbWFpbC5jb20=" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/loveky" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/loveky_" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//www.zhihu.com/people/loveky" title="Zhihu"><span class="icon icon-zhihu"></span></a>
+      </li>
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://loveky.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">为 React 编写单元测试之一 —— 测试框架的选择</h1>
+      <p class="post-meta">@loveky · Apr 2, 2018 · 2 min read</p>
+    </header>
+    <article class="post-content">
+
+<p>最近和小伙伴们在尝试做把项目中经常用到的 React 组件整理成一套 React 组件库。为了保证代码质量且方便日后维护，我们决定为组件编写单元测试。接下来几篇文章会聊聊在这个过程中我们遇到的问题以及一些思考。</p>
+
+<h3 id="正文开始">正文开始</h3>
+
+<p>要写单元测试，首先面临的一个问题就是“我该使用哪个测试框架”？</p>
+
+<p>如果你去 Google 上搜索“<a href="https://www.google.com.hk/search?num=20&amp;ei=kf_CWp2CMMi58QWXoKyAAQ&amp;q=how+to+test+react+component&amp;oq=how+to+test+react+component&amp;gs_l=psy-ab.3..0i71k1l8.0.0.0.215957.0.0.0.0.0.0.0.0..0.0....0...1c..64.psy-ab..0.0.0....0.sVSL6SvIaYQ&amp;gws_rd=cr">how to test react component</a>”，在结果页面中你大概会来来回回看到以下几个名词/概念：</p>
+
+<ul>
+<li>Jest</li>
+<li>Enzyme</li>
+<li>Mocha全家桶（套餐内容大概率是：Mocha + Chai + Sinon + Istanbul）</li>
+<li>react-test-renderer</li>
+<li>react-dom/test-utils</li>
+</ul>
+
+<p>首先让我们来看看这些库的功能和定位，然后再来做选择。</p>
+
+<h4 id="jest-https-facebook-github-io-jest">🃏 <a href="https://facebook.github.io/jest/">Jest</a></h4>
+
+<p>Jest 是 Facebook 开发的一款 JavaScript 测试<strong>框架</strong>。在 Facebook 内部广泛用来测试各种 JavaScript 代码。其官网上主要列出了以下几个特点：</p>
+
+<ul>
+<li>轻松上手
+
+<ul>
+<li>使用 <a href="https://facebook.github.io/react/blog/2016/07/22/create-apps-with-no-configuration.html"><code>create-react-app</code></a> 或是 <a href="http://facebook.github.io/react-native/docs/getting-started.html"><code>react-native init</code></a> 创建的项目已经默认集成了 Jest</li>
+<li>现有项目，只需创建一个名为 <code>__test__</code> 的目录，然后在该目录中创建以 <code>.spec.js</code> 或 <code>.test.js</code> 结尾的文件即可</li>
+</ul></li>
+<li>内置强大的断言与 mock 功能</li>
+<li>内置测试覆盖率统计功能</li>
+<li>内置 Snapshot 机制</li>
+</ul>
+
+<p>虽然 Jest 官网介绍中多次 React，但实际上 Jest 并不是和 React 绑定的。你可以使用它测试任何 JavaScript 项目。</p>
+
+<h4 id="enzyme-http-airbnb-io-enzyme"><a href="http://airbnb.io/enzyme/">Enzyme</a></h4>
+
+<p>由 Airbnb 出品。官方文档中给自己的定义是：</p>
+
+<blockquote>
+<p>Enzyme is a JavaScript Testing utility for React that makes it easier to assert, manipulate, and traverse your React Components&rsquo; output.</p>
+</blockquote>
+
+<p>从这里可以看出两点信息：</p>
+
+<ol>
+<li>Enzyme 的定位是一个<strong>工具库</strong></li>
+<li>Enzyme 的出现是为了让我们<strong>更方便</strong>的<strong>遍历、操作 React 组件输出的内容</strong></li>
+</ol>
+
+<h4 id="mocha-https-mochajs-org"><a href="https://mochajs.org/">Mocha</a></h4>
+
+<p>Mocha 是另一个 JavaScript 测试<strong>框架</strong>。与 Jest 不同的是，它自身只提供作为一个测试框架最核心的功能。而其它增强功能，如丰富的断言语法、mock、测试覆盖率统计等功能则是通过各种 <a href="https://github.com/mochajs/mocha/wiki#add-ons">Add-ons</a> 提供的。与各种 Add-ons 搭配在一起形成了各种各样的“套餐”。而最常见的组合应该就是如下这样的搭配：</p>
+
+<ul>
+<li><a href="http://www.chaijs.com/">Chai</a> 负责断言</li>
+<li><a href="http://sinonjs.org/">Sinon.js</a> 负责 mock</li>
+<li><a href="https://github.com/gotwarlost/istanbul">Istanbul</a> 负责统计测试覆盖率</li>
+</ul>
+
+<h4 id="react-test-renderer-https-reactjs-org-docs-test-renderer-html"><a href="https://reactjs.org/docs/test-renderer.html">react-test-renderer</a></h4>
+
+<p>在说 <code>react-test-renderer</code> 之前，让我们先聊聊什么是 <code>renderer</code>。React 最早是被用来开发网页的，所以早期的 React 库中还包含了大量和 DOM 相关的逻辑。后来 React 的设计思想慢慢被迁移到其它场景，最被人们熟知的莫过于 <a href="http://facebook.github.io/react-native/">React Native</a> 了。为了灵活性和扩展性，React 的代码被分拆为 React 核心代码与各种 <code>renderer</code>。React 自带了 3 个 renderer，前两个是大家常见的：</p>
+
+<ul>
+<li><a href="https://github.com/facebook/react/tree/master/packages/react-dom">react-dom</a> 负责将组建渲染到浏览器页面中。</li>
+<li><a href="https://github.com/facebook/react/tree/master/packages/react-native-renderer">react-native-renderer</a> 负责将组件渲染成原生场景中的各种 “View”。</li>
+</ul>
+
+<p>而今天提到的 <a href="https://github.com/facebook/react/tree/master/packages/react-test-renderer">react-test-renderer</a> 则负责将组件输出成 JSON 对象以方便我们遍历、断言或是进行 snapshot 测试。</p>
+
+<p>备注：<a href="https://github.com/chentsulin/awesome-react-renderer">这里</a>有一份各种各样的 renderer 列表。</p>
+
+<h4 id="react-dom-test-utils-https-reactjs-org-docs-test-utils-html"><a href="https://reactjs.org/docs/test-utils.html">react-dom/test-utils</a></h4>
+
+<p>首先从名称可以看出这个库是包含在 <code>react-dom</code> 中的。所以它只是 <code>react-dom</code> 的辅助测试工具。在 React 文档站中它的介绍页上用的标题却只有 “Test Utilities” 两个单词，很容易让人产生误解。该库中的方法主要作用是帮我们遍历 ReactDOM 生成的 DOM 树，方便我们编写断言。<strong>注意：使用该库时必须提供一个 DOM 环境。</strong>当然这个 DOM 环境可以是 <a href="https://github.com/jsdom/jsdom">jsdom</a> 这种模拟环境。(友情提示：Jest 默认的执行环境就是 jsdom)</p>
+
+<p>读到这你可能会问，<code>react-test-renderer</code> 和 <code>react-dom/test-utils</code> 两者看起来还是很相似。何时该选择哪一个库呢？</p>
+
+<ul>
+<li>如果需要测试事件（如 click, change, blur 等），那么使用 <code>react-dom/test-utils</code></li>
+<li>其它时候使用更简单、灵活的 <code>react-test-renderer</code></li>
+</ul>
+
+<h3 id="了解的差不多了-该如何选择">了解的差不多了，该如何选择？</h3>
+
+<p>通过上文的描述，我们发现这些库可以分为两大类。</p>
+
+<ul>
+<li>通用的基础设施：test runner、断言、mock、测试覆盖率统计均包含在这个范畴里。这些功能与测试什么项目并没有太大关系。Jest、Mocha以及它的小伙伴们都属于这一类。</li>
+<li>React 测试辅助工具库：Enzyme 以及 <code>react-test-renderer</code> 和 <code>react-dom/test-utils</code> 兄弟俩属于这一类。事实上，Enzyme 底层也是调用了这兄弟俩。并在之上做了大量接口封装。</li>
+</ul>
+
+<p>基于以下的考虑，我们最终选择了 Jest + <code>react-test-renderer</code> 和 <code>react-dom/test-utils</code> 的组合。</p>
+
+<ul>
+<li>Jest 的零配置起步对新手非常友好。可以让我们把更多的精力放到如何写好测试，而不是如何用 Mocha 的各种 <code>add-ons</code> 搭建环境上。</li>
+<li>Enzyme 固然用起来 API 会更简单。但大量的封装对我们来说并不透明。而使用<code>react-test-renderer</code> 和 <code>react-dom/test-utils</code> 虽然在 API 上会略微繁琐，但是可以让我们更好的理解 React 的工作原理。</li>
+</ul>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://loveky.github.io/tags/react"><span class="tag">React</span></a></li>
+        
+          <li><a href="https://loveky.github.io/tags/%E6%B5%8B%E8%AF%95"><span class="tag">测试</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        
+      </p>
+    </footer>
+    <div style="text-align:center">
+      <p>如果你觉得这篇文章对你有所帮助，可以微信扫码请作者喝杯咖啡哦~</p>
+      <img width="300" height="300" src="https://loveky.github.io/img/wechat-reward-new.jpg"/>
+  </div>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "loveky" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 loveky的流水账</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+
+
+<script src="https://loveky.github.io/js/bundle.js"></script>
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?301a286a5bea7d926e284c27f79bd221";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+  </body>
+</html>

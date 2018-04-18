@@ -6,10 +6,24 @@
     <description>Recent content in 测试 on loveky的流水账</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 06 Dec 2013 23:01:52 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 02 Apr 2018 22:48:27 +0800</lastBuildDate>
     
 	<atom:link href="https://loveky.github.io/tags/%E6%B5%8B%E8%AF%95/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>为 React 编写单元测试之一 —— 测试框架的选择</title>
+      <link>https://loveky.github.io/2018/04/02/write-unit-test-for-react-part1-choose-test-framwork/</link>
+      <pubDate>Mon, 02 Apr 2018 22:48:27 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2018/04/02/write-unit-test-for-react-part1-choose-test-framwork/</guid>
+      <description>最近和小伙伴们在尝试做把项目中经常用到的 React 组件整理成一套 React 组件库。为了保证代码质量且方便日后维护，我们决定为组件编写单元测试。接下来几篇文章会聊聊在这个过程中我们遇到的问题以及一些思考。
+正文开始 要写单元测试，首先面临的一个问题就是“我该使用哪个测试框架”？
+如果你去 Google 上搜索“how to test react component”，在结果页面中你大概会来来回回看到以下几个名词/概念：
+ Jest Enzyme Mocha全家桶（套餐内容大概率是：Mocha + Chai + Sinon + Istanbul） react-test-renderer react-dom/test-utils  首先让我们来看看这些库的功能和定位，然后再来做选择。
+🃏 Jest Jest 是 Facebook 开发的一款 JavaScript 测试框架。在 Facebook 内部广泛用来测试各种 JavaScript 代码。其官网上主要列出了以下几个特点：
+ 轻松上手  使用 create-react-app 或是 react-native init 创建的项目已经默认集成了 Jest 现有项目，只需创建一个名为 __test__ 的目录，然后在该目录中创建以 .spec.js 或 .test.js 结尾的文件即可  内置强大的断言与 mock 功能 内置测试覆盖率统计功能 内置 Snapshot 机制  虽然 Jest 官网介绍中多次 React，但实际上 Jest 并不是和 React 绑定的。你可以使用它测试任何 JavaScript 项目。</description>
+    </item>
     
     <item>
       <title>搭建属于自己的travis pro</title>

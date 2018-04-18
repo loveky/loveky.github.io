@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>是时候升级一下你的 nvm-windows 了</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="loveky" />
+  <meta name="description" content="一直以来都使用 nvm-windows 来管理 Node 版本。从没出过问题。今天团队小伙伴来反馈我们的一个内部命令行工具在 Node 6.10.0 上无法安装。于是决定安装一个 6.10.0 调查一下。
+于是执行：
+nvm install v6.10.0 结果输出：
+$ nvm install v6.10.0 Node.js vv6.10.0 is not yet released or available. 似乎是哪里不对了。
+于是下意识的 nvm ls available 一下看看：
+$ nvm ls available Showing the 15 latest available releases. STABLE | UNSTABLE --------------------------- v8.9.1 | v8.7.0 v8.9.0 | v7.9.0 v8.8.1 | v7.7.4 v8.8.0 | v7.7.3 v7.10.1 | v7.7.2 v7.10.0 | v7.7.1 v7.8.0 | v7.7.0 v6.12.0 | v6." />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@loveky_" />
+    <meta name="twitter:title" content="是时候升级一下你的 nvm-windows 了" />
+    <meta name="twitter:description" content="一直以来都使用 nvm-windows 来管理 Node 版本。从没出过问题。今天团队小伙伴来反馈我们的一个内部命令行工具在 Node 6.10.0 上无法安装。于是决定安装一个 6.10.0 调查一下。
+于是执行：
+nvm install v6.10.0 结果输出：
+$ nvm install v6.10.0 Node.js vv6.10.0 is not yet released or available. 似乎是哪里不对了。
+于是下意识的 nvm ls available 一下看看：
+$ nvm ls available Showing the 15 latest available releases. STABLE | UNSTABLE --------------------------- v8.9.1 | v8.7.0 v8.9.0 | v7.9.0 v8.8.1 | v7.7.4 v8.8.0 | v7.7.3 v7.10.1 | v7.7.2 v7.10.0 | v7.7.1 v7.8.0 | v7.7.0 v6.12.0 | v6." />
+    <meta name="twitter:image" content="https://img30.360buyimg.com/uba/s300x300_jfs/t17713/272/1820376607/38449/a06696c8/5ad7545eNac82d0be.jpg" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="是时候升级一下你的 nvm-windows 了" />
+  <meta property="og:description" content="一直以来都使用 nvm-windows 来管理 Node 版本。从没出过问题。今天团队小伙伴来反馈我们的一个内部命令行工具在 Node 6.10.0 上无法安装。于是决定安装一个 6.10.0 调查一下。
+于是执行：
+nvm install v6.10.0 结果输出：
+$ nvm install v6.10.0 Node.js vv6.10.0 is not yet released or available. 似乎是哪里不对了。
+于是下意识的 nvm ls available 一下看看：
+$ nvm ls available Showing the 15 latest available releases. STABLE | UNSTABLE --------------------------- v8.9.1 | v8.7.0 v8.9.0 | v7.9.0 v8.8.1 | v7.7.4 v8.8.0 | v7.7.3 v7.10.1 | v7.7.2 v7.10.0 | v7.7.1 v7.8.0 | v7.7.0 v6.12.0 | v6." />
+  <meta property="og:url" content="https://loveky.github.io/2018/04/18/time-to-upgrade-nvm-windows/" />
+  <meta property="og:image" content="https://img30.360buyimg.com/uba/s300x300_jfs/t17713/272/1820376607/38449/a06696c8/5ad7545eNac82d0be.jpg" />
+
+
+
+
+<meta name="generator" content="Hugo 0.36.1" />
+
+
+<link rel="canonical" href="https://loveky.github.io/2018/04/18/time-to-upgrade-nvm-windows/" />
+<link rel="alternative" href="https://loveky.github.io/index.xml" title="loveky的流水账" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="loveky的流水账" />
+<meta name="msapplication-tooltip" content="loveky的流水账" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://loveky.github.io/img/favicon.ico" />
+<link rel="icon" sizes="192x192" href="https://loveky.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://loveky.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://loveky.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://loveky.github.io/css/bundle.css" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-114966753-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-114966753-1');
+</script>
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://loveky.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">loveky的流水账</h2>
+  
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://loveky.github.io/">首页</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/tags/">标签</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/archive/">归档</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/links/">链接</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/about/">关于我</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:eWx6Y3lseEBnbWFpbC5jb20=" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/loveky" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/loveky_" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//www.zhihu.com/people/loveky" title="Zhihu"><span class="icon icon-zhihu"></span></a>
+      </li>
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://loveky.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">是时候升级一下你的 nvm-windows 了</h1>
+      <p class="post-meta">@loveky · Apr 18, 2018 · 2 min read</p>
+    </header>
+    <article class="post-content"><p>一直以来都使用 <a href="https://github.com/coreybutler/nvm-windows">nvm-windows</a> 来管理 Node 版本。从没出过问题。今天团队小伙伴来反馈我们的一个内部命令行工具在 Node 6.10.0 上无法安装。于是决定安装一个 6.10.0 调查一下。</p>
+
+<p>于是执行：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nvm install v6.10.0</code></pre></div>
+<p>结果输出：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ nvm install v6.10.0
+Node.js vv6.10.0 is not yet released or available.</code></pre></div>
+<p>似乎是哪里不对了。</p>
+
+<p>于是下意识的 <code>nvm ls available</code> 一下看看：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ nvm ls available
+
+Showing the <span style="color:#ae81ff">15</span> latest available releases.
+
+      STABLE   |    UNSTABLE
+   ---------------------------
+       v8.9.1  |      v8.7.0
+       v8.9.0  |      v7.9.0
+       v8.8.1  |      v7.7.4
+       v8.8.0  |      v7.7.3
+      v7.10.1  |      v7.7.2
+      v7.10.0  |      v7.7.1
+       v7.8.0  |      v7.7.0
+      v6.12.0  |      v6.7.0
+      v6.11.5  |     v5.11.1
+      v6.11.4  |     v5.11.0
+      v6.11.3  |      v5.9.1
+      v6.11.2  |      v5.9.0
+      v6.11.1  |      v5.7.1
+      v6.11.0  |      v5.7.0
+      v6.10.3  |    v0.11.16
+
+For a complete list, visit http://coreybutler.github.io/nodedistro</code></pre></div>
+<p>好像依然不对，Node 官网上显示的最新版本明明是 9.11.1。</p>
+
+<p><img src="https://img14.360buyimg.com/uba/jfs/t19618/269/1731290399/27749/4a301db8/5ad75603Ne7b8c5f1.png" alt="" /></p>
+
+<p>既然命令输出结果的最后说在 <a href="http://coreybutler.github.io/nodedistro">http://coreybutler.github.io/nodedistro</a> 可以看到完整的版本列表。那就看看吧。</p>
+
+<p><img src="https://img14.360buyimg.com/uba/jfs/t18823/245/1803064749/37268/ff22d86b/5ad75686N3b367891.png" alt="" /></p>
+
+<p>这。。。第一反应是这个项目不维护了？去这个项目的 GitHub 首页看了看似乎并没有这方面的声明。</p>
+
+<p>死马当死马医。于是强制安装一下最新版本试试：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ nvm install latest
+Version <span style="color:#ae81ff">9</span>.11.1 is not available. If you are attempting to download a <span style="color:#e6db74">&#34;just released&#34;</span> version,
+it may not be recognized by the nvm service yet <span style="color:#f92672">(</span>updated hourly<span style="color:#f92672">)</span>. If you feel this is in error and
+you know the version exists, please visit http://github.com/coreybutler/nodedistro and submit a PR.</code></pre></div>
+<p>这次依然安装不成功，但是在输出中给出了另一个 <a href="http://github.com/coreybutler/nodedistro">GitHub 链接</a>。打开一看，页面赫然写着 <code>DEPRECATED!</code></p>
+
+<p><img src="https://img11.360buyimg.com/uba/jfs/t19051/180/1802410770/32168/460bc87b/5ad757e5N5caf5d8f.png" alt="" /></p>
+
+<p>大概意思是：nvm-windows 需要维护一个 Node 的版本列表。由于早期 Node 官方并没有这种数据。于是 nvm-windows 的作者创建了这个仓库。后来 Node 官方开始维护 <a href="https://nodejs.org/download/release/index.json">https://nodejs.org/download/release/index.json</a>。于是作者也放弃自己维护这个仓库转而使用官方的列表了。nvm-windows 1.1.0 是最后一个使用非官方列表的版本。</p>
+
+<p>下意识的检查了一下我的版本：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ nvm version
+<span style="color:#ae81ff">1</span>.1.0</code></pre></div>
+<p>看来就是这个原因了。于是升级到 nvm-windows 的最新版本。再次 <code>nvm list available</code>，一切正常。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ nvm version
+<span style="color:#ae81ff">1</span>.1.5
+
+$ nvm list available
+
+|   CURRENT    |     LTS      |  OLD STABLE  | OLD UNSTABLE |
+|--------------|--------------|--------------|--------------|
+|    <span style="color:#ae81ff">9</span>.11.1    |    <span style="color:#ae81ff">8</span>.11.1    |   <span style="color:#ae81ff">0</span>.12.18    |   <span style="color:#ae81ff">0</span>.11.16    |
+|    <span style="color:#ae81ff">9</span>.11.0    |    <span style="color:#ae81ff">8</span>.11.0    |   <span style="color:#ae81ff">0</span>.12.17    |   <span style="color:#ae81ff">0</span>.11.15    |
+|    <span style="color:#ae81ff">9</span>.10.1    |    <span style="color:#ae81ff">8</span>.10.0    |   <span style="color:#ae81ff">0</span>.12.16    |   <span style="color:#ae81ff">0</span>.11.14    |
+|    <span style="color:#ae81ff">9</span>.10.0    |    <span style="color:#ae81ff">8</span>.9.4     |   <span style="color:#ae81ff">0</span>.12.15    |   <span style="color:#ae81ff">0</span>.11.13    |
+|    <span style="color:#ae81ff">9</span>.9.0     |    <span style="color:#ae81ff">8</span>.9.3     |   <span style="color:#ae81ff">0</span>.12.14    |   <span style="color:#ae81ff">0</span>.11.12    |
+|    <span style="color:#ae81ff">9</span>.8.0     |    <span style="color:#ae81ff">8</span>.9.2     |   <span style="color:#ae81ff">0</span>.12.13    |   <span style="color:#ae81ff">0</span>.11.11    |
+|    <span style="color:#ae81ff">9</span>.7.1     |    <span style="color:#ae81ff">8</span>.9.1     |   <span style="color:#ae81ff">0</span>.12.12    |   <span style="color:#ae81ff">0</span>.11.10    |
+|    <span style="color:#ae81ff">9</span>.7.0     |    <span style="color:#ae81ff">8</span>.9.0     |   <span style="color:#ae81ff">0</span>.12.11    |    <span style="color:#ae81ff">0</span>.11.9    |
+|    <span style="color:#ae81ff">9</span>.6.1     |    <span style="color:#ae81ff">6</span>.14.1    |   <span style="color:#ae81ff">0</span>.12.10    |    <span style="color:#ae81ff">0</span>.11.8    |
+|    <span style="color:#ae81ff">9</span>.6.0     |    <span style="color:#ae81ff">6</span>.14.0    |    <span style="color:#ae81ff">0</span>.12.9    |    <span style="color:#ae81ff">0</span>.11.7    |
+|    <span style="color:#ae81ff">9</span>.5.0     |    <span style="color:#ae81ff">6</span>.13.1    |    <span style="color:#ae81ff">0</span>.12.8    |    <span style="color:#ae81ff">0</span>.11.6    |
+|    <span style="color:#ae81ff">9</span>.4.0     |    <span style="color:#ae81ff">6</span>.13.0    |    <span style="color:#ae81ff">0</span>.12.7    |    <span style="color:#ae81ff">0</span>.11.5    |
+|    <span style="color:#ae81ff">9</span>.3.0     |    <span style="color:#ae81ff">6</span>.12.3    |    <span style="color:#ae81ff">0</span>.12.6    |    <span style="color:#ae81ff">0</span>.11.4    |
+|    <span style="color:#ae81ff">9</span>.2.1     |    <span style="color:#ae81ff">6</span>.12.2    |    <span style="color:#ae81ff">0</span>.12.5    |    <span style="color:#ae81ff">0</span>.11.3    |
+|    <span style="color:#ae81ff">9</span>.2.0     |    <span style="color:#ae81ff">6</span>.12.1    |    <span style="color:#ae81ff">0</span>.12.4    |    <span style="color:#ae81ff">0</span>.11.2    |
+|    <span style="color:#ae81ff">9</span>.1.0     |    <span style="color:#ae81ff">6</span>.12.0    |    <span style="color:#ae81ff">0</span>.12.3    |    <span style="color:#ae81ff">0</span>.11.1    |
+|    <span style="color:#ae81ff">9</span>.0.0     |    <span style="color:#ae81ff">6</span>.11.5    |    <span style="color:#ae81ff">0</span>.12.2    |    <span style="color:#ae81ff">0</span>.11.0    |
+|    <span style="color:#ae81ff">8</span>.8.1     |    <span style="color:#ae81ff">6</span>.11.4    |    <span style="color:#ae81ff">0</span>.12.1    |    <span style="color:#ae81ff">0</span>.9.12    |
+|    <span style="color:#ae81ff">8</span>.8.0     |    <span style="color:#ae81ff">6</span>.11.3    |    <span style="color:#ae81ff">0</span>.12.0    |    <span style="color:#ae81ff">0</span>.9.11    |
+|    <span style="color:#ae81ff">8</span>.7.0     |    <span style="color:#ae81ff">6</span>.11.2    |   <span style="color:#ae81ff">0</span>.10.48    |    <span style="color:#ae81ff">0</span>.9.10    |
+
+This is a partial list. For a complete list, visit https://nodejs.org/download/release</code></pre></div></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://loveky.github.io/tags/%E5%B7%A5%E5%85%B7"><span class="tag">工具</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        
+      </p>
+    </footer>
+    <div style="text-align:center">
+      <p>如果你觉得这篇文章对你有所帮助，可以微信扫码请作者喝杯咖啡哦~</p>
+      <img width="300" height="300" src="https://loveky.github.io/img/wechat-reward-new.jpg"/>
+  </div>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "loveky" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 loveky的流水账</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+
+
+<script src="https://loveky.github.io/js/bundle.js"></script>
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?301a286a5bea7d926e284c27f79bd221";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+  </body>
+</html>
