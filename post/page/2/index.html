@@ -245,6 +245,31 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2017/06/06/chrome-devtools-command-menu/" class="post-link">Chrome 开发者工具中的命令菜单</a></h3>
+    <p class="post-meta">@loveky · Jun 6, 2017</p>
+  </header>
+  
+  <p class="post-summary">大家对命令菜单(Command Menu)应该都不陌生。目前主流的编辑器中都内置了对该功能的支持。在 Sublime Text 和 Visual Studio Code 中你都可以通过快捷键 Ctrl &#43; Shift &#43; P 呼出命令菜单（在 Mac 上是 Cmd &#43; Shift &#43; P）。
+在呼出的菜单中输入关键字选择自己需要的命令（支持模糊搜索哦），按回车即可执行命令。极大的提高了效率。
+举个例子，以下的操作是为文件设置 JavaScript 的语法高亮：
+很方便吧。
+如果你已经习惯了这种操作方式，那么今天要告诉你一个好消息。Chrome 开发者工具现在也支持命令菜单了！激活的方式还是 Ctrl &#43; Shift &#43; P。
+激活后，长这个样子：
+熟悉的配方，熟悉的味道。有木有！
+滚动菜单，查看支持的命令，基本涵盖了我们日常开发用到的所有功能。
+举几个实用的小例子吧(这些例子不同命令菜单一样可以实现，但命令菜单可以极大的提高效率)。
+1. 搜索所有资源文件 激活命令菜单，输入 search，选择 Search all files，回车。在弹出的输入框中输入关键字就可以在所有页面引入的资源文件中搜索该关键字了。还支持正则表达式哦。
+2. 禁用/开启页面 JavaScript 激活命令菜单，输入 js，选择 Disable JavaScript。再次选择，即可开启。
+3. 隐藏 HTML 中的注释 激活命令菜单，输入 comment，选择 Hide HTML Comments。
+更多快捷功能，自己去发现吧！</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2017/06/06/chrome-devtools-command-menu/">阅读全文 →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2017/06/05/translate-node-stream-everything-you-need-to-know/" class="post-link">[译] Node.js 流: 你需要知道的一切</a></h3>
     <p class="post-meta">@loveky · Jun 5, 2017</p>
   </header>
@@ -423,27 +448,6 @@ http://pan.baidu.com/s/1gfl5FzX</p>
  园博园停车：20（5元/小时） 园博园门票：36（18元/人） 华联停车：6元 呷哺呷哺：74元  </p>
   <footer class="post-footer">
     <a class="read-more" href="https://loveky.github.io/2017/03/26/trip-gardenexpo-park/">阅读全文 →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://loveky.github.io/2017/03/21/config-fiddler-with-ios-https/" class="post-link">配置Fiddler拦截iOS/Andorid的https请求</a></h3>
-    <p class="post-meta">@loveky · Mar 21, 2017</p>
-  </header>
-  
-  <p class="post-summary">Fiddler可以配置用来拦截https请求。但默认配置下仅支持拦截PC上的请求。在移动端上的https请求会因为证书问题而失败。如下图所示：
-要解决这个问题，只需要在iOS/Android系统上安装一个安全证书即可。具体步骤如下：
- 访问http://www.telerik.com/fiddler/add-ons，下载并安装CertMaker for iOS and Android插件。
- 安装完成后重启Fiddler。
- 重启后浏览器访问http://ipv4.fiddler:8888，如果看到如下内容，表示安装成功。
- 在手机浏览器（iOS建议Safari）里打开前边提到的链接，点击页面中最后一个链接FiddlerRoot certificate。下载完后会提示如下页面：
-点击安装，弹出安全认证，要求输入密码。输入后出现以下页面：
-继续点击安装。安装成功提示如下：
-  到这里，所有的配置工作就全部做完了。现在再次访问https页面，已经可以正常打开了。</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2017/03/21/config-fiddler-with-ios-https/">阅读全文 →</a>
   </footer>
 </article>
 
