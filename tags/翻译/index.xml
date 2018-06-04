@@ -88,10 +88,10 @@ RedMonk 的排名将 Stack Overflow 的数据与 GitHub 上的 pull request 结�
 async/await快速入门 为了让还没听说过这个特性的小伙伴们有一个大致了解，以下是一些关于该特性的简要介绍：
  async/await是一种编写异步代码的新方法。在这之前编写异步代码使用的是回调函数和promise。 async/await实际是建立在promise之上的。因此你不能把它和回调函数搭配使用。 async/await和promise一样，是非阻塞的。 async/await可以使异步代码在形式上更接近于同步代码。这就是它最大的价值。  语法 假设有一个getJSON方法，它返回一个promise，该promise会被resolve为一个JSON对象。我们想要调用该方法，输出得到的JSON对象，最后返回&amp;quot;done&amp;quot;。
 以下是使用promise的实现方式：
-const makeRequest = () =&amp;gt; getJSON() .then(data =&amp;gt; { console.log(data) return &amp;#34;done&amp;#34; }) makeRequest() 使用async/await则是这样的：
-const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &amp;#34;done&amp;#34; } makeRequest() 使用async/await时有以下几个区别：
+const makeRequest = () =&amp;gt; getJSON() .then(data =&amp;gt; { console.log(data) return &amp;#34;done&amp;#34; }) makeRequest()  使用async/await则是这样的：
+const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &amp;#34;done&amp;#34; } makeRequest()  使用async/await时有以下几个区别：
  在定义函数时我们使用了async关键字。await关键字只能在使用async定义的函数的内部使用。所有async函数都会返回一个promise，该promise最终resolve的值就是你在函数中return的内容。 由于第一点中的原因，你不能在顶级作用域中await一个函数。因为顶级作用域不是一个async方法。
-// this will not work in top level // await makeRequest()  // this will work makeRequest().then((result) =&amp;gt; { // do something }) await getJSON()意味着直到getJSON()返回的promise在resolve之后，console.</description>
+// this will not work in top level // await makeRequest()  // this will work makeRequest().then((result) =&amp;gt; { // do something })  await getJSON()意味着直到getJSON()返回的promise在resolve之后，console.</description>
     </item>
     
   </channel>

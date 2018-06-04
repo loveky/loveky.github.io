@@ -25,7 +25,7 @@
 那么到底是 JavaScript 中的哪些代码占中了这么长 CPU 时间呢？我们在底部的选项卡中选中 Bottom-Up ，按 Total Time 降序排列。得到如下结果：
 可以看出，72.% 的 CPU 时间用在了一条正则表达式上。你肯定想到了，这就是小伙伴用来检查用户输入是否合法的正则表达式。
 完整的正则表达式是这样的：
-/^\s*((\d&#43;(\,|，)\d&#43;)*|(\d&#43;))\s*$/ 接着去 regex101 上测试一下，测试数据如下，由 10 个商品 ID 组成的字符串：
+/^\s*((\d&#43;(\,|，)\d&#43;)*|(\d&#43;))\s*$/  接着去 regex101 上测试一下，测试数据如下，由 10 个商品 ID 组成的字符串：
 123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789  执行结果如下：" />
 
   
@@ -42,7 +42,7 @@
 那么到底是 JavaScript 中的哪些代码占中了这么长 CPU 时间呢？我们在底部的选项卡中选中 Bottom-Up ，按 Total Time 降序排列。得到如下结果：
 可以看出，72.% 的 CPU 时间用在了一条正则表达式上。你肯定想到了，这就是小伙伴用来检查用户输入是否合法的正则表达式。
 完整的正则表达式是这样的：
-/^\s*((\d&#43;(\,|，)\d&#43;)*|(\d&#43;))\s*$/ 接着去 regex101 上测试一下，测试数据如下，由 10 个商品 ID 组成的字符串：
+/^\s*((\d&#43;(\,|，)\d&#43;)*|(\d&#43;))\s*$/  接着去 regex101 上测试一下，测试数据如下，由 10 个商品 ID 组成的字符串：
 123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789  执行结果如下：" />
     <meta name="twitter:image" content="https://loveky.github.io/img/avatar.jpg" />
   
@@ -59,7 +59,7 @@
 那么到底是 JavaScript 中的哪些代码占中了这么长 CPU 时间呢？我们在底部的选项卡中选中 Bottom-Up ，按 Total Time 降序排列。得到如下结果：
 可以看出，72.% 的 CPU 时间用在了一条正则表达式上。你肯定想到了，这就是小伙伴用来检查用户输入是否合法的正则表达式。
 完整的正则表达式是这样的：
-/^\s*((\d&#43;(\,|，)\d&#43;)*|(\d&#43;))\s*$/ 接着去 regex101 上测试一下，测试数据如下，由 10 个商品 ID 组成的字符串：
+/^\s*((\d&#43;(\,|，)\d&#43;)*|(\d&#43;))\s*$/  接着去 regex101 上测试一下，测试数据如下，由 10 个商品 ID 组成的字符串：
 123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789  执行结果如下：" />
   <meta property="og:url" content="https://loveky.github.io/2017/05/31/regular-expressions-catastrophic-backtracking/" />
   <meta property="og:image" content="https://loveky.github.io/img/avatar.jpg" />
@@ -67,7 +67,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.36.1" />
+<meta name="generator" content="Hugo 0.41" />
 
 
 <link rel="canonical" href="https://loveky.github.io/2017/05/31/regular-expressions-catastrophic-backtracking/" />
@@ -310,7 +310,8 @@
 <p>可以看出，72.% 的 CPU 时间用在了一条正则表达式上。你肯定想到了，这就是小伙伴用来检查用户输入是否合法的正则表达式。</p>
 
 <p>完整的正则表达式是这样的：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#e6db74">/^\s*((\d+(\,|，)\d+)*|(\d+))\s*$/</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#e6db74">/^\s*((\d+(\,|，)\d+)*|(\d+))\s*$/</span>
+</code></pre></div>
 <p>接着去 <a href="https://regex101.com/">regex101</a> 上测试一下，测试数据如下，由 10 个商品 ID 组成的字符串：</p>
 
 <pre><code>123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789
@@ -331,7 +332,8 @@
 <p>经过多次测试发现：每次正常匹配执行的时间都很短。每次不匹配时，执行的时间都很长，且随着字符串长度的增加，时间成倍的增长。</p>
 
 <p>接下来让我们认真的观察一下这个正则表达式：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#e6db74">/^\s*((\d+(\,|，)\d+)*|(\d+))\s*$/</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#e6db74">/^\s*((\d+(\,|，)\d+)*|(\d+))\s*$/</span>
+</code></pre></div>
 <p>去掉匹配首尾的空白字符，其核心结构只有两部分 <code>((\d+(\,|，)\d+)*</code> 与 <code>(\d+)</code>。前者用于匹配多个商品 ID 的情况，后者匹配只有一个商品 ID 的情况。</p>
 
 <p>前者的基本模式是这样的 <code>商品ID,商品ID</code>，然后把该模式重复多次。仔细观察后很快我就发现了第一个问题，假设用户输入的内容是 <code>商品ID,商品ID,商品ID</code> 。你会发现它符合输入规则，但是不与该正则表达式匹配。因为第一次匹配后剩余的字符串部分 <code>,商品ID</code> 无法与基本模式形成匹配。</p>
@@ -354,7 +356,8 @@
 </ol>
 
 <p>在了解需求后，我给小伙伴提供了一种正则写法：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#f92672">^</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#a6e22e">s</span><span style="color:#f92672">*</span>(<span style="color:#960050;background-color:#1e0010">\</span><span style="color:#a6e22e">d</span><span style="color:#f92672">+</span>(,<span style="color:#f92672">|</span><span style="color:#960050;background-color:#1e0010">，</span>))<span style="color:#f92672">*</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#a6e22e">d</span><span style="color:#f92672">+</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#a6e22e">s</span><span style="color:#f92672">*</span><span style="color:#a6e22e">$</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#f92672">^</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#a6e22e">s</span><span style="color:#f92672">*</span>(<span style="color:#960050;background-color:#1e0010">\</span><span style="color:#a6e22e">d</span><span style="color:#f92672">+</span>(,<span style="color:#f92672">|</span><span style="color:#960050;background-color:#1e0010">，</span>))<span style="color:#f92672">*</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#a6e22e">d</span><span style="color:#f92672">+</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#a6e22e">s</span><span style="color:#f92672">*</span><span style="color:#a6e22e">$</span>
+</code></pre></div>
 <p>经过测试，这种写法在保证逻辑无误的前提下还保证了执行效率(在有数百个商品 ID 的情况下依然可以在几毫秒内执行完毕)。</p>
 
 <p>讲到这里，你可能会有两个问题：</p>
@@ -501,7 +504,8 @@ d. 累计回溯 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 = 36 次。</p></li>
 <p>可见问题在于，随着商品 ID  个数的增长，回溯次数会成指数级增长。最终导致 JavaScript 主进程忙于进行计算，使页面失去响应。</p>
 
 <p>但是我当时给出的解决方案：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#f92672">^</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#a6e22e">s</span><span style="color:#f92672">*</span>(<span style="color:#960050;background-color:#1e0010">\</span><span style="color:#a6e22e">d</span><span style="color:#f92672">+</span>(,<span style="color:#f92672">|</span><span style="color:#960050;background-color:#1e0010">，</span>))<span style="color:#f92672">*</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#a6e22e">d</span><span style="color:#f92672">+</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#a6e22e">s</span><span style="color:#f92672">*</span><span style="color:#a6e22e">$</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#f92672">^</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#a6e22e">s</span><span style="color:#f92672">*</span>(<span style="color:#960050;background-color:#1e0010">\</span><span style="color:#a6e22e">d</span><span style="color:#f92672">+</span>(,<span style="color:#f92672">|</span><span style="color:#960050;background-color:#1e0010">，</span>))<span style="color:#f92672">*</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#a6e22e">d</span><span style="color:#f92672">+</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#a6e22e">s</span><span style="color:#f92672">*</span><span style="color:#a6e22e">$</span>
+</code></pre></div>
 <p>也使用了 <code>*</code> 符号，按说也会进行悲观回溯。为何没有性能问题呢？</p>
 
 <p>答案在于，<strong>对于同一字符串是否有多种可行的匹配模式</strong>。也就是说对于某个固定的字符串，你的正则表达式是否有“唯一解”。</p>
@@ -567,7 +571,7 @@ d. 累计回溯 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 = 36 次。</p></li>
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>351</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>369</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">

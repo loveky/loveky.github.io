@@ -21,7 +21,7 @@
 所有的这些魔法只需要我们在input元素上指定一个ng-model属性。可见ng-model这个directive是双向绑定这一特性不可缺少一点。本文就继续从源代码入手看看ngModel的实现方式以及其它directive是如何与ngModel交互的。
 ngModel被定义在input.js。从名字上可看出，该文件还定义input这个directive，从这点也可以看出ngModel与input之间的紧密关系。
 注: 文中所有涉及到的AngularJS源码均来自angular-1.2.8版本。
-var ngModelDirective = function() { return { require: [&amp;#39;ngModel&amp;#39;, &amp;#39;^?form&amp;#39;], controller: NgModelController, link: function(scope, element, attr, ctrls) { // notify others, especially parent forms  var modelCtrl = ctrls[0], formCtrl = ctrls[1] || nullFormCtrl; formCtrl.$addControl(modelCtrl); scope.$on(&amp;#39;$destroy&amp;#39;, function() { formCtrl.$removeControl(modelCtrl); }); } }; }; 可以看出ngModel依赖于ngModelController以及可选的formController。ngModel在link方法中只做了2件事:
+var ngModelDirective = function() { return { require: [&amp;#39;ngModel&amp;#39;, &amp;#39;^?form&amp;#39;], controller: NgModelController, link: function(scope, element, attr, ctrls) { // notify others, especially parent forms  var modelCtrl = ctrls[0], formCtrl = ctrls[1] || nullFormCtrl; formCtrl.$addControl(modelCtrl); scope.$on(&amp;#39;$destroy&amp;#39;, function() { formCtrl.$removeControl(modelCtrl); }); } }; };  可以看出ngModel依赖于ngModelController以及可选的formController。ngModel在link方法中只做了2件事:
  如果声明了ngModel的元素出现在一个form中，那么就向上层form注册自身 注册了$destroy事件的监听器，该事件触发时告知上层form移除对自身的引用  link方法如此简单以至于我们还没看到关于数据绑定的任何信息。看来问题的答案都藏在ngModelController中了。接下来看看ngModelController中都发生了什么。
 var NgModelController = [&amp;#39;$scope&amp;#39;, &amp;#39;$exceptionHandler&amp;#39;, &amp;#39;$attrs&amp;#39;, &amp;#39;$element&amp;#39;, &amp;#39;$parse&amp;#39;, function($scope, $exceptionHandler, $attr, $element, $parse) { this." />
 
@@ -35,7 +35,7 @@ var NgModelController = [&amp;#39;$scope&amp;#39;, &amp;#39;$exceptionHandler&am
 所有的这些魔法只需要我们在input元素上指定一个ng-model属性。可见ng-model这个directive是双向绑定这一特性不可缺少一点。本文就继续从源代码入手看看ngModel的实现方式以及其它directive是如何与ngModel交互的。
 ngModel被定义在input.js。从名字上可看出，该文件还定义input这个directive，从这点也可以看出ngModel与input之间的紧密关系。
 注: 文中所有涉及到的AngularJS源码均来自angular-1.2.8版本。
-var ngModelDirective = function() { return { require: [&amp;#39;ngModel&amp;#39;, &amp;#39;^?form&amp;#39;], controller: NgModelController, link: function(scope, element, attr, ctrls) { // notify others, especially parent forms  var modelCtrl = ctrls[0], formCtrl = ctrls[1] || nullFormCtrl; formCtrl.$addControl(modelCtrl); scope.$on(&amp;#39;$destroy&amp;#39;, function() { formCtrl.$removeControl(modelCtrl); }); } }; }; 可以看出ngModel依赖于ngModelController以及可选的formController。ngModel在link方法中只做了2件事:
+var ngModelDirective = function() { return { require: [&amp;#39;ngModel&amp;#39;, &amp;#39;^?form&amp;#39;], controller: NgModelController, link: function(scope, element, attr, ctrls) { // notify others, especially parent forms  var modelCtrl = ctrls[0], formCtrl = ctrls[1] || nullFormCtrl; formCtrl.$addControl(modelCtrl); scope.$on(&amp;#39;$destroy&amp;#39;, function() { formCtrl.$removeControl(modelCtrl); }); } }; };  可以看出ngModel依赖于ngModelController以及可选的formController。ngModel在link方法中只做了2件事:
  如果声明了ngModel的元素出现在一个form中，那么就向上层form注册自身 注册了$destroy事件的监听器，该事件触发时告知上层form移除对自身的引用  link方法如此简单以至于我们还没看到关于数据绑定的任何信息。看来问题的答案都藏在ngModelController中了。接下来看看ngModelController中都发生了什么。
 var NgModelController = [&amp;#39;$scope&amp;#39;, &amp;#39;$exceptionHandler&amp;#39;, &amp;#39;$attrs&amp;#39;, &amp;#39;$element&amp;#39;, &amp;#39;$parse&amp;#39;, function($scope, $exceptionHandler, $attr, $element, $parse) { this." />
     <meta name="twitter:image" content="https://loveky.github.io/img/avatar.jpg" />
@@ -49,7 +49,7 @@ var NgModelController = [&amp;#39;$scope&amp;#39;, &amp;#39;$exceptionHandler&am
 所有的这些魔法只需要我们在input元素上指定一个ng-model属性。可见ng-model这个directive是双向绑定这一特性不可缺少一点。本文就继续从源代码入手看看ngModel的实现方式以及其它directive是如何与ngModel交互的。
 ngModel被定义在input.js。从名字上可看出，该文件还定义input这个directive，从这点也可以看出ngModel与input之间的紧密关系。
 注: 文中所有涉及到的AngularJS源码均来自angular-1.2.8版本。
-var ngModelDirective = function() { return { require: [&amp;#39;ngModel&amp;#39;, &amp;#39;^?form&amp;#39;], controller: NgModelController, link: function(scope, element, attr, ctrls) { // notify others, especially parent forms  var modelCtrl = ctrls[0], formCtrl = ctrls[1] || nullFormCtrl; formCtrl.$addControl(modelCtrl); scope.$on(&amp;#39;$destroy&amp;#39;, function() { formCtrl.$removeControl(modelCtrl); }); } }; }; 可以看出ngModel依赖于ngModelController以及可选的formController。ngModel在link方法中只做了2件事:
+var ngModelDirective = function() { return { require: [&amp;#39;ngModel&amp;#39;, &amp;#39;^?form&amp;#39;], controller: NgModelController, link: function(scope, element, attr, ctrls) { // notify others, especially parent forms  var modelCtrl = ctrls[0], formCtrl = ctrls[1] || nullFormCtrl; formCtrl.$addControl(modelCtrl); scope.$on(&amp;#39;$destroy&amp;#39;, function() { formCtrl.$removeControl(modelCtrl); }); } }; };  可以看出ngModel依赖于ngModelController以及可选的formController。ngModel在link方法中只做了2件事:
  如果声明了ngModel的元素出现在一个form中，那么就向上层form注册自身 注册了$destroy事件的监听器，该事件触发时告知上层form移除对自身的引用  link方法如此简单以至于我们还没看到关于数据绑定的任何信息。看来问题的答案都藏在ngModelController中了。接下来看看ngModelController中都发生了什么。
 var NgModelController = [&amp;#39;$scope&amp;#39;, &amp;#39;$exceptionHandler&amp;#39;, &amp;#39;$attrs&amp;#39;, &amp;#39;$element&amp;#39;, &amp;#39;$parse&amp;#39;, function($scope, $exceptionHandler, $attr, $element, $parse) { this." />
   <meta property="og:url" content="https://loveky.github.io/2014/04/11/angularjs-ng-model/" />
@@ -58,7 +58,7 @@ var NgModelController = [&amp;#39;$scope&amp;#39;, &amp;#39;$exceptionHandler&am
 
 
 
-<meta name="generator" content="Hugo 0.36.1" />
+<meta name="generator" content="Hugo 0.41" />
 
 
 <link rel="canonical" href="https://loveky.github.io/2014/04/11/angularjs-ng-model/" />
@@ -290,7 +290,8 @@ var NgModelController = [&amp;#39;$scope&amp;#39;, &amp;#39;$exceptionHandler&am
       });
     }
   };
-};</code></pre></div>
+};
+</code></pre></div>
 <p>可以看出ngModel依赖于ngModelController以及可选的formController。ngModel在link方法中只做了2件事:</p>
 
 <ul>
@@ -310,7 +311,8 @@ var NgModelController = [&amp;#39;$scope&amp;#39;, &amp;#39;$exceptionHandler&am
 </span><span style="color:#75715e"></span>  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$dirty</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>; <span style="color:#75715e">// 数据是否被用户修改过 
 </span><span style="color:#75715e"></span>  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$valid</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>; <span style="color:#75715e">// 数据是否合法
 </span><span style="color:#75715e"></span>  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$invalid</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
-  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$name</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">$attr</span>.<span style="color:#a6e22e">name</span>;</code></pre></div>
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$name</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">$attr</span>.<span style="color:#a6e22e">name</span>;
+</code></pre></div>
 <p>这里可以注意到所有的属性都定义在了<code>this</code>上。这样当其他directive通过require ngModel来拿到了ngModelController时就可以通过这些变量来访问ngModel的内部状态了。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">ngModelGet</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">$parse</span>(<span style="color:#a6e22e">$attr</span>.<span style="color:#a6e22e">ngModel</span>),
   <span style="color:#a6e22e">ngModelSet</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ngModelGet</span>.<span style="color:#a6e22e">assign</span>;
@@ -318,17 +320,21 @@ var NgModelController = [&amp;#39;$scope&amp;#39;, &amp;#39;$exceptionHandler&am
 <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">ngModelSet</span>) {
 <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">minErr</span>(<span style="color:#e6db74">&#39;ngModel&#39;</span>)(<span style="color:#e6db74">&#39;nonassign&#39;</span>, <span style="color:#e6db74">&#34;Expression &#39;{0}&#39; is non-assignable. Element: {1}&#34;</span>,
     <span style="color:#a6e22e">$attr</span>.<span style="color:#a6e22e">ngModel</span>, <span style="color:#a6e22e">startingTag</span>(<span style="color:#a6e22e">$element</span>));
-}</code></pre></div>
+}
+</code></pre></div>
 <p>通过<code>$parse</code>服务根据指定的model名字生成getter和setter方法。这里检查用户指定的model名字是否是一个可被赋值的表达式。如果不可被赋值，则会抛出错误。关于什么样的表达式会抛出<code>non-assignable</code>错误，<a href="http://docs.angularjs.org/error/$compile/nonassign">这里</a>有详细的说明。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$render</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">noop</span>;</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$render</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">noop</span>;
+</code></pre></div>
 <p><code>$render</code>属性是一个方法。该方法的作用是当$scope中的model被修改时去更新页面显示。由于ngModel并不知道其调用者需要怎样对数据进行格式化，已经该更新哪个页面元素，所以该方法会被留给ngModel的调用者自行定义。因此这里只是将其设置为一个空函数。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$isEmpty</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">value</span>) {
   <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">isUndefined</span>(<span style="color:#a6e22e">value</span>) <span style="color:#f92672">||</span> <span style="color:#a6e22e">value</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;&#39;</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">value</span> <span style="color:#f92672">===</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">value</span> <span style="color:#f92672">!==</span> <span style="color:#a6e22e">value</span>;
-};</code></pre></div>
+};
+</code></pre></div>
 <p>$isEmpty方法用来判断输入值是否为空，默认的$isEmpty会在input为<code>undefined</code>, <code>''</code>, <code>null</code> 或 <code>NaN</code>之一时返回true。ngModel的调用者可以通过覆写该方法来实现定制的empty判断。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">parentForm</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">$element</span>.<span style="color:#a6e22e">inheritedData</span>(<span style="color:#e6db74">&#39;$formController&#39;</span>) <span style="color:#f92672">||</span> <span style="color:#a6e22e">nullFormCtrl</span>,
     <span style="color:#a6e22e">invalidCount</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#75715e">// used to easily determine if we are valid
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">$error</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$error</span> <span style="color:#f92672">=</span> {}; <span style="color:#960050;background-color:#1e0010">// keep invalid keys here</span></code></pre></div>
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">$error</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$error</span> <span style="color:#f92672">=</span> {}; <span style="color:#75715e">// keep invalid keys here
+</span><span style="color:#75715e"></span></code></pre></div>
 <p>获取对上层form的引用，用于在model值合法性改变时通知上层form。<br />
 invalidCount是对当前不合法属性的计数。一个model可能有多个条件来判断其值是否合法。每一个不合法的条件都会让该计数器加一。
 $error哈希则保存了具体不合法的属性的名字。</p>
@@ -342,7 +348,8 @@ $error哈希则保存了具体不合法的属性的名字。</p>
   <span style="color:#a6e22e">$element</span>.
     <span style="color:#a6e22e">removeClass</span>((<span style="color:#a6e22e">isValid</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">INVALID_CLASS</span> <span style="color:#f92672">:</span> <span style="color:#a6e22e">VALID_CLASS</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">validationErrorKey</span>).
     <span style="color:#a6e22e">addClass</span>((<span style="color:#a6e22e">isValid</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">VALID_CLASS</span> <span style="color:#f92672">:</span> <span style="color:#a6e22e">INVALID_CLASS</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">validationErrorKey</span>);
-}</code></pre></div>
+}
+</code></pre></div>
 <p>设置element的初始CSS状态。默认情况下，当一个声明了ngModel的element在页面初始化后会被添加上<code>ng-valid</code>和<code>ng-pristine</code>两个类。ng-valid在model值合法时出现，ng-pristine类则表示页面中的值尚未被用户修改，一旦用户修改页面值，ng-pristin类就会从元素上移除。</p>
 
 <p>toggleValidCss方法用来根据model值是否合法来设置相应CSS类。</p>
@@ -370,7 +377,8 @@ $error哈希则保存了具体不合法的属性的名字。</p>
   <span style="color:#a6e22e">toggleValidCss</span>(<span style="color:#a6e22e">isValid</span>, <span style="color:#a6e22e">validationErrorKey</span>);
 
   <span style="color:#a6e22e">parentForm</span>.<span style="color:#a6e22e">$setValidity</span>(<span style="color:#a6e22e">validationErrorKey</span>, <span style="color:#a6e22e">isValid</span>, <span style="color:#66d9ef">this</span>);
-};</code></pre></div>
+};
+</code></pre></div>
 <p>$setValidity方法用来设置model的值是否合法。它会做以下3件事:</p>
 
 <ul>
@@ -382,7 +390,8 @@ $error哈希则保存了具体不合法的属性的名字。</p>
   <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$dirty</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
   <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$pristine</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
   <span style="color:#a6e22e">$element</span>.<span style="color:#a6e22e">removeClass</span>(<span style="color:#a6e22e">DIRTY_CLASS</span>).<span style="color:#a6e22e">addClass</span>(<span style="color:#a6e22e">PRISTINE_CLASS</span>);
-};</code></pre></div>
+};
+</code></pre></div>
 <p>$setPristine方法用来移除dirty状态，设置pristine状态。(<em>暂时没发现在什么情形下会这么做</em>)</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$setViewValue</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">value</span>) {
   <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$viewValue</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">value</span>;
@@ -410,7 +419,8 @@ $error哈希则保存了具体不合法的属性的名字。</p>
       }
     });
   }
-};</code></pre></div>
+};
+</code></pre></div>
 <p>该方法用来在页面值被修改时用来更新$scope中的model值，通常被ngModel调用者使用。该方法会:
 - 移除元素的pristine状态，添加dirty状态
 - 逐一调用$parsers数字中的方法处理新值。
@@ -438,7 +448,8 @@ $error哈希则保存了具体不合法的属性的名字。</p>
   }
 
   <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">value</span>;
-});</code></pre></div>
+});
+</code></pre></div>
 <p>ngModelController定义的最后是一个$scope.$watch调用，它会监视$scope中model值的变化，一旦改变便会调用$formatters中的处理器处理最新值。如果处理过的值与页面值不同，则调用$render方法将这个model的更新同步到页面上去。注意这里的$render是由ngModel的调用者定义的。</p>
 
 <p>最后还是画一幅图总结一下:
@@ -457,7 +468,7 @@ $error哈希则保存了具体不合法的属性的名字。</p>
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>1497</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>1515</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">

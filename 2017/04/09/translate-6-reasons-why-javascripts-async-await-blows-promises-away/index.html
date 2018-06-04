@@ -21,10 +21,10 @@
 async/await快速入门 为了让还没听说过这个特性的小伙伴们有一个大致了解，以下是一些关于该特性的简要介绍：
  async/await是一种编写异步代码的新方法。在这之前编写异步代码使用的是回调函数和promise。 async/await实际是建立在promise之上的。因此你不能把它和回调函数搭配使用。 async/await和promise一样，是非阻塞的。 async/await可以使异步代码在形式上更接近于同步代码。这就是它最大的价值。  语法 假设有一个getJSON方法，它返回一个promise，该promise会被resolve为一个JSON对象。我们想要调用该方法，输出得到的JSON对象，最后返回&amp;quot;done&amp;quot;。
 以下是使用promise的实现方式：
-const makeRequest = () =&amp;gt; getJSON() .then(data =&amp;gt; { console.log(data) return &amp;#34;done&amp;#34; }) makeRequest() 使用async/await则是这样的：
-const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &amp;#34;done&amp;#34; } makeRequest() 使用async/await时有以下几个区别：
+const makeRequest = () =&amp;gt; getJSON() .then(data =&amp;gt; { console.log(data) return &amp;#34;done&amp;#34; }) makeRequest()  使用async/await则是这样的：
+const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &amp;#34;done&amp;#34; } makeRequest()  使用async/await时有以下几个区别：
  在定义函数时我们使用了async关键字。await关键字只能在使用async定义的函数的内部使用。所有async函数都会返回一个promise，该promise最终resolve的值就是你在函数中return的内容。 由于第一点中的原因，你不能在顶级作用域中await一个函数。因为顶级作用域不是一个async方法。
-// this will not work in top level // await makeRequest()  // this will work makeRequest().then((result) =&amp;gt; { // do something }) await getJSON()意味着直到getJSON()返回的promise在resolve之后，console." />
+// this will not work in top level // await makeRequest()  // this will work makeRequest().then((result) =&amp;gt; { // do something })  await getJSON()意味着直到getJSON()返回的promise在resolve之后，console." />
 
   
   
@@ -36,10 +36,10 @@ const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &am
 async/await快速入门 为了让还没听说过这个特性的小伙伴们有一个大致了解，以下是一些关于该特性的简要介绍：
  async/await是一种编写异步代码的新方法。在这之前编写异步代码使用的是回调函数和promise。 async/await实际是建立在promise之上的。因此你不能把它和回调函数搭配使用。 async/await和promise一样，是非阻塞的。 async/await可以使异步代码在形式上更接近于同步代码。这就是它最大的价值。  语法 假设有一个getJSON方法，它返回一个promise，该promise会被resolve为一个JSON对象。我们想要调用该方法，输出得到的JSON对象，最后返回&amp;quot;done&amp;quot;。
 以下是使用promise的实现方式：
-const makeRequest = () =&amp;gt; getJSON() .then(data =&amp;gt; { console.log(data) return &amp;#34;done&amp;#34; }) makeRequest() 使用async/await则是这样的：
-const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &amp;#34;done&amp;#34; } makeRequest() 使用async/await时有以下几个区别：
+const makeRequest = () =&amp;gt; getJSON() .then(data =&amp;gt; { console.log(data) return &amp;#34;done&amp;#34; }) makeRequest()  使用async/await则是这样的：
+const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &amp;#34;done&amp;#34; } makeRequest()  使用async/await时有以下几个区别：
  在定义函数时我们使用了async关键字。await关键字只能在使用async定义的函数的内部使用。所有async函数都会返回一个promise，该promise最终resolve的值就是你在函数中return的内容。 由于第一点中的原因，你不能在顶级作用域中await一个函数。因为顶级作用域不是一个async方法。
-// this will not work in top level // await makeRequest()  // this will work makeRequest().then((result) =&amp;gt; { // do something }) await getJSON()意味着直到getJSON()返回的promise在resolve之后，console." />
+// this will not work in top level // await makeRequest()  // this will work makeRequest().then((result) =&amp;gt; { // do something })  await getJSON()意味着直到getJSON()返回的promise在resolve之后，console." />
     <meta name="twitter:image" content="https://loveky.github.io/img/avatar.jpg" />
   
 
@@ -51,17 +51,17 @@ const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &am
 async/await快速入门 为了让还没听说过这个特性的小伙伴们有一个大致了解，以下是一些关于该特性的简要介绍：
  async/await是一种编写异步代码的新方法。在这之前编写异步代码使用的是回调函数和promise。 async/await实际是建立在promise之上的。因此你不能把它和回调函数搭配使用。 async/await和promise一样，是非阻塞的。 async/await可以使异步代码在形式上更接近于同步代码。这就是它最大的价值。  语法 假设有一个getJSON方法，它返回一个promise，该promise会被resolve为一个JSON对象。我们想要调用该方法，输出得到的JSON对象，最后返回&amp;quot;done&amp;quot;。
 以下是使用promise的实现方式：
-const makeRequest = () =&amp;gt; getJSON() .then(data =&amp;gt; { console.log(data) return &amp;#34;done&amp;#34; }) makeRequest() 使用async/await则是这样的：
-const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &amp;#34;done&amp;#34; } makeRequest() 使用async/await时有以下几个区别：
+const makeRequest = () =&amp;gt; getJSON() .then(data =&amp;gt; { console.log(data) return &amp;#34;done&amp;#34; }) makeRequest()  使用async/await则是这样的：
+const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &amp;#34;done&amp;#34; } makeRequest()  使用async/await时有以下几个区别：
  在定义函数时我们使用了async关键字。await关键字只能在使用async定义的函数的内部使用。所有async函数都会返回一个promise，该promise最终resolve的值就是你在函数中return的内容。 由于第一点中的原因，你不能在顶级作用域中await一个函数。因为顶级作用域不是一个async方法。
-// this will not work in top level // await makeRequest()  // this will work makeRequest().then((result) =&amp;gt; { // do something }) await getJSON()意味着直到getJSON()返回的promise在resolve之后，console." />
+// this will not work in top level // await makeRequest()  // this will work makeRequest().then((result) =&amp;gt; { // do something })  await getJSON()意味着直到getJSON()返回的promise在resolve之后，console." />
   <meta property="og:url" content="https://loveky.github.io/2017/04/09/translate-6-reasons-why-javascripts-async-await-blows-promises-away/" />
   <meta property="og:image" content="https://loveky.github.io/img/avatar.jpg" />
 
 
 
 
-<meta name="generator" content="Hugo 0.36.1" />
+<meta name="generator" content="Hugo 0.41" />
 
 
 <link rel="canonical" href="https://loveky.github.io/2017/04/09/translate-6-reasons-why-javascripts-async-await-blows-promises-away/" />
@@ -295,14 +295,16 @@ const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &am
       <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;done&#34;</span>
     })
 
-<span style="color:#a6e22e">makeRequest</span>()</code></pre></div>
+<span style="color:#a6e22e">makeRequest</span>()
+</code></pre></div>
 <p>使用async/await则是这样的：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">makeRequest</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> () =&gt; {
   <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#66d9ef">await</span> <span style="color:#a6e22e">getJSON</span>())
   <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;done&#34;</span>
 }
 
-<span style="color:#a6e22e">makeRequest</span>()</code></pre></div>
+<span style="color:#a6e22e">makeRequest</span>()
+</code></pre></div>
 <p>使用async/await时有以下几个区别：</p>
 
 <ol>
@@ -315,7 +317,8 @@ const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &am
 <span style="color:#75715e">// this will work
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">makeRequest</span>().<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">result</span>) =&gt; {
   <span style="color:#75715e">// do something
-</span><span style="color:#75715e"></span>})</code></pre></div></li>
+</span><span style="color:#75715e"></span>})
+</code></pre></div></li>
 
 <li><p><code>await getJSON()</code>意味着直到<code>getJSON()</code>返回的promise在resolve之后，<code>console.log</code>才会执行并输出resolove的值。</p></li>
 </ol>
@@ -344,7 +347,8 @@ const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &am
 </span><span style="color:#75715e"></span>  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">err</span>) {
     <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">err</span>)
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>现在看看使用了async/await的情况，<code>catch</code>代码块现在可以捕获<code>JSON.parse</code>抛出的异常了：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">makeRequest</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> () =&gt; {
   <span style="color:#66d9ef">try</span> {
@@ -354,7 +358,8 @@ const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &am
   } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">err</span>) {
     <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">err</span>)
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <h4 id="3-条件分支">3. 条件分支</h4>
 
 <p>假设有如下逻辑的代码。请求数据，然后根据返回数据中的某些内容决定是直接返回这些数据还是继续请求更多数据：</p>
@@ -372,7 +377,8 @@ const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &am
         <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">data</span>
       }
     })
-}</code></pre></div>
+}
+</code></pre></div>
 <p>只是阅读这些代码已经够让你头疼的了。一不小心你就会迷失在这些嵌套(6层)，空格，返回语句中。</p>
 
 <p>在使用async/await改写后，这段代码的可读性大大提高了：</p>
@@ -386,7 +392,8 @@ const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &am
     <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">data</span>)
     <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">data</span>    
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <h4 id="4-中间值">4. 中间值</h4>
 
 <p>你可能会遇到这种情况，请求<code>promise1</code>，使用它的返回值请求<code>promise2</code>，最后使用这两个promise的值请求<code>promise3</code>。对应的代码看起来是这样的：</p>
@@ -400,7 +407,8 @@ const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &am
 </span><span style="color:#75715e"></span>          <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">promise3</span>(<span style="color:#a6e22e">value1</span>, <span style="color:#a6e22e">value2</span>)
         })
     })
-}</code></pre></div>
+}
+</code></pre></div>
 <p>如果<code>promise3</code>没有用到<code>value1</code>，那么我们就可以把这几个promise改成嵌套的模式。如果你不喜欢这种编码方式，你也可以把value1和value2封装在一个<code>Promsie.all</code>调用中以避免深层次的嵌套：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">makeRequest</span> <span style="color:#f92672">=</span> () =&gt; {
   <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">promise1</span>()
@@ -412,7 +420,8 @@ const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &am
       <span style="color:#75715e">// do something          
 </span><span style="color:#75715e"></span>      <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">promise3</span>(<span style="color:#a6e22e">value1</span>, <span style="color:#a6e22e">value2</span>)
     })
-}</code></pre></div>
+}
+</code></pre></div>
 <p>这种方式为了保证可读性而牺牲了语义。除了避免嵌套的promise，没有其它理由要把<code>value1</code>和<code>value2</code>放到一个数组里。</p>
 
 <p>同样的逻辑如果换用async/await编写就会非常简单，直观。</p>
@@ -420,7 +429,8 @@ const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &am
   <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">value1</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">promise1</span>()
   <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">value2</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">promise2</span>(<span style="color:#a6e22e">value1</span>)
   <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">promise3</span>(<span style="color:#a6e22e">value1</span>, <span style="color:#a6e22e">value2</span>)
-}</code></pre></div>
+}
+</code></pre></div>
 <h4 id="5-异常堆栈">5. 异常堆栈</h4>
 
 <p>假设有一段串行调用多个promise的代码，在promise串中的某一点抛出了异常：</p>
@@ -440,7 +450,8 @@ const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &am
     <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">err</span>);
     <span style="color:#75715e">// output
 </span><span style="color:#75715e"></span>    <span style="color:#75715e">// Error: oops at callAPromise.then.then.then.then.then (index.js:8:13)
-</span><span style="color:#75715e"></span>  })</code></pre></div>
+</span><span style="color:#75715e"></span>  })
+</code></pre></div>
 <p>从promise串返回的异常堆栈中没有包含关于异常是从哪一个环节抛出的信息。更糟糕的是，它还会误导你，它包含的唯一的函数名是<code>callAPromise</code>，然而该函数与此异常并无关系。（这种情况下文件名和行号还是有参考价值的）。</p>
 
 <p>然而，在使用了async/await的代码中，异常堆栈指向了正确的函数：</p>
@@ -458,7 +469,8 @@ const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &am
     <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">err</span>);
     <span style="color:#75715e">// output
 </span><span style="color:#75715e"></span>    <span style="color:#75715e">// Error: oops at makeRequest (index.js:7:9)
-</span><span style="color:#75715e"></span>  })</code></pre></div>
+</span><span style="color:#75715e"></span>  })
+</code></pre></div>
 <p>这带来的好处在本地开发环境中可能并不明显，但当你想要在生产环境的服务器上获取有意义的异常信息时，这会非常有用。在这种情况下，知道异常来自<code>makeRequest</code>而不是一连串的<code>then</code>调用会有意义的多。</p>
 
 <h4 id="6-调试">6. 调试</h4>
@@ -501,7 +513,7 @@ const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &am
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>403</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>421</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">

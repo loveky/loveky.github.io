@@ -6,10 +6,26 @@
     <description>Recent content in Posts on loveky的流水账</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 17 May 2018 20:48:27 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 04 Jun 2018 20:46:26 +0800</lastBuildDate>
     
 	<atom:link href="https://loveky.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>书写良好的 commit message</title>
+      <link>https://loveky.github.io/2018/06/04/write-good-commit-message/</link>
+      <pubDate>Mon, 04 Jun 2018 20:46:26 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2018/06/04/write-good-commit-message/</guid>
+      <description>今天来说说如何书写好的 commit message。
+Commit message 大家应该每天都在写，每次使用 Git 提交代码时，我们都会在执行 git commit 命令时附带上一句话来简要描述此次提交的改动。
+Commit message 看似简单，作用却很重要。在阅读代码时，可以通过 commit message 了解到作者编写某行代码时的背景；调查 bug 时可以通过搜索 commit message 快速定位相关的提交记录。
+那么什么样的 commit message 才算好的 commit message 呢？
+开源社区已经为我们总结出了一套名为 Conventional Commits 的书写规范。很多流行的开源项目都使用了这套规范，如 Karma，Angular 等。其规定的格式如下：
+&amp;lt;type&amp;gt;[optional scope]: &amp;lt;description&amp;gt; [optional body] [optional footer]  下面我们分别来介绍一下其中的各个组成部分：
+type ：用于表明我们这次提交的改动类型，是新增了功能？还是修改了测试代码？又或者是更新了文档？开源社区目前总结出了以下 11 种类型：
+ build：主要目的是修改项目构建系统(例如 glup，webpack，rollup 的配置等)的提交 ci：主要目的是修改项目继续集成流程(例如 Travis，Jenkins，GitLab CI，Circle等)的提交 docs：文档更新 feat：新增功能 fix：bug 修复 perf：性能优化 refactor：重构代码(既没有新增功能，也没有修复 bug) style：不影响程序逻辑的代码修改(修改空白字符，补全缺失的分号等) test：新增测试用例或是更新现有测试 revert：回滚某个更早之前的提交 chore：不属于以上类型的其他类型  optional scope：一个可选的修改范围。用于标识此次提交主要涉及到代码中哪个模块。根据项目实际情况填写即可，最好在项目中规定好模块列表，保持一致性。</description>
+    </item>
     
     <item>
       <title>单元测试与单元测试框架 Jest</title>
@@ -99,7 +115,7 @@ If you want your application to be stable, don&amp;rsquo;t use context. It is an
 在谈 pkg.module 之前，让我们先来了解一个和它有着紧密关系的概念 —— Tree Shaking。
 什么是 Tree Shaking？ 让我们通过两个小例子来了解。
 假设我们有以下两个文件：
-// math.js exports.add1 = function (x) { return x + 1; } exports.add2 = function (x) { return x + 2; }// app.js import { add1 } from &amp;#39;./math&amp;#39;; add1(100); app.js 文件通过 import 引入了 math.js 中的 add1 方法。
+// math.js exports.add1 = function (x) { return x + 1; } exports.add2 = function (x) { return x + 2; } // app.js import { add1 } from &amp;#39;./math&amp;#39;; add1(100);  app.js 文件通过 import 引入了 math.js 中的 add1 方法。
 我们通过 webpack 命令打包：
 webpack --entry ./app.js --output-filename app.bunble.js 在生成的 app.bundle.js 文件中我们可以看到以下内容：
 这里我们可以看到虽然我们只用到了 math.js 文件中的 add1 方法，但是在最终生成的 bundle 文件中却包含了 add1 和 add2 两个方法。这是为什么呢？</description>
@@ -144,7 +160,7 @@ yarn add --dev eslint // or npm install --save-dev eslint 创建配置文件
       <description>本文旨在帮你快速了解 service worker 的基本知识点，让你对 service worker 有一个大致的了解。为以后开发一个简单的 PWA 应用打下基础。
 关于 service worker 的几个基本知识点  它是一个可编程的网络代理，让你可以控制页面请求的处理方式。 它是一个 JavaScript Worker，因此它无法直接操作 DOM。但可以通过 postMessage 接口与页面通信。同时，service worker 中的代码不会阻塞页面响应。 它在闲置时被终止，在需要时被启动。并不是常驻内存。因此你不能在 onfetch 或是 onmessage 回调中依赖全局状态。 被设计成完全异步。因此在 service worker 中无法使用同步 API （例如同步 XHR，localStorage等）。接口重度依赖于 promise。 只能在 HTTPS 页面加载（唯一的例外：localhost/127.0.0.1，方便调试）。  Service worker 的作用域 一个 service worker 的默认作用域是这个 service worker 脚本所在的目录。例如 https://example.com/sw.js 脚本默认就是 https://example.com 下的所有页面。
 你也可以在注册 service worker 时明确指定作用域：
-navigator.serviceWorker.register(&amp;#39;sw.js&amp;#39;, { scope: &amp;#39;./abc&amp;#39; }); 假设以上代码在 https://example.com 页面里执行，则意味着该 service worker 的作用域就是 https://example.</description>
+navigator.serviceWorker.register(&amp;#39;sw.js&amp;#39;, { scope: &amp;#39;./abc&amp;#39; });  假设以上代码在 https://example.com 页面里执行，则意味着该 service worker 的作用域就是 https://example.</description>
     </item>
     
     <item>
@@ -217,7 +233,7 @@ const grep = ... // 一个 grep 命令输出的 stream const wc = ... // 一个 
 那么到底是 JavaScript 中的哪些代码占中了这么长 CPU 时间呢？我们在底部的选项卡中选中 Bottom-Up ，按 Total Time 降序排列。得到如下结果：
 可以看出，72.% 的 CPU 时间用在了一条正则表达式上。你肯定想到了，这就是小伙伴用来检查用户输入是否合法的正则表达式。
 完整的正则表达式是这样的：
-/^\s*((\d+(\,|，)\d+)*|(\d+))\s*$/ 接着去 regex101 上测试一下，测试数据如下，由 10 个商品 ID 组成的字符串：
+/^\s*((\d+(\,|，)\d+)*|(\d+))\s*$/  接着去 regex101 上测试一下，测试数据如下，由 10 个商品 ID 组成的字符串：
 123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789  执行结果如下：</description>
     </item>
     
@@ -264,10 +280,10 @@ RedMonk 的排名将 Stack Overflow 的数据与 GitHub 上的 pull request 结�
 async/await快速入门 为了让还没听说过这个特性的小伙伴们有一个大致了解，以下是一些关于该特性的简要介绍：
  async/await是一种编写异步代码的新方法。在这之前编写异步代码使用的是回调函数和promise。 async/await实际是建立在promise之上的。因此你不能把它和回调函数搭配使用。 async/await和promise一样，是非阻塞的。 async/await可以使异步代码在形式上更接近于同步代码。这就是它最大的价值。  语法 假设有一个getJSON方法，它返回一个promise，该promise会被resolve为一个JSON对象。我们想要调用该方法，输出得到的JSON对象，最后返回&amp;quot;done&amp;quot;。
 以下是使用promise的实现方式：
-const makeRequest = () =&amp;gt; getJSON() .then(data =&amp;gt; { console.log(data) return &amp;#34;done&amp;#34; }) makeRequest() 使用async/await则是这样的：
-const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &amp;#34;done&amp;#34; } makeRequest() 使用async/await时有以下几个区别：
+const makeRequest = () =&amp;gt; getJSON() .then(data =&amp;gt; { console.log(data) return &amp;#34;done&amp;#34; }) makeRequest()  使用async/await则是这样的：
+const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &amp;#34;done&amp;#34; } makeRequest()  使用async/await时有以下几个区别：
  在定义函数时我们使用了async关键字。await关键字只能在使用async定义的函数的内部使用。所有async函数都会返回一个promise，该promise最终resolve的值就是你在函数中return的内容。 由于第一点中的原因，你不能在顶级作用域中await一个函数。因为顶级作用域不是一个async方法。
-// this will not work in top level // await makeRequest()  // this will work makeRequest().then((result) =&amp;gt; { // do something }) await getJSON()意味着直到getJSON()返回的promise在resolve之后，console.</description>
+// this will not work in top level // await makeRequest()  // this will work makeRequest().then((result) =&amp;gt; { // do something })  await getJSON()意味着直到getJSON()返回的promise在resolve之后，console.</description>
     </item>
     
     <item>
@@ -279,9 +295,8 @@ const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &am
       <description>要讨论Webpack 2中新增的这两个plugin的功能，还要先从使用Webpack打包的项目的前端资源缓存方案说起。
 通常在使用了Webpack的项目中我们会使用CommonsChunkPlugin来将所有依赖的第三方包打包到一个名为vender的chunk中。与此同时，为了避免每次更改项目代码时导致vender chunk的chunkHash改变，我们还会单独生成一个manifest chunk。
 举个例子，假设我们有一个项目，项目中入口文件为index.js。其内容如下：
-import add from &amp;#39;./src/add&amp;#39;; import leftPad from &amp;#39;left-pad&amp;#39;; import jsonp from &amp;#39;jsonp&amp;#39;; add(1, 2); 通常我们的webpack.config.js文件就会有类似如下的配置：
-const path = require(&amp;#39;path&amp;#39;); const webpack = require(&amp;#39;webpack&amp;#39;); module.exports = { entry: { &amp;#39;app&amp;#39;: &amp;#39;./index.js&amp;#39;, &amp;#39;vender&amp;#39;: [&amp;#39;left-pad&amp;#39;, &amp;#39;jsonp&amp;#39;] }, output: { filename: &amp;#39;[name].[chunkHash].js&amp;#39;, path: path.resolve(__dirname, &amp;#39;build&amp;#39;) }, resolve: { extensions: [&amp;#39;.js&amp;#39;] }, module: { ... }, plugins:[ new webpack.optimize.CommonsChunkPlugin({ name: [&amp;#39;vender&amp;#39;, &amp;#39;manifest&amp;#39;], minChunks: Infinity, }) ] }; 这时，通过Webpack打包，会生成三个文件：
-假设我们修改了./src/add.js文件，重新打包，会得到：</description>
+import add from &amp;#39;./src/add&amp;#39;; import leftPad from &amp;#39;left-pad&amp;#39;; import jsonp from &amp;#39;jsonp&amp;#39;; add(1, 2);  通常我们的webpack.config.js文件就会有类似如下的配置：
+const path = require(&amp;#39;path&amp;#39;); const webpack = require(&amp;#39;webpack&amp;#39;); module.exports = { entry: { &amp;#39;app&amp;#39;: &amp;#39;./index.js&amp;#39;, &amp;#39;vender&amp;#39;: [&amp;#39;left-pad&amp;#39;, &amp;#39;jsonp&amp;#39;] }, output: { filename: &amp;#39;[name].[chunkHash].js&amp;#39;, path: path.resolve(__dirname, &amp;#39;build&amp;#39;) }, resolve: { extensions: [&amp;#39;.js&amp;#39;] }, module: { ... }, plugins:[ new webpack.optimize.CommonsChunkPlugin({ name: [&amp;#39;vender&amp;#39;, &amp;#39;manifest&amp;#39;], minChunks: Infinity, }) ] };  这时，通过Webpack打包，会生成三个文件：</description>
     </item>
     
     <item>
@@ -292,9 +307,9 @@ const path = require(&amp;#39;path&amp;#39;); const webpack = require(&amp;#39;w
       <guid>https://loveky.github.io/2017/03/27/lock-npm-package-version-in-js-project/</guid>
       <description>问题 最近在项目中遇到这样一个问题，webpack生成的vender包的哈希值在我和同事的电脑上不一致。由于之前已经配置过了CommonsChunkPlugin（配置如下），所以我们期望的结果是在不同环境下构建出的文件哈希值应该是一致的。
 注：只给出了和本文内容相关的配置项
-module.exports = { entry: { app: &amp;#39;./src/js/app.jsx&amp;#39;, vender: [ &amp;#39;classnames&amp;#39;, &amp;#39;react&amp;#39;, &amp;#39;react-dom&amp;#39;, &amp;#39;redux&amp;#39;, &amp;#39;react-redux&amp;#39;, &amp;#39;redux-promise-middleware&amp;#39;, &amp;#39;updeep&amp;#39;, &amp;#39;axios&amp;#39;, &amp;#39;jdc-rc-list&amp;#39;, &amp;#39;react-router&amp;#39;, &amp;#39;react-router-redux&amp;#39; ] }, output: { path: path.resolve(__dirname, &amp;#39;./build/js/&amp;#39;), filename: (isDevelopmentEnvironment ? &amp;#39;[name].bundle.js&amp;#39; : &amp;#39;[name].[chunkhash].js&amp;#39;), chunkFilename: (isDevelopmentEnvironment ? &amp;#39;[name].bundle.js&amp;#39; : &amp;#39;[name].[chunkhash].js&amp;#39;) }, plugins: [ new webpack.optimize.CommonsChunkPlugin({ name: [&amp;#39;vender&amp;#39;, &amp;#39;manifest&amp;#39;], minChunks: Infinity, }) ] }; 调查 经过多次验证发现，我们在各自的电脑上多次构建出来的哈希值可以保持一致，只是在两台电脑上不一致。考虑到vender中打包的都是第三方依赖，于是猜测是两台电脑上安装的依赖包不同。接着对比了两人的package.json中的dependencies，完全一致。
+module.exports = { entry: { app: &amp;#39;./src/js/app.jsx&amp;#39;, vender: [ &amp;#39;classnames&amp;#39;, &amp;#39;react&amp;#39;, &amp;#39;react-dom&amp;#39;, &amp;#39;redux&amp;#39;, &amp;#39;react-redux&amp;#39;, &amp;#39;redux-promise-middleware&amp;#39;, &amp;#39;updeep&amp;#39;, &amp;#39;axios&amp;#39;, &amp;#39;jdc-rc-list&amp;#39;, &amp;#39;react-router&amp;#39;, &amp;#39;react-router-redux&amp;#39; ] }, output: { path: path.resolve(__dirname, &amp;#39;./build/js/&amp;#39;), filename: (isDevelopmentEnvironment ? &amp;#39;[name].bundle.js&amp;#39; : &amp;#39;[name].[chunkhash].js&amp;#39;), chunkFilename: (isDevelopmentEnvironment ? &amp;#39;[name].bundle.js&amp;#39; : &amp;#39;[name].[chunkhash].js&amp;#39;) }, plugins: [ new webpack.optimize.CommonsChunkPlugin({ name: [&amp;#39;vender&amp;#39;, &amp;#39;manifest&amp;#39;], minChunks: Infinity, }) ] };  调查 经过多次验证发现，我们在各自的电脑上多次构建出来的哈希值可以保持一致，只是在两台电脑上不一致。考虑到vender中打包的都是第三方依赖，于是猜测是两台电脑上安装的依赖包不同。接着对比了两人的package.json中的dependencies，完全一致。
 考虑到package.json文件中包版本中的^符号匹配的范围比较大。参考npm官方给出的解释：
-^1.2.3 := &amp;gt;=1.2.3 &amp;lt;2.0.0 ^0.2.3 := &amp;gt;=0.2.3 &amp;lt;0.3.0 ^0.0.3 := &amp;gt;=0.0.3 &amp;lt;0.</description>
+^1.2.3 := &amp;gt;=1.2.3 &amp;lt;2.0.0 ^0.2.3 := &amp;gt;=0.2.3 &amp;lt;0.3.0 ^0.0.3 := &amp;gt;=0.</description>
     </item>
     
     <item>
@@ -441,7 +456,7 @@ function getUsername(userId) { return database.users.get({id: userId}) .then(fun
  从介绍中可以看出这又是一个小而美的框架。到GitHub项目页面上看了一下发现源码里只有4个JS文件，总代码量只有1571行(以2015年12月26日最新稳定版1.1.2为准)。于是决定把代码clone下来学习一下，本篇会先从整个框架的入口文件lib/application.js说起。
 总体说明 lib/application.js文件export出的是一个构造函数，用来创建一个koa应用。一个koa应用最常用的方法有2个： - listen(port) 执行listen后会通过http.createServer启动一个服务器并监听指定端口 - use(middleware) 注册一个中间件，一个koa应用可以注册多个中间件， 处理请求时会按照中间件注册的顺序执行这些中间件。
 更多详细信息可以参考GitHub文档页面。
-代码注释 function Application() { if (!(this instanceof Application)) return new Application; this.env = process.env.NODE_ENV || &amp;#39;development&amp;#39;; this.subdomainOffset = 2; this.middleware = []; this.proxy = false; this.context = Object.create(context); this.request = Object.create(request); this.response = Object.create(response); } 以上就是Application构造函数的定义，很简洁，主要做了以下几件事情：
+代码注释 function Application() { if (!(this instanceof Application)) return new Application; this.env = process.env.NODE_ENV || &amp;#39;development&amp;#39;; this.subdomainOffset = 2; this.middleware = []; this.proxy = false; this.context = Object.create(context); this.request = Object.create(request); this.response = Object.create(response); }  以上就是Application构造函数的定义，很简洁，主要做了以下几件事情：
 - 通过instanceof判断来支持不带new关键字的调用。 - 设置应用运行环境，会从环境变量NODE_ENV读取，默认值为development - 声明this.</description>
     </item>
     
@@ -493,13 +508,12 @@ DI in a Nutshell 一个组件要想获取它的依赖可以通过以下三种途
  依赖可以作为参数传递给需要它的组件
   前两种获取依赖的方式并不理想，因为这会导致依赖关系被硬编码进代码中。这会导致更新依赖关系变得很复杂。在测试时尤其如此，我们通常会提供mock过的依赖关系以隔离不同组件间的测试，硬编码会导致每次测试都需要修改相关的源码。
 相比之下，第三种方式是最可行的，因为它将解决依赖关系的责任从组件中移除。依赖只是简单的作为参数传递给组件：
-function SomeClass(greeter) { this.greeter = greeter; } SomeClass.prototype.doSomething = function(name) { this.greeter.greet(name); } 在上边的例子中，SomeClass并不关心如何创建或找到greeter，它只是在初始化时从参数列表里取出需要的依赖即可。
+function SomeClass(greeter) { this.greeter = greeter; } SomeClass.prototype.doSomething = function(name) { this.greeter.greet(name); }  在上边的例子中，SomeClass并不关心如何创建或找到greeter，它只是在初始化时从参数列表里取出需要的依赖即可。
 但这样做的问题是，寻找/创建依赖的责任被转交给了调用SomeClass的代码。
 为了统一管理依赖关系，每个Angular应用都有一个injector。injector是一个服务定位器，它负责查找或创建依赖。
 下面是一个使用injector服务的例子：
-// Provide the wiring information in a module var myModule = angular.module(&amp;#39;myModule&amp;#39;, []); 下面的代码告诉injector如何创建greeter服务。需要注意的是greeter又依赖于$window服务。greeter实际上是一个包含greet方法的对象。
-myModule.factory(&amp;#39;greeter&amp;#39;, function($window) { return { greet: function(text) { $window.alert(text); } }; }); 下面的代码演示了如何创建一个injector并通过它来请求greeter服务:
-var injector = angular.</description>
+// Provide the wiring information in a module var myModule = angular.module(&amp;#39;myModule&amp;#39;, []);  下面的代码告诉injector如何创建greeter服务。需要注意的是greeter又依赖于$window服务。greeter实际上是一个包含greet方法的对象。
+myModule.factory(&amp;#39;greeter&amp;#39;, function($window) { return { greet: function(text) { $window.alert(text); } }; });  下面的代码演示了如何创建一个injector并通过它来请求greeter服务:</description>
     </item>
     
     <item>
@@ -513,7 +527,7 @@ var injector = angular.</description>
 所有的这些魔法只需要我们在input元素上指定一个ng-model属性。可见ng-model这个directive是双向绑定这一特性不可缺少一点。本文就继续从源代码入手看看ngModel的实现方式以及其它directive是如何与ngModel交互的。
 ngModel被定义在input.js。从名字上可看出，该文件还定义input这个directive，从这点也可以看出ngModel与input之间的紧密关系。
 注: 文中所有涉及到的AngularJS源码均来自angular-1.2.8版本。
-var ngModelDirective = function() { return { require: [&amp;#39;ngModel&amp;#39;, &amp;#39;^?form&amp;#39;], controller: NgModelController, link: function(scope, element, attr, ctrls) { // notify others, especially parent forms  var modelCtrl = ctrls[0], formCtrl = ctrls[1] || nullFormCtrl; formCtrl.$addControl(modelCtrl); scope.$on(&amp;#39;$destroy&amp;#39;, function() { formCtrl.$removeControl(modelCtrl); }); } }; }; 可以看出ngModel依赖于ngModelController以及可选的formController。ngModel在link方法中只做了2件事:
+var ngModelDirective = function() { return { require: [&amp;#39;ngModel&amp;#39;, &amp;#39;^?form&amp;#39;], controller: NgModelController, link: function(scope, element, attr, ctrls) { // notify others, especially parent forms  var modelCtrl = ctrls[0], formCtrl = ctrls[1] || nullFormCtrl; formCtrl.$addControl(modelCtrl); scope.$on(&amp;#39;$destroy&amp;#39;, function() { formCtrl.$removeControl(modelCtrl); }); } }; };  可以看出ngModel依赖于ngModelController以及可选的formController。ngModel在link方法中只做了2件事:
  如果声明了ngModel的元素出现在一个form中，那么就向上层form注册自身 注册了$destroy事件的监听器，该事件触发时告知上层form移除对自身的引用  link方法如此简单以至于我们还没看到关于数据绑定的任何信息。看来问题的答案都藏在ngModelController中了。接下来看看ngModelController中都发生了什么。
 var NgModelController = [&amp;#39;$scope&amp;#39;, &amp;#39;$exceptionHandler&amp;#39;, &amp;#39;$attrs&amp;#39;, &amp;#39;$element&amp;#39;, &amp;#39;$parse&amp;#39;, function($scope, $exceptionHandler, $attr, $element, $parse) { this.</description>
     </item>
@@ -544,7 +558,7 @@ var NgModelController = [&amp;#39;$scope&amp;#39;, &amp;#39;$exceptionHandler&am
 这两天项目主体完成，准备上线，算是有了一些自由时间，正好借此机会学习一下AngularJS内部的实现机制。
 本篇来说说最常见的directive之一 ngRepeat
 该文件的整体结构如下：
-var ngRepeatDirective = [&amp;#39;$parse&amp;#39;, &amp;#39;$animate&amp;#39;, function($parse, $animate) { var NG_REMOVED = &amp;#39;$$NG_REMOVED&amp;#39;; var ngRepeatMinErr = minErr(&amp;#39;ngRepeat&amp;#39;); return { transclude: &amp;#39;element&amp;#39;, priority: 1000, terminal: true, $$tlb: true, link: function($scope, $element, $attr, ctrl, $transclude){ ..... } }; function getBlockStart(block) { return block.clone[0]; } function getBlockEnd(block) { return block.clone[block.clone.length - 1]; } }]; ngRepeatDirective是一个数组，它会被传递给directive方法用来生成ngRepeat这个directive。可以看到ngRepeat依赖于$parse和$animate两个服务。$parse用来将字符串解析成javascript函数。$animate用来给DOM改变附加上动画效果。文件最后声明了两个helper方法，会在稍后的分析中介绍到。
+var ngRepeatDirective = [&amp;#39;$parse&amp;#39;, &amp;#39;$animate&amp;#39;, function($parse, $animate) { var NG_REMOVED = &amp;#39;$$NG_REMOVED&amp;#39;; var ngRepeatMinErr = minErr(&amp;#39;ngRepeat&amp;#39;); return { transclude: &amp;#39;element&amp;#39;, priority: 1000, terminal: true, $$tlb: true, link: function($scope, $element, $attr, ctrl, $transclude){ ..... } }; function getBlockStart(block) { return block.clone[0]; } function getBlockEnd(block) { return block.clone[block.clone.length - 1]; } }];  ngRepeatDirective是一个数组，它会被传递给directive方法用来生成ngRepeat这个directive。可以看到ngRepeat依赖于$parse和$animate两个服务。$parse用来将字符串解析成javascript函数。$animate用来给DOM改变附加上动画效果。文件最后声明了两个helper方法，会在稍后的分析中介绍到。
 接下来把最大的篇幅交给这个directive的核心——link方法。
 var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]+?)\s+in\s+([\s\S]+?)(?:\s+track\s+by\s+([\s\S]+?))?\s*$/), trackByExp, trackByExpGetter, trackByIdExpFn, trackByIdArrayFn, trackByIdObjFn, lhs, rhs, valueIdentifier, keyIdentifier, hashFnLocals = {$id: hashKey}; if (!</description>
     </item>
@@ -561,14 +575,13 @@ compile属性是一个函数。该函数会针对每一个directive的实例执�
  元素还没有被插入document
  可以修改template，最终结果会被angular缓存
   link属性可以有两种配置方式。 link属性可以被设置为一个对象，包含pre, post两个属性，分别对应一个函数(preLink, postLink)。preList，postLink的区别在于执行顺序。preLink是自顶向下的，先父节点，后子节点，postLink正好相反。
-.directive{ return { link: { pre: function preLink(){ ... }, post: function postLink() { ... } } } } link属性也可以被直接设置为一个函数，则默认相当于设置了postLink函数。
-.directive{ return { link: function link(){ ... } } } 等于
+.directive{ return { link: { pre: function preLink(){ ... }, post: function postLink() { ... } } } }  link属性也可以被直接设置为一个函数，则默认相当于设置了postLink函数。
+.directive{ return { link: function link(){ ... } } }  等于
 .directive{ return { link: { post: function post() { ... } } } }  由此可见，如果直接将link属性设置为一个函数，则link阶段的执行顺序是自底向上的。
 link阶段会针对每一个被RENDERED的directive实例执行一次。此阶段：
  可以访问scope(因为controller已经初始化完成)
  元素已经被插入document中
- 不可以修改template(angular会直接使用之前缓存的内容)
-  如果定义了compile属性则link属性会被忽略。</description>
+ 不可以修改template(angular会直接使用之前缓存的内容)</description>
     </item>
     
     <item>

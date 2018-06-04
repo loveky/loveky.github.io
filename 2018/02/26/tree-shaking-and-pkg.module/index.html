@@ -20,7 +20,7 @@
 在谈 pkg.module 之前，让我们先来了解一个和它有着紧密关系的概念 —— Tree Shaking。
 什么是 Tree Shaking？ 让我们通过两个小例子来了解。
 假设我们有以下两个文件：
-// math.js exports.add1 = function (x) { return x &#43; 1; } exports.add2 = function (x) { return x &#43; 2; }// app.js import { add1 } from &amp;#39;./math&amp;#39;; add1(100); app.js 文件通过 import 引入了 math.js 中的 add1 方法。
+// math.js exports.add1 = function (x) { return x &#43; 1; } exports.add2 = function (x) { return x &#43; 2; } // app.js import { add1 } from &amp;#39;./math&amp;#39;; add1(100);  app.js 文件通过 import 引入了 math.js 中的 add1 方法。
 我们通过 webpack 命令打包：
 webpack --entry ./app.js --output-filename app.bunble.js 在生成的 app.bundle.js 文件中我们可以看到以下内容：
 这里我们可以看到虽然我们只用到了 math.js 文件中的 add1 方法，但是在最终生成的 bundle 文件中却包含了 add1 和 add2 两个方法。这是为什么呢？" />
@@ -34,7 +34,7 @@ webpack --entry ./app.js --output-filename app.bunble.js 在生成的 app.bundle
 在谈 pkg.module 之前，让我们先来了解一个和它有着紧密关系的概念 —— Tree Shaking。
 什么是 Tree Shaking？ 让我们通过两个小例子来了解。
 假设我们有以下两个文件：
-// math.js exports.add1 = function (x) { return x &#43; 1; } exports.add2 = function (x) { return x &#43; 2; }// app.js import { add1 } from &amp;#39;./math&amp;#39;; add1(100); app.js 文件通过 import 引入了 math.js 中的 add1 方法。
+// math.js exports.add1 = function (x) { return x &#43; 1; } exports.add2 = function (x) { return x &#43; 2; } // app.js import { add1 } from &amp;#39;./math&amp;#39;; add1(100);  app.js 文件通过 import 引入了 math.js 中的 add1 方法。
 我们通过 webpack 命令打包：
 webpack --entry ./app.js --output-filename app.bunble.js 在生成的 app.bundle.js 文件中我们可以看到以下内容：
 这里我们可以看到虽然我们只用到了 math.js 文件中的 add1 方法，但是在最终生成的 bundle 文件中却包含了 add1 和 add2 两个方法。这是为什么呢？" />
@@ -48,7 +48,7 @@ webpack --entry ./app.js --output-filename app.bunble.js 在生成的 app.bundle
 在谈 pkg.module 之前，让我们先来了解一个和它有着紧密关系的概念 —— Tree Shaking。
 什么是 Tree Shaking？ 让我们通过两个小例子来了解。
 假设我们有以下两个文件：
-// math.js exports.add1 = function (x) { return x &#43; 1; } exports.add2 = function (x) { return x &#43; 2; }// app.js import { add1 } from &amp;#39;./math&amp;#39;; add1(100); app.js 文件通过 import 引入了 math.js 中的 add1 方法。
+// math.js exports.add1 = function (x) { return x &#43; 1; } exports.add2 = function (x) { return x &#43; 2; } // app.js import { add1 } from &amp;#39;./math&amp;#39;; add1(100);  app.js 文件通过 import 引入了 math.js 中的 add1 方法。
 我们通过 webpack 命令打包：
 webpack --entry ./app.js --output-filename app.bunble.js 在生成的 app.bundle.js 文件中我们可以看到以下内容：
 这里我们可以看到虽然我们只用到了 math.js 文件中的 add1 方法，但是在最终生成的 bundle 文件中却包含了 add1 和 add2 两个方法。这是为什么呢？" />
@@ -58,7 +58,7 @@ webpack --entry ./app.js --output-filename app.bunble.js 在生成的 app.bundle
 
 
 
-<meta name="generator" content="Hugo 0.36.1" />
+<meta name="generator" content="Hugo 0.41" />
 
 
 <link rel="canonical" href="https://loveky.github.io/2018/02/26/tree-shaking-and-pkg.module/" />
@@ -283,12 +283,14 @@ webpack --entry ./app.js --output-filename app.bunble.js 在生成的 app.bundle
 
 <span style="color:#a6e22e">exports</span>.<span style="color:#a6e22e">add2</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">x</span>) {
     <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>;
-}</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// app.js
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// app.js
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> {
     <span style="color:#a6e22e">add1</span>
 } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./math&#39;</span>;
 
-<span style="color:#a6e22e">add1</span>(<span style="color:#ae81ff">100</span>);</code></pre></div>
+<span style="color:#a6e22e">add1</span>(<span style="color:#ae81ff">100</span>);
+</code></pre></div>
 <p><code>app.js</code> 文件通过 import 引入了 <code>math.js</code> 中的 <code>add1</code> 方法。</p>
 
 <p>我们通过 webpack 命令打包：</p>
@@ -354,7 +356,8 @@ export function add2 (x) {
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">{
   <span style="color:#e6db74">&#34;main&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;dist/dist.js&#34;</span>,
   <span style="color:#e6db74">&#34;module&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;dist/dist.es.js&#34;</span>
-}</code></pre></div>
+}
+</code></pre></div>
 <p>相当于在一个包内同时发布了两种模块规范的版本。</p>
 
 <p>当打包工具遇到我们的模块时：</p>
@@ -376,7 +379,8 @@ export function add2 (x) {
     <span style="color:#a6e22e">file</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;bundle.es.js&#39;</span>,
     <span style="color:#a6e22e">format</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;es&#39;</span>
   }
-};</code></pre></div>
+};
+</code></pre></div>
 <p>目前 <code>pkg.module</code> 还只是一个提案，并不是 package.json 文件标准格式的一部分。但它极有可能会成为标准的一部分，因为它目前已经是事实上的标准了（最早由 <a href="https://rollupjs.org/">Rollup</a>提出，<a href="https://webpack.js.org">Webpack</a>也已支持）。</p>
 
 <p><strong>参考链接：</strong></p>

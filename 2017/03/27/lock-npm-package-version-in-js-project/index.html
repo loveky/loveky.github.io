@@ -18,9 +18,9 @@
   <meta name="author" content="loveky" />
   <meta name="description" content="问题 最近在项目中遇到这样一个问题，webpack生成的vender包的哈希值在我和同事的电脑上不一致。由于之前已经配置过了CommonsChunkPlugin（配置如下），所以我们期望的结果是在不同环境下构建出的文件哈希值应该是一致的。
 注：只给出了和本文内容相关的配置项
-module.exports = { entry: { app: &amp;#39;./src/js/app.jsx&amp;#39;, vender: [ &amp;#39;classnames&amp;#39;, &amp;#39;react&amp;#39;, &amp;#39;react-dom&amp;#39;, &amp;#39;redux&amp;#39;, &amp;#39;react-redux&amp;#39;, &amp;#39;redux-promise-middleware&amp;#39;, &amp;#39;updeep&amp;#39;, &amp;#39;axios&amp;#39;, &amp;#39;jdc-rc-list&amp;#39;, &amp;#39;react-router&amp;#39;, &amp;#39;react-router-redux&amp;#39; ] }, output: { path: path.resolve(__dirname, &amp;#39;./build/js/&amp;#39;), filename: (isDevelopmentEnvironment ? &amp;#39;[name].bundle.js&amp;#39; : &amp;#39;[name].[chunkhash].js&amp;#39;), chunkFilename: (isDevelopmentEnvironment ? &amp;#39;[name].bundle.js&amp;#39; : &amp;#39;[name].[chunkhash].js&amp;#39;) }, plugins: [ new webpack.optimize.CommonsChunkPlugin({ name: [&amp;#39;vender&amp;#39;, &amp;#39;manifest&amp;#39;], minChunks: Infinity, }) ] }; 调查 经过多次验证发现，我们在各自的电脑上多次构建出来的哈希值可以保持一致，只是在两台电脑上不一致。考虑到vender中打包的都是第三方依赖，于是猜测是两台电脑上安装的依赖包不同。接着对比了两人的package.json中的dependencies，完全一致。
+module.exports = { entry: { app: &amp;#39;./src/js/app.jsx&amp;#39;, vender: [ &amp;#39;classnames&amp;#39;, &amp;#39;react&amp;#39;, &amp;#39;react-dom&amp;#39;, &amp;#39;redux&amp;#39;, &amp;#39;react-redux&amp;#39;, &amp;#39;redux-promise-middleware&amp;#39;, &amp;#39;updeep&amp;#39;, &amp;#39;axios&amp;#39;, &amp;#39;jdc-rc-list&amp;#39;, &amp;#39;react-router&amp;#39;, &amp;#39;react-router-redux&amp;#39; ] }, output: { path: path.resolve(__dirname, &amp;#39;./build/js/&amp;#39;), filename: (isDevelopmentEnvironment ? &amp;#39;[name].bundle.js&amp;#39; : &amp;#39;[name].[chunkhash].js&amp;#39;), chunkFilename: (isDevelopmentEnvironment ? &amp;#39;[name].bundle.js&amp;#39; : &amp;#39;[name].[chunkhash].js&amp;#39;) }, plugins: [ new webpack.optimize.CommonsChunkPlugin({ name: [&amp;#39;vender&amp;#39;, &amp;#39;manifest&amp;#39;], minChunks: Infinity, }) ] };  调查 经过多次验证发现，我们在各自的电脑上多次构建出来的哈希值可以保持一致，只是在两台电脑上不一致。考虑到vender中打包的都是第三方依赖，于是猜测是两台电脑上安装的依赖包不同。接着对比了两人的package.json中的dependencies，完全一致。
 考虑到package.json文件中包版本中的^符号匹配的范围比较大。参考npm官方给出的解释：
-^1.2.3 := &amp;gt;=1.2.3 &amp;lt;2.0.0 ^0.2.3 := &amp;gt;=0.2.3 &amp;lt;0.3.0 ^0.0.3 := &amp;gt;=0.0.3 &amp;lt;0." />
+^1.2.3 := &amp;gt;=1.2.3 &amp;lt;2.0.0 ^0.2.3 := &amp;gt;=0.2.3 &amp;lt;0.3.0 ^0.0.3 := &amp;gt;=0." />
 
   
   
@@ -29,9 +29,9 @@ module.exports = { entry: { app: &amp;#39;./src/js/app.jsx&amp;#39;, vender: [ &
     <meta name="twitter:title" content="在JavaScript项目中锁定npm依赖包版本" />
     <meta name="twitter:description" content="问题 最近在项目中遇到这样一个问题，webpack生成的vender包的哈希值在我和同事的电脑上不一致。由于之前已经配置过了CommonsChunkPlugin（配置如下），所以我们期望的结果是在不同环境下构建出的文件哈希值应该是一致的。
 注：只给出了和本文内容相关的配置项
-module.exports = { entry: { app: &amp;#39;./src/js/app.jsx&amp;#39;, vender: [ &amp;#39;classnames&amp;#39;, &amp;#39;react&amp;#39;, &amp;#39;react-dom&amp;#39;, &amp;#39;redux&amp;#39;, &amp;#39;react-redux&amp;#39;, &amp;#39;redux-promise-middleware&amp;#39;, &amp;#39;updeep&amp;#39;, &amp;#39;axios&amp;#39;, &amp;#39;jdc-rc-list&amp;#39;, &amp;#39;react-router&amp;#39;, &amp;#39;react-router-redux&amp;#39; ] }, output: { path: path.resolve(__dirname, &amp;#39;./build/js/&amp;#39;), filename: (isDevelopmentEnvironment ? &amp;#39;[name].bundle.js&amp;#39; : &amp;#39;[name].[chunkhash].js&amp;#39;), chunkFilename: (isDevelopmentEnvironment ? &amp;#39;[name].bundle.js&amp;#39; : &amp;#39;[name].[chunkhash].js&amp;#39;) }, plugins: [ new webpack.optimize.CommonsChunkPlugin({ name: [&amp;#39;vender&amp;#39;, &amp;#39;manifest&amp;#39;], minChunks: Infinity, }) ] }; 调查 经过多次验证发现，我们在各自的电脑上多次构建出来的哈希值可以保持一致，只是在两台电脑上不一致。考虑到vender中打包的都是第三方依赖，于是猜测是两台电脑上安装的依赖包不同。接着对比了两人的package.json中的dependencies，完全一致。
+module.exports = { entry: { app: &amp;#39;./src/js/app.jsx&amp;#39;, vender: [ &amp;#39;classnames&amp;#39;, &amp;#39;react&amp;#39;, &amp;#39;react-dom&amp;#39;, &amp;#39;redux&amp;#39;, &amp;#39;react-redux&amp;#39;, &amp;#39;redux-promise-middleware&amp;#39;, &amp;#39;updeep&amp;#39;, &amp;#39;axios&amp;#39;, &amp;#39;jdc-rc-list&amp;#39;, &amp;#39;react-router&amp;#39;, &amp;#39;react-router-redux&amp;#39; ] }, output: { path: path.resolve(__dirname, &amp;#39;./build/js/&amp;#39;), filename: (isDevelopmentEnvironment ? &amp;#39;[name].bundle.js&amp;#39; : &amp;#39;[name].[chunkhash].js&amp;#39;), chunkFilename: (isDevelopmentEnvironment ? &amp;#39;[name].bundle.js&amp;#39; : &amp;#39;[name].[chunkhash].js&amp;#39;) }, plugins: [ new webpack.optimize.CommonsChunkPlugin({ name: [&amp;#39;vender&amp;#39;, &amp;#39;manifest&amp;#39;], minChunks: Infinity, }) ] };  调查 经过多次验证发现，我们在各自的电脑上多次构建出来的哈希值可以保持一致，只是在两台电脑上不一致。考虑到vender中打包的都是第三方依赖，于是猜测是两台电脑上安装的依赖包不同。接着对比了两人的package.json中的dependencies，完全一致。
 考虑到package.json文件中包版本中的^符号匹配的范围比较大。参考npm官方给出的解释：
-^1.2.3 := &amp;gt;=1.2.3 &amp;lt;2.0.0 ^0.2.3 := &amp;gt;=0.2.3 &amp;lt;0.3.0 ^0.0.3 := &amp;gt;=0.0.3 &amp;lt;0." />
+^1.2.3 := &amp;gt;=1.2.3 &amp;lt;2.0.0 ^0.2.3 := &amp;gt;=0.2.3 &amp;lt;0.3.0 ^0.0.3 := &amp;gt;=0." />
     <meta name="twitter:image" content="https://loveky.github.io/img/avatar.jpg" />
   
 
@@ -40,16 +40,16 @@ module.exports = { entry: { app: &amp;#39;./src/js/app.jsx&amp;#39;, vender: [ &
   <meta property="og:title" content="在JavaScript项目中锁定npm依赖包版本" />
   <meta property="og:description" content="问题 最近在项目中遇到这样一个问题，webpack生成的vender包的哈希值在我和同事的电脑上不一致。由于之前已经配置过了CommonsChunkPlugin（配置如下），所以我们期望的结果是在不同环境下构建出的文件哈希值应该是一致的。
 注：只给出了和本文内容相关的配置项
-module.exports = { entry: { app: &amp;#39;./src/js/app.jsx&amp;#39;, vender: [ &amp;#39;classnames&amp;#39;, &amp;#39;react&amp;#39;, &amp;#39;react-dom&amp;#39;, &amp;#39;redux&amp;#39;, &amp;#39;react-redux&amp;#39;, &amp;#39;redux-promise-middleware&amp;#39;, &amp;#39;updeep&amp;#39;, &amp;#39;axios&amp;#39;, &amp;#39;jdc-rc-list&amp;#39;, &amp;#39;react-router&amp;#39;, &amp;#39;react-router-redux&amp;#39; ] }, output: { path: path.resolve(__dirname, &amp;#39;./build/js/&amp;#39;), filename: (isDevelopmentEnvironment ? &amp;#39;[name].bundle.js&amp;#39; : &amp;#39;[name].[chunkhash].js&amp;#39;), chunkFilename: (isDevelopmentEnvironment ? &amp;#39;[name].bundle.js&amp;#39; : &amp;#39;[name].[chunkhash].js&amp;#39;) }, plugins: [ new webpack.optimize.CommonsChunkPlugin({ name: [&amp;#39;vender&amp;#39;, &amp;#39;manifest&amp;#39;], minChunks: Infinity, }) ] }; 调查 经过多次验证发现，我们在各自的电脑上多次构建出来的哈希值可以保持一致，只是在两台电脑上不一致。考虑到vender中打包的都是第三方依赖，于是猜测是两台电脑上安装的依赖包不同。接着对比了两人的package.json中的dependencies，完全一致。
+module.exports = { entry: { app: &amp;#39;./src/js/app.jsx&amp;#39;, vender: [ &amp;#39;classnames&amp;#39;, &amp;#39;react&amp;#39;, &amp;#39;react-dom&amp;#39;, &amp;#39;redux&amp;#39;, &amp;#39;react-redux&amp;#39;, &amp;#39;redux-promise-middleware&amp;#39;, &amp;#39;updeep&amp;#39;, &amp;#39;axios&amp;#39;, &amp;#39;jdc-rc-list&amp;#39;, &amp;#39;react-router&amp;#39;, &amp;#39;react-router-redux&amp;#39; ] }, output: { path: path.resolve(__dirname, &amp;#39;./build/js/&amp;#39;), filename: (isDevelopmentEnvironment ? &amp;#39;[name].bundle.js&amp;#39; : &amp;#39;[name].[chunkhash].js&amp;#39;), chunkFilename: (isDevelopmentEnvironment ? &amp;#39;[name].bundle.js&amp;#39; : &amp;#39;[name].[chunkhash].js&amp;#39;) }, plugins: [ new webpack.optimize.CommonsChunkPlugin({ name: [&amp;#39;vender&amp;#39;, &amp;#39;manifest&amp;#39;], minChunks: Infinity, }) ] };  调查 经过多次验证发现，我们在各自的电脑上多次构建出来的哈希值可以保持一致，只是在两台电脑上不一致。考虑到vender中打包的都是第三方依赖，于是猜测是两台电脑上安装的依赖包不同。接着对比了两人的package.json中的dependencies，完全一致。
 考虑到package.json文件中包版本中的^符号匹配的范围比较大。参考npm官方给出的解释：
-^1.2.3 := &amp;gt;=1.2.3 &amp;lt;2.0.0 ^0.2.3 := &amp;gt;=0.2.3 &amp;lt;0.3.0 ^0.0.3 := &amp;gt;=0.0.3 &amp;lt;0." />
+^1.2.3 := &amp;gt;=1.2.3 &amp;lt;2.0.0 ^0.2.3 := &amp;gt;=0.2.3 &amp;lt;0.3.0 ^0.0.3 := &amp;gt;=0." />
   <meta property="og:url" content="https://loveky.github.io/2017/03/27/lock-npm-package-version-in-js-project/" />
   <meta property="og:image" content="https://loveky.github.io/img/avatar.jpg" />
 
 
 
 
-<meta name="generator" content="Hugo 0.36.1" />
+<meta name="generator" content="Hugo 0.41" />
 
 
 <link rel="canonical" href="https://loveky.github.io/2017/03/27/lock-npm-package-version-in-js-project/" />
@@ -289,7 +289,8 @@ module.exports = { entry: { app: &amp;#39;./src/js/app.jsx&amp;#39;, vender: [ &
             <span style="color:#a6e22e">minChunks</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">Infinity</span>,
         })
     ]
-};</code></pre></div>
+};
+</code></pre></div>
 <h3 id="调查">调查</h3>
 
 <p>经过多次验证发现，我们在各自的电脑上多次构建出来的哈希值可以保持一致，只是在两台电脑上不一致。考虑到vender中打包的都是第三方依赖，于是猜测是两台电脑上安装的依赖包不同。接着对比了两人的package.json中的dependencies，完全一致。</p>
@@ -370,7 +371,7 @@ npm shrinkwrap --dev</code></pre></div>
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>416</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>434</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">

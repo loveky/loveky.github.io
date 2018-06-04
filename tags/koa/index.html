@@ -39,7 +39,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.36.1" />
+<meta name="generator" content="Hugo 0.41" />
 
 
 <link rel="canonical" href="https://loveky.github.io/tags/koa/" />
@@ -251,7 +251,7 @@
  从介绍中可以看出这又是一个小而美的框架。到GitHub项目页面上看了一下发现源码里只有4个JS文件，总代码量只有1571行(以2015年12月26日最新稳定版1.1.2为准)。于是决定把代码clone下来学习一下，本篇会先从整个框架的入口文件lib/application.js说起。
 总体说明 lib/application.js文件export出的是一个构造函数，用来创建一个koa应用。一个koa应用最常用的方法有2个： - listen(port) 执行listen后会通过http.createServer启动一个服务器并监听指定端口 - use(middleware) 注册一个中间件，一个koa应用可以注册多个中间件， 处理请求时会按照中间件注册的顺序执行这些中间件。
 更多详细信息可以参考GitHub文档页面。
-代码注释 function Application() { if (!(this instanceof Application)) return new Application; this.env = process.env.NODE_ENV || &#39;development&#39;; this.subdomainOffset = 2; this.middleware = []; this.proxy = false; this.context = Object.create(context); this.request = Object.create(request); this.response = Object.create(response); } 以上就是Application构造函数的定义，很简洁，主要做了以下几件事情：
+代码注释 function Application() { if (!(this instanceof Application)) return new Application; this.env = process.env.NODE_ENV || &#39;development&#39;; this.subdomainOffset = 2; this.middleware = []; this.proxy = false; this.context = Object.create(context); this.request = Object.create(request); this.response = Object.create(response); }  以上就是Application构造函数的定义，很简洁，主要做了以下几件事情：
 - 通过instanceof判断来支持不带new关键字的调用。 - 设置应用运行环境，会从环境变量NODE_ENV读取，默认值为development - 声明this.</p>
   <footer class="post-footer">
     <a class="read-more" href="https://loveky.github.io/2015/12/28/koa-source-lib-application/">阅读全文 →</a>

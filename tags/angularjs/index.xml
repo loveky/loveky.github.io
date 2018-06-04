@@ -27,13 +27,12 @@ DI in a Nutshell 一个组件要想获取它的依赖可以通过以下三种途
  依赖可以作为参数传递给需要它的组件
   前两种获取依赖的方式并不理想，因为这会导致依赖关系被硬编码进代码中。这会导致更新依赖关系变得很复杂。在测试时尤其如此，我们通常会提供mock过的依赖关系以隔离不同组件间的测试，硬编码会导致每次测试都需要修改相关的源码。
 相比之下，第三种方式是最可行的，因为它将解决依赖关系的责任从组件中移除。依赖只是简单的作为参数传递给组件：
-function SomeClass(greeter) { this.greeter = greeter; } SomeClass.prototype.doSomething = function(name) { this.greeter.greet(name); } 在上边的例子中，SomeClass并不关心如何创建或找到greeter，它只是在初始化时从参数列表里取出需要的依赖即可。
+function SomeClass(greeter) { this.greeter = greeter; } SomeClass.prototype.doSomething = function(name) { this.greeter.greet(name); }  在上边的例子中，SomeClass并不关心如何创建或找到greeter，它只是在初始化时从参数列表里取出需要的依赖即可。
 但这样做的问题是，寻找/创建依赖的责任被转交给了调用SomeClass的代码。
 为了统一管理依赖关系，每个Angular应用都有一个injector。injector是一个服务定位器，它负责查找或创建依赖。
 下面是一个使用injector服务的例子：
-// Provide the wiring information in a module var myModule = angular.module(&amp;#39;myModule&amp;#39;, []); 下面的代码告诉injector如何创建greeter服务。需要注意的是greeter又依赖于$window服务。greeter实际上是一个包含greet方法的对象。
-myModule.factory(&amp;#39;greeter&amp;#39;, function($window) { return { greet: function(text) { $window.alert(text); } }; }); 下面的代码演示了如何创建一个injector并通过它来请求greeter服务:
-var injector = angular.</description>
+// Provide the wiring information in a module var myModule = angular.module(&amp;#39;myModule&amp;#39;, []);  下面的代码告诉injector如何创建greeter服务。需要注意的是greeter又依赖于$window服务。greeter实际上是一个包含greet方法的对象。
+myModule.factory(&amp;#39;greeter&amp;#39;, function($window) { return { greet: function(text) { $window.alert(text); } }; });  下面的代码演示了如何创建一个injector并通过它来请求greeter服务:</description>
     </item>
     
     <item>
@@ -47,7 +46,7 @@ var injector = angular.</description>
 所有的这些魔法只需要我们在input元素上指定一个ng-model属性。可见ng-model这个directive是双向绑定这一特性不可缺少一点。本文就继续从源代码入手看看ngModel的实现方式以及其它directive是如何与ngModel交互的。
 ngModel被定义在input.js。从名字上可看出，该文件还定义input这个directive，从这点也可以看出ngModel与input之间的紧密关系。
 注: 文中所有涉及到的AngularJS源码均来自angular-1.2.8版本。
-var ngModelDirective = function() { return { require: [&amp;#39;ngModel&amp;#39;, &amp;#39;^?form&amp;#39;], controller: NgModelController, link: function(scope, element, attr, ctrls) { // notify others, especially parent forms  var modelCtrl = ctrls[0], formCtrl = ctrls[1] || nullFormCtrl; formCtrl.$addControl(modelCtrl); scope.$on(&amp;#39;$destroy&amp;#39;, function() { formCtrl.$removeControl(modelCtrl); }); } }; }; 可以看出ngModel依赖于ngModelController以及可选的formController。ngModel在link方法中只做了2件事:
+var ngModelDirective = function() { return { require: [&amp;#39;ngModel&amp;#39;, &amp;#39;^?form&amp;#39;], controller: NgModelController, link: function(scope, element, attr, ctrls) { // notify others, especially parent forms  var modelCtrl = ctrls[0], formCtrl = ctrls[1] || nullFormCtrl; formCtrl.$addControl(modelCtrl); scope.$on(&amp;#39;$destroy&amp;#39;, function() { formCtrl.$removeControl(modelCtrl); }); } }; };  可以看出ngModel依赖于ngModelController以及可选的formController。ngModel在link方法中只做了2件事:
  如果声明了ngModel的元素出现在一个form中，那么就向上层form注册自身 注册了$destroy事件的监听器，该事件触发时告知上层form移除对自身的引用  link方法如此简单以至于我们还没看到关于数据绑定的任何信息。看来问题的答案都藏在ngModelController中了。接下来看看ngModelController中都发生了什么。
 var NgModelController = [&amp;#39;$scope&amp;#39;, &amp;#39;$exceptionHandler&amp;#39;, &amp;#39;$attrs&amp;#39;, &amp;#39;$element&amp;#39;, &amp;#39;$parse&amp;#39;, function($scope, $exceptionHandler, $attr, $element, $parse) { this.</description>
     </item>
@@ -78,7 +77,7 @@ var NgModelController = [&amp;#39;$scope&amp;#39;, &amp;#39;$exceptionHandler&am
 这两天项目主体完成，准备上线，算是有了一些自由时间，正好借此机会学习一下AngularJS内部的实现机制。
 本篇来说说最常见的directive之一 ngRepeat
 该文件的整体结构如下：
-var ngRepeatDirective = [&amp;#39;$parse&amp;#39;, &amp;#39;$animate&amp;#39;, function($parse, $animate) { var NG_REMOVED = &amp;#39;$$NG_REMOVED&amp;#39;; var ngRepeatMinErr = minErr(&amp;#39;ngRepeat&amp;#39;); return { transclude: &amp;#39;element&amp;#39;, priority: 1000, terminal: true, $$tlb: true, link: function($scope, $element, $attr, ctrl, $transclude){ ..... } }; function getBlockStart(block) { return block.clone[0]; } function getBlockEnd(block) { return block.clone[block.clone.length - 1]; } }]; ngRepeatDirective是一个数组，它会被传递给directive方法用来生成ngRepeat这个directive。可以看到ngRepeat依赖于$parse和$animate两个服务。$parse用来将字符串解析成javascript函数。$animate用来给DOM改变附加上动画效果。文件最后声明了两个helper方法，会在稍后的分析中介绍到。
+var ngRepeatDirective = [&amp;#39;$parse&amp;#39;, &amp;#39;$animate&amp;#39;, function($parse, $animate) { var NG_REMOVED = &amp;#39;$$NG_REMOVED&amp;#39;; var ngRepeatMinErr = minErr(&amp;#39;ngRepeat&amp;#39;); return { transclude: &amp;#39;element&amp;#39;, priority: 1000, terminal: true, $$tlb: true, link: function($scope, $element, $attr, ctrl, $transclude){ ..... } }; function getBlockStart(block) { return block.clone[0]; } function getBlockEnd(block) { return block.clone[block.clone.length - 1]; } }];  ngRepeatDirective是一个数组，它会被传递给directive方法用来生成ngRepeat这个directive。可以看到ngRepeat依赖于$parse和$animate两个服务。$parse用来将字符串解析成javascript函数。$animate用来给DOM改变附加上动画效果。文件最后声明了两个helper方法，会在稍后的分析中介绍到。
 接下来把最大的篇幅交给这个directive的核心——link方法。
 var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]+?)\s+in\s+([\s\S]+?)(?:\s+track\s+by\s+([\s\S]+?))?\s*$/), trackByExp, trackByExpGetter, trackByIdExpFn, trackByIdArrayFn, trackByIdObjFn, lhs, rhs, valueIdentifier, keyIdentifier, hashFnLocals = {$id: hashKey}; if (!</description>
     </item>
@@ -95,14 +94,13 @@ compile属性是一个函数。该函数会针对每一个directive的实例执�
  元素还没有被插入document
  可以修改template，最终结果会被angular缓存
   link属性可以有两种配置方式。 link属性可以被设置为一个对象，包含pre, post两个属性，分别对应一个函数(preLink, postLink)。preList，postLink的区别在于执行顺序。preLink是自顶向下的，先父节点，后子节点，postLink正好相反。
-.directive{ return { link: { pre: function preLink(){ ... }, post: function postLink() { ... } } } } link属性也可以被直接设置为一个函数，则默认相当于设置了postLink函数。
-.directive{ return { link: function link(){ ... } } } 等于
+.directive{ return { link: { pre: function preLink(){ ... }, post: function postLink() { ... } } } }  link属性也可以被直接设置为一个函数，则默认相当于设置了postLink函数。
+.directive{ return { link: function link(){ ... } } }  等于
 .directive{ return { link: { post: function post() { ... } } } }  由此可见，如果直接将link属性设置为一个函数，则link阶段的执行顺序是自底向上的。
 link阶段会针对每一个被RENDERED的directive实例执行一次。此阶段：
  可以访问scope(因为controller已经初始化完成)
  元素已经被插入document中
- 不可以修改template(angular会直接使用之前缓存的内容)
-  如果定义了compile属性则link属性会被忽略。</description>
+ 不可以修改template(angular会直接使用之前缓存的内容)</description>
     </item>
     
   </channel>

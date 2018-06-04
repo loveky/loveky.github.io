@@ -19,9 +19,8 @@
   <meta name="description" content="要讨论Webpack 2中新增的这两个plugin的功能，还要先从使用Webpack打包的项目的前端资源缓存方案说起。
 通常在使用了Webpack的项目中我们会使用CommonsChunkPlugin来将所有依赖的第三方包打包到一个名为vender的chunk中。与此同时，为了避免每次更改项目代码时导致vender chunk的chunkHash改变，我们还会单独生成一个manifest chunk。
 举个例子，假设我们有一个项目，项目中入口文件为index.js。其内容如下：
-import add from &amp;#39;./src/add&amp;#39;; import leftPad from &amp;#39;left-pad&amp;#39;; import jsonp from &amp;#39;jsonp&amp;#39;; add(1, 2); 通常我们的webpack.config.js文件就会有类似如下的配置：
-const path = require(&amp;#39;path&amp;#39;); const webpack = require(&amp;#39;webpack&amp;#39;); module.exports = { entry: { &amp;#39;app&amp;#39;: &amp;#39;./index.js&amp;#39;, &amp;#39;vender&amp;#39;: [&amp;#39;left-pad&amp;#39;, &amp;#39;jsonp&amp;#39;] }, output: { filename: &amp;#39;[name].[chunkHash].js&amp;#39;, path: path.resolve(__dirname, &amp;#39;build&amp;#39;) }, resolve: { extensions: [&amp;#39;.js&amp;#39;] }, module: { ... }, plugins:[ new webpack.optimize.CommonsChunkPlugin({ name: [&amp;#39;vender&amp;#39;, &amp;#39;manifest&amp;#39;], minChunks: Infinity, }) ] }; 这时，通过Webpack打包，会生成三个文件：
-假设我们修改了./src/add.js文件，重新打包，会得到：" />
+import add from &amp;#39;./src/add&amp;#39;; import leftPad from &amp;#39;left-pad&amp;#39;; import jsonp from &amp;#39;jsonp&amp;#39;; add(1, 2);  通常我们的webpack.config.js文件就会有类似如下的配置：
+const path = require(&amp;#39;path&amp;#39;); const webpack = require(&amp;#39;webpack&amp;#39;); module.exports = { entry: { &amp;#39;app&amp;#39;: &amp;#39;./index.js&amp;#39;, &amp;#39;vender&amp;#39;: [&amp;#39;left-pad&amp;#39;, &amp;#39;jsonp&amp;#39;] }, output: { filename: &amp;#39;[name].[chunkHash].js&amp;#39;, path: path.resolve(__dirname, &amp;#39;build&amp;#39;) }, resolve: { extensions: [&amp;#39;.js&amp;#39;] }, module: { ... }, plugins:[ new webpack.optimize.CommonsChunkPlugin({ name: [&amp;#39;vender&amp;#39;, &amp;#39;manifest&amp;#39;], minChunks: Infinity, }) ] };  这时，通过Webpack打包，会生成三个文件：" />
 
   
   
@@ -31,9 +30,8 @@ const path = require(&amp;#39;path&amp;#39;); const webpack = require(&amp;#39;w
     <meta name="twitter:description" content="要讨论Webpack 2中新增的这两个plugin的功能，还要先从使用Webpack打包的项目的前端资源缓存方案说起。
 通常在使用了Webpack的项目中我们会使用CommonsChunkPlugin来将所有依赖的第三方包打包到一个名为vender的chunk中。与此同时，为了避免每次更改项目代码时导致vender chunk的chunkHash改变，我们还会单独生成一个manifest chunk。
 举个例子，假设我们有一个项目，项目中入口文件为index.js。其内容如下：
-import add from &amp;#39;./src/add&amp;#39;; import leftPad from &amp;#39;left-pad&amp;#39;; import jsonp from &amp;#39;jsonp&amp;#39;; add(1, 2); 通常我们的webpack.config.js文件就会有类似如下的配置：
-const path = require(&amp;#39;path&amp;#39;); const webpack = require(&amp;#39;webpack&amp;#39;); module.exports = { entry: { &amp;#39;app&amp;#39;: &amp;#39;./index.js&amp;#39;, &amp;#39;vender&amp;#39;: [&amp;#39;left-pad&amp;#39;, &amp;#39;jsonp&amp;#39;] }, output: { filename: &amp;#39;[name].[chunkHash].js&amp;#39;, path: path.resolve(__dirname, &amp;#39;build&amp;#39;) }, resolve: { extensions: [&amp;#39;.js&amp;#39;] }, module: { ... }, plugins:[ new webpack.optimize.CommonsChunkPlugin({ name: [&amp;#39;vender&amp;#39;, &amp;#39;manifest&amp;#39;], minChunks: Infinity, }) ] }; 这时，通过Webpack打包，会生成三个文件：
-假设我们修改了./src/add.js文件，重新打包，会得到：" />
+import add from &amp;#39;./src/add&amp;#39;; import leftPad from &amp;#39;left-pad&amp;#39;; import jsonp from &amp;#39;jsonp&amp;#39;; add(1, 2);  通常我们的webpack.config.js文件就会有类似如下的配置：
+const path = require(&amp;#39;path&amp;#39;); const webpack = require(&amp;#39;webpack&amp;#39;); module.exports = { entry: { &amp;#39;app&amp;#39;: &amp;#39;./index.js&amp;#39;, &amp;#39;vender&amp;#39;: [&amp;#39;left-pad&amp;#39;, &amp;#39;jsonp&amp;#39;] }, output: { filename: &amp;#39;[name].[chunkHash].js&amp;#39;, path: path.resolve(__dirname, &amp;#39;build&amp;#39;) }, resolve: { extensions: [&amp;#39;.js&amp;#39;] }, module: { ... }, plugins:[ new webpack.optimize.CommonsChunkPlugin({ name: [&amp;#39;vender&amp;#39;, &amp;#39;manifest&amp;#39;], minChunks: Infinity, }) ] };  这时，通过Webpack打包，会生成三个文件：" />
     <meta name="twitter:image" content="https://loveky.github.io/img/avatar.jpg" />
   
 
@@ -43,16 +41,15 @@ const path = require(&amp;#39;path&amp;#39;); const webpack = require(&amp;#39;w
   <meta property="og:description" content="要讨论Webpack 2中新增的这两个plugin的功能，还要先从使用Webpack打包的项目的前端资源缓存方案说起。
 通常在使用了Webpack的项目中我们会使用CommonsChunkPlugin来将所有依赖的第三方包打包到一个名为vender的chunk中。与此同时，为了避免每次更改项目代码时导致vender chunk的chunkHash改变，我们还会单独生成一个manifest chunk。
 举个例子，假设我们有一个项目，项目中入口文件为index.js。其内容如下：
-import add from &amp;#39;./src/add&amp;#39;; import leftPad from &amp;#39;left-pad&amp;#39;; import jsonp from &amp;#39;jsonp&amp;#39;; add(1, 2); 通常我们的webpack.config.js文件就会有类似如下的配置：
-const path = require(&amp;#39;path&amp;#39;); const webpack = require(&amp;#39;webpack&amp;#39;); module.exports = { entry: { &amp;#39;app&amp;#39;: &amp;#39;./index.js&amp;#39;, &amp;#39;vender&amp;#39;: [&amp;#39;left-pad&amp;#39;, &amp;#39;jsonp&amp;#39;] }, output: { filename: &amp;#39;[name].[chunkHash].js&amp;#39;, path: path.resolve(__dirname, &amp;#39;build&amp;#39;) }, resolve: { extensions: [&amp;#39;.js&amp;#39;] }, module: { ... }, plugins:[ new webpack.optimize.CommonsChunkPlugin({ name: [&amp;#39;vender&amp;#39;, &amp;#39;manifest&amp;#39;], minChunks: Infinity, }) ] }; 这时，通过Webpack打包，会生成三个文件：
-假设我们修改了./src/add.js文件，重新打包，会得到：" />
+import add from &amp;#39;./src/add&amp;#39;; import leftPad from &amp;#39;left-pad&amp;#39;; import jsonp from &amp;#39;jsonp&amp;#39;; add(1, 2);  通常我们的webpack.config.js文件就会有类似如下的配置：
+const path = require(&amp;#39;path&amp;#39;); const webpack = require(&amp;#39;webpack&amp;#39;); module.exports = { entry: { &amp;#39;app&amp;#39;: &amp;#39;./index.js&amp;#39;, &amp;#39;vender&amp;#39;: [&amp;#39;left-pad&amp;#39;, &amp;#39;jsonp&amp;#39;] }, output: { filename: &amp;#39;[name].[chunkHash].js&amp;#39;, path: path.resolve(__dirname, &amp;#39;build&amp;#39;) }, resolve: { extensions: [&amp;#39;.js&amp;#39;] }, module: { ... }, plugins:[ new webpack.optimize.CommonsChunkPlugin({ name: [&amp;#39;vender&amp;#39;, &amp;#39;manifest&amp;#39;], minChunks: Infinity, }) ] };  这时，通过Webpack打包，会生成三个文件：" />
   <meta property="og:url" content="https://loveky.github.io/2017/03/29/webpack-module-ids/" />
   <meta property="og:image" content="https://loveky.github.io/img/avatar.jpg" />
 
 
 
 
-<meta name="generator" content="Hugo 0.36.1" />
+<meta name="generator" content="Hugo 0.41" />
 
 
 <link rel="canonical" href="https://loveky.github.io/2017/03/29/webpack-module-ids/" />
@@ -266,7 +263,8 @@ const path = require(&amp;#39;path&amp;#39;); const webpack = require(&amp;#39;w
 <span style="color:#66d9ef">import</span> <span style="color:#a6e22e">leftPad</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;left-pad&#39;</span>;
 <span style="color:#66d9ef">import</span> <span style="color:#a6e22e">jsonp</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;jsonp&#39;</span>;
 
-<span style="color:#a6e22e">add</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>);</code></pre></div>
+<span style="color:#a6e22e">add</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>);
+</code></pre></div>
 <p>通常我们的<code>webpack.config.js</code>文件就会有类似如下的配置：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">path</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;path&#39;</span>);
 <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">webpack</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;webpack&#39;</span>);
@@ -292,7 +290,8 @@ const path = require(&amp;#39;path&amp;#39;); const webpack = require(&amp;#39;w
             <span style="color:#a6e22e">minChunks</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">Infinity</span>,
         })
   ]
-};</code></pre></div>
+};
+</code></pre></div>
 <p>这时，通过Webpack打包，会生成三个文件：</p>
 
 <p><img src="https://loveky.github.io/img/Snip20170329_2.png" alt="" /></p>
@@ -312,7 +311,8 @@ const path = require(&amp;#39;path&amp;#39;); const webpack = require(&amp;#39;w
 <span style="color:#66d9ef">import</span> <span style="color:#a6e22e">jsonp</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;jsonp&#39;</span>;
 
 <span style="color:#a6e22e">add</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>);
-<span style="color:#a6e22e">add2</span>(<span style="color:#ae81ff">1</span>);</code></pre></div>
+<span style="color:#a6e22e">add2</span>(<span style="color:#ae81ff">1</span>);
+</code></pre></div>
 <p>此时再次构建，会得到如下的输出：</p>
 
 <p><img src="https://loveky.github.io/img/Snip20170329_4.png" alt="" /></p>
@@ -363,7 +363,7 @@ const path = require(&amp;#39;path&amp;#39;); const webpack = require(&amp;#39;w
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>413</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>431</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">

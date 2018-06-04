@@ -64,7 +64,7 @@ it &amp;#34;sends out email&amp;#34; do expect { post :create, user: Fabricate.a
 
 
 
-<meta name="generator" content="Hugo 0.36.1" />
+<meta name="generator" content="Hugo 0.41" />
 
 
 <link rel="canonical" href="https://loveky.github.io/2013/06/15/try-sidekiq/" />
@@ -304,7 +304,7 @@ it &amp;#34;sends out email&amp;#34; do expect { post :create, user: Fabricate.a
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">it <span style="color:#e6db74">&#34;sends out email&#34;</span> <span style="color:#66d9ef">do</span>
     expect {
         post <span style="color:#e6db74">:create</span>, <span style="color:#e6db74">user</span>: <span style="color:#66d9ef">Fabricate</span><span style="color:#f92672">.</span>attributes_for(<span style="color:#e6db74">:user</span>)
-    }<span style="color:#f92672">.</span>to change{ <span style="color:#66d9ef">ActionMailer</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Base</span><span style="color:#f92672">.</span>deliveries<span style="color:#f92672">.</span>size }<span style="color:#f92672">.</span>by(<span style="color:#ae81ff">1</span><span style="color:#f92672"></span>)
+    }<span style="color:#f92672">.</span>to change{ <span style="color:#66d9ef">ActionMailer</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Base</span><span style="color:#f92672">.</span>deliveries<span style="color:#f92672">.</span>size }<span style="color:#f92672">.</span>by(<span style="color:#ae81ff">1</span>)
 <span style="color:#66d9ef">end</span>
 
 it <span style="color:#e6db74">&#34;sends to the right recipient&#34;</span> <span style="color:#66d9ef">do</span>
@@ -335,7 +335,7 @@ it <span style="color:#e6db74">&#34;send with the right content&#34;</span> <spa
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>1797</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>1814</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">

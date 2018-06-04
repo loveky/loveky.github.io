@@ -40,7 +40,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.36.1" />
+<meta name="generator" content="Hugo 0.41" />
 
 
 <link rel="canonical" href="https://loveky.github.io/post/" />
@@ -245,6 +245,26 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2018/06/04/write-good-commit-message/" class="post-link">书写良好的 commit message</a></h3>
+    <p class="post-meta">@loveky · Jun 4, 2018</p>
+  </header>
+  
+  <p class="post-summary">今天来说说如何书写好的 commit message。
+Commit message 大家应该每天都在写，每次使用 Git 提交代码时，我们都会在执行 git commit 命令时附带上一句话来简要描述此次提交的改动。
+Commit message 看似简单，作用却很重要。在阅读代码时，可以通过 commit message 了解到作者编写某行代码时的背景；调查 bug 时可以通过搜索 commit message 快速定位相关的提交记录。
+那么什么样的 commit message 才算好的 commit message 呢？
+开源社区已经为我们总结出了一套名为 Conventional Commits 的书写规范。很多流行的开源项目都使用了这套规范，如 Karma，Angular 等。其规定的格式如下：
+&lt;type&gt;[optional scope]: &lt;description&gt; [optional body] [optional footer]  下面我们分别来介绍一下其中的各个组成部分：
+type ：用于表明我们这次提交的改动类型，是新增了功能？还是修改了测试代码？又或者是更新了文档？开源社区目前总结出了以下 11 种类型：
+ build：主要目的是修改项目构建系统(例如 glup，webpack，rollup 的配置等)的提交 ci：主要目的是修改项目继续集成流程(例如 Travis，Jenkins，GitLab CI，Circle等)的提交 docs：文档更新 feat：新增功能 fix：bug 修复 perf：性能优化 refactor：重构代码(既没有新增功能，也没有修复 bug) style：不影响程序逻辑的代码修改(修改空白字符，补全缺失的分号等) test：新增测试用例或是更新现有测试 revert：回滚某个更早之前的提交 chore：不属于以上类型的其他类型  optional scope：一个可选的修改范围。用于标识此次提交主要涉及到代码中哪个模块。根据项目实际情况填写即可，最好在项目中规定好模块列表，保持一致性。</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2018/06/04/write-good-commit-message/">阅读全文 →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2018/05/17/unit-test-and-jest/" class="post-link">单元测试与单元测试框架 Jest</a></h3>
     <p class="post-meta">@loveky · May 17, 2018</p>
   </header>
@@ -363,7 +383,7 @@ If you want your application to be stable, don’t use context. It is an experim
 在谈 pkg.module 之前，让我们先来了解一个和它有着紧密关系的概念 —— Tree Shaking。
 什么是 Tree Shaking？ 让我们通过两个小例子来了解。
 假设我们有以下两个文件：
-// math.js exports.add1 = function (x) { return x &#43; 1; } exports.add2 = function (x) { return x &#43; 2; }// app.js import { add1 } from &#39;./math&#39;; add1(100); app.js 文件通过 import 引入了 math.js 中的 add1 方法。
+// math.js exports.add1 = function (x) { return x &#43; 1; } exports.add2 = function (x) { return x &#43; 2; } // app.js import { add1 } from &#39;./math&#39;; add1(100);  app.js 文件通过 import 引入了 math.js 中的 add1 方法。
 我们通过 webpack 命令打包：
 webpack --entry ./app.js --output-filename app.bunble.js 在生成的 app.bundle.js 文件中我们可以看到以下内容：
 这里我们可以看到虽然我们只用到了 math.js 文件中的 add1 方法，但是在最终生成的 bundle 文件中却包含了 add1 和 add2 两个方法。这是为什么呢？</p>
@@ -420,26 +440,9 @@ yarn add --dev eslint // or npm install --save-dev eslint 创建配置文件
   <p class="post-summary">本文旨在帮你快速了解 service worker 的基本知识点，让你对 service worker 有一个大致的了解。为以后开发一个简单的 PWA 应用打下基础。
 关于 service worker 的几个基本知识点  它是一个可编程的网络代理，让你可以控制页面请求的处理方式。 它是一个 JavaScript Worker，因此它无法直接操作 DOM。但可以通过 postMessage 接口与页面通信。同时，service worker 中的代码不会阻塞页面响应。 它在闲置时被终止，在需要时被启动。并不是常驻内存。因此你不能在 onfetch 或是 onmessage 回调中依赖全局状态。 被设计成完全异步。因此在 service worker 中无法使用同步 API （例如同步 XHR，localStorage等）。接口重度依赖于 promise。 只能在 HTTPS 页面加载（唯一的例外：localhost/127.0.0.1，方便调试）。  Service worker 的作用域 一个 service worker 的默认作用域是这个 service worker 脚本所在的目录。例如 https://example.com/sw.js 脚本默认就是 https://example.com 下的所有页面。
 你也可以在注册 service worker 时明确指定作用域：
-navigator.serviceWorker.register(&#39;sw.js&#39;, { scope: &#39;./abc&#39; }); 假设以上代码在 https://example.com 页面里执行，则意味着该 service worker 的作用域就是 https://example.</p>
+navigator.serviceWorker.register(&#39;sw.js&#39;, { scope: &#39;./abc&#39; });  假设以上代码在 https://example.com 页面里执行，则意味着该 service worker 的作用域就是 https://example.</p>
   <footer class="post-footer">
     <a class="read-more" href="https://loveky.github.io/2017/07/24/service-worker-101/">阅读全文 →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://loveky.github.io/2017/07/21/translate-five-tips-for-working-with-redux-in-large-applications/" class="post-link">[译] 在大型应用中使用 Redux 的五个技巧</a></h3>
-    <p class="post-meta">@loveky · Jul 21, 2017</p>
-  </header>
-  
-  <p class="post-summary">Redux 是一个很棒的用于管理应用程序“状态”的工具。单向数据流以及对不可变数据的关注使得推断状态的变化变得很简单。每次状态变化都由一个 action 触发，这会导致 reducer 函数返回一个变更后的新状态。由于客户要在我们的平台上管理或发布广告资源，在 AppNexus 使用 Redux 创建的很多用户界面都需要处理大量数据以及非常复杂的交互。在开发这些界面的过程中，我们发现了一些有用的规则和技巧以维持 Redux 易于管理。以下的几点讨论应该可以帮助到任何在大型，数据密集型应用中使用 Redux 的开发者：
- 第一点: 在存储和访问状态时使用索引和选择器 第二点: 把数据对象，对数据对象的修改以及其它 UI 状态区分开 第三点: 在单页应用的不同页面间共享数据，以及何时不该这么做 第四点: 在状态中的不同节点复用通用的 reducer 函数 第五点: 连接 React 组件与 Redux 状态的最佳实践  1. 使用索引保存数据，使用选择器读取数据 选择正确的数据结构可以对程序的结构和性能产生很大影响。存储来自 API 的可序列化数据可以极大的受益于索引的使用。索引是指一个 JavaScript 对象，其键是我们要存储的数据对象的 id，其值则是这些数据对象自身。这种模式和使用 hashmap 存储数据非常类似，在查询效率方面也有相同的优势。这一点对于精通 Redux 的人来说不足为奇。实际上，Redux 的作者 Dan Abramov 在它的 Redux 教程中就推荐了这种数据结构。
-设想你有一组从 REST API 获取的数据对象，例如来自 /users 服务的数据。假设我们决定直接将这个普通数组存储在状态中，就像在响应中那样。当我们需要获取一个特定用户对象时会怎样呢？我们需要遍历状态中的所有用户。如果用户很多，这可能会是一个代价高昂的操作。如果我们想跟踪用户的一小部分，例如选中和未选中的用户呢？我们要么需要把数据保存在两个数组中，要么就要跟踪这些选中和未选中用户在主数组中的索引（译者注：此处指的是普通意义上的数组索引）。
-然而，我们决定重构代码改用索引的方式存储数据。我们可以在 reducer 中以如下的方式存储数据：
-{ &#34;usersById&#34;: { 123: { id: 123, name: &#34;Jane Doe&#34;, email: &#34;jdoe@example.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2017/07/21/translate-five-tips-for-working-with-redux-in-large-applications/">阅读全文 →</a>
   </footer>
 </article>
 

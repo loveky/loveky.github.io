@@ -26,13 +26,12 @@ DI in a Nutshell 一个组件要想获取它的依赖可以通过以下三种途
  依赖可以作为参数传递给需要它的组件
   前两种获取依赖的方式并不理想，因为这会导致依赖关系被硬编码进代码中。这会导致更新依赖关系变得很复杂。在测试时尤其如此，我们通常会提供mock过的依赖关系以隔离不同组件间的测试，硬编码会导致每次测试都需要修改相关的源码。
 相比之下，第三种方式是最可行的，因为它将解决依赖关系的责任从组件中移除。依赖只是简单的作为参数传递给组件：
-function SomeClass(greeter) { this.greeter = greeter; } SomeClass.prototype.doSomething = function(name) { this.greeter.greet(name); } 在上边的例子中，SomeClass并不关心如何创建或找到greeter，它只是在初始化时从参数列表里取出需要的依赖即可。
+function SomeClass(greeter) { this.greeter = greeter; } SomeClass.prototype.doSomething = function(name) { this.greeter.greet(name); }  在上边的例子中，SomeClass并不关心如何创建或找到greeter，它只是在初始化时从参数列表里取出需要的依赖即可。
 但这样做的问题是，寻找/创建依赖的责任被转交给了调用SomeClass的代码。
 为了统一管理依赖关系，每个Angular应用都有一个injector。injector是一个服务定位器，它负责查找或创建依赖。
 下面是一个使用injector服务的例子：
-// Provide the wiring information in a module var myModule = angular.module(&amp;#39;myModule&amp;#39;, []); 下面的代码告诉injector如何创建greeter服务。需要注意的是greeter又依赖于$window服务。greeter实际上是一个包含greet方法的对象。
-myModule.factory(&amp;#39;greeter&amp;#39;, function($window) { return { greet: function(text) { $window.alert(text); } }; }); 下面的代码演示了如何创建一个injector并通过它来请求greeter服务:
-var injector = angular." />
+// Provide the wiring information in a module var myModule = angular.module(&amp;#39;myModule&amp;#39;, []);  下面的代码告诉injector如何创建greeter服务。需要注意的是greeter又依赖于$window服务。greeter实际上是一个包含greet方法的对象。
+myModule.factory(&amp;#39;greeter&amp;#39;, function($window) { return { greet: function(text) { $window.alert(text); } }; });  下面的代码演示了如何创建一个injector并通过它来请求greeter服务:" />
 
   
   
@@ -49,13 +48,12 @@ DI in a Nutshell 一个组件要想获取它的依赖可以通过以下三种途
  依赖可以作为参数传递给需要它的组件
   前两种获取依赖的方式并不理想，因为这会导致依赖关系被硬编码进代码中。这会导致更新依赖关系变得很复杂。在测试时尤其如此，我们通常会提供mock过的依赖关系以隔离不同组件间的测试，硬编码会导致每次测试都需要修改相关的源码。
 相比之下，第三种方式是最可行的，因为它将解决依赖关系的责任从组件中移除。依赖只是简单的作为参数传递给组件：
-function SomeClass(greeter) { this.greeter = greeter; } SomeClass.prototype.doSomething = function(name) { this.greeter.greet(name); } 在上边的例子中，SomeClass并不关心如何创建或找到greeter，它只是在初始化时从参数列表里取出需要的依赖即可。
+function SomeClass(greeter) { this.greeter = greeter; } SomeClass.prototype.doSomething = function(name) { this.greeter.greet(name); }  在上边的例子中，SomeClass并不关心如何创建或找到greeter，它只是在初始化时从参数列表里取出需要的依赖即可。
 但这样做的问题是，寻找/创建依赖的责任被转交给了调用SomeClass的代码。
 为了统一管理依赖关系，每个Angular应用都有一个injector。injector是一个服务定位器，它负责查找或创建依赖。
 下面是一个使用injector服务的例子：
-// Provide the wiring information in a module var myModule = angular.module(&amp;#39;myModule&amp;#39;, []); 下面的代码告诉injector如何创建greeter服务。需要注意的是greeter又依赖于$window服务。greeter实际上是一个包含greet方法的对象。
-myModule.factory(&amp;#39;greeter&amp;#39;, function($window) { return { greet: function(text) { $window.alert(text); } }; }); 下面的代码演示了如何创建一个injector并通过它来请求greeter服务:
-var injector = angular." />
+// Provide the wiring information in a module var myModule = angular.module(&amp;#39;myModule&amp;#39;, []);  下面的代码告诉injector如何创建greeter服务。需要注意的是greeter又依赖于$window服务。greeter实际上是一个包含greet方法的对象。
+myModule.factory(&amp;#39;greeter&amp;#39;, function($window) { return { greet: function(text) { $window.alert(text); } }; });  下面的代码演示了如何创建一个injector并通过它来请求greeter服务:" />
     <meta name="twitter:image" content="https://loveky.github.io/img/avatar.jpg" />
   
 
@@ -72,20 +70,19 @@ DI in a Nutshell 一个组件要想获取它的依赖可以通过以下三种途
  依赖可以作为参数传递给需要它的组件
   前两种获取依赖的方式并不理想，因为这会导致依赖关系被硬编码进代码中。这会导致更新依赖关系变得很复杂。在测试时尤其如此，我们通常会提供mock过的依赖关系以隔离不同组件间的测试，硬编码会导致每次测试都需要修改相关的源码。
 相比之下，第三种方式是最可行的，因为它将解决依赖关系的责任从组件中移除。依赖只是简单的作为参数传递给组件：
-function SomeClass(greeter) { this.greeter = greeter; } SomeClass.prototype.doSomething = function(name) { this.greeter.greet(name); } 在上边的例子中，SomeClass并不关心如何创建或找到greeter，它只是在初始化时从参数列表里取出需要的依赖即可。
+function SomeClass(greeter) { this.greeter = greeter; } SomeClass.prototype.doSomething = function(name) { this.greeter.greet(name); }  在上边的例子中，SomeClass并不关心如何创建或找到greeter，它只是在初始化时从参数列表里取出需要的依赖即可。
 但这样做的问题是，寻找/创建依赖的责任被转交给了调用SomeClass的代码。
 为了统一管理依赖关系，每个Angular应用都有一个injector。injector是一个服务定位器，它负责查找或创建依赖。
 下面是一个使用injector服务的例子：
-// Provide the wiring information in a module var myModule = angular.module(&amp;#39;myModule&amp;#39;, []); 下面的代码告诉injector如何创建greeter服务。需要注意的是greeter又依赖于$window服务。greeter实际上是一个包含greet方法的对象。
-myModule.factory(&amp;#39;greeter&amp;#39;, function($window) { return { greet: function(text) { $window.alert(text); } }; }); 下面的代码演示了如何创建一个injector并通过它来请求greeter服务:
-var injector = angular." />
+// Provide the wiring information in a module var myModule = angular.module(&amp;#39;myModule&amp;#39;, []);  下面的代码告诉injector如何创建greeter服务。需要注意的是greeter又依赖于$window服务。greeter实际上是一个包含greet方法的对象。
+myModule.factory(&amp;#39;greeter&amp;#39;, function($window) { return { greet: function(text) { $window.alert(text); } }; });  下面的代码演示了如何创建一个injector并通过它来请求greeter服务:" />
   <meta property="og:url" content="https://loveky.github.io/2014/05/04/di-in-angularjs/" />
   <meta property="og:image" content="https://loveky.github.io/img/avatar.jpg" />
 
 
 
 
-<meta name="generator" content="Hugo 0.36.1" />
+<meta name="generator" content="Hugo 0.41" />
 
 
 <link rel="canonical" href="https://loveky.github.io/2014/05/04/di-in-angularjs/" />
@@ -321,7 +318,8 @@ Angular injector子系统负责创建组件，解决它们的依赖，并按要�
 
 <span style="color:#a6e22e">SomeClass</span>.<span style="color:#a6e22e">prototype</span>.<span style="color:#a6e22e">doSomething</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">name</span>) {
   <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">greeter</span>.<span style="color:#a6e22e">greet</span>(<span style="color:#a6e22e">name</span>);
-}</code></pre></div>
+}
+</code></pre></div>
 <p>在上边的例子中，<code>SomeClass</code>并不关心如何创建或找到<code>greeter</code>，它只是在初始化时从参数列表里取出需要的依赖即可。<br />
 但这样做的问题是，寻找/创建依赖的责任被转交给了调用<code>SomeClass</code>的代码。</p>
 
@@ -329,7 +327,8 @@ Angular injector子系统负责创建组件，解决它们的依赖，并按要�
 
 <p>下面是一个使用<code>injector</code>服务的例子：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// Provide the wiring information in a module
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">myModule</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">angular</span>.<span style="color:#a6e22e">module</span>(<span style="color:#e6db74">&#39;myModule&#39;</span>, []);</code></pre></div>
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">myModule</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">angular</span>.<span style="color:#a6e22e">module</span>(<span style="color:#e6db74">&#39;myModule&#39;</span>, []);
+</code></pre></div>
 <p><img src="https://docs.angularjs.org/img/guide/concepts-module-injector.png" alt="Alt text" /></p>
 
 <p>下面的代码告诉injector如何创建<code>greeter</code>服务。需要注意的是<code>greeter</code>又依赖于<code>$window</code>服务。<code>greeter</code>实际上是一个包含<code>greet</code>方法的对象。</p>
@@ -339,10 +338,12 @@ Angular injector子系统负责创建组件，解决它们的依赖，并按要�
       <span style="color:#a6e22e">$window</span>.<span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">text</span>);
     }
   };
-});</code></pre></div>
+});
+</code></pre></div>
 <p>下面的代码演示了如何创建一个<code>injector</code>并通过它来请求<code>greeter</code>服务:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">injector</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">angular</span>.<span style="color:#a6e22e">injector</span>([<span style="color:#e6db74">&#39;myModule&#39;</span>, <span style="color:#e6db74">&#39;ng&#39;</span>]);
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">greeter</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">injector</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;greeter&#39;</span>);</code></pre></div>
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">greeter</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">injector</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;greeter&#39;</span>);
+</code></pre></div>
 <p>向外部索要依赖服务解决了硬编码的问题，但是这也意味着<code>injector</code>需要在应用内部到处传递(这违背了<a href="http://en.wikipedia.org/wiki/Law_of_Demeter">Law of Demeter</a>)。为解决这个问题，我们在HTML模板中使用一种声明，以此将创建组件的责任交给<code>injector</code>。示例如下：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">ng-controller</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;MyController&#34;</span>&gt;
   &lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">ng-click</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sayHello()&#34;</span>&gt;Hello&lt;/<span style="color:#f92672">button</span>&gt;
@@ -350,9 +351,11 @@ Angular injector子系统负责创建组件，解决它们的依赖，并按要�
   <span style="color:#a6e22e">$scope</span>.<span style="color:#a6e22e">sayHello</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>() {
     <span style="color:#a6e22e">greeter</span>.<span style="color:#a6e22e">greet</span>(<span style="color:#e6db74">&#39;Hello World&#39;</span>);
   };
-}</code></pre></div>
+}
+</code></pre></div>
 <p>当Angular处理HTML到<code>ng-controller</code>时，它会调用<code>injector</code>生成一个controler的实例:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">injector</span>.<span style="color:#a6e22e">instantiate</span>(<span style="color:#a6e22e">MyController</span>); <span style="color:#960050;background-color:#1e0010">// 同时会处理MyController的依赖</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">injector</span>.<span style="color:#a6e22e">instantiate</span>(<span style="color:#a6e22e">MyController</span>); <span style="color:#75715e">// 同时会处理MyController的依赖
+</span><span style="color:#75715e"></span></code></pre></div>
 <p>所有这些都是自动完成的。通过使用<code>ng-controller</code>来调用injector创建controller实例可以达到既解决了controller的依赖，又不需要将injector暴露给controller的目的。</p>
 
 <p>这就是最终的解决方案。应用程序只需要声明它依赖的服务而不需要与injector打交道，这种组织代码的方法并不违背<code>Law of Demeter</code>。</p>
@@ -376,7 +379,8 @@ Angular injector子系统负责创建组件，解决它们的依赖，并按要�
 <p>最简单获取依赖的方式就是假定函数的参数名就是依赖的名字:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">MyController</span>(<span style="color:#a6e22e">$scope</span>, <span style="color:#a6e22e">greeter</span>) {
   <span style="color:#75715e">// ...
-</span><span style="color:#75715e"></span>}</code></pre></div>
+</span><span style="color:#75715e"></span>}
+</code></pre></div>
 <p>给定一个函数，<code>injector</code>可以通过检查它的参数名来推断出那些服务需要被注入。在上边的例子中，<code>$scope</code>和<code>greeter</code>就是需要被注入给MyController的两个服务的名字。</p>
 
 <p>虽然这种方式简单易懂，但它并不适用于使用了JavaScript压缩工具/混淆工具的场景，因为那些工具会将函数的参数名重命名。这使得这种方式只适用于原型开发或是演示程序。</p>
@@ -387,7 +391,8 @@ Angular injector子系统负责创建组件，解决它们的依赖，并按要�
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">MyController</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">renamed$scope</span>, <span style="color:#a6e22e">renamedGreeter</span>) {
   ...
 }
-<span style="color:#a6e22e">MyController</span>[<span style="color:#e6db74">&#39;$inject&#39;</span>] <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;$scope&#39;</span>, <span style="color:#e6db74">&#39;greeter&#39;</span>];</code></pre></div>
+<span style="color:#a6e22e">MyController</span>[<span style="color:#e6db74">&#39;$inject&#39;</span>] <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;$scope&#39;</span>, <span style="color:#e6db74">&#39;greeter&#39;</span>];
+</code></pre></div>
 <p>在这方式中，<code>$inject</code>数组中服务的顺序需要与函数参数名中服务的顺序保持一致。以上边的示例代码为例，<code>$scope</code>服务会被注入到<code>renamed$scope</code>中，<code>greeter</code>会被注入到<code>renamedGreeter</code>中。这里的顺序一定要保持对应。</p>
 
 <p>由于这种方式将声明信息作为属性赋给一个函数，它比较适合定义Controller。</p>
@@ -399,7 +404,8 @@ Angular injector子系统负责创建组件，解决它们的依赖，并按要�
 <p>比如：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">someModule</span>.<span style="color:#a6e22e">factory</span>(<span style="color:#e6db74">&#39;greeter&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">$window</span>) {
   <span style="color:#75715e">// ...
-</span><span style="color:#75715e"></span>});</code></pre></div>
+</span><span style="color:#75715e"></span>});
+</code></pre></div>
 <p>会导致代码膨胀为以下的形式(需要额外定义一个临时变量)：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">greeterFactory</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">renamed$window</span>) {
   <span style="color:#75715e">// ...
@@ -407,11 +413,13 @@ Angular injector子系统负责创建组件，解决它们的依赖，并按要�
 
 <span style="color:#a6e22e">greeterFactory</span>.<span style="color:#a6e22e">$inject</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;$window&#39;</span>];
 
-<span style="color:#a6e22e">someModule</span>.<span style="color:#a6e22e">factory</span>(<span style="color:#e6db74">&#39;greeter&#39;</span>, <span style="color:#a6e22e">greeterFactory</span>);</code></pre></div>
+<span style="color:#a6e22e">someModule</span>.<span style="color:#a6e22e">factory</span>(<span style="color:#e6db74">&#39;greeter&#39;</span>, <span style="color:#a6e22e">greeterFactory</span>);
+</code></pre></div>
 <p>为了避免这种情况，第三种声明方式允许你以如下方式声明：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">someModule</span>.<span style="color:#a6e22e">factory</span>(<span style="color:#e6db74">&#39;greeter&#39;</span>, [<span style="color:#e6db74">&#39;$window&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">renamed$window</span>) {
   <span style="color:#75715e">// ...
-</span><span style="color:#75715e"></span>}]);</code></pre></div>
+</span><span style="color:#75715e"></span>}]);
+</code></pre></div>
 <p>在这里，我们没有简单的把一个factory作为第二个参数，取而代之的是一个包含一系列服务名的字符串以及一个函数的数组。</p>
 
 <p>以上三种方式可以互换，且可以在Angular系统中任何支持依赖注入的地方使用。</p>
@@ -437,7 +445,8 @@ Angular injector子系统负责创建组件，解决它们的依赖，并按要�
   }])
   .<span style="color:#a6e22e">filter</span>(<span style="color:#e6db74">&#39;filterName&#39;</span>, [<span style="color:#e6db74">&#39;depService&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">depService</span>) {
     ...
-  }]);</code></pre></div>
+  }]);
+</code></pre></div>
 <h4 id="module方法">Module方法</h4>
 
 <p>我们可以通过<code>run</code>方法和<code>config</code>方法来指定一个模块在配置阶段和运行阶段要执行的代码。这些方法就像factory方法一样可以注入依赖：</p>
@@ -447,7 +456,8 @@ Angular injector子系统负责创建组件，解决它们的依赖，并按要�
   }])
   .<span style="color:#a6e22e">run</span>([<span style="color:#e6db74">&#39;depService&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">depService</span>) {
     ...
-  }]);</code></pre></div>
+  }]);
+</code></pre></div>
 <h4 id="controller">Controller</h4>
 
 <p>Controller是负责为页面元素提供应用逻辑的构造函数。定义Controller的推荐方式是使用数组声明：</p>
@@ -457,7 +467,8 @@ Angular injector子系统负责创建组件，解决它们的依赖，并按要�
     ...
   }
   ...
-}]);</code></pre></div>
+}]);
+</code></pre></div>
 <p>这样既避免了创建全局函数又可以不受代码压缩的影响。<br />
 与service不同的是，一个应用中可以有同一个Controller的多个实例。每一个<code>ng-controller</code>语句都会创建一个新的实例。<br />
 此外，还可以向Controller注入以下依赖：</p>
@@ -478,7 +489,7 @@ Angular injector子系统负责创建组件，解决它们的依赖，并按要�
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>1474</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>1492</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">

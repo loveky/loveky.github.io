@@ -22,7 +22,7 @@
 这两天项目主体完成，准备上线，算是有了一些自由时间，正好借此机会学习一下AngularJS内部的实现机制。
 本篇来说说最常见的directive之一 ngRepeat
 该文件的整体结构如下：
-var ngRepeatDirective = [&amp;#39;$parse&amp;#39;, &amp;#39;$animate&amp;#39;, function($parse, $animate) { var NG_REMOVED = &amp;#39;$$NG_REMOVED&amp;#39;; var ngRepeatMinErr = minErr(&amp;#39;ngRepeat&amp;#39;); return { transclude: &amp;#39;element&amp;#39;, priority: 1000, terminal: true, $$tlb: true, link: function($scope, $element, $attr, ctrl, $transclude){ ..... } }; function getBlockStart(block) { return block.clone[0]; } function getBlockEnd(block) { return block.clone[block.clone.length - 1]; } }]; ngRepeatDirective是一个数组，它会被传递给directive方法用来生成ngRepeat这个directive。可以看到ngRepeat依赖于$parse和$animate两个服务。$parse用来将字符串解析成javascript函数。$animate用来给DOM改变附加上动画效果。文件最后声明了两个helper方法，会在稍后的分析中介绍到。
+var ngRepeatDirective = [&amp;#39;$parse&amp;#39;, &amp;#39;$animate&amp;#39;, function($parse, $animate) { var NG_REMOVED = &amp;#39;$$NG_REMOVED&amp;#39;; var ngRepeatMinErr = minErr(&amp;#39;ngRepeat&amp;#39;); return { transclude: &amp;#39;element&amp;#39;, priority: 1000, terminal: true, $$tlb: true, link: function($scope, $element, $attr, ctrl, $transclude){ ..... } }; function getBlockStart(block) { return block.clone[0]; } function getBlockEnd(block) { return block.clone[block.clone.length - 1]; } }];  ngRepeatDirective是一个数组，它会被传递给directive方法用来生成ngRepeat这个directive。可以看到ngRepeat依赖于$parse和$animate两个服务。$parse用来将字符串解析成javascript函数。$animate用来给DOM改变附加上动画效果。文件最后声明了两个helper方法，会在稍后的分析中介绍到。
 接下来把最大的篇幅交给这个directive的核心——link方法。
 var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]&#43;?)\s&#43;in\s&#43;([\s\S]&#43;?)(?:\s&#43;track\s&#43;by\s&#43;([\s\S]&#43;?))?\s*$/), trackByExp, trackByExpGetter, trackByIdExpFn, trackByIdArrayFn, trackByIdObjFn, lhs, rhs, valueIdentifier, keyIdentifier, hashFnLocals = {$id: hashKey}; if (!" />
 
@@ -37,7 +37,7 @@ var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]&#43;?
 这两天项目主体完成，准备上线，算是有了一些自由时间，正好借此机会学习一下AngularJS内部的实现机制。
 本篇来说说最常见的directive之一 ngRepeat
 该文件的整体结构如下：
-var ngRepeatDirective = [&amp;#39;$parse&amp;#39;, &amp;#39;$animate&amp;#39;, function($parse, $animate) { var NG_REMOVED = &amp;#39;$$NG_REMOVED&amp;#39;; var ngRepeatMinErr = minErr(&amp;#39;ngRepeat&amp;#39;); return { transclude: &amp;#39;element&amp;#39;, priority: 1000, terminal: true, $$tlb: true, link: function($scope, $element, $attr, ctrl, $transclude){ ..... } }; function getBlockStart(block) { return block.clone[0]; } function getBlockEnd(block) { return block.clone[block.clone.length - 1]; } }]; ngRepeatDirective是一个数组，它会被传递给directive方法用来生成ngRepeat这个directive。可以看到ngRepeat依赖于$parse和$animate两个服务。$parse用来将字符串解析成javascript函数。$animate用来给DOM改变附加上动画效果。文件最后声明了两个helper方法，会在稍后的分析中介绍到。
+var ngRepeatDirective = [&amp;#39;$parse&amp;#39;, &amp;#39;$animate&amp;#39;, function($parse, $animate) { var NG_REMOVED = &amp;#39;$$NG_REMOVED&amp;#39;; var ngRepeatMinErr = minErr(&amp;#39;ngRepeat&amp;#39;); return { transclude: &amp;#39;element&amp;#39;, priority: 1000, terminal: true, $$tlb: true, link: function($scope, $element, $attr, ctrl, $transclude){ ..... } }; function getBlockStart(block) { return block.clone[0]; } function getBlockEnd(block) { return block.clone[block.clone.length - 1]; } }];  ngRepeatDirective是一个数组，它会被传递给directive方法用来生成ngRepeat这个directive。可以看到ngRepeat依赖于$parse和$animate两个服务。$parse用来将字符串解析成javascript函数。$animate用来给DOM改变附加上动画效果。文件最后声明了两个helper方法，会在稍后的分析中介绍到。
 接下来把最大的篇幅交给这个directive的核心——link方法。
 var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]&#43;?)\s&#43;in\s&#43;([\s\S]&#43;?)(?:\s&#43;track\s&#43;by\s&#43;([\s\S]&#43;?))?\s*$/), trackByExp, trackByExpGetter, trackByIdExpFn, trackByIdArrayFn, trackByIdObjFn, lhs, rhs, valueIdentifier, keyIdentifier, hashFnLocals = {$id: hashKey}; if (!" />
     <meta name="twitter:image" content="https://loveky.github.io/img/avatar.jpg" />
@@ -52,7 +52,7 @@ var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]&#43;?
 这两天项目主体完成，准备上线，算是有了一些自由时间，正好借此机会学习一下AngularJS内部的实现机制。
 本篇来说说最常见的directive之一 ngRepeat
 该文件的整体结构如下：
-var ngRepeatDirective = [&amp;#39;$parse&amp;#39;, &amp;#39;$animate&amp;#39;, function($parse, $animate) { var NG_REMOVED = &amp;#39;$$NG_REMOVED&amp;#39;; var ngRepeatMinErr = minErr(&amp;#39;ngRepeat&amp;#39;); return { transclude: &amp;#39;element&amp;#39;, priority: 1000, terminal: true, $$tlb: true, link: function($scope, $element, $attr, ctrl, $transclude){ ..... } }; function getBlockStart(block) { return block.clone[0]; } function getBlockEnd(block) { return block.clone[block.clone.length - 1]; } }]; ngRepeatDirective是一个数组，它会被传递给directive方法用来生成ngRepeat这个directive。可以看到ngRepeat依赖于$parse和$animate两个服务。$parse用来将字符串解析成javascript函数。$animate用来给DOM改变附加上动画效果。文件最后声明了两个helper方法，会在稍后的分析中介绍到。
+var ngRepeatDirective = [&amp;#39;$parse&amp;#39;, &amp;#39;$animate&amp;#39;, function($parse, $animate) { var NG_REMOVED = &amp;#39;$$NG_REMOVED&amp;#39;; var ngRepeatMinErr = minErr(&amp;#39;ngRepeat&amp;#39;); return { transclude: &amp;#39;element&amp;#39;, priority: 1000, terminal: true, $$tlb: true, link: function($scope, $element, $attr, ctrl, $transclude){ ..... } }; function getBlockStart(block) { return block.clone[0]; } function getBlockEnd(block) { return block.clone[block.clone.length - 1]; } }];  ngRepeatDirective是一个数组，它会被传递给directive方法用来生成ngRepeat这个directive。可以看到ngRepeat依赖于$parse和$animate两个服务。$parse用来将字符串解析成javascript函数。$animate用来给DOM改变附加上动画效果。文件最后声明了两个helper方法，会在稍后的分析中介绍到。
 接下来把最大的篇幅交给这个directive的核心——link方法。
 var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]&#43;?)\s&#43;in\s&#43;([\s\S]&#43;?)(?:\s&#43;track\s&#43;by\s&#43;([\s\S]&#43;?))?\s*$/), trackByExp, trackByExpGetter, trackByIdExpFn, trackByIdArrayFn, trackByIdObjFn, lhs, rhs, valueIdentifier, keyIdentifier, hashFnLocals = {$id: hashKey}; if (!" />
   <meta property="og:url" content="https://loveky.github.io/2014/04/02/angularjs-ngrepeat/" />
@@ -61,7 +61,7 @@ var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]&#43;?
 
 
 
-<meta name="generator" content="Hugo 0.36.1" />
+<meta name="generator" content="Hugo 0.41" />
 
 
 <link rel="canonical" href="https://loveky.github.io/2014/04/02/angularjs-ngrepeat/" />
@@ -296,7 +296,8 @@ var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]&#43;?
   <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getBlockEnd</span>(<span style="color:#a6e22e">block</span>) {
     <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">block</span>.<span style="color:#a6e22e">clone</span>[<span style="color:#a6e22e">block</span>.<span style="color:#a6e22e">clone</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
   }
-}];</code></pre></div>
+}];
+</code></pre></div>
 <p><code>ngRepeatDirective</code>是一个数组，它会被传递给directive方法用来生成ngRepeat这个directive。可以看到ngRepeat依赖于<code>$parse</code>和<code>$animate</code>两个服务。<code>$parse</code>用来将字符串解析成javascript函数。<code>$animate</code>用来给DOM改变附加上动画效果。文件最后声明了两个helper方法，会在稍后的分析中介绍到。</p>
 
 <p>接下来把最大的篇幅交给这个directive的核心——link方法。</p>
@@ -311,7 +312,8 @@ var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]&#43;?
 }
 <span style="color:#a6e22e">lhs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">match</span>[<span style="color:#ae81ff">1</span>];
 <span style="color:#a6e22e">rhs</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">match</span>[<span style="color:#ae81ff">2</span>];
-<span style="color:#a6e22e">trackByExp</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">match</span>[<span style="color:#ae81ff">3</span>];</code></pre></div>
+<span style="color:#a6e22e">trackByExp</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">match</span>[<span style="color:#ae81ff">3</span>];
+</code></pre></div>
 <p>首先从directive元素的attribute中取出<code>ng-repeat</code>属性设置的字符串。接着会尝试用取到的字符串与一个正则表达式匹配，用来检查ng-repeat语句是否符合语法。如果语法正确，则将字符串拆分为3部分。<code>lhs</code>保存了循环中的临时变量的名字，<code>rhs</code>保存了被循环的collection的名字，<code>trackByExp</code>则保存了可选的<code>track by</code>字符串。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">trackByExp</span>) {
   <span style="color:#a6e22e">trackByExpGetter</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">$parse</span>(<span style="color:#a6e22e">trackByExp</span>);
@@ -329,7 +331,8 @@ var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]&#43;?
   <span style="color:#a6e22e">trackByIdObjFn</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">key</span>) {
     <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">key</span>;
   };
-}</code></pre></div>
+}
+</code></pre></div>
 <p>如果指定了<code>trackByExp</code>则根据该字符串构造一个id生成函数，否则为数组和哈希构造缺省的id生成函数。这些函数生成的id会被用来把每个item与页面中唯一的元素绑定。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">match</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">lhs</span>.<span style="color:#a6e22e">match</span>(<span style="color:#e6db74">/^(?:([\$\w]+)|\(([\$\w]+)\s*,\s*([\$\w]+)\))$/</span>);
 <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">match</span>) {
@@ -344,7 +347,8 @@ var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]&#43;?
 </span><span style="color:#75715e">// - scope: bound scope
 </span><span style="color:#75715e">// - element: previous element.
 </span><span style="color:#75715e">// - index: position
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">lastBlockMap</span> <span style="color:#f92672">=</span> {};</code></pre></div>
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">lastBlockMap</span> <span style="color:#f92672">=</span> {};
+</code></pre></div>
 <p>判断临时变量的格式，angular支持两种格式<code>album in artist.albums</code>用来循环一个数组，<code>(key, value) in expression</code>用来循环一个哈希。两种格式中都有表示将要作为临时变量值的<code>valueIdentifier</code>，而只有在第二种情况中有作为临时变量键的<code>keyIdentifier</code>。</p>
 
 <p><code>lastBlockMap</code>是一个用来保存最近一次view更新完后各个循环item状态的hash。该hash的键是各个被循环的item，值则是一个保存了该item相应属性的对象：</p>
@@ -369,7 +373,8 @@ var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]&#43;?
       <span style="color:#a6e22e">collectionKeys</span>,
       <span style="color:#a6e22e">block</span>, <span style="color:#75715e">// last object information {scope, element, id}
 </span><span style="color:#75715e"></span>      <span style="color:#a6e22e">nextBlockOrder</span> <span style="color:#f92672">=</span> [],
-      <span style="color:#a6e22e">elementsToRemove</span>;</code></pre></div>
+      <span style="color:#a6e22e">elementsToRemove</span>;
+</code></pre></div>
 <p>接着便是link方法最核心的部分——监听model变化并更新view。这里使用了<code>$watchCollection</code>方法监听我们指定的collection，并在每次collection更新时调用ngRepeatAction方法。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">isArrayLike</span>(<span style="color:#a6e22e">collection</span>)) {
   <span style="color:#a6e22e">collectionKeys</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">collection</span>;
@@ -386,7 +391,8 @@ var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]&#43;?
   <span style="color:#a6e22e">collectionKeys</span>.<span style="color:#a6e22e">sort</span>();
 }
 
-<span style="color:#a6e22e">arrayLength</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">collectionKeys</span>.<span style="color:#a6e22e">length</span>;</code></pre></div>
+<span style="color:#a6e22e">arrayLength</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">collectionKeys</span>.<span style="color:#a6e22e">length</span>;
+</code></pre></div>
 <p>首先确定<code>collectionKeys</code>和<code>trackByIdFn</code>。为将要被循环的集合中的每一个item创建一个key，保存在<code>collectionKeys</code>中。如果collection是数组，则key就是item自身；如果collection是对象，则每个键值对的键会被用作对于item的key(同时会对key排序，排序的结果就是collection中item在页面上显示的顺序)</p>
 
 <p>arrayLength用来保存本次将要循环的item的数目。也就是此次更新后页面中显示的item的数目。</p>
@@ -411,7 +417,8 @@ var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]&#43;?
 </span><span style="color:#75715e"></span>   <span style="color:#a6e22e">nextBlockOrder</span>[<span style="color:#a6e22e">index</span>] <span style="color:#f92672">=</span> { <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">trackById</span> };
    <span style="color:#a6e22e">nextBlockMap</span>[<span style="color:#a6e22e">trackById</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
  }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>按照<code>collectionKeys</code>中保存的key依次取出要被循环处理的value。<code>trackById</code>是使用<code>trackByIdFn</code>计算出来的每个item唯一的标识，用来建立item与页面中元素间的关联。</p>
 
 <p>如果<code>lastBlockMap</code>中有<code>trackById</code>这个属性，则说明该item在上次循环中已经存在，则将相应的属性/值设置到<code>nextBlockMap</code>对象中，同时在<code>nextBlockOrder</code>数组中保存顺序。<br />
@@ -427,7 +434,8 @@ var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]&#43;?
     <span style="color:#a6e22e">forEach</span>(<span style="color:#a6e22e">elementsToRemove</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">element</span>) { <span style="color:#a6e22e">element</span>[<span style="color:#a6e22e">NG_REMOVED</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>; }); <span style="color:#75715e">// 标记该元素已经从DOM中移除
 </span><span style="color:#75715e"></span>    <span style="color:#a6e22e">block</span>.<span style="color:#a6e22e">scope</span>.<span style="color:#a6e22e">$destroy</span>(); <span style="color:#75715e">// 销毁对应的scope
 </span><span style="color:#75715e"></span>  }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>在经历前面一次检查后，现在还留在<code>lastBlockMap</code>中的item就是被从collection中移除的item。要做的就是将对应的element从DOM中移除并销毁item对应的scope。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// we are not using forEach for perf reasons (trying to avoid #call)
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> (<span style="color:#a6e22e">index</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">length</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">collectionKeys</span>.<span style="color:#a6e22e">length</span>; <span style="color:#a6e22e">index</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">length</span>; <span style="color:#a6e22e">index</span><span style="color:#f92672">++</span>) {
@@ -454,7 +462,8 @@ var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]&#43;?
 </span><span style="color:#75715e"></span>  } <span style="color:#66d9ef">else</span> {
     <span style="color:#75715e">// new item which we don&#39;t know about
 </span><span style="color:#75715e"></span>    <span style="color:#a6e22e">childScope</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">$scope</span>.<span style="color:#a6e22e">$new</span>(); <span style="color:#75715e">// 如果是新item，生成一个新scope
-</span><span style="color:#75715e"></span>  }</code></pre></div>
+</span><span style="color:#75715e"></span>  }
+</code></pre></div>
 <p>最后一个循环用来处理已有item的DOM移动以及新item对应的DOM插入。在这个循环中<code>previousNode</code>代表了上一次循环item元素在DOM中的位置，angular会顺次将各个block插入到前一个block的后面(对于已经存在的元素则是移动)。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">childScope</span>[<span style="color:#a6e22e">valueIdentifier</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">value</span>;
 <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">keyIdentifier</span>) <span style="color:#a6e22e">childScope</span>[<span style="color:#a6e22e">keyIdentifier</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">key</span>;
@@ -464,7 +473,8 @@ var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]&#43;?
 <span style="color:#a6e22e">childScope</span>.<span style="color:#a6e22e">$middle</span> <span style="color:#f92672">=</span> <span style="color:#f92672">!</span>(<span style="color:#a6e22e">childScope</span>.<span style="color:#a6e22e">$first</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">childScope</span>.<span style="color:#a6e22e">$last</span>);
 <span style="color:#75715e">// jshint bitwise: false
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">childScope</span>.<span style="color:#a6e22e">$odd</span> <span style="color:#f92672">=</span> <span style="color:#f92672">!</span>(<span style="color:#a6e22e">childScope</span>.<span style="color:#a6e22e">$even</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">index</span><span style="color:#f92672">&amp;</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">===</span> <span style="color:#ae81ff">0</span>);
-<span style="color:#960050;background-color:#1e0010">// jshint bitwise: true</span></code></pre></div>
+<span style="color:#75715e">// jshint bitwise: true
+</span><span style="color:#75715e"></span></code></pre></div>
 <p>接着设置了一些方便在directive中方便判断状态的变量。如当前元素是否是第一个/最后一个出现在页面上的item。方便用户为相应item元素做特殊处理。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">block</span>.<span style="color:#a6e22e">scope</span>) {
     <span style="color:#a6e22e">$transclude</span>(<span style="color:#a6e22e">childScope</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">clone</span>) {
@@ -480,7 +490,8 @@ var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]&#43;?
     });
   }
 }
-<span style="color:#a6e22e">lastBlockMap</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">nextBlockMap</span>;</code></pre></div>
+<span style="color:#a6e22e">lastBlockMap</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">nextBlockMap</span>;
+</code></pre></div>
 <p>对于新item，将新生成的scope应用到template上生成相应的元素，并插入DOM中。同时设置<code>previousNode</code>为新生成的元素，并将scope等相关信息保存至<code>nextBlockMap</code>数组中。</p>
 
 <p>最后将nextBlockMap的值赋给lastBlockMap，结束本次循环。</p>
@@ -504,7 +515,7 @@ var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]&#43;?
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>1506</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>1524</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">

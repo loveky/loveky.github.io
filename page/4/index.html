@@ -35,7 +35,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.36.1" />
+<meta name="generator" content="Hugo 0.41" />
 
 
 <link rel="canonical" href="https://loveky.github.io/" />
@@ -238,6 +238,26 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2014/04/11/angularjs-ng-model/" class="post-link">AngularJS源码阅读之ngModel</a></h3>
+    <p class="post-meta">@loveky · Apr 11, 2014</p>
+  </header>
+  
+  <p class="post-summary">数据的双向绑定可能是Angular最为人们熟知的特性之一。举个最简单的例子 
+可以在result页面中看到，每当在input中输入时，$scope中对应model的值也改变了。反之，当用户点击Set按钮在$scope中更新了model的值时，input输入框中的内容也对应更新了。
+所有的这些魔法只需要我们在input元素上指定一个ng-model属性。可见ng-model这个directive是双向绑定这一特性不可缺少一点。本文就继续从源代码入手看看ngModel的实现方式以及其它directive是如何与ngModel交互的。
+ngModel被定义在input.js。从名字上可看出，该文件还定义input这个directive，从这点也可以看出ngModel与input之间的紧密关系。
+注: 文中所有涉及到的AngularJS源码均来自angular-1.2.8版本。
+var ngModelDirective = function() { return { require: [&#39;ngModel&#39;, &#39;^?form&#39;], controller: NgModelController, link: function(scope, element, attr, ctrls) { // notify others, especially parent forms  var modelCtrl = ctrls[0], formCtrl = ctrls[1] || nullFormCtrl; formCtrl.$addControl(modelCtrl); scope.$on(&#39;$destroy&#39;, function() { formCtrl.$removeControl(modelCtrl); }); } }; };  可以看出ngModel依赖于ngModelController以及可选的formController。ngModel在link方法中只做了2件事:
+ 如果声明了ngModel的元素出现在一个form中，那么就向上层form注册自身 注册了$destroy事件的监听器，该事件触发时告知上层form移除对自身的引用  link方法如此简单以至于我们还没看到关于数据绑定的任何信息。看来问题的答案都藏在ngModelController中了。接下来看看ngModelController中都发生了什么。
+var NgModelController = [&#39;$scope&#39;, &#39;$exceptionHandler&#39;, &#39;$attrs&#39;, &#39;$element&#39;, &#39;$parse&#39;, function($scope, $exceptionHandler, $attr, $element, $parse) { this.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2014/04/11/angularjs-ng-model/">阅读全文 →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2014/04/11/angularjs-controller/" class="post-link">Angular中的Controller</a></h3>
     <p class="post-meta">@loveky · Apr 11, 2014</p>
   </header>
@@ -266,7 +286,7 @@
 这两天项目主体完成，准备上线，算是有了一些自由时间，正好借此机会学习一下AngularJS内部的实现机制。
 本篇来说说最常见的directive之一 ngRepeat
 该文件的整体结构如下：
-var ngRepeatDirective = [&#39;$parse&#39;, &#39;$animate&#39;, function($parse, $animate) { var NG_REMOVED = &#39;$$NG_REMOVED&#39;; var ngRepeatMinErr = minErr(&#39;ngRepeat&#39;); return { transclude: &#39;element&#39;, priority: 1000, terminal: true, $$tlb: true, link: function($scope, $element, $attr, ctrl, $transclude){ ..... } }; function getBlockStart(block) { return block.clone[0]; } function getBlockEnd(block) { return block.clone[block.clone.length - 1]; } }]; ngRepeatDirective是一个数组，它会被传递给directive方法用来生成ngRepeat这个directive。可以看到ngRepeat依赖于$parse和$animate两个服务。$parse用来将字符串解析成javascript函数。$animate用来给DOM改变附加上动画效果。文件最后声明了两个helper方法，会在稍后的分析中介绍到。
+var ngRepeatDirective = [&#39;$parse&#39;, &#39;$animate&#39;, function($parse, $animate) { var NG_REMOVED = &#39;$$NG_REMOVED&#39;; var ngRepeatMinErr = minErr(&#39;ngRepeat&#39;); return { transclude: &#39;element&#39;, priority: 1000, terminal: true, $$tlb: true, link: function($scope, $element, $attr, ctrl, $transclude){ ..... } }; function getBlockStart(block) { return block.clone[0]; } function getBlockEnd(block) { return block.clone[block.clone.length - 1]; } }];  ngRepeatDirective是一个数组，它会被传递给directive方法用来生成ngRepeat这个directive。可以看到ngRepeat依赖于$parse和$animate两个服务。$parse用来将字符串解析成javascript函数。$animate用来给DOM改变附加上动画效果。文件最后声明了两个helper方法，会在稍后的分析中介绍到。
 接下来把最大的篇幅交给这个directive的核心——link方法。
 var expression = $attr.ngRepeat; var match = expression.match(/^\s*([\s\S]&#43;?)\s&#43;in\s&#43;([\s\S]&#43;?)(?:\s&#43;track\s&#43;by\s&#43;([\s\S]&#43;?))?\s*$/), trackByExp, trackByExpGetter, trackByIdExpFn, trackByIdArrayFn, trackByIdObjFn, lhs, rhs, valueIdentifier, keyIdentifier, hashFnLocals = {$id: hashKey}; if (!</p>
   <footer class="post-footer">
@@ -287,14 +307,13 @@ compile属性是一个函数。该函数会针对每一个directive的实例执�
  元素还没有被插入document
  可以修改template，最终结果会被angular缓存
   link属性可以有两种配置方式。 link属性可以被设置为一个对象，包含pre, post两个属性，分别对应一个函数(preLink, postLink)。preList，postLink的区别在于执行顺序。preLink是自顶向下的，先父节点，后子节点，postLink正好相反。
-.directive{ return { link: { pre: function preLink(){ ... }, post: function postLink() { ... } } } } link属性也可以被直接设置为一个函数，则默认相当于设置了postLink函数。
-.directive{ return { link: function link(){ ... } } } 等于
+.directive{ return { link: { pre: function preLink(){ ... }, post: function postLink() { ... } } } }  link属性也可以被直接设置为一个函数，则默认相当于设置了postLink函数。
+.directive{ return { link: function link(){ ... } } }  等于
 .directive{ return { link: { post: function post() { ... } } } }  由此可见，如果直接将link属性设置为一个函数，则link阶段的执行顺序是自底向上的。
 link阶段会针对每一个被RENDERED的directive实例执行一次。此阶段：
  可以访问scope(因为controller已经初始化完成)
  元素已经被插入document中
- 不可以修改template(angular会直接使用之前缓存的内容)
-  如果定义了compile属性则link属性会被忽略。</p>
+ 不可以修改template(angular会直接使用之前缓存的内容)</p>
   <footer class="post-footer">
     <a class="read-more" href="https://loveky.github.io/2014/04/01/angularjs-directive-compile-link/">阅读全文 →</a>
   </footer>

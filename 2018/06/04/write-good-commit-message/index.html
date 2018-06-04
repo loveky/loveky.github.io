@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>书写良好的 commit message</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="loveky" />
+  <meta name="description" content="今天来说说如何书写好的 commit message。
+Commit message 大家应该每天都在写，每次使用 Git 提交代码时，我们都会在执行 git commit 命令时附带上一句话来简要描述此次提交的改动。
+Commit message 看似简单，作用却很重要。在阅读代码时，可以通过 commit message 了解到作者编写某行代码时的背景；调查 bug 时可以通过搜索 commit message 快速定位相关的提交记录。
+那么什么样的 commit message 才算好的 commit message 呢？
+开源社区已经为我们总结出了一套名为 Conventional Commits 的书写规范。很多流行的开源项目都使用了这套规范，如 Karma，Angular 等。其规定的格式如下：
+&amp;lt;type&amp;gt;[optional scope]: &amp;lt;description&amp;gt; [optional body] [optional footer]  下面我们分别来介绍一下其中的各个组成部分：
+type ：用于表明我们这次提交的改动类型，是新增了功能？还是修改了测试代码？又或者是更新了文档？开源社区目前总结出了以下 11 种类型：
+ build：主要目的是修改项目构建系统(例如 glup，webpack，rollup 的配置等)的提交 ci：主要目的是修改项目继续集成流程(例如 Travis，Jenkins，GitLab CI，Circle等)的提交 docs：文档更新 feat：新增功能 fix：bug 修复 perf：性能优化 refactor：重构代码(既没有新增功能，也没有修复 bug) style：不影响程序逻辑的代码修改(修改空白字符，补全缺失的分号等) test：新增测试用例或是更新现有测试 revert：回滚某个更早之前的提交 chore：不属于以上类型的其他类型  optional scope：一个可选的修改范围。用于标识此次提交主要涉及到代码中哪个模块。根据项目实际情况填写即可，最好在项目中规定好模块列表，保持一致性。" />
+
+  
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@loveky_" />
+    <meta name="twitter:title" content="书写良好的 commit message" />
+    <meta name="twitter:description" content="今天来说说如何书写好的 commit message。
+Commit message 大家应该每天都在写，每次使用 Git 提交代码时，我们都会在执行 git commit 命令时附带上一句话来简要描述此次提交的改动。
+Commit message 看似简单，作用却很重要。在阅读代码时，可以通过 commit message 了解到作者编写某行代码时的背景；调查 bug 时可以通过搜索 commit message 快速定位相关的提交记录。
+那么什么样的 commit message 才算好的 commit message 呢？
+开源社区已经为我们总结出了一套名为 Conventional Commits 的书写规范。很多流行的开源项目都使用了这套规范，如 Karma，Angular 等。其规定的格式如下：
+&amp;lt;type&amp;gt;[optional scope]: &amp;lt;description&amp;gt; [optional body] [optional footer]  下面我们分别来介绍一下其中的各个组成部分：
+type ：用于表明我们这次提交的改动类型，是新增了功能？还是修改了测试代码？又或者是更新了文档？开源社区目前总结出了以下 11 种类型：
+ build：主要目的是修改项目构建系统(例如 glup，webpack，rollup 的配置等)的提交 ci：主要目的是修改项目继续集成流程(例如 Travis，Jenkins，GitLab CI，Circle等)的提交 docs：文档更新 feat：新增功能 fix：bug 修复 perf：性能优化 refactor：重构代码(既没有新增功能，也没有修复 bug) style：不影响程序逻辑的代码修改(修改空白字符，补全缺失的分号等) test：新增测试用例或是更新现有测试 revert：回滚某个更早之前的提交 chore：不属于以上类型的其他类型  optional scope：一个可选的修改范围。用于标识此次提交主要涉及到代码中哪个模块。根据项目实际情况填写即可，最好在项目中规定好模块列表，保持一致性。" />
+    <meta name="twitter:image" content="https://loveky.github.io/img/avatar.jpg" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="书写良好的 commit message" />
+  <meta property="og:description" content="今天来说说如何书写好的 commit message。
+Commit message 大家应该每天都在写，每次使用 Git 提交代码时，我们都会在执行 git commit 命令时附带上一句话来简要描述此次提交的改动。
+Commit message 看似简单，作用却很重要。在阅读代码时，可以通过 commit message 了解到作者编写某行代码时的背景；调查 bug 时可以通过搜索 commit message 快速定位相关的提交记录。
+那么什么样的 commit message 才算好的 commit message 呢？
+开源社区已经为我们总结出了一套名为 Conventional Commits 的书写规范。很多流行的开源项目都使用了这套规范，如 Karma，Angular 等。其规定的格式如下：
+&amp;lt;type&amp;gt;[optional scope]: &amp;lt;description&amp;gt; [optional body] [optional footer]  下面我们分别来介绍一下其中的各个组成部分：
+type ：用于表明我们这次提交的改动类型，是新增了功能？还是修改了测试代码？又或者是更新了文档？开源社区目前总结出了以下 11 种类型：
+ build：主要目的是修改项目构建系统(例如 glup，webpack，rollup 的配置等)的提交 ci：主要目的是修改项目继续集成流程(例如 Travis，Jenkins，GitLab CI，Circle等)的提交 docs：文档更新 feat：新增功能 fix：bug 修复 perf：性能优化 refactor：重构代码(既没有新增功能，也没有修复 bug) style：不影响程序逻辑的代码修改(修改空白字符，补全缺失的分号等) test：新增测试用例或是更新现有测试 revert：回滚某个更早之前的提交 chore：不属于以上类型的其他类型  optional scope：一个可选的修改范围。用于标识此次提交主要涉及到代码中哪个模块。根据项目实际情况填写即可，最好在项目中规定好模块列表，保持一致性。" />
+  <meta property="og:url" content="https://loveky.github.io/2018/06/04/write-good-commit-message/" />
+  <meta property="og:image" content="https://loveky.github.io/img/avatar.jpg" />
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+
+<link rel="canonical" href="https://loveky.github.io/2018/06/04/write-good-commit-message/" />
+<link rel="alternative" href="https://loveky.github.io/index.xml" title="loveky的流水账" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="loveky的流水账" />
+<meta name="msapplication-tooltip" content="loveky的流水账" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://loveky.github.io/img/favicon.ico" />
+<link rel="icon" sizes="192x192" href="https://loveky.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://loveky.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://loveky.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://loveky.github.io/css/bundle.css" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-114966753-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-114966753-1');
+</script>
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://loveky.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">loveky的流水账</h2>
+  
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://loveky.github.io/">首页</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/tags/">标签</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/archive/">归档</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/links/">链接</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/about/">关于我</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:eWx6Y3lseEBnbWFpbC5jb20=" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/loveky" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/loveky_" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//www.zhihu.com/people/loveky" title="Zhihu"><span class="icon icon-zhihu"></span></a>
+      </li>
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://loveky.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">书写良好的 commit message</h1>
+      <p class="post-meta">@loveky · Jun 4, 2018 · 1 min read</p>
+    </header>
+    <article class="post-content">
+
+<p>今天来说说如何书写好的 commit message。</p>
+
+<p>Commit message 大家应该每天都在写，每次使用 Git 提交代码时，我们都会在执行 <code>git commit</code> 命令时附带上一句话来简要描述此次提交的改动。</p>
+
+<p>Commit message 看似简单，作用却很重要。在阅读代码时，可以通过 commit message 了解到作者编写某行代码时的背景；调查 bug 时可以通过搜索 commit message 快速定位相关的提交记录。</p>
+
+<p>那么什么样的 commit message 才算好的 commit message 呢？</p>
+
+<p>开源社区已经为我们总结出了一套名为 <a href="https://conventionalcommits.org/#conventional-commits-100-beta2">Conventional Commits</a> 的书写规范。很多流行的开源项目都使用了这套规范，如 <a href="http://karma-runner.github.io/2.0/index.html">Karma</a>，<a href="https://angular.io/">Angular</a> 等。其规定的格式如下：</p>
+
+<pre><code>&lt;type&gt;[optional scope]: &lt;description&gt;
+
+[optional body]
+
+[optional footer]
+</code></pre>
+
+<p>下面我们分别来介绍一下其中的各个组成部分：</p>
+
+<p><strong>type</strong> ：用于表明我们这次提交的改动类型，是新增了功能？还是修改了测试代码？又或者是更新了文档？开源社区目前总结出了以下 11 种类型：</p>
+
+<ul>
+<li>build：主要目的是修改项目构建系统(例如 glup，webpack，rollup 的配置等)的提交</li>
+<li>ci：主要目的是修改项目继续集成流程(例如 Travis，Jenkins，GitLab CI，Circle等)的提交</li>
+<li>docs：文档更新</li>
+<li>feat：新增功能</li>
+<li>fix：bug 修复</li>
+<li>perf：性能优化</li>
+<li>refactor：重构代码(既没有新增功能，也没有修复 bug)</li>
+<li>style：不影响程序逻辑的代码修改(修改空白字符，补全缺失的分号等)</li>
+<li>test：新增测试用例或是更新现有测试</li>
+<li>revert：回滚某个更早之前的提交</li>
+<li>chore：不属于以上类型的其他类型</li>
+</ul>
+
+<p><strong>optional scope</strong>：一个可选的修改范围。用于标识此次提交主要涉及到代码中哪个模块。根据项目实际情况填写即可，最好在项目中规定好模块列表，保持一致性。</p>
+
+<p><strong>description</strong>：一句话描述此次提交的主要内容，做到言简意赅。</p>
+
+<p><strong>optional body</strong> 和 <strong>optional footer</strong> 通常我们都不会用到，此处不再赘述。</p>
+
+<p>介绍完了格式，让我们来看看真实世界中符合该规范的 commit message 长什么样子吧。</p>
+
+<p>以 Angular 为例，来看看它最新的提交历史：</p>
+
+<p><img src="https://img20.360buyimg.com/uba/jfs/t20611/308/677480810/132585/940d5656/5b1525e6Nc605636d.png" alt="" /></p>
+
+<p>是不是很整洁？</p>
+
+<p>现在规范是有了，但是还需要一个工具自动帮我们检测我们编写的 commit message 是否真的符合规范。这就好比是我们创建了一套 JavaScript 的语法规范，还需要 ESLint 这样的功能来自动帮我们检查一样。</p>
+
+<p>对于 commit message 来说，这个工具就是 <a href="http://marionebl.github.io/commitlint/#/">commitlint</a>。</p>
+
+<h2 id="在项目中启用-commitlint">在项目中启用 commitlint</h2>
+
+<p>和 ESLint 一样的是，commitlint 自身只提供了检测的功能和一些最基础的规则。使用者需要根据这些规则配置出自己的规范。</p>
+
+<p>对于 Conventional Commits 规范，社区已经整理好了 <code>@commitlint/config-conventional</code> 包，我们只需要安装并启用它就可以了。</p>
+
+<p>首先安装 commitlint 以及 conventional 规范：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm install --save-dev @commitlint/cli @commitlint/config-conventional</code></pre></div>
+<p>接着创建 <code>commitlint.config.js</code> 文件，并写入以下内容：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> {
+  <span style="color:#66d9ef">extends</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;@commitlint/config-conventional&#39;</span>],
+};
+</code></pre></div>
+<p>至此，commitlint 的配置就基本完成了。但目前我们还没有说何时来执行 commitlint。</p>
+
+<p>答案显而易见，在每次执行 <code>git commit</code> 的时候咯~</p>
+
+<p>为了可以在每次 commit 时执行 commitlint 检查我们输入的 message，我们还需要用到一个工具 —— <a href="https://github.com/typicode/husky">husky</a>。</p>
+
+<p>husky 是一个增强的 git hook 工具。可以在 git hook 的各个阶段执行我们在 <code>package.json</code> 中配置好的 npm script。</p>
+
+<p>首先安装 husky：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm install --save-dev husky</code></pre></div>
+<p>接着在 <code>package.json</code> 中配置 <code>commitmsg</code> 脚本：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;scripts&#34;</span>: {
+    <span style="color:#f92672">&#34;commitmsg&#34;</span>: <span style="color:#e6db74">&#34;commitlint -E GIT_PARAMS&#34;</span>
+  }
+}</code></pre></div>
+<p>至此就彻底配置完成啦。</p>
+
+<p>让我们来感受一下：</p>
+
+<p><img src="https://img12.360buyimg.com/uba/jfs/t21337/289/681073221/88718/eac5bc39/5b15340bN8af4d42f.gif" alt="" /></p>
+
+<p>还在等什么？赶快在自己的项目中启用 commitlint 吧！</p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://loveky.github.io/tags/%E5%B7%A5%E5%85%B7"><span class="tag">工具</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        
+      </p>
+    </footer>
+    <div style="text-align:center">
+      <p>如果你觉得这篇文章对你有所帮助，可以微信扫码请作者喝杯咖啡哦~</p>
+      <img width="300" height="300" src="https://loveky.github.io/img/wechat-reward-new.jpg"/>
+  </div>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "loveky" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 loveky的流水账</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+
+
+<script src="https://loveky.github.io/js/bundle.js"></script>
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?301a286a5bea7d926e284c27f79bd221";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+  </body>
+</html>

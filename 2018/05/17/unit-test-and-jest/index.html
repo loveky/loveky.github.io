@@ -70,7 +70,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.36.1" />
+<meta name="generator" content="Hugo 0.41" />
 
 
 <link rel="canonical" href="https://loveky.github.io/2018/05/17/unit-test-and-jest/" />
@@ -370,7 +370,8 @@
     <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">expectedResult</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;
     <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">result</span>).<span style="color:#a6e22e">toBe</span>(<span style="color:#a6e22e">expectedResult</span>);
   });
-});</code></pre></div>
+});
+</code></pre></div>
 <p>接下来让我们看看这个单元测试是否满足了我们前文提到的元素与步骤。</p>
 
 <p>元素：</p>
@@ -396,7 +397,8 @@
   <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;knows that 2 and 2 make 4&#39;</span>, () =&gt; {
       <span style="color:#a6e22e">expect</span>(<span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>).<span style="color:#a6e22e">toBe</span>(<span style="color:#ae81ff">4</span>);
   });
-});</code></pre></div>
+});
+</code></pre></div>
 <p><a href="https://facebook.github.io/jest/docs/en/expect.html#tobevalue"><code>toBe</code></a> 只是 Jest 强大断言功能中的一个方法。你可以在<a href="https://facebook.github.io/jest/docs/en/expect.html#methods">这里</a>找到 Jest 支持的全部断言语法的详细文档。</p>
 
 <p>现在让我们来执行一下刚刚编写的测试代码吧：</p>
@@ -412,7 +414,8 @@
   <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">index</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">index</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">items</span>.<span style="color:#a6e22e">length</span>; <span style="color:#a6e22e">index</span><span style="color:#f92672">++</span>) {
     <span style="color:#a6e22e">callback</span>(<span style="color:#a6e22e">items</span>[<span style="color:#a6e22e">index</span>]);
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>功能很简单，循环第一个参数 <code>items</code>，并把数组中的每一项作为参数调用第二个参数 <code>callback</code>。该如何测试呢？</p>
 
 <p>我们要创建一个特殊的 callback 函数，它可以记录每次调用时传入的参数供我们进行断言。</p>
@@ -428,7 +431,8 @@
     <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">callHistory</span>[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>]).<span style="color:#a6e22e">toBe</span>(<span style="color:#ae81ff">1</span>);
     <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">callHistory</span>[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>]).<span style="color:#a6e22e">toBe</span>(<span style="color:#ae81ff">2</span>);
   })
-});</code></pre></div>
+});
+</code></pre></div>
 <p>这里的 <code>specialCallback</code> 就是一个 mock。它存在的意义就是统计函数被调用的信息供我们使用。这种模式在单元测试中经常被使用，所以 Jest 已经内置了对 mock 的支持。让我们来看看如何使用：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">describe</span>(<span style="color:#e6db74">&#39;forEach&#39;</span>, () =&gt; {
   <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;should call callback with each item&#39;</span>, () =&gt; {
@@ -439,7 +443,8 @@
     <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">mockFn</span>.<span style="color:#a6e22e">mock</span>.<span style="color:#a6e22e">calls</span>[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>]).<span style="color:#a6e22e">toBe</span>(<span style="color:#ae81ff">1</span>);
     <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">mockFn</span>.<span style="color:#a6e22e">mock</span>.<span style="color:#a6e22e">calls</span>[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>]).<span style="color:#a6e22e">toBe</span>(<span style="color:#ae81ff">2</span>);
   })
-});</code></pre></div>
+});
+</code></pre></div>
 <p>很方便吧，只需要 <code>jest.fn()</code> 一下就可以得到一个功能抢到的 mock 函数。Jest 中的 mock 远不止是统计一下调用参数那么简单，更多强大用法可以参考<a href="https://facebook.github.io/jest/docs/en/mock-functions.html">这里</a>和<a href="https://facebook.github.io/jest/docs/en/mock-function-api.html">这里</a>。</p>
 
 <p>最后再来说一下 spy。其实 spy 和 mock 是非常类似的，唯一的区别点在于，spy 用于监听一个现有对象上的方法。</p>
@@ -449,7 +454,8 @@
   <span style="color:#a6e22e">sayHello</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">name</span>) =&gt; {
     <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Hello </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">name</span><span style="color:#e6db74">}</span><span style="color:#e6db74">!`</span>);
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>我们可以像下面这样创建并使用 spy：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">describe</span>(<span style="color:#e6db74">&#39;bot&#39;</span>, () =&gt; {
   <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;should say hello&#39;</span>, () =&gt; {
@@ -461,7 +467,8 @@
 
     <span style="color:#a6e22e">spy</span>.<span style="color:#a6e22e">mockRestore</span>();
   })
-});</code></pre></div>
+});
+</code></pre></div>
 <p>我们通过 <code>jest.spyOn</code> 创建了一个监听 <code>bot</code> 对象的 <code>sayHello</code> 方法的 spy。它就像间谍一样监听了所有对 <code>bot#sayHello</code> 方法的调用。由于创建 spy 时，Jest 实际上修改了 <code>bot</code> 对象的 <code>sayHello</code> 属性，所以在断言完成后，我们还要通过 <code>mockRestore</code> 来恢复 <code>bot</code> 对象原本的 <code>sayHello</code> 方法。</p>
 
 <p><a href="https://facebook.github.io/jest/docs/en/jest-object.html#jestspyonobject-methodname">这里</a>可以找到关于 Jest#spyOn 更详细的介绍。</p>
@@ -485,7 +492,8 @@
   } <span style="color:#66d9ef">else</span> {
     <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">domains</span>[Math.<span style="color:#a6e22e">floor</span>(Math.<span style="color:#a6e22e">random</span>() <span style="color:#f92672">*</span> <span style="color:#ae81ff">5</span>)];
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>对应的测试代码如下，由于逻辑比较简单，故不再详细分析：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">describe</span>(<span style="color:#e6db74">&#39;getImageDomain&#39;</span>, () =&gt; {
   <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;should select domain based on skuId if provided&#39;</span>, () =&gt; {
@@ -500,7 +508,8 @@
 
     <span style="color:#a6e22e">spy</span>.<span style="color:#a6e22e">mockRestore</span>();
   });
-});</code></pre></div>
+});
+</code></pre></div>
 <h2 id="写在最后">写在最后</h2>
 
 <p>测试只是一种手段，而不是目的。</p>

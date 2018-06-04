@@ -49,7 +49,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.36.1" />
+<meta name="generator" content="Hugo 0.41" />
 
 
 <link rel="canonical" href="https://loveky.github.io/2017/07/21/translate-five-tips-for-working-with-redux-in-large-applications/" />
@@ -286,17 +286,20 @@
     },
     ...
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>那么这种数据结构到底是如何帮助我们解决以上问题的呢？如果我们需要查找一个特定用户，我们可以用 <code>const user = state.usersById[userId]</code> 这种简单的方式访问状态。这种读取方式不需要我们遍历整个列表，节省时间的同时简化了代码。</p>
 
 <p>此时你可能会好奇我们如何通过这种数据结构来展示一个简单的用户列表呢。为此，我们需要使用一个选择器，它是一个接收状态并返回所需数据的函数。一个简单的例子是一个返回状态中所有用户的函数：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getUsers</span> <span style="color:#f92672">=</span> ({ <span style="color:#a6e22e">usersById</span> }) =&gt; {
   <span style="color:#66d9ef">return</span> Object.<span style="color:#a6e22e">keys</span>(<span style="color:#a6e22e">usersById</span>).<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">id</span>) =&gt; <span style="color:#a6e22e">usersById</span>[<span style="color:#a6e22e">id</span>]);
-}</code></pre></div>
+}
+</code></pre></div>
 <p>在我们的视图代码中，我们调用该方法以获取用户列表。然后就可以遍历这些用户生成视图了。我们可以创建另一个函数用于从状态中获取指定用户：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getSelectedUsers</span> <span style="color:#f92672">=</span> ({ <span style="color:#a6e22e">selectedUserIds</span>, <span style="color:#a6e22e">usersById</span> }) =&gt; {
   <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">selectedUserIds</span>.<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">id</span>) =&gt; <span style="color:#a6e22e">usersById</span>[<span style="color:#a6e22e">id</span>]);
-}</code></pre></div>
+}
+</code></pre></div>
 <p>选择器模式还同时增加了代码的可维护性。设想以后我们想要改变状态的结构。在不使用选择器的情况下，我们不得不更新所有的视图代码以适应新的状态结构。随着视图组件的增多，修改状态结构的负担会急剧增加。为了避免这种情况，我们在视图中通过选择器读取状态。即使底层的状态结构发生了改变，我们也只需要更新选择器。所有依赖状态的组件仍将可以获取它们的数据，我们也不必更新它们。出于所有这些原因，大型 Redux 应用将受益于索引与选择器数据存储模式。</p>
 
 <h3 id="2-区分标准状态与视图状态和编辑状态">2. 区分标准状态与视图状态和编辑状态</h3>
@@ -580,7 +583,7 @@ const setDomainsPagination = setPaginationFor('DOMAINS_');
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>300</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>318</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">

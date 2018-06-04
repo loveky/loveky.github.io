@@ -22,14 +22,13 @@ compile属性是一个函数。该函数会针对每一个directive的实例执�
  元素还没有被插入document
  可以修改template，最终结果会被angular缓存
   link属性可以有两种配置方式。 link属性可以被设置为一个对象，包含pre, post两个属性，分别对应一个函数(preLink, postLink)。preList，postLink的区别在于执行顺序。preLink是自顶向下的，先父节点，后子节点，postLink正好相反。
-.directive{ return { link: { pre: function preLink(){ ... }, post: function postLink() { ... } } } } link属性也可以被直接设置为一个函数，则默认相当于设置了postLink函数。
-.directive{ return { link: function link(){ ... } } } 等于
+.directive{ return { link: { pre: function preLink(){ ... }, post: function postLink() { ... } } } }  link属性也可以被直接设置为一个函数，则默认相当于设置了postLink函数。
+.directive{ return { link: function link(){ ... } } }  等于
 .directive{ return { link: { post: function post() { ... } } } }  由此可见，如果直接将link属性设置为一个函数，则link阶段的执行顺序是自底向上的。
 link阶段会针对每一个被RENDERED的directive实例执行一次。此阶段：
  可以访问scope(因为controller已经初始化完成)
  元素已经被插入document中
- 不可以修改template(angular会直接使用之前缓存的内容)
-  如果定义了compile属性则link属性会被忽略。" />
+ 不可以修改template(angular会直接使用之前缓存的内容)" />
 
   
   
@@ -42,14 +41,13 @@ compile属性是一个函数。该函数会针对每一个directive的实例执�
  元素还没有被插入document
  可以修改template，最终结果会被angular缓存
   link属性可以有两种配置方式。 link属性可以被设置为一个对象，包含pre, post两个属性，分别对应一个函数(preLink, postLink)。preList，postLink的区别在于执行顺序。preLink是自顶向下的，先父节点，后子节点，postLink正好相反。
-.directive{ return { link: { pre: function preLink(){ ... }, post: function postLink() { ... } } } } link属性也可以被直接设置为一个函数，则默认相当于设置了postLink函数。
-.directive{ return { link: function link(){ ... } } } 等于
+.directive{ return { link: { pre: function preLink(){ ... }, post: function postLink() { ... } } } }  link属性也可以被直接设置为一个函数，则默认相当于设置了postLink函数。
+.directive{ return { link: function link(){ ... } } }  等于
 .directive{ return { link: { post: function post() { ... } } } }  由此可见，如果直接将link属性设置为一个函数，则link阶段的执行顺序是自底向上的。
 link阶段会针对每一个被RENDERED的directive实例执行一次。此阶段：
  可以访问scope(因为controller已经初始化完成)
  元素已经被插入document中
- 不可以修改template(angular会直接使用之前缓存的内容)
-  如果定义了compile属性则link属性会被忽略。" />
+ 不可以修改template(angular会直接使用之前缓存的内容)" />
     <meta name="twitter:image" content="https://loveky.github.io/img/avatar.jpg" />
   
 
@@ -62,21 +60,20 @@ compile属性是一个函数。该函数会针对每一个directive的实例执�
  元素还没有被插入document
  可以修改template，最终结果会被angular缓存
   link属性可以有两种配置方式。 link属性可以被设置为一个对象，包含pre, post两个属性，分别对应一个函数(preLink, postLink)。preList，postLink的区别在于执行顺序。preLink是自顶向下的，先父节点，后子节点，postLink正好相反。
-.directive{ return { link: { pre: function preLink(){ ... }, post: function postLink() { ... } } } } link属性也可以被直接设置为一个函数，则默认相当于设置了postLink函数。
-.directive{ return { link: function link(){ ... } } } 等于
+.directive{ return { link: { pre: function preLink(){ ... }, post: function postLink() { ... } } } }  link属性也可以被直接设置为一个函数，则默认相当于设置了postLink函数。
+.directive{ return { link: function link(){ ... } } }  等于
 .directive{ return { link: { post: function post() { ... } } } }  由此可见，如果直接将link属性设置为一个函数，则link阶段的执行顺序是自底向上的。
 link阶段会针对每一个被RENDERED的directive实例执行一次。此阶段：
  可以访问scope(因为controller已经初始化完成)
  元素已经被插入document中
- 不可以修改template(angular会直接使用之前缓存的内容)
-  如果定义了compile属性则link属性会被忽略。" />
+ 不可以修改template(angular会直接使用之前缓存的内容)" />
   <meta property="og:url" content="https://loveky.github.io/2014/04/01/angularjs-directive-compile-link/" />
   <meta property="og:image" content="https://loveky.github.io/img/avatar.jpg" />
 
 
 
 
-<meta name="generator" content="Hugo 0.36.1" />
+<meta name="generator" content="Hugo 0.41" />
 
 
 <link rel="canonical" href="https://loveky.github.io/2014/04/01/angularjs-directive-compile-link/" />
@@ -304,7 +301,8 @@ link属性可以被设置为一个对象，包含pre, post两个属性，分别�
            }
     }
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>link属性也可以被直接设置为一个函数，则默认相当于设置了postLink函数。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">.<span style="color:#a6e22e">directive</span>{
   <span style="color:#66d9ef">return</span> {
@@ -312,7 +310,8 @@ link属性可以被设置为一个对象，包含pre, post两个属性，分别�
             ...
           }
   }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>等于</p>
 
 <pre><code>.directive{
@@ -369,7 +368,7 @@ link属性可以被设置为一个对象，包含pre, post两个属性，分别�
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>1507</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>1525</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">

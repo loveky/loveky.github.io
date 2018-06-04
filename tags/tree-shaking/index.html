@@ -39,7 +39,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.36.1" />
+<meta name="generator" content="Hugo 0.41" />
 
 
 <link rel="canonical" href="https://loveky.github.io/tags/tree-shaking/" />
@@ -252,7 +252,7 @@
 在谈 pkg.module 之前，让我们先来了解一个和它有着紧密关系的概念 —— Tree Shaking。
 什么是 Tree Shaking？ 让我们通过两个小例子来了解。
 假设我们有以下两个文件：
-// math.js exports.add1 = function (x) { return x &#43; 1; } exports.add2 = function (x) { return x &#43; 2; }// app.js import { add1 } from &#39;./math&#39;; add1(100); app.js 文件通过 import 引入了 math.js 中的 add1 方法。
+// math.js exports.add1 = function (x) { return x &#43; 1; } exports.add2 = function (x) { return x &#43; 2; } // app.js import { add1 } from &#39;./math&#39;; add1(100);  app.js 文件通过 import 引入了 math.js 中的 add1 方法。
 我们通过 webpack 命令打包：
 webpack --entry ./app.js --output-filename app.bunble.js 在生成的 app.bundle.js 文件中我们可以看到以下内容：
 这里我们可以看到虽然我们只用到了 math.js 文件中的 add1 方法，但是在最终生成的 bundle 文件中却包含了 add1 和 add2 两个方法。这是为什么呢？</p>

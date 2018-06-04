@@ -19,7 +19,7 @@
   <meta name="description" content="本文旨在帮你快速了解 service worker 的基本知识点，让你对 service worker 有一个大致的了解。为以后开发一个简单的 PWA 应用打下基础。
 关于 service worker 的几个基本知识点  它是一个可编程的网络代理，让你可以控制页面请求的处理方式。 它是一个 JavaScript Worker，因此它无法直接操作 DOM。但可以通过 postMessage 接口与页面通信。同时，service worker 中的代码不会阻塞页面响应。 它在闲置时被终止，在需要时被启动。并不是常驻内存。因此你不能在 onfetch 或是 onmessage 回调中依赖全局状态。 被设计成完全异步。因此在 service worker 中无法使用同步 API （例如同步 XHR，localStorage等）。接口重度依赖于 promise。 只能在 HTTPS 页面加载（唯一的例外：localhost/127.0.0.1，方便调试）。  Service worker 的作用域 一个 service worker 的默认作用域是这个 service worker 脚本所在的目录。例如 https://example.com/sw.js 脚本默认就是 https://example.com 下的所有页面。
 你也可以在注册 service worker 时明确指定作用域：
-navigator.serviceWorker.register(&amp;#39;sw.js&amp;#39;, { scope: &amp;#39;./abc&amp;#39; }); 假设以上代码在 https://example.com 页面里执行，则意味着该 service worker 的作用域就是 https://example." />
+navigator.serviceWorker.register(&amp;#39;sw.js&amp;#39;, { scope: &amp;#39;./abc&amp;#39; });  假设以上代码在 https://example.com 页面里执行，则意味着该 service worker 的作用域就是 https://example." />
 
   
   
@@ -29,7 +29,7 @@ navigator.serviceWorker.register(&amp;#39;sw.js&amp;#39;, { scope: &amp;#39;./ab
     <meta name="twitter:description" content="本文旨在帮你快速了解 service worker 的基本知识点，让你对 service worker 有一个大致的了解。为以后开发一个简单的 PWA 应用打下基础。
 关于 service worker 的几个基本知识点  它是一个可编程的网络代理，让你可以控制页面请求的处理方式。 它是一个 JavaScript Worker，因此它无法直接操作 DOM。但可以通过 postMessage 接口与页面通信。同时，service worker 中的代码不会阻塞页面响应。 它在闲置时被终止，在需要时被启动。并不是常驻内存。因此你不能在 onfetch 或是 onmessage 回调中依赖全局状态。 被设计成完全异步。因此在 service worker 中无法使用同步 API （例如同步 XHR，localStorage等）。接口重度依赖于 promise。 只能在 HTTPS 页面加载（唯一的例外：localhost/127.0.0.1，方便调试）。  Service worker 的作用域 一个 service worker 的默认作用域是这个 service worker 脚本所在的目录。例如 https://example.com/sw.js 脚本默认就是 https://example.com 下的所有页面。
 你也可以在注册 service worker 时明确指定作用域：
-navigator.serviceWorker.register(&amp;#39;sw.js&amp;#39;, { scope: &amp;#39;./abc&amp;#39; }); 假设以上代码在 https://example.com 页面里执行，则意味着该 service worker 的作用域就是 https://example." />
+navigator.serviceWorker.register(&amp;#39;sw.js&amp;#39;, { scope: &amp;#39;./abc&amp;#39; });  假设以上代码在 https://example.com 页面里执行，则意味着该 service worker 的作用域就是 https://example." />
     <meta name="twitter:image" content="https://loveky.github.io/img/avatar.jpg" />
   
 
@@ -39,14 +39,14 @@ navigator.serviceWorker.register(&amp;#39;sw.js&amp;#39;, { scope: &amp;#39;./ab
   <meta property="og:description" content="本文旨在帮你快速了解 service worker 的基本知识点，让你对 service worker 有一个大致的了解。为以后开发一个简单的 PWA 应用打下基础。
 关于 service worker 的几个基本知识点  它是一个可编程的网络代理，让你可以控制页面请求的处理方式。 它是一个 JavaScript Worker，因此它无法直接操作 DOM。但可以通过 postMessage 接口与页面通信。同时，service worker 中的代码不会阻塞页面响应。 它在闲置时被终止，在需要时被启动。并不是常驻内存。因此你不能在 onfetch 或是 onmessage 回调中依赖全局状态。 被设计成完全异步。因此在 service worker 中无法使用同步 API （例如同步 XHR，localStorage等）。接口重度依赖于 promise。 只能在 HTTPS 页面加载（唯一的例外：localhost/127.0.0.1，方便调试）。  Service worker 的作用域 一个 service worker 的默认作用域是这个 service worker 脚本所在的目录。例如 https://example.com/sw.js 脚本默认就是 https://example.com 下的所有页面。
 你也可以在注册 service worker 时明确指定作用域：
-navigator.serviceWorker.register(&amp;#39;sw.js&amp;#39;, { scope: &amp;#39;./abc&amp;#39; }); 假设以上代码在 https://example.com 页面里执行，则意味着该 service worker 的作用域就是 https://example." />
+navigator.serviceWorker.register(&amp;#39;sw.js&amp;#39;, { scope: &amp;#39;./abc&amp;#39; });  假设以上代码在 https://example.com 页面里执行，则意味着该 service worker 的作用域就是 https://example." />
   <meta property="og:url" content="https://loveky.github.io/2017/07/24/service-worker-101/" />
   <meta property="og:image" content="https://loveky.github.io/img/avatar.jpg" />
 
 
 
 
-<meta name="generator" content="Hugo 0.36.1" />
+<meta name="generator" content="Hugo 0.41" />
 
 
 <link rel="canonical" href="https://loveky.github.io/2017/07/24/service-worker-101/" />
@@ -272,7 +272,8 @@ navigator.serviceWorker.register(&amp;#39;sw.js&amp;#39;, { scope: &amp;#39;./ab
 <p>你也可以在注册 service worker 时明确指定作用域：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">navigator</span>.<span style="color:#a6e22e">serviceWorker</span>.<span style="color:#a6e22e">register</span>(<span style="color:#e6db74">&#39;sw.js&#39;</span>, {
     <span style="color:#a6e22e">scope</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;./abc&#39;</span>
-});</code></pre></div>
+});
+</code></pre></div>
 <p>假设以上代码在 <code>https://example.com</code> 页面里执行，则意味着该 service worker 的作用域就是 <code>https://example.com/abc</code> 下的页面。</p>
 
 <p>我们把页面、workers 以及 shared workers 统称为 <code>clients</code>。你的 service worker 只能控制其作用域范围内的 clients。</p>
@@ -295,7 +296,8 @@ navigator.serviceWorker.register(&amp;#39;sw.js&amp;#39;, { scope: &amp;#39;./ab
     }, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">err</span>) {
       <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;ServiceWorker registration failed: &#39;</span>, <span style="color:#a6e22e">err</span>);
     });
-  }</code></pre></div>
+  }
+</code></pre></div>
 <h4 id="2-install-事件">2. <code>install</code> 事件</h4>
 
 <p>在注册 service worker 之后，从 service worker 的视角来看。它收到的第一个事件就是 <code>install</code> 事件。在 <code>install</code> 事件回调函数中，你可以：</p>
@@ -319,7 +321,8 @@ navigator.serviceWorker.register(&amp;#39;sw.js&amp;#39;, { scope: &amp;#39;./ab
         <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">cache</span>.<span style="color:#a6e22e">addAll</span>(<span style="color:#a6e22e">urlsToCache</span>);
       })
   );
-});</code></pre></div>
+});
+</code></pre></div>
 <h4 id="3-activate-事件">3. <code>activate</code> 事件</h4>
 
 <p>在 <code>activate</code> 事件回调中通常要做的工作就是缓存管理。此时可以安全的清理之前版本 service worker 创建的缓存内容。</p>
@@ -343,7 +346,8 @@ navigator.serviceWorker.register(&amp;#39;sw.js&amp;#39;, { scope: &amp;#39;./ab
       }
     )
   );
-});</code></pre></div>
+});
+</code></pre></div>
 <h3 id="更新-service-worker">更新 service worker</h3>
 
 <p>更新一个 service worker 的流程大致如下：</p>
@@ -379,7 +383,7 @@ navigator.serviceWorker.register(&amp;#39;sw.js&amp;#39;, { scope: &amp;#39;./ab
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>297</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>315</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">
