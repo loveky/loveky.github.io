@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>利用 Jest 为 React 组件编写单元测试</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="loveky" />
+  <meta name="description" content="图片来自 https://blog.algolia.com   在上一篇文章中我们介绍了什么是单元测试以及单元测试框架 Jest 的基本用法。在本文中我们会具体聊聊如何用 Jest 为 React 组件编写单元测试。
+首先我们要明确的一点，那就是 React 组件的单元测试本质是也是单元测试。因此它也符合我们之前介绍过的单元测试的全部特点。唯一不同的地方在于 React 组件的单元测试中我们需要找到合适的方法对执行结果进行断言。换言之，我们要根据 React 的特点来设置代码是否正确执行的判断条件。
+那么 React 组件和其它的被测试对象有何不同呢？仔细想过，我们会发现：
+ React 组件的 render 结果是一个组件树，并且整个树最终会被解析成一个纯粹由 HTML 元素构成的树形结构 React 组件可以拥有 state，且 state 的变化会影响 render 结果 React 组件可以拥有生命周期函数，这些生命周期函数会在特定时间点执行  知道了要测试的内容，接下来的问题就是如何执行一个 React 组件并编写断言了。如何执行一个 React 组件呢？看到这个问题估计大多数儿人是蒙的。平时不就是直接 ReactDOM.render 吗？不错，ReactDOM.render 确实可以执行一个 React 组件并将它渲染到页面中，但这种方式不利于编写测试代码。
+有没有更简单的方式呢？其实 React 已经帮我们提供好了工具，让我们一起来看看。
+React 提供的测试工具 在 React 的官方文档中提到了两个用于测试 React 组件的库。让我们分别介绍。
+react-test-renderer 在说 react-test-renderer 之前，让我们先聊聊什么是 renderer。React 最早是被用来开发网页的，所以早期的 React 库中还包含了大量和 DOM 相关的逻辑。后来 React 的设计思想慢慢被迁移到其它场景，最被人们熟知的莫过于 React Native 了。为了灵活性和扩展性，React 的代码被分拆为 React 核心代码与各种 renderer。React 自带了 3 个 renderer，前两个是大家常见的：" />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@loveky_" />
+    <meta name="twitter:title" content="利用 Jest 为 React 组件编写单元测试" />
+    <meta name="twitter:description" content="图片来自 https://blog.algolia.com   在上一篇文章中我们介绍了什么是单元测试以及单元测试框架 Jest 的基本用法。在本文中我们会具体聊聊如何用 Jest 为 React 组件编写单元测试。
+首先我们要明确的一点，那就是 React 组件的单元测试本质是也是单元测试。因此它也符合我们之前介绍过的单元测试的全部特点。唯一不同的地方在于 React 组件的单元测试中我们需要找到合适的方法对执行结果进行断言。换言之，我们要根据 React 的特点来设置代码是否正确执行的判断条件。
+那么 React 组件和其它的被测试对象有何不同呢？仔细想过，我们会发现：
+ React 组件的 render 结果是一个组件树，并且整个树最终会被解析成一个纯粹由 HTML 元素构成的树形结构 React 组件可以拥有 state，且 state 的变化会影响 render 结果 React 组件可以拥有生命周期函数，这些生命周期函数会在特定时间点执行  知道了要测试的内容，接下来的问题就是如何执行一个 React 组件并编写断言了。如何执行一个 React 组件呢？看到这个问题估计大多数儿人是蒙的。平时不就是直接 ReactDOM.render 吗？不错，ReactDOM.render 确实可以执行一个 React 组件并将它渲染到页面中，但这种方式不利于编写测试代码。
+有没有更简单的方式呢？其实 React 已经帮我们提供好了工具，让我们一起来看看。
+React 提供的测试工具 在 React 的官方文档中提到了两个用于测试 React 组件的库。让我们分别介绍。
+react-test-renderer 在说 react-test-renderer 之前，让我们先聊聊什么是 renderer。React 最早是被用来开发网页的，所以早期的 React 库中还包含了大量和 DOM 相关的逻辑。后来 React 的设计思想慢慢被迁移到其它场景，最被人们熟知的莫过于 React Native 了。为了灵活性和扩展性，React 的代码被分拆为 React 核心代码与各种 renderer。React 自带了 3 个 renderer，前两个是大家常见的：" />
+    <meta name="twitter:image" content="https://img20.360buyimg.com/uba/s300x300_jfs/t20215/257/718598224/50702/4b2501db/5b168cc4N1fc2ed0b.png" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="利用 Jest 为 React 组件编写单元测试" />
+  <meta property="og:description" content="图片来自 https://blog.algolia.com   在上一篇文章中我们介绍了什么是单元测试以及单元测试框架 Jest 的基本用法。在本文中我们会具体聊聊如何用 Jest 为 React 组件编写单元测试。
+首先我们要明确的一点，那就是 React 组件的单元测试本质是也是单元测试。因此它也符合我们之前介绍过的单元测试的全部特点。唯一不同的地方在于 React 组件的单元测试中我们需要找到合适的方法对执行结果进行断言。换言之，我们要根据 React 的特点来设置代码是否正确执行的判断条件。
+那么 React 组件和其它的被测试对象有何不同呢？仔细想过，我们会发现：
+ React 组件的 render 结果是一个组件树，并且整个树最终会被解析成一个纯粹由 HTML 元素构成的树形结构 React 组件可以拥有 state，且 state 的变化会影响 render 结果 React 组件可以拥有生命周期函数，这些生命周期函数会在特定时间点执行  知道了要测试的内容，接下来的问题就是如何执行一个 React 组件并编写断言了。如何执行一个 React 组件呢？看到这个问题估计大多数儿人是蒙的。平时不就是直接 ReactDOM.render 吗？不错，ReactDOM.render 确实可以执行一个 React 组件并将它渲染到页面中，但这种方式不利于编写测试代码。
+有没有更简单的方式呢？其实 React 已经帮我们提供好了工具，让我们一起来看看。
+React 提供的测试工具 在 React 的官方文档中提到了两个用于测试 React 组件的库。让我们分别介绍。
+react-test-renderer 在说 react-test-renderer 之前，让我们先聊聊什么是 renderer。React 最早是被用来开发网页的，所以早期的 React 库中还包含了大量和 DOM 相关的逻辑。后来 React 的设计思想慢慢被迁移到其它场景，最被人们熟知的莫过于 React Native 了。为了灵活性和扩展性，React 的代码被分拆为 React 核心代码与各种 renderer。React 自带了 3 个 renderer，前两个是大家常见的：" />
+  <meta property="og:url" content="https://loveky.github.io/2018/06/05/unit-testing-react-component-with-jest/" />
+  <meta property="og:image" content="https://img20.360buyimg.com/uba/s300x300_jfs/t20215/257/718598224/50702/4b2501db/5b168cc4N1fc2ed0b.png" />
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+
+<link rel="canonical" href="https://loveky.github.io/2018/06/05/unit-testing-react-component-with-jest/" />
+<link rel="alternative" href="https://loveky.github.io/index.xml" title="loveky的流水账" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="loveky的流水账" />
+<meta name="msapplication-tooltip" content="loveky的流水账" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://loveky.github.io/img/favicon.ico" />
+<link rel="icon" sizes="192x192" href="https://loveky.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://loveky.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://loveky.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://loveky.github.io/css/bundle.css" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-114966753-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-114966753-1');
+</script>
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://loveky.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">loveky的流水账</h2>
+  
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://loveky.github.io/">首页</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/tags/">标签</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/archive/">归档</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/links/">链接</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/about/">关于我</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:eWx6Y3lseEBnbWFpbC5jb20=" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/loveky" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/loveky_" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//www.zhihu.com/people/loveky" title="Zhihu"><span class="icon icon-zhihu"></span></a>
+      </li>
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://loveky.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">利用 Jest 为 React 组件编写单元测试</h1>
+      <p class="post-meta">@loveky · Jun 5, 2018 · 4 min read</p>
+    </header>
+    <article class="post-content">
+
+
+<figure>
+    
+        <img src="https://img20.360buyimg.com/uba/jfs/t20215/257/718598224/50702/4b2501db/5b168cc4N1fc2ed0b.png" width="800" />
+    
+    
+    <figcaption>
+        <h4>图片来自 https://blog.algolia.com</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+<p>在<a href="https://loveky.github.io/2018/05/17/unit-test-and-jest/">上一篇文章中</a>我们介绍了什么是单元测试以及单元测试框架 Jest 的基本用法。在本文中我们会具体聊聊如何用 Jest 为 React 组件编写单元测试。</p>
+
+<p>首先我们要明确的一点，那就是 React 组件的单元测试本质是也是单元测试。因此它也符合我们之前介绍过的单元测试的全部特点。唯一不同的地方在于 React 组件的单元测试中我们需要找到合适的方法对执行结果进行断言。换言之，我们要根据 React 的特点来设置代码是否正确执行的判断条件。</p>
+
+<p>那么 React 组件和其它的被测试对象有何不同呢？仔细想过，我们会发现：</p>
+
+<ul>
+<li>React 组件的 render 结果是一个组件树，并且整个树最终会被解析成一个纯粹由 HTML 元素构成的树形结构</li>
+<li>React 组件可以拥有 state，且 state 的变化会影响 render 结果</li>
+<li>React 组件可以拥有生命周期函数，这些生命周期函数会在特定时间点执行</li>
+</ul>
+
+<p>知道了要测试的内容，接下来的问题就是如何执行一个 React 组件并编写断言了。如何执行一个 React 组件呢？看到这个问题估计大多数儿人是蒙的。平时不就是直接 <code>ReactDOM.render</code> 吗？不错，<code>ReactDOM.render</code> 确实可以执行一个 React 组件并将它渲染到页面中，但这种方式不利于编写测试代码。</p>
+
+<p>有没有更简单的方式呢？其实 React 已经帮我们提供好了工具，让我们一起来看看。</p>
+
+<h2 id="react-提供的测试工具">React 提供的测试工具</h2>
+
+<p>在 React 的官方文档中提到了两个用于测试 React 组件的库。让我们分别介绍。</p>
+
+<h3 id="react-test-renderer-https-reactjs-org-docs-test-renderer-html"><a href="https://reactjs.org/docs/test-renderer.html">react-test-renderer</a></h3>
+
+<p>在说 <code>react-test-renderer</code> 之前，让我们先聊聊什么是 <code>renderer</code>。React 最早是被用来开发网页的，所以早期的 React 库中还包含了大量和 DOM 相关的逻辑。后来 React 的设计思想慢慢被迁移到其它场景，最被人们熟知的莫过于 <a href="http://facebook.github.io/react-native/">React Native</a> 了。为了灵活性和扩展性，React 的代码被分拆为 React 核心代码与各种 <code>renderer</code>。React 自带了 3 个 renderer，前两个是大家常见的：</p>
+
+<ul>
+<li><p><a href="https://github.com/facebook/react/tree/master/packages/react-dom">react-dom</a> 负责将组建渲染到浏览器页面中。</p></li>
+
+<li><p><a href="https://github.com/facebook/react/tree/master/packages/react-native-renderer">react-native-renderer</a> 负责将组件渲染成原生场景中的各种 “View”。</p></li>
+</ul>
+
+<p>而今天提到的 <a href="https://github.com/facebook/react/tree/master/packages/react-test-renderer">react-test-renderer</a> 则负责将组件输出成 JSON 对象以方便我们遍历、断言或是进行 snapshot 测试。</p>
+
+<p>备注：<a href="https://github.com/chentsulin/awesome-react-renderer">这里</a>有一份各种各样的 renderer 列表。</p>
+
+<h3 id="react-dom-test-utils-https-reactjs-org-docs-test-utils-html"><a href="https://reactjs.org/docs/test-utils.html">react-dom/test-utils</a></h3>
+
+<p>首先从名称可以看出这个库是包含在 <code>react-dom</code> 中的。所以它只是 <code>react-dom</code> 的辅助测试工具。在 React 文档站中它的介绍页上用的标题却只有 “Test Utilities” 两个单词，很容易让人产生误解。该库中的方法主要作用是帮我们遍历 ReactDOM 生成的 DOM 树，方便我们编写断言。<strong>注意：使用该库时必须提供一个 DOM 环境。</strong>当然这个 DOM 环境可以是 <a href="https://github.com/jsdom/jsdom">jsdom</a> 这种模拟环境。(Jest 默认的执行环境就是 jsdom)</p>
+
+<h3 id="如何选择">如何选择？</h3>
+
+<p>读到这你可能会问，<code>react-test-renderer</code> 和 <code>react-dom/test-utils</code> 两者看起来还是很相似。何时该选择哪一个库呢？根据笔者实际使用经验，简单来说：</p>
+
+<ul>
+<li>如果需要测试事件（如 click, change, blur 等），那么使用 <code>react-dom/test-utils</code></li>
+<li>其它时候使用更简单、灵活的 <code>react-test-renderer</code></li>
+</ul>
+
+<h2 id="react-test-renderer-使用方法">react-test-renderer 使用方法</h2>
+
+<p>react-test-renderer 在实际使用过程中又有两种用法：</p>
+
+<ul>
+<li>shallow render：组件只会被 render 一层（children 中的 React 组件不会被 render）</li>
+<li>full render：组件会被完全 render</li>
+</ul>
+
+<p>现在让我们通过例子来具体看看两种方式的差别。</p>
+
+<p>假设我们有以下两个组件：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Link</span> <span style="color:#f92672">=</span> ({<span style="color:#a6e22e">to</span>, <span style="color:#a6e22e">children</span>}) =&gt; (
+  <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">a</span> <span style="color:#a6e22e">className</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;my-link&#34;</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">to</span>} <span style="color:#a6e22e">target</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;_blank&#34;</span> <span style="color:#a6e22e">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;noopener noreferrer&#34;</span><span style="color:#f92672">&gt;</span>{<span style="color:#a6e22e">children</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/a&gt;</span>
+);
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Header</span> <span style="color:#f92672">=</span> () =&gt; (
+  <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">span</span> <span style="color:#a6e22e">className</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;brand&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">Hello</span> <span style="color:#a6e22e">world</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/span&gt;</span>
+    <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Link</span> <span style="color:#a6e22e">to</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://jd.com&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">JD</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/Link&gt;</span>
+    <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Link</span> <span style="color:#a6e22e">to</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://butler.jd.com&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">Butler</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/Link&gt;</span>
+    <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Link</span> <span style="color:#a6e22e">to</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://lrc.jd.com&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">lrc</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/Link&gt;</span>
+  <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
+);
+</code></pre></div>
+<h3 id="shallow-render">shallow render</h3>
+
+<p>shallow render 相关的工具类存在于 <code>react-test-renderer/shallow</code> 空间下，我们首先引入，并创建一个实例：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">ShallowRenderer</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-test-renderer/shallow&#39;</span>;
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">renderer</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ShallowRenderer</span>();
+</code></pre></div>
+<p>ShallowRenderer 的实例为我们提供了两个方法：</p>
+
+<ul>
+<li><code>render()</code> 用于 render 一个组件。你可以把 ShallowRenderer 的实例想象成一个容纳被 render 组件的“空间”。</li>
+<li><code>getRenderOutput()</code> 在 render 之后，可以通过此命令获取 render 的结果。</li>
+</ul>
+
+<p>让我们看看完整的例子：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">describe</span>(<span style="color:#e6db74">&#39;Header&#39;</span>, () =&gt; {
+  <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;should render a top level div&#39;</span>, () =&gt; {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">renderer</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ShallowRenderer</span>();
+    <span style="color:#a6e22e">renderer</span>.<span style="color:#a6e22e">render</span>(<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Header</span> <span style="color:#960050;background-color:#1e0010">/&gt;);</span>
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">renderer</span>.<span style="color:#a6e22e">getRenderOutput</span>();
+    <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">type</span>).<span style="color:#a6e22e">toBe</span>(<span style="color:#e6db74">&#39;div&#39;</span>);
+  });
+
+  <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;should render 3 Link&#39;</span>, () =&gt; {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">renderer</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ShallowRenderer</span>();
+    <span style="color:#a6e22e">renderer</span>.<span style="color:#a6e22e">render</span>(<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Header</span> <span style="color:#960050;background-color:#1e0010">/&gt;);</span>
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">renderer</span>.<span style="color:#a6e22e">getRenderOutput</span>();
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">childrenLink</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">props</span>.<span style="color:#a6e22e">children</span>.<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">c</span> =&gt; <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">type</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">Link</span>);
+    <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">childrenLink</span>.<span style="color:#a6e22e">length</span>).<span style="color:#a6e22e">toBe</span>(<span style="color:#ae81ff">3</span>);
+  });
+});
+</code></pre></div>
+<p>我们首先验证了 <code>Header</code> render 后顶层元素是一个 <code>div</code>。接着在第二个用例中验证了 render 结果中包含 3 个 <code>Link</code> 组件的实例。由于 shallow render 只 render 一层，所以可以验证的信息也都比较简单。比较适合验证组件输出的结构是否符合预期。</p>
+
+<h3 id="full-render">full render</h3>
+
+<p>接下来看看 full render。</p>
+
+<p>首先引入工具库：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">TestRenderer</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react-test-renderer&#39;</span>;
+</code></pre></div>
+<p>调用 <code>TestRenderer</code> 的 <code>create</code> 方法并传入要 render 的组件就可以获得一个 <code>TestRenderer</code> 的实例。该实例上存在着以下几个方法和属性：</p>
+
+<ul>
+<li><code>.toJSON()</code>：生成一个表示 render 结果的 JSON 对象。该对象中只包含像 <code>&lt;div&gt;</code>（web 平台）或是 <code>&lt;View</code> （native 平台）这样的原生节点。不会包含用户开发的组件的信息。适合用于 <a href="http://facebook.github.io/jest/docs/en/snapshot-testing.html#snapshot-testing-with-jest">snapshot testing</a>。</li>
+<li><code>.toTree()</code>：和 <code>.toJSON()</code> 类似，但信息更加丰富，包含了用户开发的组件的信息。</li>
+<li><code>.update(element)</code>：通过传入一个新的元素来更新上次 render 得到的组件树。</li>
+<li><code>.umount()</code>：umount 组件树，同时触发相应的生命周期函数。</li>
+<li><code>.getInstance()</code>：返回根节点对应的 React 组件实例，如果存在的话。如果顶级组件是一个函数式组件，则无法获取。</li>
+<li><code>.root</code>：该属性保存了根节点对应的测试实例(test instance)。该实例为我们提供了一系列方法方便我们编写断言。</li>
+</ul>
+
+<p>现在让我们看看测试实例上都有哪些方法和属性可供我们使用(完整列表请<a href="https://reactjs.org/docs/test-renderer.html#testinstance">参考这里</a>：</p>
+
+<ul>
+<li><code>.find()</code> 与 <code>.findAll()</code>：用于查找符合特定条件的测试实例。区别在于 <code>.find()</code> 会严格要求节点树种只有 1 个满足条件的测试实例，如果没有或者多于 1 个就会抛出异常。此区别同样适用于下面两组方法。</li>
+<li><code>.findByType()</code> 与 <code>.findAllByType</code>：用于查找特定类型的测试实例。这里的类型可以是 <code>div</code> 这种原生类型，也可以是 <code>Link</code> 这种用户编写的 React 组件。</li>
+<li><code>.findByProps()</code> 与 <code>.findAllByProps()</code>：用于查找 props 符合特定结构的测试实例。</li>
+<li><code>.instance</code>：该测试实例对应的 React 组件实例。</li>
+</ul>
+
+<p>现在让我们看一个完整的测试用例：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">describe</span>(<span style="color:#e6db74">&#39;Header&#39;</span>, () =&gt; {
+  <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;should render 3 a tag with className &#34;my-link&#34;&#39;</span>, () =&gt; {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">testRenderer</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">TestRenderer</span>.<span style="color:#a6e22e">create</span>(<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Header</span> <span style="color:#960050;background-color:#1e0010">/&gt;);</span>
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">testInstance</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">testRenderer</span>.<span style="color:#a6e22e">root</span>;
+    <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">testInstance</span>.<span style="color:#a6e22e">findAll</span>(<span style="color:#a6e22e">node</span> =&gt; <span style="color:#a6e22e">node</span>.<span style="color:#a6e22e">type</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">node</span>.<span style="color:#a6e22e">props</span>.<span style="color:#a6e22e">className</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;my-link&#39;</span>)).<span style="color:#a6e22e">toHaveLength</span>(<span style="color:#ae81ff">3</span>);
+  });
+});
+</code></pre></div>
+<p>在这个用例中我们通过 <code>.find()</code> 方法查找了 <code>className</code> 为 <code>my-link</code> 的 <code>a</code> 标签并确保找到了 3 个。</p>
+
+<h2 id="react-dom-test-utils-使用方法">react-dom/test-utils 使用方法</h2>
+
+<p>现在让我们来看看涉及到用户交互的组件如何编写单元测试。首先简单了解一下 <code>react-dom/test-utils</code> 的基本用法。</p>
+
+<p>首先还是引入工具类：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span>  <span style="color:#a6e22e">ReactTestUtils</span>  <span style="color:#a6e22e">from</span>  <span style="color:#e6db74">&#39;react-dom/test-utils&#39;</span>;
+</code></pre></div>
+<p><code>ReactTestUtils</code> 对象上我们通常会用到以下一些方法(完整方法列表请参考<a href="https://reactjs.org/docs/test-utils.html">这里</a>)：</p>
+
+<ul>
+<li><code>.Simulate.{evnentName}()</code>：模拟在给定的 DOM 节点上触发特点事件。<code>Simulate</code> 可以触发<a href="https://reactjs.org/docs/events.html#supported-events">所有 React 支持的事件类型</a>。</li>
+<li><code>renderIntoDocument()</code>：把一个 React 组件 render 到一个 detached 的 DOM 中。注意：该方法依赖 DOM 环境。不过不用担心，Jest 默认集成了 <a href="https://github.com/jsdom/jsdom">jsdom</a>。该方法会返回被 render 的 React 组件的实例。</li>
+<li><code>scryRenderedDOMComponentsWithClass()</code> 与 <code>findRenderedDOMComponentWithClass()</code>：查找匹配特定类名的 DOM 元素。区别在于 <code>scryRenderedDOMComponentsWithClass()</code> 会查找所有元素。而 <code>findRenderedDOMComponentWithClass()</code> 会假定页面中有且只有 1 个符合条件的元素，否则抛出异常。</li>
+<li><code>scryRenderedDOMComponentsWithTag()</code> 与 <code>findRenderedDOMComponentWithTag()</code>：查找匹配特定标签类型的 DOM 元素。</li>
+</ul>
+
+<p>还是让我们通过一个具体的组件来熟悉下实际用法。</p>
+
+<p>假设我们有以下 <code>Button</code> 组件：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Button</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+  <span style="color:#a6e22e">constructor</span>() {
+    <span style="color:#66d9ef">super</span>();
+
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> { <span style="color:#a6e22e">disabled</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span> };
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">handClick</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">handClick</span>.<span style="color:#a6e22e">bind</span>(<span style="color:#66d9ef">this</span>);
+  }
+
+  <span style="color:#a6e22e">handClick</span>() {
+    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">disabled</span>) { <span style="color:#66d9ef">return</span> }
+    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">props</span>.<span style="color:#a6e22e">onClick</span>) { <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">props</span>.<span style="color:#a6e22e">onClick</span>() }
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">setState</span>({ <span style="color:#a6e22e">disabled</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span> });
+    <span style="color:#a6e22e">setTimeout</span>(() =&gt; {<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">setState</span>({ <span style="color:#a6e22e">disabled</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span> })}, <span style="color:#ae81ff">200</span>);
+  }
+
+  <span style="color:#a6e22e">render</span>() {
+    <span style="color:#66d9ef">return</span> (
+      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">button</span> <span style="color:#a6e22e">className</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;my-button&#34;</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">handClick</span>}<span style="color:#f92672">&gt;</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">props</span>.<span style="color:#a6e22e">children</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/button&gt;</span>
+    );
+  }
+};
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">Button</span>;
+</code></pre></div>
+<p>其主要功能就是点击 <code>button</code> 元素时执行 <code>onClick</code> 回调，并且设置了自上一次点击之后，200 毫秒内按钮进入禁用状态。</p>
+
+<p>首先让我们测试一下执行 <code>onClick</code> 回调这个逻辑：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">  <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;should call onClick callback if provided&#39;</span>, () =&gt; {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">onClickMock</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">jest</span>.<span style="color:#a6e22e">fn</span>();
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">testInstance</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ReactTestUtils</span>.<span style="color:#a6e22e">renderIntoDocument</span>(
+      <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Button</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">onClickMock</span>}<span style="color:#f92672">&gt;</span><span style="color:#a6e22e">hello</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/Button&gt;</span>
+    );
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">buttonDom</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ReactTestUtils</span>.<span style="color:#a6e22e">findRenderedDOMComponentWithClass</span>(<span style="color:#a6e22e">testInstance</span>, <span style="color:#e6db74">&#39;my-button&#39;</span>);
+    <span style="color:#a6e22e">ReactTestUtils</span>.<span style="color:#a6e22e">Simulate</span>.<span style="color:#a6e22e">click</span>(<span style="color:#a6e22e">buttonDom</span>);
+    <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">onClickMock</span>).<span style="color:#a6e22e">toHaveBeenCalled</span>();
+  });
+</code></pre></div>
+<p>这里我们创建了一个 mock 方法 <code>onClickMock</code> 并将它作为回到函数传递给 <code>Button</code> 组件。然后利用 <code>ReactTestUtils.Simulate.click</code> 模拟触发点击事件。最后确认一下 <code>onClickMock</code> 被调用。</p>
+
+<p>注：关于 mock 方法的使用，在<a href="https://loveky.github.io/2018/05/17/unit-test-and-jest/">上一篇文章中</a>有详细介绍，欢迎阅读。</p>
+
+<p>接下来让我们测试一下点击过后 200 毫秒内进入禁用状态：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">  <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;should be throttled to 200ms&#39;</span>, () =&gt; {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">testInstance</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ReactTestUtils</span>.<span style="color:#a6e22e">renderIntoDocument</span>(<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Button</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">hello</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/Button&gt;);</span>
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">buttonDom</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ReactTestUtils</span>.<span style="color:#a6e22e">findRenderedDOMComponentWithClass</span>(<span style="color:#a6e22e">testInstance</span>, <span style="color:#e6db74">&#39;my-button&#39;</span>);
+    <span style="color:#a6e22e">ReactTestUtils</span>.<span style="color:#a6e22e">Simulate</span>.<span style="color:#a6e22e">click</span>(<span style="color:#a6e22e">buttonDom</span>);
+    <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">testInstance</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">disabled</span>).<span style="color:#a6e22e">toBeTruthy</span>();
+    <span style="color:#a6e22e">jest</span>.<span style="color:#a6e22e">advanceTimersByTime</span>(<span style="color:#ae81ff">199</span>);
+    <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">testInstance</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">disabled</span>).<span style="color:#a6e22e">toBeTruthy</span>();
+    <span style="color:#a6e22e">jest</span>.<span style="color:#a6e22e">advanceTimersByTime</span>(<span style="color:#ae81ff">1</span>);
+    <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">testInstance</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">disabled</span>).<span style="color:#a6e22e">toBeFalsy</span>();
+  });
+</code></pre></div>
+<p>由于涉及到定时器逻辑，我们在这个用例中使用了 Jest 提供的 <a href="https://facebook.github.io/jest/docs/en/timer-mocks.html">timer mock 功能</a>。详细用法请参考 Jest 官方文档。</p>
+
+<h2 id="enzyme">Enzyme</h2>
+
+<p>前面已经介绍完了 React 自带的两个测试工具库。接下来简单介绍一下由 Airbnb 开源的 React 测试工具库 <a href="http://airbnb.io/enzyme/">Enzyme</a>。</p>
+
+<p>Enzyme 底层其实也是基于 <code>react-test-renderer</code> 和 <code>react-dom/test-utils</code> 的。但它在二者的基础上进行了封装提供了更加简单易用的查询、断言方法。在概念上，Enzyme 也与二者非常相似。在 Enzyme 中有三种 render 模式：</p>
+
+<ul>
+<li><a href="http://airbnb.io/enzyme/docs/api/shallow.html">Shallow Rendering</a> 对应 <code>react-test-renderer/shallow</code></li>
+<li><a href="http://airbnb.io/enzyme/docs/api/mount.html">Full DOM Rendering</a> 对应 <code>react-dom/test-utils</code></li>
+<li><a href="http://airbnb.io/enzyme/docs/api/render.html">Static Rendering</a> 对应 <code>react-test-renderer</code></li>
+</ul>
+
+<p>如果你能理解前面对 <code>react-test-renderer</code> 和 <code>react-dom/test-utils</code> 的介绍，那么上手 Enzyme 应该是非常容易的。此处不再详细介绍 Enzyme 的使用方法。</p>
+
+<p>让我们使用 Enzyme 改写一下前面为 <code>Button</code> 组件编写的测试：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">describe</span>(<span style="color:#e6db74">&#39;Button&#39;</span>, () =&gt; {
+  <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;should be throttled to 200ms&#39;</span>, () =&gt; {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">wrapper</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">mount</span>(<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Button</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">hello</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/Button&gt;);</span>
+    <span style="color:#a6e22e">wrapper</span>.<span style="color:#a6e22e">find</span>(<span style="color:#e6db74">&#39;.my-button&#39;</span>).<span style="color:#a6e22e">simulate</span>(<span style="color:#e6db74">&#39;click&#39;</span>);
+    <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">wrapper</span>.<span style="color:#a6e22e">state</span>(<span style="color:#e6db74">&#39;disabled&#39;</span>)).<span style="color:#a6e22e">toBeTruthy</span>();
+    <span style="color:#a6e22e">jest</span>.<span style="color:#a6e22e">advanceTimersByTime</span>(<span style="color:#ae81ff">199</span>);
+    <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">wrapper</span>.<span style="color:#a6e22e">state</span>(<span style="color:#e6db74">&#39;disabled&#39;</span>)).<span style="color:#a6e22e">toBeTruthy</span>();
+    <span style="color:#a6e22e">jest</span>.<span style="color:#a6e22e">advanceTimersByTime</span>(<span style="color:#ae81ff">1</span>);
+    <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">wrapper</span>.<span style="color:#a6e22e">state</span>(<span style="color:#e6db74">&#39;disabled&#39;</span>)).<span style="color:#a6e22e">toBeFalsy</span>();
+  });
+
+  <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;should call onClick callback if provided&#39;</span>, () =&gt; {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">onClickMock</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">jest</span>.<span style="color:#a6e22e">fn</span>();
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">wrapper</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">mount</span>(<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Button</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">onClickMock</span>}<span style="color:#f92672">&gt;</span><span style="color:#a6e22e">hello</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/Button&gt;);</span>
+    <span style="color:#a6e22e">wrapper</span>.<span style="color:#a6e22e">find</span>(<span style="color:#e6db74">&#39;.my-button&#39;</span>).<span style="color:#a6e22e">simulate</span>(<span style="color:#e6db74">&#39;click&#39;</span>);
+    <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">onClickMock</span>).<span style="color:#a6e22e">toHaveBeenCalled</span>();
+  });
+});
+</code></pre></div>
+<p>现在我们可以通过 Enzyme 提供的 <code>.find()</code> 方法查找 DOM 节点，通过 <code>.state()</code> 方法读取 state。简单不少吧。</p>
+
+<h2 id="写在最后">写在最后</h2>
+
+<p>本文简单介绍了 <code>react-test-renderer</code> 和 <code>react-dom/test-utils</code> 两兄弟以及 Enzyme。具体在项目中选择哪一款工具根据自己喜好选择即可。</p>
+
+<p>本文中全部代码均可在 <a href="https://github.com/loveky/unit-testing-react-component">loveky/unit-testing-react-component</a> 仓库中获取。</p>
+
+<h3 id="链接">链接</h3>
+
+<ul>
+<li><a href="https://reactjs.org/docs/test-renderer.html">react-test-renderer</a></li>
+<li><a href="https://reactjs.org/docs/test-utils.html">react-dom/test-utils</a></li>
+<li><a href="http://airbnb.io/enzyme/">Enzyme</a></li>
+<li><a href="https://loveky.github.io/2018/05/17/unit-test-and-jest/">单元测试与单元测试框架 Jest</a></li>
+</ul>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://loveky.github.io/tags/%E6%B5%8B%E8%AF%95"><span class="tag">测试</span></a></li>
+        
+          <li><a href="https://loveky.github.io/tags/react"><span class="tag">React</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        
+      </p>
+    </footer>
+    <div style="text-align:center">
+      <p>如果你觉得这篇文章对你有所帮助，可以微信扫码请作者喝杯咖啡哦~</p>
+      <img width="300" height="300" src="https://loveky.github.io/img/wechat-reward-new.jpg"/>
+  </div>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "loveky" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 loveky的流水账</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+
+
+<script src="https://loveky.github.io/js/bundle.js"></script>
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?301a286a5bea7d926e284c27f79bd221";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+  </body>
+</html>

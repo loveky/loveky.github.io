@@ -238,6 +238,27 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2018/06/05/unit-testing-react-component-with-jest/" class="post-link">利用 Jest 为 React 组件编写单元测试</a></h3>
+    <p class="post-meta">@loveky · Jun 5, 2018</p>
+  </header>
+  
+    <img class="post-cover" src="https://img20.360buyimg.com/uba/s300x300_jfs/t20215/257/718598224/50702/4b2501db/5b168cc4N1fc2ed0b.png" alt="利用 Jest 为 React 组件编写单元测试">
+  
+  <p class="post-summary">图片来自 https://blog.algolia.com   在上一篇文章中我们介绍了什么是单元测试以及单元测试框架 Jest 的基本用法。在本文中我们会具体聊聊如何用 Jest 为 React 组件编写单元测试。
+首先我们要明确的一点，那就是 React 组件的单元测试本质是也是单元测试。因此它也符合我们之前介绍过的单元测试的全部特点。唯一不同的地方在于 React 组件的单元测试中我们需要找到合适的方法对执行结果进行断言。换言之，我们要根据 React 的特点来设置代码是否正确执行的判断条件。
+那么 React 组件和其它的被测试对象有何不同呢？仔细想过，我们会发现：
+ React 组件的 render 结果是一个组件树，并且整个树最终会被解析成一个纯粹由 HTML 元素构成的树形结构 React 组件可以拥有 state，且 state 的变化会影响 render 结果 React 组件可以拥有生命周期函数，这些生命周期函数会在特定时间点执行  知道了要测试的内容，接下来的问题就是如何执行一个 React 组件并编写断言了。如何执行一个 React 组件呢？看到这个问题估计大多数儿人是蒙的。平时不就是直接 ReactDOM.render 吗？不错，ReactDOM.render 确实可以执行一个 React 组件并将它渲染到页面中，但这种方式不利于编写测试代码。
+有没有更简单的方式呢？其实 React 已经帮我们提供好了工具，让我们一起来看看。
+React 提供的测试工具 在 React 的官方文档中提到了两个用于测试 React 组件的库。让我们分别介绍。
+react-test-renderer 在说 react-test-renderer 之前，让我们先聊聊什么是 renderer。React 最早是被用来开发网页的，所以早期的 React 库中还包含了大量和 DOM 相关的逻辑。后来 React 的设计思想慢慢被迁移到其它场景，最被人们熟知的莫过于 React Native 了。为了灵活性和扩展性，React 的代码被分拆为 React 核心代码与各种 renderer。React 自带了 3 个 renderer，前两个是大家常见的：</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2018/06/05/unit-testing-react-component-with-jest/">阅读全文 →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2018/06/04/write-good-commit-message/" class="post-link">书写良好的 commit message</a></h3>
     <p class="post-meta">@loveky · Jun 4, 2018</p>
   </header>
@@ -420,22 +441,6 @@ yarn add --dev eslint // or npm install --save-dev eslint 创建配置文件
 配置好以后就可以通过命令</p>
   <footer class="post-footer">
     <a class="read-more" href="https://loveky.github.io/2017/08/03/config-eslint-and-stylelint-in-project/">阅读全文 →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://loveky.github.io/2017/07/24/service-worker-101/" class="post-link">Service Worker 基础知识</a></h3>
-    <p class="post-meta">@loveky · Jul 24, 2017</p>
-  </header>
-  
-  <p class="post-summary">本文旨在帮你快速了解 service worker 的基本知识点，让你对 service worker 有一个大致的了解。为以后开发一个简单的 PWA 应用打下基础。
-关于 service worker 的几个基本知识点  它是一个可编程的网络代理，让你可以控制页面请求的处理方式。 它是一个 JavaScript Worker，因此它无法直接操作 DOM。但可以通过 postMessage 接口与页面通信。同时，service worker 中的代码不会阻塞页面响应。 它在闲置时被终止，在需要时被启动。并不是常驻内存。因此你不能在 onfetch 或是 onmessage 回调中依赖全局状态。 被设计成完全异步。因此在 service worker 中无法使用同步 API （例如同步 XHR，localStorage等）。接口重度依赖于 promise。 只能在 HTTPS 页面加载（唯一的例外：localhost/127.0.0.1，方便调试）。  Service worker 的作用域 一个 service worker 的默认作用域是这个 service worker 脚本所在的目录。例如 https://example.com/sw.js 脚本默认就是 https://example.com 下的所有页面。
-你也可以在注册 service worker 时明确指定作用域：
-navigator.serviceWorker.register(&#39;sw.js&#39;, { scope: &#39;./abc&#39; });  假设以上代码在 https://example.com 页面里执行，则意味着该 service worker 的作用域就是 https://example.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2017/07/24/service-worker-101/">阅读全文 →</a>
   </footer>
 </article>
 

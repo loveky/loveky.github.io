@@ -5,9 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>
-  Tags | loveky的流水账
-</title>
+  <title>loveky的流水账</title>
 
   
   
@@ -31,7 +29,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="loveky的流水账" />
   <meta property="og:description" content="" />
-  <meta property="og:url" content="https://loveky.github.io/tags/" />
+  <meta property="og:url" content="https://loveky.github.io/" />
   <meta property="og:image" content="https://loveky.github.io/img/avatar.jpg" />
 
 
@@ -40,7 +38,7 @@
 <meta name="generator" content="Hugo 0.41" />
 
 
-<link rel="canonical" href="https://loveky.github.io/tags/" />
+<link rel="canonical" href="https://loveky.github.io/" />
 <link rel="alternative" href="https://loveky.github.io/index.xml" title="loveky的流水账" type="application/atom+xml" />
 
 
@@ -72,8 +70,6 @@
 <link rel="mask-icon" href="https://loveky.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
 
 
-
-<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
 
 <link rel="stylesheet" href="https://loveky.github.io/css/bundle.css" />
 
@@ -117,7 +113,7 @@
   <header class="site-header">
   <img class="avatar" src="https://loveky.github.io/img/avatar.jpg" alt="Avatar">
   
-  <h2 class="title">loveky的流水账</h2>
+  <h1 class="title">loveky的流水账</h1>
   
   <p class="subtitle"></p>
   <button class="menu-toggle" type="button">
@@ -132,14 +128,14 @@
       
         <li class="menu-item
             
+              is-active
+            
             
             ">
             <a href="https://loveky.github.io/">首页</a>
           </li>
       
         <li class="menu-item
-            
-              is-active
             
             
             ">
@@ -233,89 +229,47 @@
   </nav>
 </header>
 
-  <section class="main post-detail terms-list">
-    <header class="post-header">
-      <h1 class="post-title">Tags</h1>
+  <section class="main post-list">
+    <header class="list-header offscreen">
+      <h2 class="list-label">All Posts</h2>
     </header>
-    <div class="tags-cloud">
+    
+    
       
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2013/06/15/try-sidekiq/" class="post-link">sidekiq初体验</a></h3>
+    <p class="post-meta">@loveky · Jun 15, 2013</p>
+  </header>
+  
+  <p class="post-summary">今天Kevin讲了background job，提到了Resque和Sidekiq，并推荐我们使用Sidekiq。于是初步体验了一下。
+Sidekiq在其项目主页上写到:
+ What if 1 Sidekiq process could do the work of 20 Resque or DelayedJob processes?
+ 口气不小啊…⊙﹏⊙b
+安装 只需在Gemfile里添加
+gem &#39;sidekiq&#39;  然后执行bundle install即可。
+使用 这里拿课程中的一段真实code举例说明。在该项目中有一个UserController在新用户注册时会发送欢迎邮件，但是此处发送邮件是一个同步的操作，如果你的网络不稳定则用户在点击注册后可能会等很长时间才能看到注册成功的页面，我们要把发送欢迎邮件的操作转换成一个异步的后台任务。使用Sidekiq前的code如下：
+if @user.save AppMailer.send_welcome_email(@user.id).deliver 要把它转为后台任务，只需改为：
+if @user.save AppMailer.delay.send_welcome_email(@user.id) 测试 改完之后在开发环境中测试正常，接着跑rspec发现有3个spec失败，这三个spec内容如下：
+it &#34;sends out email&#34; do expect { post :create, user: Fabricate.attributes_for(:user) }.to change{ ActionMailer::Base.deliveries.size }.by(1) end it &#34;sends to the right recipient&#34; do post :create, user: Fabricate.attributes_for(:user) email = ActionMailer::Base.deliveries.last expect(email.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2013/06/15/try-sidekiq/">阅读全文 →</a>
+  </footer>
+</article>
+
       
-        
-        <a href="https://loveky.github.io/tags/javascript/" class="tag-xxl">javascript</a>
-      
-        
-        <a href="https://loveky.github.io/tags/%E5%B7%A5%E5%85%B7/" class="tag-xxl">工具</a>
-      
-        
-        <a href="https://loveky.github.io/tags/angularjs/" class="tag-xxl">angularjs</a>
-      
-        
-        <a href="https://loveky.github.io/tags/react/" class="tag-xxl">react</a>
-      
-        
-        <a href="https://loveky.github.io/tags/%E7%BF%BB%E8%AF%91/" class="tag-xxl">翻译</a>
-      
-        
-        <a href="https://loveky.github.io/tags/es6/" class="tag-l">es6</a>
-      
-        
-        <a href="https://loveky.github.io/tags/%E6%B5%8B%E8%AF%95/" class="tag-l">测试</a>
-      
-        
-        <a href="https://loveky.github.io/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" class="tag-l">源码阅读</a>
-      
-        
-        <a href="https://loveky.github.io/tags/git/" class="tag-m">git</a>
-      
-        
-        <a href="https://loveky.github.io/tags/redux/" class="tag-m">redux</a>
-      
-        
-        <a href="https://loveky.github.io/tags/ruby/" class="tag-m">ruby</a>
-      
-        
-        <a href="https://loveky.github.io/tags/webpack/" class="tag-m">webpack</a>
-      
-        
-        <a href="https://loveky.github.io/tags/%E7%94%9F%E6%B4%BB/" class="tag-m">生活</a>
-      
-        
-        <a href="https://loveky.github.io/tags/%E8%81%8C%E4%B8%9A%E7%94%9F%E6%B6%AF/" class="tag-m">职业生涯</a>
-      
-        
-        <a href="https://loveky.github.io/tags/css3/" class="tag-s">css3</a>
-      
-        
-        <a href="https://loveky.github.io/tags/jenkins/" class="tag-s">jenkins</a>
-      
-        
-        <a href="https://loveky.github.io/tags/koa/" class="tag-s">koa</a>
-      
-        
-        <a href="https://loveky.github.io/tags/npm/" class="tag-s">npm</a>
-      
-        
-        <a href="https://loveky.github.io/tags/pwa/" class="tag-s">pwa</a>
-      
-        
-        <a href="https://loveky.github.io/tags/rollup/" class="tag-s">rollup</a>
-      
-        
-        <a href="https://loveky.github.io/tags/tree-shaking/" class="tag-s">tree-shaking</a>
-      
-        
-        <a href="https://loveky.github.io/tags/typescript/" class="tag-s">typescript</a>
-      
-        
-        <a href="https://loveky.github.io/tags/%E5%8A%A8%E7%94%BB/" class="tag-s">动画</a>
-      
-        
-        <a href="https://loveky.github.io/tags/%E6%B8%B8%E8%AE%B0/" class="tag-s">游记</a>
-      
-        
-        <a href="https://loveky.github.io/tags/%E8%B0%83%E8%AF%95/" class="tag-s">调试</a>
-      
-    </div>
+    
+    
+      <footer class="list-footer">
+        <nav class="pagination">
+          <h3 class="offscreen">Pagination</h3>
+          
+            <a class="pagination-previous" href="https://loveky.github.io/page/4/">← Newer Posts</a>
+          
+          
+        </nav>
+      </footer>
+    
   </section>
   <footer class="site-footer">
   <p>© 2017-2018 loveky的流水账</p>
@@ -323,9 +277,6 @@
   
 </footer>
 
-
-
-<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
 
 
 <script src="https://loveky.github.io/js/bundle.js"></script>

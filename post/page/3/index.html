@@ -245,6 +245,21 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2017/03/27/react-conf-2017-video/" class="post-link">React Conf 2017视频 百度网盘地址</a></h3>
+    <p class="post-meta">@loveky · Mar 27, 2017</p>
+  </header>
+  
+  <p class="post-summary">React Conf 2017的全部视频已经在YouTube上放出来了。为了方便在家里的电视上播放，就全部下载了一套。顺便上传了百度网盘一份。感兴趣的可以看看哦。全部720p。
+下载地址：
+http://pan.baidu.com/s/1gfl5FzX</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2017/03/27/react-conf-2017-video/">阅读全文 →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2017/03/26/trip-gardenexpo-park/" class="post-link">园博园一日游</a></h3>
     <p class="post-meta">@loveky · Mar 26, 2017</p>
   </header>
@@ -444,34 +459,6 @@ Q: .babel文件编译出来的代码我看不懂，出了问题如何调试呢�
 控制流  {if testExpr} {elseif testExpr} {else} {/if}   testExpr可以是任何不包含}的JavaScript表达式 testExpr不需要被(和)包围  示例：</p>
   <footer class="post-footer">
     <a class="read-more" href="https://loveky.github.io/2015/12/03/trimpath-syntax/">阅读全文 →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://loveky.github.io/2014/05/04/di-in-angularjs/" class="post-link">AngularJS中的依赖注入</a></h3>
-    <p class="post-meta">@loveky · May 4, 2014</p>
-  </header>
-  
-  <p class="post-summary">本文译自https://docs.angularjs.org/guide/di
-依赖注入 依赖注入(DI)是一种解决组件如何获取其依赖这一问题的设计模式。
-Angular injector子系统负责创建组件，解决它们的依赖，并按要求将它们提供给其他组件。
-如果想深入了解DI，可以查看依赖注入的Wikipedia以及Martin Fowler的这篇Inversion of Control。
-DI in a Nutshell 一个组件要想获取它的依赖可以通过以下三种途径：
- 直接创建这个依赖的一个实例，通常使用new操作符
- 通过全局变量查找已经被创建的依赖
- 依赖可以作为参数传递给需要它的组件
-  前两种获取依赖的方式并不理想，因为这会导致依赖关系被硬编码进代码中。这会导致更新依赖关系变得很复杂。在测试时尤其如此，我们通常会提供mock过的依赖关系以隔离不同组件间的测试，硬编码会导致每次测试都需要修改相关的源码。
-相比之下，第三种方式是最可行的，因为它将解决依赖关系的责任从组件中移除。依赖只是简单的作为参数传递给组件：
-function SomeClass(greeter) { this.greeter = greeter; } SomeClass.prototype.doSomething = function(name) { this.greeter.greet(name); }  在上边的例子中，SomeClass并不关心如何创建或找到greeter，它只是在初始化时从参数列表里取出需要的依赖即可。
-但这样做的问题是，寻找/创建依赖的责任被转交给了调用SomeClass的代码。
-为了统一管理依赖关系，每个Angular应用都有一个injector。injector是一个服务定位器，它负责查找或创建依赖。
-下面是一个使用injector服务的例子：
-// Provide the wiring information in a module var myModule = angular.module(&#39;myModule&#39;, []);  下面的代码告诉injector如何创建greeter服务。需要注意的是greeter又依赖于$window服务。greeter实际上是一个包含greet方法的对象。
-myModule.factory(&#39;greeter&#39;, function($window) { return { greet: function(text) { $window.alert(text); } }; });  下面的代码演示了如何创建一个injector并通过它来请求greeter服务:</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2014/05/04/di-in-angularjs/">阅读全文 →</a>
   </footer>
 </article>
 

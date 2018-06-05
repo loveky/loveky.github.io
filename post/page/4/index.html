@@ -245,6 +245,34 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2014/05/04/di-in-angularjs/" class="post-link">AngularJS中的依赖注入</a></h3>
+    <p class="post-meta">@loveky · May 4, 2014</p>
+  </header>
+  
+  <p class="post-summary">本文译自https://docs.angularjs.org/guide/di
+依赖注入 依赖注入(DI)是一种解决组件如何获取其依赖这一问题的设计模式。
+Angular injector子系统负责创建组件，解决它们的依赖，并按要求将它们提供给其他组件。
+如果想深入了解DI，可以查看依赖注入的Wikipedia以及Martin Fowler的这篇Inversion of Control。
+DI in a Nutshell 一个组件要想获取它的依赖可以通过以下三种途径：
+ 直接创建这个依赖的一个实例，通常使用new操作符
+ 通过全局变量查找已经被创建的依赖
+ 依赖可以作为参数传递给需要它的组件
+  前两种获取依赖的方式并不理想，因为这会导致依赖关系被硬编码进代码中。这会导致更新依赖关系变得很复杂。在测试时尤其如此，我们通常会提供mock过的依赖关系以隔离不同组件间的测试，硬编码会导致每次测试都需要修改相关的源码。
+相比之下，第三种方式是最可行的，因为它将解决依赖关系的责任从组件中移除。依赖只是简单的作为参数传递给组件：
+function SomeClass(greeter) { this.greeter = greeter; } SomeClass.prototype.doSomething = function(name) { this.greeter.greet(name); }  在上边的例子中，SomeClass并不关心如何创建或找到greeter，它只是在初始化时从参数列表里取出需要的依赖即可。
+但这样做的问题是，寻找/创建依赖的责任被转交给了调用SomeClass的代码。
+为了统一管理依赖关系，每个Angular应用都有一个injector。injector是一个服务定位器，它负责查找或创建依赖。
+下面是一个使用injector服务的例子：
+// Provide the wiring information in a module var myModule = angular.module(&#39;myModule&#39;, []);  下面的代码告诉injector如何创建greeter服务。需要注意的是greeter又依赖于$window服务。greeter实际上是一个包含greet方法的对象。
+myModule.factory(&#39;greeter&#39;, function($window) { return { greet: function(text) { $window.alert(text); } }; });  下面的代码演示了如何创建一个injector并通过它来请求greeter服务:</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2014/05/04/di-in-angularjs/">阅读全文 →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2014/04/11/angularjs-ng-model/" class="post-link">AngularJS源码阅读之ngModel</a></h3>
     <p class="post-meta">@loveky · Apr 11, 2014</p>
   </header>
@@ -425,28 +453,6 @@ $ git init git-rerere-test Initialized empty Git repository in /cygdrive/e/test/
 </article>
 
       
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://loveky.github.io/2013/06/15/try-sidekiq/" class="post-link">sidekiq初体验</a></h3>
-    <p class="post-meta">@loveky · Jun 15, 2013</p>
-  </header>
-  
-  <p class="post-summary">今天Kevin讲了background job，提到了Resque和Sidekiq，并推荐我们使用Sidekiq。于是初步体验了一下。
-Sidekiq在其项目主页上写到:
- What if 1 Sidekiq process could do the work of 20 Resque or DelayedJob processes?
- 口气不小啊…⊙﹏⊙b
-安装 只需在Gemfile里添加
-gem &#39;sidekiq&#39;  然后执行bundle install即可。
-使用 这里拿课程中的一段真实code举例说明。在该项目中有一个UserController在新用户注册时会发送欢迎邮件，但是此处发送邮件是一个同步的操作，如果你的网络不稳定则用户在点击注册后可能会等很长时间才能看到注册成功的页面，我们要把发送欢迎邮件的操作转换成一个异步的后台任务。使用Sidekiq前的code如下：
-if @user.save AppMailer.send_welcome_email(@user.id).deliver 要把它转为后台任务，只需改为：
-if @user.save AppMailer.delay.send_welcome_email(@user.id) 测试 改完之后在开发环境中测试正常，接着跑rspec发现有3个spec失败，这三个spec内容如下：
-it &#34;sends out email&#34; do expect { post :create, user: Fabricate.attributes_for(:user) }.to change{ ActionMailer::Base.deliveries.size }.by(1) end it &#34;sends to the right recipient&#34; do post :create, user: Fabricate.attributes_for(:user) email = ActionMailer::Base.deliveries.last expect(email.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2013/06/15/try-sidekiq/">阅读全文 →</a>
-  </footer>
-</article>
-
-      
     
     
       <footer class="list-footer">
@@ -455,6 +461,8 @@ it &#34;sends out email&#34; do expect { post :create, user: Fabricate.attribute
           
             <a class="pagination-previous" href="https://loveky.github.io/post/page/3/">← Newer Posts</a>
           
+          
+            <a class="pagination-next" href="https://loveky.github.io/post/page/5/">Older Posts →</a>
           
         </nav>
       </footer>
