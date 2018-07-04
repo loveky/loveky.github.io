@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Flutter 初体验</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="loveky" />
+  <meta name="description" content="初识 Flutter 还是在上个月的 GMTC 大会上。来自 Google 的工程师现场演示了如何使用 Flutter 构建美观、高性能的移动应用。个人对其中一些特性，比如良好的开发者体验、优秀的跨平台能力很感兴趣。于是决定在会后亲自体验一下。
+最近几天尝试使用 Flutter 把京东 APP 中的排行榜频道的首屏布局实现了一下，算是对基于 Flutter 的开发有了一个最简单的了解，特地记录一下，方便其他想了解、尝试 Flutter 框架的小伙伴。
+首先看看我实现了一个什么样的界面：
+接下来让我们从不同方面说说 Flutter 的开发。
+Flutter 开发环境搭建 安装 Flutter 不同平台的安装流程基本一致，这里就以 macOS 为例。首先下载 flutter macOS 版，并解压。
+把 Flutter 的 bin 目录添加到系统 PATH 中：
+export PATH=~/Software/flutter/bin:$PATH 提示：记得把这行代码放到你的 shell 启动脚本中，避免每次都要手动执行。
+路径添加完成后就可以执行 flutter 命令啦。 Flutter 提供了一个 flutter doctor 命令协助我们安装 Flutter 的依赖。它会检查本地是否有 iOS 和 Android 的开发环境。如果检测到依赖缺失，它还会给出对应依赖的安装方法。你只需要不断执行该方法，然后安装缺失的依赖，直到全部依赖安装完成即可。
+配置代码编辑器 主要是给 IDE 安装相关插件。
+VS Code 上只需要安装 flutter 扩展即可。 Android Studio 上需要安装 flutter 和 dart 两个插件。" />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@loveky_" />
+    <meta name="twitter:title" content="Flutter 初体验" />
+    <meta name="twitter:description" content="初识 Flutter 还是在上个月的 GMTC 大会上。来自 Google 的工程师现场演示了如何使用 Flutter 构建美观、高性能的移动应用。个人对其中一些特性，比如良好的开发者体验、优秀的跨平台能力很感兴趣。于是决定在会后亲自体验一下。
+最近几天尝试使用 Flutter 把京东 APP 中的排行榜频道的首屏布局实现了一下，算是对基于 Flutter 的开发有了一个最简单的了解，特地记录一下，方便其他想了解、尝试 Flutter 框架的小伙伴。
+首先看看我实现了一个什么样的界面：
+接下来让我们从不同方面说说 Flutter 的开发。
+Flutter 开发环境搭建 安装 Flutter 不同平台的安装流程基本一致，这里就以 macOS 为例。首先下载 flutter macOS 版，并解压。
+把 Flutter 的 bin 目录添加到系统 PATH 中：
+export PATH=~/Software/flutter/bin:$PATH 提示：记得把这行代码放到你的 shell 启动脚本中，避免每次都要手动执行。
+路径添加完成后就可以执行 flutter 命令啦。 Flutter 提供了一个 flutter doctor 命令协助我们安装 Flutter 的依赖。它会检查本地是否有 iOS 和 Android 的开发环境。如果检测到依赖缺失，它还会给出对应依赖的安装方法。你只需要不断执行该方法，然后安装缺失的依赖，直到全部依赖安装完成即可。
+配置代码编辑器 主要是给 IDE 安装相关插件。
+VS Code 上只需要安装 flutter 扩展即可。 Android Studio 上需要安装 flutter 和 dart 两个插件。" />
+    <meta name="twitter:image" content="https://img12.360buyimg.com/uba/s300x300_jfs/t22333/316/1892258469/68208/66d017fd/5b3ce1e8N69717104.png" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Flutter 初体验" />
+  <meta property="og:description" content="初识 Flutter 还是在上个月的 GMTC 大会上。来自 Google 的工程师现场演示了如何使用 Flutter 构建美观、高性能的移动应用。个人对其中一些特性，比如良好的开发者体验、优秀的跨平台能力很感兴趣。于是决定在会后亲自体验一下。
+最近几天尝试使用 Flutter 把京东 APP 中的排行榜频道的首屏布局实现了一下，算是对基于 Flutter 的开发有了一个最简单的了解，特地记录一下，方便其他想了解、尝试 Flutter 框架的小伙伴。
+首先看看我实现了一个什么样的界面：
+接下来让我们从不同方面说说 Flutter 的开发。
+Flutter 开发环境搭建 安装 Flutter 不同平台的安装流程基本一致，这里就以 macOS 为例。首先下载 flutter macOS 版，并解压。
+把 Flutter 的 bin 目录添加到系统 PATH 中：
+export PATH=~/Software/flutter/bin:$PATH 提示：记得把这行代码放到你的 shell 启动脚本中，避免每次都要手动执行。
+路径添加完成后就可以执行 flutter 命令啦。 Flutter 提供了一个 flutter doctor 命令协助我们安装 Flutter 的依赖。它会检查本地是否有 iOS 和 Android 的开发环境。如果检测到依赖缺失，它还会给出对应依赖的安装方法。你只需要不断执行该方法，然后安装缺失的依赖，直到全部依赖安装完成即可。
+配置代码编辑器 主要是给 IDE 安装相关插件。
+VS Code 上只需要安装 flutter 扩展即可。 Android Studio 上需要安装 flutter 和 dart 两个插件。" />
+  <meta property="og:url" content="https://loveky.github.io/2018/07/04/flutter-first-experience/" />
+  <meta property="og:image" content="https://img12.360buyimg.com/uba/s300x300_jfs/t22333/316/1892258469/68208/66d017fd/5b3ce1e8N69717104.png" />
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+
+<link rel="canonical" href="https://loveky.github.io/2018/07/04/flutter-first-experience/" />
+<link rel="alternative" href="https://loveky.github.io/index.xml" title="loveky的流水账" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="loveky的流水账" />
+<meta name="msapplication-tooltip" content="loveky的流水账" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://loveky.github.io/img/favicon.ico" />
+<link rel="icon" sizes="192x192" href="https://loveky.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://loveky.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://loveky.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://loveky.github.io/css/bundle.css" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-114966753-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-114966753-1');
+</script>
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://loveky.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">loveky的流水账</h2>
+  
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://loveky.github.io/">首页</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/tags/">标签</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/archive/">归档</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/links/">链接</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/about/">关于我</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:eWx6Y3lseEBnbWFpbC5jb20=" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/loveky" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/loveky_" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//www.zhihu.com/people/loveky" title="Zhihu"><span class="icon icon-zhihu"></span></a>
+      </li>
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://loveky.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Flutter 初体验</h1>
+      <p class="post-meta">@loveky · Jul 4, 2018 · 3 min read</p>
+    </header>
+    <article class="post-content">
+
+<p>初识 Flutter 还是在上个月的 <a href="https://gmtc.geekbang.org/">GMTC 大会</a>上。来自 Google 的工程师现场演示了如何使用 Flutter 构建美观、高性能的移动应用。个人对其中一些特性，比如良好的开发者体验、优秀的跨平台能力很感兴趣。于是决定在会后亲自体验一下。</p>
+
+<p>最近几天尝试使用 Flutter 把京东 APP 中的排行榜频道的首屏布局实现了一下，算是对基于 Flutter 的开发有了一个最简单的了解，特地记录一下，方便其他想了解、尝试 Flutter 框架的小伙伴。</p>
+
+<p>首先看看我实现了一个什么样的界面：</p>
+
+<p><img src="https://img14.360buyimg.com/uba/jfs/t21502/10/1872228411/1060381/920bed7f/5b3c69d6N945ef921.gif" alt="" /></p>
+
+<p>接下来让我们从不同方面说说 Flutter 的开发。</p>
+
+<h2 id="flutter-开发环境搭建">Flutter 开发环境搭建</h2>
+
+<h3 id="安装-flutter">安装 Flutter</h3>
+
+<p>不同平台的安装流程基本一致，这里就以 macOS 为例。首先下载 <a href="https://flutter.io/sdk-archive/#macos">flutter macOS 版</a>，并解压。</p>
+
+<p>把 Flutter 的 <code>bin</code> 目录添加到系统 <code>PATH</code> 中：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export PATH<span style="color:#f92672">=</span>~/Software/flutter/bin:$PATH</code></pre></div>
+<p><strong>提示：记得把这行代码放到你的 shell 启动脚本中，避免每次都要手动执行。</strong></p>
+
+<p>路径添加完成后就可以执行 <code>flutter</code> 命令啦。 Flutter 提供了一个 <code>flutter doctor</code> 命令协助我们安装 Flutter 的依赖。它会检查本地是否有 iOS 和 Android 的开发环境。如果检测到依赖缺失，它还会给出对应依赖的安装方法。你只需要不断执行该方法，然后安装缺失的依赖，直到全部依赖安装完成即可。</p>
+
+<h3 id="配置代码编辑器">配置代码编辑器</h3>
+
+<p>主要是给 IDE 安装相关插件。</p>
+
+<p>VS Code 上只需要安装 <a href="https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter">flutter</a> 扩展即可。
+Android Studio 上需要安装 flutter 和 dart 两个插件。</p>
+
+<p>这里简单说一下两个 IDE 的差异。从开发过程来说，VS Code 完胜 Android Studio。VS Code 提供了非常好的代码提示功能。以下图为例，鼠标移到某个对象或方法上，VS Code 会给出非常详细的信息。</p>
+
+<p><img src="https://img13.360buyimg.com/uba/jfs/t23491/108/675493574/78382/3fdbbf47/5b3c78e1N7c628c09.png" alt="" /></p>
+
+<p>而在 Android Studio 中，或许是 Android Studio 上的 dart 插件目前功能还不够完善的原因，IDE 能提供给我的只有一行干瘪的函数签名。</p>
+
+<p><img src="https://img14.360buyimg.com/uba/jfs/t20611/69/1869377482/29176/1f054c04/5b3c7a50N4fd6ee0a.png" alt="" /></p>
+
+<p>在调试阶段，两款 IDE 都提供了完善的断点调试机制。区别在于，Android Studio 还提供了一个名为 Flutter Inspector 的工具。你可以把它理解成为 Flutter 版的审查元素。</p>
+
+<p><img src="https://img11.360buyimg.com/uba/jfs/t21946/54/1927818103/234066/84cac353/5b3c7cc8N62199182.png" alt="" /></p>
+
+<p>综合以上几点，目前我在编写代码以及调试简单的逻辑问题时会使用 VS Code，在遇到布局问题时会启动 Android Studio。具体的选择大家根据自己的个人喜好决定即可。</p>
+
+<h3 id="配置依赖源镜像">配置依赖源镜像</h3>
+
+<p>Flutter 项目有两个依赖源。</p>
+
+<p>第一个就是 Flutter 框架自身的源。每当 Flutter 框架更新后，我们可以从源中更新最新的 Flutter 框架代码。
+此外，由于 Flutter 使用 <a href="https://www.dartlang.org/">Dart</a> 作为其开发语言。Dart 语言的 packages 统一在 <a href="https://pub.dartlang.org/">https://pub.dartlang.org/</a> 维护，这就是第二个依赖源。</p>
+
+<p>这两个源目前都是由 Google 在维护，而由于众所周知的原因，从国内访问 Google 的服务非常的不稳定。因此需要配置这两个源的国内镜像：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export PUB_HOSTED_URL<span style="color:#f92672">=</span>https://pub.flutter-io.cn
+export FLUTTER_STORAGE_BASE_URL<span style="color:#f92672">=</span>https://storage.flutter-io.cn</code></pre></div>
+<p><strong>提示：记得把这些代码放到你的 shell 启动脚本中，避免每次都要手动执行。</strong></p>
+
+<h3 id="配置调试设备">配置调试设备</h3>
+
+<p>调试设备又分为两类：真机 or 模拟器。我们分别介绍。</p>
+
+<h4 id="ios-模拟器">iOS 模拟器</h4>
+
+<p>这一项是唯一一个不需要任何配置的。只要按照之前的步骤正确安装依赖。直接在 IDE 中开始调试就会自动启动一个 iPhone X 的模拟器。</p>
+
+<h4 id="android-模拟器">Android 模拟器</h4>
+
+<p>Android Studio 默认是不带设备模拟器的，需要手动添加。</p>
+
+<ol>
+<li>启动 Android Studio</li>
+<li>Tools -&gt; AVD Manager</li>
+<li>点击 “Create Virtual Devices&hellip;”</li>
+<li>选择一个手机型号(其实就是一个屏幕分辨率和像素密度的组合)，点击“Next”</li>
+<li>选择并下载一个 Android 镜像。点击“Next”</li>
+<li>点击“Finish”完成虚拟设备的创建。</li>
+</ol>
+
+<h4 id="ios-真机">iOS 真机</h4>
+
+<p>需要分别在电脑端和手机端进行配置。</p>
+
+<p><strong>电脑端</strong></p>
+
+<p>进入项目目录，执行命令：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">open ios/Runner.xcworkspace</code></pre></div>
+<p>在弹出的 Xcode 界面依次执行以下操作：</p>
+
+<p>注意：这里说的开发者账号可以是你个人的 Apple ID，不必是花 99 刀购买的正式的开发者账号。</p>
+
+<p><img src="https://img13.360buyimg.com/uba/jfs/t20227/169/1866611542/57835/666b96c4/5b3cb9acN762614c1.png" alt="" /></p>
+
+<p><img src="https://img14.360buyimg.com/uba/jfs/t22321/279/1909388443/33555/bb1ff6f/5b3cbaefNb8008602.png" alt="" /></p>
+
+<p><strong>手机端</strong></p>
+
+<p>在完成电脑端的配置后，使用数据线将 iOS 设备接入电脑。如果弹出“要信任此电脑吗？”的弹框，请选择“信任”。</p>
+
+<p>然后进入 iOS 的设置界面，依次进入 “通用” -&gt; “描述文件与设备管理”。在这个界面你会看到一个以你 Apple ID 命名的开发者应用证书，选择信任。</p>
+
+<p>至此 iOS 的真机调试就配置完成了。</p>
+
+<h4 id="android-真机">Android 真机</h4>
+
+<p><strong>电脑端</strong></p>
+
+<p>如果是 Windows 系统，请安装 <a href="https://developer.android.com/studio/run/win-usb">Google USB Driver</a>。其他操作系统无需特殊配置。</p>
+
+<p><strong>手机端</strong></p>
+
+<ol>
+<li>开启“开发者模式”和“USB调试”选项。</li>
+<li>将手机通过数据线连接电脑，如果提示“是否允许USB调试”，选择“是”。</li>
+</ol>
+
+<p>至此，Flutter 的开发环境就基本搭建完成了。</p>
+
+<h2 id="dart">Dart</h2>
+
+<p>在说 Flutter 之前，先来聊聊 Flutter 项目的开发语言 —— <a href="https://www.dartlang.org/">Dart</a>。Dart 是由 Google 开发的一种面向对象语言。它也可以编译成 JavaScript，也有类型系统。很多人可能会把它和 TypeScript 比较，两者在这两点上还是很相似的。这里简单说一下。</p>
+
+<p>TypeScript 是 JavaScript 的超集。这意味所有的 JavaScript 代码也都是合法的 TypeScript 代码。TypeScript 在原有 JavaScript 语法的基础之上提供了一套镜头类型检查系统，可以帮助我们有效的减少由类型不一致导致的代码问题。另外，TypeScript 必须编译成 JavaScript 才可以被执行。</p>
+
+<p>Dart 本身除了可以编译成 JavaScript 外就和 JavaScript 没什么关系了。它其实是一门完全独立的语言。除了编译成 JavaScript 在 JavaScript 引擎上执行外，Dart 还可以编译成 ARM 和 x86 代码直接运行在 iOS、Android 设备上。Dart 同时支持 <a href="https://en.wikipedia.org/wiki/Just-in-time_compilation">JIT</a> 和 <a href="https://en.wikipedia.org/wiki/Ahead-of-time_compilation">AOT</a>。</p>
+
+<p>由于是一门完全独立的语言，和 JavaScript 没有任何关系，在学习的过程中请时刻保持清晰的思路。不要把两个语言中类似的概念混淆，否则很容易造成困扰。</p>
+
+<p>学习资源的话推荐官方的这篇 <a href="https://www.dartlang.org/guides/language/language-tour">A Tour of the Dart Language</a>。Dart 语言中最基础，最常用的语法都有介绍。建议一开始通读一遍。</p>
+
+<p>在具体使用过程中如果对某个类的某个方法不清楚，可以去 <a href="https://api.dartlang.org/dev">Dart SDK</a> 文档站搜索具体的类查看完整的文档。</p>
+
+<p>最后，如果你疑惑 Google 为何会选择一个非常冷门的 Dart 而不是更为流行的 JavaScript/TypeScript 作为 Flutter 框架的开发语言，那么强烈推荐你阅读这篇由 Flutter 团队成员写的 <a href="https://hackernoon.com/why-flutter-uses-dart-dd635a054ebf">Why Flutter Uses Dart</a>。</p>
+
+<h2 id="flutter">Flutter</h2>
+
+<p>终于，终于要说到 Flutter 框架自身了。由于这两天的开发过程中其实也只是使用了 Flutter 框架中很少的一部分功能。所以这里只就我认为对 Flutter 入门最需要理解的两点来展开聊聊。</p>
+
+<h3 id="widget">Widget</h3>
+
+<p>在 Flutter 中所有展示在页面上的元素其实都是一个 Widget。整个 APP/页面对应一个顶级 Widget。</p>
+
+<p>根据 Widget 内部是否存在可变状态，在 Flutter 中又可分为 StatelessWidget 和 StatefulWidget。</p>
+
+<p>顾名思义，StatelessWidget 就是指无可变状态的 Widget。换句话说，这类 Widget 的状态只由创建 Widget 时传入的参数决定，一旦创建，其状态、在页面上的展示效果也就不再改变。</p>
+
+<p>而 StatefulWidget 内部则存在着可变状态。当这些状态改变时，Flutter 会重新渲染该 Widget。</p>
+
+<p>在实际项目开发过程中，我们要做的就是根据实际需求开发不同的 Widget，并将这些 Widget 组合嵌套以形成一个完整的页面。在开发之前我们首先要做的就是根据页面的功能划分不同的功能模块，将这些模块细分成众多独立的 Widget。然后再逐一实现其逻辑。</p>
+
+<h3 id="布局-样式">布局、样式</h3>
+
+<p>首先从宏观上来说，Flutter 中的布局、样式中绝大多数的概念其实还是沿用了 CSS 中的概念。例如在布局方面与 CSS 中 flex 布局对应的有 Row、Column 两个 Widget，分别提供了水平和垂直两个方向的布局方式。再比如 Stack Widget 提供了一种 Widget 之间相互堆叠的机制，这又和 CSS 中的 <code>position: absolute;</code> 很像。</p>
+
+<p><a href="https://flutter.io/widgets/layout/#Multi-child%20layout%20widgets">点此</a>查看 Flutter 中所有和布局相关的 Widget。</p>
+
+<p>概念上的相似是不是就可以让我们轻松上手了呢？其实并不是，因为在具体的代码层面，为 Flutter 中的 Widget 添加样式 和为一个 HTML 元素添加样式还是有着很大的差别。这些差别主要表现在以下两个方面：</p>
+
+<ul>
+<li><p>不是所有 Widget 都可以添加任意的样式属性。举例来说，如果你想给一段文字添加一个 border。你必须创建一个 Container，把这段问题设置为这个 Container 的 child。然后给这个 Container 设置一个 BoxDecoration 属性，并在该属性中设置具体的边框样式。像下面这样：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dart" data-lang="dart">Container(
+  decoration: BoxDecoration(
+    border: Border.all(color: Colors.red)
+  ),
+  child: <span style="color:#66d9ef">new</span> Text(<span style="color:#e6db74">&#34;My Awesome Border&#34;</span>),
+)</code></pre></div></li>
+
+<li><p>由于 Dart 面向对象的特点，基本上所有的样式属性都不在支持以字符串的形式书写，而是必须创建特定类的实例或是使用 Flutter 中预先定义好的常量，再看一个例子：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dart" data-lang="dart">ListView.builder(
+  scrollDirection: Axis.horizontal,
+  padding: EdgeInsets.all(<span style="color:#ae81ff">10.0</span>),
+  itemCount: subCategories.length,
+  itemBuilder: (BuildContext context, <span style="color:#66d9ef">int</span> index) {
+
+  }
+)</code></pre></div>
+<p>这里为了指定 ListView 的滚动方向，我们使用了 Flutter 中预先定义好的 <code>Axis.horizontal</code> 常量，为了表示 4 个方向上的 padding 值，我们创建了一个 <code>EdgeInsets</code> 类的实例。</p></li>
+</ul>
+
+<p>以上两个方面在我们刚开始使用 Flutter 开发时会造成一定的困扰，大可不必慌张。只需要一段时间的适应过程，适应之后再配合 IDE 的智能提示功能，开发效率可以得到很大的提升。</p>
+
+<p>以上就是过去几天我在尝试使用 Flutter 框架开发一个完整页面的过程中积累的一些经验和思考。欢迎对 Flutter 感兴趣的小伙伴一起学习，讨论。</p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://loveky.github.io/tags/flutter"><span class="tag">Flutter</span></a></li>
+        
+          <li><a href="https://loveky.github.io/tags/dart"><span class="tag">Dart</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        
+      </p>
+    </footer>
+    <div style="text-align:center">
+      <p>如果你觉得这篇文章对你有所帮助，可以微信扫码请作者喝杯咖啡哦~</p>
+      <img width="300" height="300" src="https://loveky.github.io/img/wechat-reward-new.jpg"/>
+  </div>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "loveky" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 loveky的流水账</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+
+
+<script src="https://loveky.github.io/js/bundle.js"></script>
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?301a286a5bea7d926e284c27f79bd221";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+  </body>
+</html>

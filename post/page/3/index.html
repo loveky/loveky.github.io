@@ -245,6 +245,23 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2017/03/27/lock-npm-package-version-in-js-project/" class="post-link">在JavaScript项目中锁定npm依赖包版本</a></h3>
+    <p class="post-meta">@loveky · Mar 27, 2017</p>
+  </header>
+  
+  <p class="post-summary">问题 最近在项目中遇到这样一个问题，webpack生成的vender包的哈希值在我和同事的电脑上不一致。由于之前已经配置过了CommonsChunkPlugin（配置如下），所以我们期望的结果是在不同环境下构建出的文件哈希值应该是一致的。
+注：只给出了和本文内容相关的配置项
+module.exports = { entry: { app: &#39;./src/js/app.jsx&#39;, vender: [ &#39;classnames&#39;, &#39;react&#39;, &#39;react-dom&#39;, &#39;redux&#39;, &#39;react-redux&#39;, &#39;redux-promise-middleware&#39;, &#39;updeep&#39;, &#39;axios&#39;, &#39;jdc-rc-list&#39;, &#39;react-router&#39;, &#39;react-router-redux&#39; ] }, output: { path: path.resolve(__dirname, &#39;./build/js/&#39;), filename: (isDevelopmentEnvironment ? &#39;[name].bundle.js&#39; : &#39;[name].[chunkhash].js&#39;), chunkFilename: (isDevelopmentEnvironment ? &#39;[name].bundle.js&#39; : &#39;[name].[chunkhash].js&#39;) }, plugins: [ new webpack.optimize.CommonsChunkPlugin({ name: [&#39;vender&#39;, &#39;manifest&#39;], minChunks: Infinity, }) ] };  调查 经过多次验证发现，我们在各自的电脑上多次构建出来的哈希值可以保持一致，只是在两台电脑上不一致。考虑到vender中打包的都是第三方依赖，于是猜测是两台电脑上安装的依赖包不同。接着对比了两人的package.json中的dependencies，完全一致。
+考虑到package.json文件中包版本中的^符号匹配的范围比较大。参考npm官方给出的解释：
+^1.2.3 := &gt;=1.2.3 &lt;2.0.0 ^0.2.3 := &gt;=0.2.3 &lt;0.3.0 ^0.0.3 := &gt;=0.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2017/03/27/lock-npm-package-version-in-js-project/">阅读全文 →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2017/03/27/react-conf-2017-video/" class="post-link">React Conf 2017视频 百度网盘地址</a></h3>
     <p class="post-meta">@loveky · Mar 27, 2017</p>
   </header>
@@ -441,24 +458,6 @@ Q: .babel文件编译出来的代码我看不懂，出了问题如何调试呢�
 关于sourceMap的更多信息请参考这里。</p>
   <footer class="post-footer">
     <a class="read-more" href="https://loveky.github.io/2015/12/19/use-es6-in-jdf-projects/">阅读全文 →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://loveky.github.io/2015/12/03/trimpath-syntax/" class="post-link">[译] TrimPath模板引擎语法</a></h3>
-    <p class="post-meta">@loveky · Dec 3, 2015</p>
-  </header>
-  
-  <p class="post-summary">本文翻译自JavaScript Template Syntax
-表达式与表达式修饰符  ${expr} ${expr|modifier} ${expr|modifier1|modifier2|...|modifierN} ${expr|modifier1:argExpr1_1} ${expr|modifier1:argExpr1_1,argExpr1_2,...,argExpr1_N} ${expr|modifier1:argExpr1_1,argExpr1_2|...|modifierN:argExprN_1,argExprN_2,...,argExprN_M}   expr可以是不包含右花括号}的任何合法JavaScript表达式 修饰符的格式是modifierName[:argExpr1[,argExpr2[,argExprN]]]  argExpr可以是任何合法的expr    Examples: ${customer.firstName} ${customer.firstName|capitalize} ${customer.firstName|default:&#34;no name&#34;|capitalize} ${article.getCreationDate()|default:new Date()|toCalenderControl:&#34;YYYY.MM.DD&#34;,true,&#34;Creation Date&#34;} ${(lastQuarter.calcRevenue() - fixedCosts) / 1000000}  这里有一份内置的修饰符列表，你也可以通过TrimPath提供的API来创建自定义的修饰符。
-表达式还可以写成${% customer.firstName %}这种形式，多出的%字符允许你的表达式中出现花括号}。例如：
- Visit our ${% emitLink(&#39;Solutions and Products&#39;, { color: &#39;red&#39;, blink: false }) %}  表达式中的空白字符是可选的，你也可以写成下面的格式：
- ${%customer.firstName%} ${%customer.firstName|capitalize%}  声明 声明标签可以嵌套使用。
-控制流  {if testExpr} {elseif testExpr} {else} {/if}   testExpr可以是任何不包含}的JavaScript表达式 testExpr不需要被(和)包围  示例：</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2015/12/03/trimpath-syntax/">阅读全文 →</a>
   </footer>
 </article>
 

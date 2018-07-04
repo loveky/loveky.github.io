@@ -40,7 +40,25 @@
 目前在京东主要负责京东商城 PC 端黄金购物流程以及京东 APP 内部分 React Native 页面的开发工作。
 工作中顺手开发几个 Chrome 插件：
  DNS Flusher 一键清理 DNS 缓存 Which Host 在页面上展示对应域名实际请求的 IP  平时主要用到以下技术/工具：
- jQuery / React / React Native Redux / Mobx / Axios SeaJS / Webpack / Rollup / Babel Jest / Mocha / Chai / Sison ESLint Git / GitLab / GitHub Fiddler / Wireshark / Chrome Dev Tools VSCode  京东 JDC 常年招聘靠谱的前端工程师，有意的小伙伴请发简历至 eWx6Y3lseEBnbWFpbC5jb20=</description>
+ JavaScript / TypeScript / Dart jQuery / React / React Native / Flutter Redux / MobX SeaJS / Webpack / Rollup Jest / Mocha / Chai / Sison ESLint / TSLint Git / GitLab / GitHub Fiddler / Wireshark / Chrome Dev Tools VS Code  京东 JDC 常年招聘靠谱的前端工程师，有意的小伙伴请发简历至 eWx6Y3lseEBnbWFpbC5jb20=</description>
+    </item>
+    
+    <item>
+      <title>Flutter 初体验</title>
+      <link>https://loveky.github.io/2018/07/04/flutter-first-experience/</link>
+      <pubDate>Wed, 04 Jul 2018 22:57:32 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2018/07/04/flutter-first-experience/</guid>
+      <description>初识 Flutter 还是在上个月的 GMTC 大会上。来自 Google 的工程师现场演示了如何使用 Flutter 构建美观、高性能的移动应用。个人对其中一些特性，比如良好的开发者体验、优秀的跨平台能力很感兴趣。于是决定在会后亲自体验一下。
+最近几天尝试使用 Flutter 把京东 APP 中的排行榜频道的首屏布局实现了一下，算是对基于 Flutter 的开发有了一个最简单的了解，特地记录一下，方便其他想了解、尝试 Flutter 框架的小伙伴。
+首先看看我实现了一个什么样的界面：
+接下来让我们从不同方面说说 Flutter 的开发。
+Flutter 开发环境搭建 安装 Flutter 不同平台的安装流程基本一致，这里就以 macOS 为例。首先下载 flutter macOS 版，并解压。
+把 Flutter 的 bin 目录添加到系统 PATH 中：
+export PATH=~/Software/flutter/bin:$PATH 提示：记得把这行代码放到你的 shell 启动脚本中，避免每次都要手动执行。
+路径添加完成后就可以执行 flutter 命令啦。 Flutter 提供了一个 flutter doctor 命令协助我们安装 Flutter 的依赖。它会检查本地是否有 iOS 和 Android 的开发环境。如果检测到依赖缺失，它还会给出对应依赖的安装方法。你只需要不断执行该方法，然后安装缺失的依赖，直到全部依赖安装完成即可。
+配置代码编辑器 主要是给 IDE 安装相关插件。
+VS Code 上只需要安装 flutter 扩展即可。 Android Studio 上需要安装 flutter 和 dart 两个插件。</description>
     </item>
     
     <item>

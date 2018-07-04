@@ -18,6 +18,11 @@
   </url>
   
   <url>
+    <loc>https://loveky.github.io/2018/07/04/flutter-first-experience/</loc>
+    <lastmod>2018-07-04T22:57:32+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://loveky.github.io/2018/06/05/unit-testing-react-component-with-jest/</loc>
     <lastmod>2018-06-05T21:15:45+08:00</lastmod>
   </url>
@@ -240,8 +245,20 @@
   </url>
   
   <url>
+    <loc>https://loveky.github.io/tags/dart/</loc>
+    <lastmod>2018-07-04T22:57:32+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://loveky.github.io/tags/es6/</loc>
     <lastmod>2018-02-26T10:44:38+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/tags/flutter/</loc>
+    <lastmod>2018-07-04T22:57:32+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -277,7 +294,7 @@
   
   <url>
     <loc>https://loveky.github.io/post/</loc>
-    <lastmod>2018-06-05T21:15:45+08:00</lastmod>
+    <lastmod>2018-07-04T22:57:32+08:00</lastmod>
     <priority>0</priority>
   </url>
   
