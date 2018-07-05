@@ -238,6 +238,28 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2015/12/19/use-es6-in-jdf-projects/" class="post-link">在JDF项目中使用ES6新特性</a></h3>
+    <p class="post-meta">@loveky · Dec 19, 2015</p>
+  </header>
+  
+  <p class="post-summary">Note: 目前虽然JDF已经支持使用ES6开发脚本，但线上使用还在前期摸索阶段，请大家根据自己项目实际情况评估使用情况
+最近利用业余时间给JDF增加了ES6代码的支持。背后的原理是在项目构建阶段利用Babel将.babel文件转译成ES5代码。关于Babel的更多使用方法可以参考其官网的配置文档。
+下面开始正式介绍在利用ES6特性开发前的准备工作: - 升级JDF到最新版本（&gt;= 1.8.2） - 进入JDF项目目录，安装基本的Babel preset和plugin。关于preset和plugin的更多说明请参考文档
+npm install babel-preset-es2015 npm install babel-plugin-transform-es3-member-expression-literals npm install babel-plugin-transform-es3-property-literals  配置项目的.gitignore文件，忽略node_modules目录。在文件中添加以下内容：  **/node_modules/   引入es6-base.js(包含 es5-shim和babel-polyfill)  至此，所有的准备工作就完成了。接下来就可以利用ES6的各种新特性开发了。需要注意的是所有包含了ES6特性的脚本文件扩展名必须是.babel，否则JDF是不会对其进行编译的。
+最后是一份简单的FAQ：
+Q: ES6都有哪些新特性，有没有推荐的学习资料？ 当然有，中文版的有阮一峰出品的ECMAScript 6入门。 英文的有： - ES6 In Depth来自Mozilla团队博客的一系列文章，每篇讲解一个新特性。建议按时间顺序阅读。 - Understanding ECMAScript 6来自Nicholas C. Zakas大神的一本ES6小书。
+Q: 我想使用额外的Babel plugin或preset该怎样配置？ 只需在package.json中指定需要额外引入的plugin或preset，例如：
+&#34;babel&#34;: { &#34;plugins&#34;: [&#34;syntax-async-functions&#34;,&#34;transform-regenerator&#34;], &#34;presets&#34;: [&#34;stage-0&#34;] } 并在JDF项目的目录中安装相关npm package即可。
+Q: .babel文件编译出来的代码我看不懂，出了问题如何调试呢？ 我们看到的经过Babel转译后的JS是这样的： 这里包含了大量的Babel生成的代码，非常不利于调试。不过不用担心，JDF在本地开发模式中启用了sourceMap，你只需在Chrome开发者工具中的Sources Tab中在你要调试的JS文件目录下找到同名的.babel文件即可。相关JS中的报错信息，都会被映射到转译前的.babel文件的对应位置。
+关于sourceMap的更多信息请参考这里。</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2015/12/19/use-es6-in-jdf-projects/">阅读全文 →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2015/12/03/trimpath-syntax/" class="post-link">[译] TrimPath模板引擎语法</a></h3>
     <p class="post-meta">@loveky · Dec 3, 2015</p>
   </header>
@@ -421,25 +443,6 @@ LM-SHC-00355679@17:48:13:~/Angular/pomodoro-time (master) =&gt; cat .gitignore /
  -X 仅删除.</p>
   <footer class="post-footer">
     <a class="read-more" href="https://loveky.github.io/2013/12/18/git-clean/">阅读全文 →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://loveky.github.io/2013/12/06/travis-pro/" class="post-link">搭建属于自己的travis pro</a></h3>
-    <p class="post-meta">@loveky · Dec 6, 2013</p>
-  </header>
-  
-  <p class="post-summary">Travis是一个众所周知的持续集成服务提供商，免费为开源项目提供持续集成服务。但是对于闭源项目/private repo需要购买travis pro服务才能使用。对于小团队，每月129刀的最低消费实在是一笔不小的开支，因此便有了本文。
-为什么要做这件事？  首先，我们是一群有情(jie)节(cao)的程序猿。我们要对自己的代码负责，保证所有上线的代码都是经过测试的。所有Pull Request的code要经过team member的revew并跑通测试。
- 其次，我们是一群节(diao)俭(si)的程序猿。Travis Pro每个月129刀的最低消费让我们望(xia)而(niao)却(le)步(!)。  要搭建这样一台持续集成服务器，需要哪些东西？  一台linux主机 (本文中使用的是linode上的Ubuntu 12.04) 一个GitHub账号 (加为你repo的collaborator或是team的member)  如何配置？ Step1 安装Jenkins，非Ubuntu系统安装Jenkins请参考Jenkins官方文档
-wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add - sudo echo &#39;deb http://pkg.jenkins-ci.org/debian binary/&#39; &gt;&gt; /etc/apt/sources.list sudo apt-get update sudo apt-get install jenkins Setp2 为jenkins用户安装rvm
-sudo su - jenkins curl -L https://get.rvm.io | bash -s stable --ruby=1.9.3 Setp3 安装Xvfb。(如果你的测试不需要用模拟的DISPLAY，那你可以忽略此步骤)
-我们测试Rails时需要用capybar跑feature spec。有js相关的测试需要启动一个浏览器来执行测试代码，但是linode上的Ubuntu都是没有display的，因此跑feature spec的时候会遇到无法启动浏览器而报错的情况。Xvfb就是用来创建一个虚拟的Display供启动浏览器用的。
-sudo apt-get install xvfb Xvfb :99 -screen 0 1024x768x16 &gt;&gt; /tmp/Xvfb.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2013/12/06/travis-pro/">阅读全文 →</a>
   </footer>
 </article>
 

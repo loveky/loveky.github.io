@@ -238,6 +238,23 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2017/03/29/webpack-module-ids/" class="post-link">Webpack2中的NamedModulesPlugin与HashedModuleIdsPlugin</a></h3>
+    <p class="post-meta">@loveky · Mar 29, 2017</p>
+  </header>
+  
+  <p class="post-summary">要讨论Webpack 2中新增的这两个plugin的功能，还要先从使用Webpack打包的项目的前端资源缓存方案说起。
+通常在使用了Webpack的项目中我们会使用CommonsChunkPlugin来将所有依赖的第三方包打包到一个名为vender的chunk中。与此同时，为了避免每次更改项目代码时导致vender chunk的chunkHash改变，我们还会单独生成一个manifest chunk。
+举个例子，假设我们有一个项目，项目中入口文件为index.js。其内容如下：
+import add from &#39;./src/add&#39;; import leftPad from &#39;left-pad&#39;; import jsonp from &#39;jsonp&#39;; add(1, 2);  通常我们的webpack.config.js文件就会有类似如下的配置：
+const path = require(&#39;path&#39;); const webpack = require(&#39;webpack&#39;); module.exports = { entry: { &#39;app&#39;: &#39;./index.js&#39;, &#39;vender&#39;: [&#39;left-pad&#39;, &#39;jsonp&#39;] }, output: { filename: &#39;[name].[chunkHash].js&#39;, path: path.resolve(__dirname, &#39;build&#39;) }, resolve: { extensions: [&#39;.js&#39;] }, module: { ... }, plugins:[ new webpack.optimize.CommonsChunkPlugin({ name: [&#39;vender&#39;, &#39;manifest&#39;], minChunks: Infinity, }) ] };  这时，通过Webpack打包，会生成三个文件：</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2017/03/29/webpack-module-ids/">阅读全文 →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2017/03/27/lock-npm-package-version-in-js-project/" class="post-link">在JavaScript项目中锁定npm依赖包版本</a></h3>
     <p class="post-meta">@loveky · Mar 27, 2017</p>
   </header>
@@ -429,28 +446,6 @@ function getUsername(userId) { return database.users.get({id: userId}) .then(fun
 - 通过instanceof判断来支持不带new关键字的调用。 - 设置应用运行环境，会从环境变量NODE_ENV读取，默认值为development - 声明this.</p>
   <footer class="post-footer">
     <a class="read-more" href="https://loveky.github.io/2015/12/28/koa-source-lib-application/">阅读全文 →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://loveky.github.io/2015/12/19/use-es6-in-jdf-projects/" class="post-link">在JDF项目中使用ES6新特性</a></h3>
-    <p class="post-meta">@loveky · Dec 19, 2015</p>
-  </header>
-  
-  <p class="post-summary">Note: 目前虽然JDF已经支持使用ES6开发脚本，但线上使用还在前期摸索阶段，请大家根据自己项目实际情况评估使用情况
-最近利用业余时间给JDF增加了ES6代码的支持。背后的原理是在项目构建阶段利用Babel将.babel文件转译成ES5代码。关于Babel的更多使用方法可以参考其官网的配置文档。
-下面开始正式介绍在利用ES6特性开发前的准备工作: - 升级JDF到最新版本（&gt;= 1.8.2） - 进入JDF项目目录，安装基本的Babel preset和plugin。关于preset和plugin的更多说明请参考文档
-npm install babel-preset-es2015 npm install babel-plugin-transform-es3-member-expression-literals npm install babel-plugin-transform-es3-property-literals  配置项目的.gitignore文件，忽略node_modules目录。在文件中添加以下内容：  **/node_modules/   引入es6-base.js(包含 es5-shim和babel-polyfill)  至此，所有的准备工作就完成了。接下来就可以利用ES6的各种新特性开发了。需要注意的是所有包含了ES6特性的脚本文件扩展名必须是.babel，否则JDF是不会对其进行编译的。
-最后是一份简单的FAQ：
-Q: ES6都有哪些新特性，有没有推荐的学习资料？ 当然有，中文版的有阮一峰出品的ECMAScript 6入门。 英文的有： - ES6 In Depth来自Mozilla团队博客的一系列文章，每篇讲解一个新特性。建议按时间顺序阅读。 - Understanding ECMAScript 6来自Nicholas C. Zakas大神的一本ES6小书。
-Q: 我想使用额外的Babel plugin或preset该怎样配置？ 只需在package.json中指定需要额外引入的plugin或preset，例如：
-&#34;babel&#34;: { &#34;plugins&#34;: [&#34;syntax-async-functions&#34;,&#34;transform-regenerator&#34;], &#34;presets&#34;: [&#34;stage-0&#34;] } 并在JDF项目的目录中安装相关npm package即可。
-Q: .babel文件编译出来的代码我看不懂，出了问题如何调试呢？ 我们看到的经过Babel转译后的JS是这样的： 这里包含了大量的Babel生成的代码，非常不利于调试。不过不用担心，JDF在本地开发模式中启用了sourceMap，你只需在Chrome开发者工具中的Sources Tab中在你要调试的JS文件目录下找到同名的.babel文件即可。相关JS中的报错信息，都会被映射到转译前的.babel文件的对应位置。
-关于sourceMap的更多信息请参考这里。</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2015/12/19/use-es6-in-jdf-projects/">阅读全文 →</a>
   </footer>
 </article>
 

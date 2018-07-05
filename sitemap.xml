@@ -18,6 +18,11 @@
   </url>
   
   <url>
+    <loc>https://loveky.github.io/2018/07/05/config-lantern-as-shell-proxy/</loc>
+    <lastmod>2018-07-05T11:01:54+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://loveky.github.io/2018/07/04/flutter-first-experience/</loc>
     <lastmod>2018-07-04T22:57:32+08:00</lastmod>
   </url>
@@ -246,7 +251,7 @@
   
   <url>
     <loc>https://loveky.github.io/tags/dart/</loc>
-    <lastmod>2018-07-04T22:57:32+08:00</lastmod>
+    <lastmod>2018-07-05T11:01:54+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -258,7 +263,7 @@
   
   <url>
     <loc>https://loveky.github.io/tags/flutter/</loc>
-    <lastmod>2018-07-04T22:57:32+08:00</lastmod>
+    <lastmod>2018-07-05T11:01:54+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -294,7 +299,7 @@
   
   <url>
     <loc>https://loveky.github.io/post/</loc>
-    <lastmod>2018-07-04T22:57:32+08:00</lastmod>
+    <lastmod>2018-07-05T11:01:54+08:00</lastmod>
     <priority>0</priority>
   </url>
   

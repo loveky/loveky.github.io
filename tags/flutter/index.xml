@@ -6,10 +6,27 @@
     <description>Recent content in Flutter on loveky的流水账</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 04 Jul 2018 22:57:32 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 05 Jul 2018 11:01:54 +0800</lastBuildDate>
     
 	<atom:link href="https://loveky.github.io/tags/flutter/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>利用蓝灯为命令行配置HTTP代理</title>
+      <link>https://loveky.github.io/2018/07/05/config-lantern-as-shell-proxy/</link>
+      <pubDate>Thu, 05 Jul 2018 11:01:54 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2018/07/05/config-lantern-as-shell-proxy/</guid>
+      <description>蓝灯是个好工具。可以帮忙我们访问一些由于众所周知的原因在国内无法正常访问的网站(比如 Google、Stack Overflow、Medium 等等)。
+每次启动蓝灯，它会自动修改操作系统的网络代理指向它自己。不需要我们手动配置，很是方便。
+需要网络代理的地方其实不止是浏览器，很多命令行工具也会访问网络。比如，我们通过 homebrew 安装 dart 的时候，brew 命令会从 Google 的服务器上下载安装文件。然后你就会看到网络连接错误的提示信息。
+要解决这类问题，只需要为 Shell 设置两个环境变量 HTTP_PROXY 和 HTTPS_PROXY 即可。我们直接利用蓝灯在本地启动好的代理端口。
+我们首先找到蓝灯在本地启动的具体端口号。打开蓝灯，依次选择 Settings -&amp;gt; ADVANCED SETTINGS 即可看到蓝灯在本地选择的端口号。
+然后去 Shell 里执行以下两个命令设置环境变量：
+export HTTP_PROXY=http://127.0.0.1:51350 export HTTPS_PROXY=http://127.0.0.1:51350 就完成配置了。
+最后为了避免每次都要敲这么长的命令，我们写一个 Shell 函数：
+# http proxy util hp() { if [ &amp;#34;$1&amp;#34; = &amp;#34;enable&amp;#34; ] then PORT=&amp;#34;51350&amp;#34; if [ -n &amp;#34;$2&amp;#34; ] then PORT=&amp;#34;$2&amp;#34; fi export HTTP_PROXY=http://127.0.0.1:$PORT export HTTPS_PROXY=http://127.0.0.1:$PORT else export HTTP_PROXY=&amp;#34;&amp;#34; export HTTPS_PROXY=&amp;#34;&amp;#34; fi } 把这都函数代码放到 Shell 启动脚本里。然后需要开启代理的时候执行 hp enable 即可，或是指定代理端口号 hp enable 33333。关闭代理执行 hp 即可。</description>
+    </item>
     
     <item>
       <title>Flutter 初体验</title>

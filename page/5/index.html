@@ -238,6 +238,25 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2013/12/06/travis-pro/" class="post-link">搭建属于自己的travis pro</a></h3>
+    <p class="post-meta">@loveky · Dec 6, 2013</p>
+  </header>
+  
+  <p class="post-summary">Travis是一个众所周知的持续集成服务提供商，免费为开源项目提供持续集成服务。但是对于闭源项目/private repo需要购买travis pro服务才能使用。对于小团队，每月129刀的最低消费实在是一笔不小的开支，因此便有了本文。
+为什么要做这件事？  首先，我们是一群有情(jie)节(cao)的程序猿。我们要对自己的代码负责，保证所有上线的代码都是经过测试的。所有Pull Request的code要经过team member的revew并跑通测试。
+ 其次，我们是一群节(diao)俭(si)的程序猿。Travis Pro每个月129刀的最低消费让我们望(xia)而(niao)却(le)步(!)。  要搭建这样一台持续集成服务器，需要哪些东西？  一台linux主机 (本文中使用的是linode上的Ubuntu 12.04) 一个GitHub账号 (加为你repo的collaborator或是team的member)  如何配置？ Step1 安装Jenkins，非Ubuntu系统安装Jenkins请参考Jenkins官方文档
+wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add - sudo echo &#39;deb http://pkg.jenkins-ci.org/debian binary/&#39; &gt;&gt; /etc/apt/sources.list sudo apt-get update sudo apt-get install jenkins Setp2 为jenkins用户安装rvm
+sudo su - jenkins curl -L https://get.rvm.io | bash -s stable --ruby=1.9.3 Setp3 安装Xvfb。(如果你的测试不需要用模拟的DISPLAY，那你可以忽略此步骤)
+我们测试Rails时需要用capybar跑feature spec。有js相关的测试需要启动一个浏览器来执行测试代码，但是linode上的Ubuntu都是没有display的，因此跑feature spec的时候会遇到无法启动浏览器而报错的情况。Xvfb就是用来创建一个虚拟的Display供启动浏览器用的。
+sudo apt-get install xvfb Xvfb :99 -screen 0 1024x768x16 &gt;&gt; /tmp/Xvfb.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2013/12/06/travis-pro/">阅读全文 →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2013/11/27/git-rerere/" class="post-link">你可能不知道的git rerere</a></h3>
     <p class="post-meta">@loveky · Nov 27, 2013</p>
   </header>
