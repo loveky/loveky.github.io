@@ -427,7 +427,7 @@ export FLUTTER_STORAGE_BASE_URL<span style="color:#f92672">=</span>https://stora
 <p>概念上的相似是不是就可以让我们轻松上手了呢？其实并不是，因为在具体的代码层面，为 Flutter 中的 Widget 添加样式 和为一个 HTML 元素添加样式还是有着很大的差别。这些差别主要表现在以下两个方面：</p>
 
 <ul>
-<li><p>不是所有 Widget 都可以添加任意的样式属性。举例来说，如果你想给一段文字添加一个 border。你必须创建一个 Container，把这段问题设置为这个 Container 的 child。然后给这个 Container 设置一个 BoxDecoration 属性，并在该属性中设置具体的边框样式。像下面这样：</p>
+<li><p>不是所有 Widget 都可以添加任意的样式属性。举例来说，如果你想给一段文字添加一个 border。你必须创建一个 Container，把这段文字设置为这个 Container 的 child。然后给这个 Container 设置一个 BoxDecoration 属性，并在该属性中设置具体的边框样式。像下面这样：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dart" data-lang="dart">Container(
   decoration: BoxDecoration(
     border: Border.all(color: Colors.red)
@@ -435,7 +435,7 @@ export FLUTTER_STORAGE_BASE_URL<span style="color:#f92672">=</span>https://stora
   child: <span style="color:#66d9ef">new</span> Text(<span style="color:#e6db74">&#34;My Awesome Border&#34;</span>),
 )</code></pre></div></li>
 
-<li><p>由于 Dart 面向对象的特点，基本上所有的样式属性都不在支持以字符串的形式书写，而是必须创建特定类的实例或是使用 Flutter 中预先定义好的常量，再看一个例子：</p>
+<li><p>由于 Dart 面向对象的特点，基本上所有的样式属性都不支持以字符串的形式书写，而是必须创建特定类的实例或是使用 Flutter 中预先定义好的常量，再看一个例子：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dart" data-lang="dart">ListView.builder(
   scrollDirection: Axis.horizontal,
   padding: EdgeInsets.all(<span style="color:#ae81ff">10.0</span>),
