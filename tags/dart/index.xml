@@ -6,10 +6,22 @@
     <description>Recent content in Dart on loveky的流水账</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 05 Jul 2018 11:01:54 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 13 Jul 2018 09:09:47 +0800</lastBuildDate>
     
 	<atom:link href="https://loveky.github.io/tags/dart/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Flutter 中 ListView 组件的子元素曝光统计</title>
+      <link>https://loveky.github.io/2018/07/13/flutter-listview-child-visibility-monitor/</link>
+      <pubDate>Fri, 13 Jul 2018 09:09:47 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2018/07/13/flutter-listview-child-visibility-monitor/</guid>
+      <description>在使用 Flutter 开发应用的过程中我们经常遇到需要展示一组连续元素的情景。这时我们通常会选择使用 ListView 组件。在电商场景中，被展示的元素通常是一组商品、一组店铺又或是一组优惠券信息。把这些信息正确的展示出来仅仅是第一步，通常业务同学为了统计用户的浏览习惯、活动的展示效果还会让我们上报列表元素的曝光信息。
+什么是曝光信息？ 什么是曝光是信息呢？简单来说就是用户实际看到了一个列表中的哪些元素？实际展示给用户的这部分元素用户浏览了多少次？
+让我们通过一个简单示例应用来说明：
+import &amp;#39;package:flutter/material.dart&amp;#39;; class Card extends StatelessWidget { final String text; Card({ @required this.text, }); @override Widget build(BuildContext context) { return Container( margin: EdgeInsets.only(bottom: 10.0), color: Colors.greenAccent, height: 300.0, child: Center( child: Text( text, style: TextStyle(fontSize: 40.0), ), ), ); } } class HelloFlutter extends StatelessWidget { final items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]; @override Widget build(BuildContext context) { return ListView.</description>
+    </item>
     
     <item>
       <title>利用蓝灯为命令行配置HTTP代理</title>

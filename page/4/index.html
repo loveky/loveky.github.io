@@ -238,6 +238,25 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2015/12/28/koa-source-lib-application/" class="post-link">koa框架源码阅读笔记 之 lib/application.js</a></h3>
+    <p class="post-meta">@loveky · Dec 28, 2015</p>
+  </header>
+  
+  <p class="post-summary">最近在学习ES6 Generator特性时发现了koa这个基于Generator的Web框架，它可以让开发者以一种“同步的方式”编写包含各种异步请求的Web应用。下面是关于它的一段中文介绍：
+ 由 Express 原班人马打造的 koa，致力于成为一个更小、更健壮、更富有表现力的 Web 框架。使用 koa 编写 web 应用，通过组合不同的 generator，可以免除重复繁琐的回调函数嵌套，并极大地提升常用错误处理效率。Koa 不在内核方法中绑定任何中间件，它仅仅提供了一个轻量优雅的函数库，使得编写 Web 应用变得得心应手。
+ 从介绍中可以看出这又是一个小而美的框架。到GitHub项目页面上看了一下发现源码里只有4个JS文件，总代码量只有1571行(以2015年12月26日最新稳定版1.1.2为准)。于是决定把代码clone下来学习一下，本篇会先从整个框架的入口文件lib/application.js说起。
+总体说明 lib/application.js文件export出的是一个构造函数，用来创建一个koa应用。一个koa应用最常用的方法有2个： - listen(port) 执行listen后会通过http.createServer启动一个服务器并监听指定端口 - use(middleware) 注册一个中间件，一个koa应用可以注册多个中间件， 处理请求时会按照中间件注册的顺序执行这些中间件。
+更多详细信息可以参考GitHub文档页面。
+代码注释 function Application() { if (!(this instanceof Application)) return new Application; this.env = process.env.NODE_ENV || &#39;development&#39;; this.subdomainOffset = 2; this.middleware = []; this.proxy = false; this.context = Object.create(context); this.request = Object.create(request); this.response = Object.create(response); }  以上就是Application构造函数的定义，很简洁，主要做了以下几件事情：
+- 通过instanceof判断来支持不带new关键字的调用。 - 设置应用运行环境，会从环境变量NODE_ENV读取，默认值为development - 声明this.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2015/12/28/koa-source-lib-application/">阅读全文 →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2015/12/19/use-es6-in-jdf-projects/" class="post-link">在JDF项目中使用ES6新特性</a></h3>
     <p class="post-meta">@loveky · Dec 19, 2015</p>
   </header>
@@ -423,26 +442,6 @@ Ruby? Rails? 没错，不得不提的主题。过去一年里的业余时间都�
  感谢我的女朋友，一直没能陪在她身边，有很多亏欠，只希望在以后的日子里慢慢弥补 学会Rails已经一系列相关的技术，并最终转型为一个全职的开发人员 结识了很多好朋友，一直在工作内外给我帮助，不能一一列出姓名，谨祝工作顺利 渐渐的开始锻炼身体，开始跑步 在无人指导的情况下，无师自通，学会了做饭。。。 开始渐渐的学会思考，尝试make it right而不仅仅是make it work 喜欢上了阅读，电子书，纸质书，中文，外文，技术，社科，来者不拒  </p>
   <footer class="post-footer">
     <a class="read-more" href="https://loveky.github.io/2014/02/17/farewell-shanghai/">阅读全文 →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://loveky.github.io/2013/12/18/git-clean/" class="post-link">你可能不知道的git clean</a></h3>
-    <p class="post-meta">@loveky · Dec 18, 2013</p>
-  </header>
-  
-  <p class="post-summary">git clean是干啥的？ git clean可以帮你清理workspace中未被git版本控制的文件，比如临时文件，构建出来的二进制文件。
-使用方法 如果你的clean.requireForce项没有设置为false，那么每次使用git clean时都要加上-f参数
-示例如下，workspace中有2个调试logo时创建的临时png文件，commit之前需要删掉。如果不用git clean的话需要一个一个rm。
-LM-SHC-00355679@17:42:26:~/Angular/pomodoro-time (master) =&gt; git status -s ?? image/logo1.png ?? image/logo2.png 使用git clean可以快速清楚，当临时文件较多时尤其方便。
-LM-SHC-00355679@17:42:30:~/Angular/pomodoro-time (master) =&gt; git clean -f Removing image/logo1.png Removing image/logo2.png 有的时候可能需要将当前workspace打包成zip。但是直接打包会将.gitignore里的文件也打进去。这是git clean也可以帮忙。只需加上-x参数。
-LM-SHC-00355679@17:48:13:~/Angular/pomodoro-time (master) =&gt; cat .gitignore /coverage LM-SHC-00355679@17:48:16:~/Angular/pomodoro-time (master) # -d 参数表示连同目录一起删除 =&gt; git clean -xfd Removing coverage/ LM-SHC-00355679@17:48:25:~/Angular/pomodoro-time (master) =&gt; ls coverage ls: coverage: No such file or directory 以上就是git clean的基本用法啦。下面介绍下git clean的其他可选参数：
- -n 并不实际执行删除操作，只显示出将被清理的文件列表
- -X 仅删除.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2013/12/18/git-clean/">阅读全文 →</a>
   </footer>
 </article>
 
