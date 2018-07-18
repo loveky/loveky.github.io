@@ -6,10 +6,23 @@
     <description>Recent content in Dart on loveky的流水账</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 13 Jul 2018 09:09:47 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 18 Jul 2018 18:52:08 +0800</lastBuildDate>
     
 	<atom:link href="https://loveky.github.io/tags/dart/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>从 Flutter 源码看 InheritedWidget 内部实现原理</title>
+      <link>https://loveky.github.io/2018/07/18/how-flutter-inheritedwidget-works/</link>
+      <pubDate>Wed, 18 Jul 2018 18:52:08 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2018/07/18/how-flutter-inheritedwidget-works/</guid>
+      <description>这两天学习了一下 Flutter 中的 InheritedWidget 的使用方法，顺便查看一下相关源码了解了其底层实现机制。特地记录一下。
+Prerequirements 由于本文主要是从源码的角度分析 InheritedWidget 的工作原理，所以对阅读本文的小伙伴的 Flutter 知识有一定的要求。主要有以下几点，如果其中某部分你还不太清楚，请先阅读相关链接：
+ 了解 Flutter 的基本用法。 了解 Flutter 中的 Widget 和 Element 的基本概念。 推荐阅读：Flutter, what are Widgets, RenderObjects and Elements? 对 Flutter 中 Element 的生命周期有基本了解。推荐阅读：Element class  下面开始正文。
+InheritedWidget 的使用方法 先看一个 InheritedWidget 最简单的使用示例：
+import &amp;#39;package:flutter/material.dart&amp;#39;; void main() =&amp;gt; runApp(new MyApp()); class MyWelcomeInfo extends InheritedWidget { MyWelcomeInfo({Key key, this.welcomeInfo, Widget child}) : super(key: key, child: child); final String welcomeInfo; @override bool updateShouldNotify(InheritedWidget oldWidget) { return oldWidget.</description>
+    </item>
     
     <item>
       <title>Flutter 中 ListView 组件的子元素曝光统计</title>

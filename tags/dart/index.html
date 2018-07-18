@@ -242,6 +242,25 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2018/07/18/how-flutter-inheritedwidget-works/" class="post-link">从 Flutter 源码看 InheritedWidget 内部实现原理</a></h3>
+    <p class="post-meta">@loveky · Jul 18, 2018</p>
+  </header>
+  
+    <img class="post-cover" src="https://img11.360buyimg.com/uba/s300x300_jfs/t23086/34/1085755315/92891/9249e03d/5b4f1c76N2108c1ca.jpg" alt="从 Flutter 源码看 InheritedWidget 内部实现原理">
+  
+  <p class="post-summary">这两天学习了一下 Flutter 中的 InheritedWidget 的使用方法，顺便查看一下相关源码了解了其底层实现机制。特地记录一下。
+Prerequirements 由于本文主要是从源码的角度分析 InheritedWidget 的工作原理，所以对阅读本文的小伙伴的 Flutter 知识有一定的要求。主要有以下几点，如果其中某部分你还不太清楚，请先阅读相关链接：
+ 了解 Flutter 的基本用法。 了解 Flutter 中的 Widget 和 Element 的基本概念。 推荐阅读：Flutter, what are Widgets, RenderObjects and Elements? 对 Flutter 中 Element 的生命周期有基本了解。推荐阅读：Element class  下面开始正文。
+InheritedWidget 的使用方法 先看一个 InheritedWidget 最简单的使用示例：
+import &#39;package:flutter/material.dart&#39;; void main() =&gt; runApp(new MyApp()); class MyWelcomeInfo extends InheritedWidget { MyWelcomeInfo({Key key, this.welcomeInfo, Widget child}) : super(key: key, child: child); final String welcomeInfo; @override bool updateShouldNotify(InheritedWidget oldWidget) { return oldWidget.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2018/07/18/how-flutter-inheritedwidget-works/">阅读全文 →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2018/07/13/flutter-listview-child-visibility-monitor/" class="post-link">Flutter 中 ListView 组件的子元素曝光统计</a></h3>
     <p class="post-meta">@loveky · Jul 13, 2018</p>
   </header>

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>从 Flutter 源码看 InheritedWidget 内部实现原理</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="loveky" />
+  <meta name="description" content="这两天学习了一下 Flutter 中的 InheritedWidget 的使用方法，顺便查看一下相关源码了解了其底层实现机制。特地记录一下。
+Prerequirements 由于本文主要是从源码的角度分析 InheritedWidget 的工作原理，所以对阅读本文的小伙伴的 Flutter 知识有一定的要求。主要有以下几点，如果其中某部分你还不太清楚，请先阅读相关链接：
+ 了解 Flutter 的基本用法。 了解 Flutter 中的 Widget 和 Element 的基本概念。 推荐阅读：Flutter, what are Widgets, RenderObjects and Elements? 对 Flutter 中 Element 的生命周期有基本了解。推荐阅读：Element class  下面开始正文。
+InheritedWidget 的使用方法 先看一个 InheritedWidget 最简单的使用示例：
+import &amp;#39;package:flutter/material.dart&amp;#39;; void main() =&amp;gt; runApp(new MyApp()); class MyWelcomeInfo extends InheritedWidget { MyWelcomeInfo({Key key, this.welcomeInfo, Widget child}) : super(key: key, child: child); final String welcomeInfo; @override bool updateShouldNotify(InheritedWidget oldWidget) { return oldWidget." />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@loveky_" />
+    <meta name="twitter:title" content="从 Flutter 源码看 InheritedWidget 内部实现原理" />
+    <meta name="twitter:description" content="这两天学习了一下 Flutter 中的 InheritedWidget 的使用方法，顺便查看一下相关源码了解了其底层实现机制。特地记录一下。
+Prerequirements 由于本文主要是从源码的角度分析 InheritedWidget 的工作原理，所以对阅读本文的小伙伴的 Flutter 知识有一定的要求。主要有以下几点，如果其中某部分你还不太清楚，请先阅读相关链接：
+ 了解 Flutter 的基本用法。 了解 Flutter 中的 Widget 和 Element 的基本概念。 推荐阅读：Flutter, what are Widgets, RenderObjects and Elements? 对 Flutter 中 Element 的生命周期有基本了解。推荐阅读：Element class  下面开始正文。
+InheritedWidget 的使用方法 先看一个 InheritedWidget 最简单的使用示例：
+import &amp;#39;package:flutter/material.dart&amp;#39;; void main() =&amp;gt; runApp(new MyApp()); class MyWelcomeInfo extends InheritedWidget { MyWelcomeInfo({Key key, this.welcomeInfo, Widget child}) : super(key: key, child: child); final String welcomeInfo; @override bool updateShouldNotify(InheritedWidget oldWidget) { return oldWidget." />
+    <meta name="twitter:image" content="https://img11.360buyimg.com/uba/s300x300_jfs/t23086/34/1085755315/92891/9249e03d/5b4f1c76N2108c1ca.jpg" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="从 Flutter 源码看 InheritedWidget 内部实现原理" />
+  <meta property="og:description" content="这两天学习了一下 Flutter 中的 InheritedWidget 的使用方法，顺便查看一下相关源码了解了其底层实现机制。特地记录一下。
+Prerequirements 由于本文主要是从源码的角度分析 InheritedWidget 的工作原理，所以对阅读本文的小伙伴的 Flutter 知识有一定的要求。主要有以下几点，如果其中某部分你还不太清楚，请先阅读相关链接：
+ 了解 Flutter 的基本用法。 了解 Flutter 中的 Widget 和 Element 的基本概念。 推荐阅读：Flutter, what are Widgets, RenderObjects and Elements? 对 Flutter 中 Element 的生命周期有基本了解。推荐阅读：Element class  下面开始正文。
+InheritedWidget 的使用方法 先看一个 InheritedWidget 最简单的使用示例：
+import &amp;#39;package:flutter/material.dart&amp;#39;; void main() =&amp;gt; runApp(new MyApp()); class MyWelcomeInfo extends InheritedWidget { MyWelcomeInfo({Key key, this.welcomeInfo, Widget child}) : super(key: key, child: child); final String welcomeInfo; @override bool updateShouldNotify(InheritedWidget oldWidget) { return oldWidget." />
+  <meta property="og:url" content="https://loveky.github.io/2018/07/18/how-flutter-inheritedwidget-works/" />
+  <meta property="og:image" content="https://img11.360buyimg.com/uba/s300x300_jfs/t23086/34/1085755315/92891/9249e03d/5b4f1c76N2108c1ca.jpg" />
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+
+<link rel="canonical" href="https://loveky.github.io/2018/07/18/how-flutter-inheritedwidget-works/" />
+<link rel="alternative" href="https://loveky.github.io/index.xml" title="loveky的流水账" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="loveky的流水账" />
+<meta name="msapplication-tooltip" content="loveky的流水账" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://loveky.github.io/img/favicon.ico" />
+<link rel="icon" sizes="192x192" href="https://loveky.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://loveky.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://loveky.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://loveky.github.io/css/bundle.css" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-114966753-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-114966753-1');
+</script>
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://loveky.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">loveky的流水账</h2>
+  
+  <p class="subtitle"></p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://loveky.github.io/">首页</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/tags/">标签</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/archive/">归档</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/links/">链接</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://loveky.github.io/about/">关于我</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:eWx6Y3lseEBnbWFpbC5jb20=" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/loveky" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/loveky_" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//www.zhihu.com/people/loveky" title="Zhihu"><span class="icon icon-zhihu"></span></a>
+      </li>
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://loveky.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">从 Flutter 源码看 InheritedWidget 内部实现原理</h1>
+      <p class="post-meta">@loveky · Jul 18, 2018 · 3 min read</p>
+    </header>
+    <article class="post-content">
+
+<p>这两天学习了一下 Flutter 中的 InheritedWidget 的使用方法，顺便查看一下相关源码了解了其底层实现机制。特地记录一下。</p>
+
+<h2 id="prerequirements">Prerequirements</h2>
+
+<p>由于本文主要是从源码的角度分析 InheritedWidget 的工作原理，所以对阅读本文的小伙伴的 Flutter 知识有一定的要求。主要有以下几点，如果其中某部分你还不太清楚，请先阅读相关链接：</p>
+
+<ul>
+<li>了解 Flutter 的基本用法。</li>
+<li>了解 Flutter 中的 Widget 和 Element 的基本概念。 推荐阅读：<a href="https://medium.com/flutter-community/flutter-what-are-widgets-renderobjects-and-elements-630a57d05208">Flutter, what are Widgets, RenderObjects and Elements?</a></li>
+<li>对 Flutter 中 Element 的生命周期有基本了解。推荐阅读：<a href="https://docs.flutter.io/flutter/widgets/Element-class.html">Element class</a></li>
+</ul>
+
+<p>下面开始正文。</p>
+
+<h2 id="inheritedwidget-的使用方法">InheritedWidget 的使用方法</h2>
+
+<p>先看一个 InheritedWidget 最简单的使用示例：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dart" data-lang="dart"><span style="color:#66d9ef">import</span> <span style="color:#e6db74">&#39;package:flutter/material.dart&#39;</span>;
+
+<span style="color:#66d9ef">void</span> main() <span style="color:#f92672">=&gt;</span> runApp(<span style="color:#66d9ef">new</span> MyApp());
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyWelcomeInfo</span> <span style="color:#66d9ef">extends</span> InheritedWidget {
+  MyWelcomeInfo({Key key, <span style="color:#66d9ef">this</span>.welcomeInfo, Widget child})
+      <span style="color:#f92672">:</span> <span style="color:#66d9ef">super</span>(key: key, child: child);
+
+  <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">String</span> welcomeInfo;
+
+  <span style="color:#960050;background-color:#1e0010">@</span>override
+  <span style="color:#66d9ef">bool</span> updateShouldNotify(InheritedWidget oldWidget) {
+    <span style="color:#66d9ef">return</span> oldWidget.welcomeInfo <span style="color:#f92672">!=</span> welcomeInfo;
+  }
+}
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyNestedChild</span> <span style="color:#66d9ef">extends</span> StatelessWidget {
+  <span style="color:#960050;background-color:#1e0010">@</span>override
+  build(BuildContext context) {
+    <span style="color:#66d9ef">final</span> MyWelcomeInfo widget <span style="color:#f92672">=</span>
+        context.inheritFromWidgetOfExactType(MyWelcomeInfo);
+    <span style="color:#66d9ef">return</span> Text(widget.welcomeInfo);
+  }
+}
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyApp</span> <span style="color:#66d9ef">extends</span> StatelessWidget {
+  <span style="color:#960050;background-color:#1e0010">@</span>override
+  Widget build(BuildContext context) {
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> MaterialApp(
+      title: <span style="color:#e6db74">&#39;Flutter InheritWidget&#39;</span>,
+      home: MyWelcomeInfo(
+          welcomeInfo: <span style="color:#e6db74">&#39;hello flutter&#39;</span>,
+          child: Center(
+            child: MyNestedChild(),
+          )),
+    );
+  }
+}</code></pre></div>
+<p>可以看出我们使用 InheritedWidget 时涉及到的工作量主要有 2 部分：</p>
+
+<ul>
+<li>创建一个继承自 InheritedWidget 的类，并将其插入 Widget 树</li>
+<li>通过 BuildContext 对象提供的 <code>inheritFromWidgetOfExactType</code> 方法查找 Widget 树中最近的一个特定类型的 InheritedWidget 类的实例</li>
+</ul>
+
+<p>这里还暗含了一个逻辑，那就是当我们通过 <code>inheritFromWidgetOfExactType</code> 查找特定类型 InheritedWidget 的时候，这个 InheritedWidget 的信息是由父元素层层向子元素传递下来的呢？还是 <code>inheritFromWidgetOfExactType</code> 方法自己层层向上查找的呢？</p>
+
+<p>接下来让我们从源码的角度分别看看 Flutter 框架对以上几部分的实现。</p>
+
+<h2 id="实现原理分析">实现原理分析</h2>
+
+<h3 id="inheritedwidget-定义">InheritedWidget 定义</h3>
+
+<p>首先看一下 InheritedWidget 的定义：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dart" data-lang="dart"><span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">InheritedWidget</span> <span style="color:#66d9ef">extends</span> ProxyWidget {
+  <span style="color:#66d9ef">const</span> InheritedWidget({ Key key, Widget child })
+    <span style="color:#f92672">:</span> <span style="color:#66d9ef">super</span>(key: key, child: child);
+
+  <span style="color:#960050;background-color:#1e0010">@</span>override
+  InheritedElement createElement() <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">new</span> InheritedElement(<span style="color:#66d9ef">this</span>);
+  
+  <span style="color:#960050;background-color:#1e0010">@</span>protected
+  <span style="color:#66d9ef">bool</span> updateShouldNotify(covariant InheritedWidget oldWidget);
+}</code></pre></div>
+<p>它是一个继承自 <code>ProxyWidget</code> 的抽象类。内部没什么逻辑，除了实现了一个 <code>createElement</code> 方法之外，还定义了一个 <code>updateShouldNotify()</code> 接口。 每次当 InheritedElement 的实例更新时会执行该方法并传入更新之前对应的 Widget 对象，如果该方法返回 <code>true</code> 那么依赖该 Widget 的(在 build 阶段通过 <code>inheritFromWidgetOfExactType</code> 方法查找过该 Widget 的子 widget)实例会被通知进行更新；如果返回 <code>false</code> 则不会通知依赖项更新。这个机制和 React 框架中的 <code>shouldComponentUpdate</code> 机制很像。</p>
+
+<h3 id="inheritedwidget-相关信息的传递机制">InheritedWidget 相关信息的传递机制</h3>
+
+<p>每个 Element 实例上都有一个 <code>_inheritedWidgets</code> 属性。该属性的类型为：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dart" data-lang="dart">HashMap<span style="color:#f92672">&lt;</span>Type, InheritedElement<span style="color:#f92672">&gt;</span></code></pre></div>
+<p>其中保存了祖先节点中出现的 InheritedWidget 与其对应 element 的映射关系。在 element 的 <a href="https://github.com/flutter/flutter/blob/v0.5.7/packages/flutter/lib/src/widgets/framework.dart#L2754"><code>mount</code> 阶段</a>和 <a href="https://github.com/flutter/flutter/blob/v0.5.7/packages/flutter/lib/src/widgets/framework.dart#L3019"><code>active</code> 阶段</a>，会执行 <code>_updateInheritance()</code> 方法更新这个映射关系。</p>
+
+<p>对于普通 Element 实例，<code>_updateInheritance()</code> 只是<a href="https://github.com/flutter/flutter/blob/v0.5.7/packages/flutter/lib/src/widgets/framework.dart#L3251-L3254">单纯把父 element 的 <code>_inheritedWidgets</code> 属性保存在自身 <code>_inheritedWidgets</code> 里</a>。从而实现映射关系的层层向下传递。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dart" data-lang="dart">  <span style="color:#66d9ef">void</span> _updateInheritance() {
+    <span style="color:#66d9ef">assert</span>(_active);
+    _inheritedWidgets <span style="color:#f92672">=</span> _parent<span style="color:#f92672">?</span>._inheritedWidgets;
+  }</code></pre></div>
+<p>由 InheritedWidget 创建的 InheritedElement <a href="https://github.com/flutter/flutter/blob/v0.5.7/packages/flutter/lib/src/widgets/framework.dart#L4039-L4047">重写了该方法</a>：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dart" data-lang="dart">  <span style="color:#66d9ef">void</span> _updateInheritance() {
+    <span style="color:#66d9ef">assert</span>(_active);
+    <span style="color:#66d9ef">final</span> Map<span style="color:#f92672">&lt;</span>Type, InheritedElement<span style="color:#f92672">&gt;</span> incomingWidgets <span style="color:#f92672">=</span> _parent<span style="color:#f92672">?</span>._inheritedWidgets;
+    <span style="color:#66d9ef">if</span> (incomingWidgets <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>)
+      _inheritedWidgets <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;</span>Type, InheritedElement<span style="color:#f92672">&gt;</span>.from(incomingWidgets);
+    <span style="color:#66d9ef">else</span>
+      _inheritedWidgets <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;</span>Type, InheritedElement<span style="color:#f92672">&gt;</span>();
+    _inheritedWidgets[widget.runtimeType] <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>;
+  }</code></pre></div>
+<p>可以看出 InheritedElement 实例会把自身的信息添加到 <code>_inheritedWidgets</code> 属性中，这样其子孙 element 就可以通过前面提到的 <code>_inheritedWidgets</code> 的传递机制获取到此 InheritedElement 的引用。</p>
+
+<h3 id="inheritedwidget-的更新通知机制">InheritedWidget 的更新通知机制</h3>
+
+<p>首先让我们回答一个小问题，前文提到 <code>_inheritedWidgets</code> 属性存在于 Element 实例上，而我们代码中调用的 <code>inheritFromWidgetOfExactType</code> 方法则存在于 BuildContext 实例之上。那么 BuildContext 是如何获取 Element 实例上的信息的呢？答案是<strong>不需要获取</strong>。因为<strong>每一个 Element 实例也都是一个 BuildContext 实例</strong>。这一点可以从<a href="https://github.com/flutter/flutter/blob/v0.5.7/packages/flutter/lib/src/widgets/framework.dart#L2496"> Element 的定义</a>中得到：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dart" data-lang="dart"><span style="color:#66d9ef">abstract</span>  <span style="color:#66d9ef">class</span>  <span style="color:#a6e22e">Element</span>  <span style="color:#66d9ef">extends</span>  DiagnosticableTree  <span style="color:#66d9ef">implements</span>  BuildContext {
+
+}</code></pre></div>
+<p>而每次 Element 实例执行 Widget 实例的 <code>build</code> 方法时传入的 context 就是该 Element 实例自身，以 <a href="https://github.com/flutter/flutter/blob/v0.5.7/packages/flutter/lib/src/widgets/framework.dart#L3700-L3717">StatelessElement</a> 为例：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dart" data-lang="dart"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StatelessElement</span> <span style="color:#66d9ef">extends</span> ComponentElement {
+  ...
+
+  <span style="color:#960050;background-color:#1e0010">@</span>override
+  Widget build() <span style="color:#f92672">=&gt;</span> widget.build(<span style="color:#66d9ef">this</span>);
+  
+  ...
+}</code></pre></div>
+<p>大家也可以在 IDE 中通过断点验证这一点。</p>
+
+<p>既然可以拿到 InheritedWidget 的信息了，那接下让我们通过源码看看更新通知机制的具体实现。</p>
+
+<p>首先看一下 <a href="https://github.com/flutter/flutter/blob/v0.5.7/packages/flutter/lib/src/widgets/framework.dart#L3230-L3242"><code>inheritFromWidgetOfExactType</code> 的实现</a>：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dart" data-lang="dart">  InheritedWidget inheritFromWidgetOfExactType(Type targetType) {
+    <span style="color:#66d9ef">assert</span>(_debugCheckStateIsActiveForAncestorLookup());
+    <span style="color:#66d9ef">final</span> InheritedElement ancestor <span style="color:#f92672">=</span> _inheritedWidgets <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">?</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">:</span> _inheritedWidgets[targetType];
+    <span style="color:#66d9ef">if</span> (ancestor <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+      <span style="color:#66d9ef">assert</span>(ancestor <span style="color:#66d9ef">is</span> InheritedElement);
+      _dependencies <span style="color:#f92672">??=</span> <span style="color:#66d9ef">new</span> HashSet<span style="color:#f92672">&lt;</span>InheritedElement<span style="color:#f92672">&gt;</span>();
+      _dependencies.add(ancestor);
+      ancestor._dependents.add(<span style="color:#66d9ef">this</span>);
+      <span style="color:#66d9ef">return</span> ancestor.widget;
+    }
+    _hadUnsatisfiedDependencies <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
+  }</code></pre></div>
+<p>首先在 <code>_inheritedWidget</code> 映射中查找是否有特定类型 InheritedWidget 的实例。如果有则将该实例添加到自身的依赖列表中，同时将自身添加到对应的依赖项列表中。这样该 InheritedWidget 在更新后就可以通过其 <code>_dependents</code> 属性知道需要通知哪些依赖了它的 widget。</p>
+
+<p>每当 <a href="https://github.com/flutter/flutter/blob/v0.5.7/packages/flutter/lib/src/widgets/framework.dart#L3914-L3923">InheritedElement 实例更新</a>时，会执行实例上的 <a href="https://github.com/flutter/flutter/blob/v0.5.7/packages/flutter/lib/src/widgets/framework.dart#L4070-L4086"><code>notifyClients</code> 方法</a>通知依赖了它的子 element 同步更新。<code>notifyClients</code> 实现如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dart" data-lang="dart">  <span style="color:#66d9ef">void</span> notifyClients(InheritedWidget oldWidget) {
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>widget.updateShouldNotify(oldWidget))
+      <span style="color:#66d9ef">return</span>;
+    <span style="color:#66d9ef">assert</span>(_debugCheckOwnerBuildTargetExists(<span style="color:#e6db74">&#39;notifyClients&#39;</span>));
+    <span style="color:#66d9ef">for</span> (Element dependent <span style="color:#66d9ef">in</span> _dependents) {
+      <span style="color:#66d9ef">assert</span>(() {
+        <span style="color:#75715e">// check that it really is our descendant
+</span><span style="color:#75715e"></span>        Element ancestor <span style="color:#f92672">=</span> dependent._parent;
+        <span style="color:#66d9ef">while</span> (ancestor <span style="color:#f92672">!=</span> <span style="color:#66d9ef">this</span> <span style="color:#f92672">&amp;&amp;</span> ancestor <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>)
+          ancestor <span style="color:#f92672">=</span> ancestor._parent;
+        <span style="color:#66d9ef">return</span> ancestor <span style="color:#f92672">==</span> <span style="color:#66d9ef">this</span>;
+      }());
+      <span style="color:#75715e">// check that it really depends on us
+</span><span style="color:#75715e"></span>      <span style="color:#66d9ef">assert</span>(dependent._dependencies.contains(<span style="color:#66d9ef">this</span>));
+      dependent.didChangeDependencies();
+    }
+  }</code></pre></div>
+<p>首先执行相应 InheritedWidget 上的 <code>updateShouldNotify</code> 方法判断是否需要通知，如果该方法返回 <code>true</code> 则遍历 <code>_dependents</code> 列表中的 element 并执行他们的 <code>didChangeDependencies()</code> 方法。这样 InheritedWidget 中的更新就通知到依赖它的子 widget 中了。</p>
+
+<h2 id="写在最后">写在最后</h2>
+
+<p>本文简单的从源码的角度讨论了 InheritedWidget 的实现原理。由于 Flutter 框架本身也是使用 Dart 语言开发的，在熟悉了 Dart 语言后其实阅读 Flutter 源码并没有想象中的那么难，大家也可以根据自己感兴趣的点去有选择的阅读部分源码。</p>
+
+<p>由于作者也是 Flutter 的初学者，文中可能存在描述不准确甚至是错误的地方。欢迎大家一起讨论。</p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://loveky.github.io/tags/flutter"><span class="tag">Flutter</span></a></li>
+        
+          <li><a href="https://loveky.github.io/tags/dart"><span class="tag">Dart</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        
+      </p>
+    </footer>
+    <div style="text-align:center">
+      <p>如果你觉得这篇文章对你有所帮助，可以微信扫码请作者喝杯咖啡哦~</p>
+      <img width="300" height="300" src="https://loveky.github.io/img/wechat-reward-new.jpg"/>
+  </div>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "loveky" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 loveky的流水账</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+
+
+<script src="https://loveky.github.io/js/bundle.js"></script>
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?301a286a5bea7d926e284c27f79bd221";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+  </body>
+</html>
