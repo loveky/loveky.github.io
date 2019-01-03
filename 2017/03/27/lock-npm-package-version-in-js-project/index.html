@@ -49,7 +49,7 @@ module.exports = { entry: { app: &amp;#39;./src/js/app.jsx&amp;#39;, vender: [ &
 
 
 
-<meta name="generator" content="Hugo 0.41" />
+<meta name="generator" content="Hugo 0.52" />
 
 
 <link rel="canonical" href="https://loveky.github.io/2017/03/27/lock-npm-package-version-in-js-project/" />
@@ -348,10 +348,10 @@ npm shrinkwrap --dev</code></pre></div>
 <p><a href="https://yarnpkg.com/en/">yarn</a>是一个与npm兼容的node包管理器。使用它安装npm包，会自动在项目目录中创建一个<code>yarn.lock</code>文件。该文件包含了当前项目中所安装的依赖包的版本信息。其他人在使用yarn安装项目的依赖包时就可以通过该文件创建一个完全相同的依赖环境。</p>
 
 <p>使用方法如下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yarn <span style="color:#75715e"># 现有项目中使用yarn来创建yarn.lock
-</span><span style="color:#75715e"></span>yarn init <span style="color:#75715e"># 使用yarn新建一个项目
-</span><span style="color:#75715e"></span>yarn add xxxx <span style="color:#75715e"># 安装一个依赖包
-</span><span style="color:#75715e"></span>yarn remove xxx # 删除一个依赖包</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yarn <span style="color:#75715e"># 现有项目中使用yarn来创建yarn.lock</span>
+yarn init <span style="color:#75715e"># 使用yarn新建一个项目</span>
+yarn add xxxx <span style="color:#75715e"># 安装一个依赖包</span>
+yarn remove xxx <span style="color:#75715e"># 删除一个依赖包</span></code></pre></div>
 <p>更多命令参考<a href="https://yarnpkg.com/en/docs/cli/">yarn官方文档</a>。除了可以自动帮你锁定依赖包的版本之外，yarn还有一个很棒的特性就是可以缓存已经安装过的包。当再次安装时，直接从本地读取即可，可以极大的提高依赖安装速度。</p>
 
 <p><strong>该方法缺陷：需要团队成员都使用yarn，增加初始的沟通成本。</strong></p>
@@ -371,7 +371,7 @@ npm shrinkwrap --dev</code></pre></div>
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>478</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>647</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">
@@ -380,7 +380,7 @@ npm shrinkwrap --dev</code></pre></div>
   </div>
     
       <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -403,7 +403,7 @@ npm shrinkwrap --dev</code></pre></div>
     
   </section>
   <footer class="site-footer">
-  <p>© 2017-2018 loveky的流水账</p>
+  <p>© 2017-2019 loveky的流水账</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
   
 </footer>

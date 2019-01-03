@@ -61,7 +61,7 @@ export HTTP_PROXY=http://127.0.0.1:51350 export HTTPS_PROXY=http://127.0.0.1:513
 
 
 
-<meta name="generator" content="Hugo 0.41" />
+<meta name="generator" content="Hugo 0.52" />
 
 
 <link rel="canonical" href="https://loveky.github.io/2018/07/05/config-lantern-as-shell-proxy/" />
@@ -284,8 +284,8 @@ export HTTPS_PROXY<span style="color:#f92672">=</span>http://127.0.0.1:51350</co
 <p>就完成配置了。</p>
 
 <p>最后为了避免每次都要敲这么长的命令，我们写一个 Shell 函数：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># http proxy util
-</span><span style="color:#75715e"></span>hp<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># http proxy util</span>
+hp<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
   <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;enable&#34;</span> <span style="color:#f92672">]</span>
   <span style="color:#66d9ef">then</span>
     PORT<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;51350&#34;</span>
@@ -314,7 +314,7 @@ export HTTPS_PROXY<span style="color:#f92672">=</span>http://127.0.0.1:51350</co
       </ul>
       
       <p class="post-copyright">
-        
+        本文发表于 <strong>182</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">
@@ -323,7 +323,7 @@ export HTTPS_PROXY<span style="color:#f92672">=</span>http://127.0.0.1:51350</co
   </div>
     
       <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -346,7 +346,7 @@ export HTTPS_PROXY<span style="color:#f92672">=</span>http://127.0.0.1:51350</co
     
   </section>
   <footer class="site-footer">
-  <p>© 2017-2018 loveky的流水账</p>
+  <p>© 2017-2019 loveky的流水账</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
   
 </footer>

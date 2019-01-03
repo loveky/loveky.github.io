@@ -339,9 +339,7 @@ RedMonk 的排名将 Stack Overflow 的数据与 GitHub 上的 pull request 结�
 
 &lt;p&gt;关于我的一些详细信息：我现年32岁，有10年以上扎实的工作经验。直到最近几年我才对自己所做的工作充满信心。即使是现在，我也在不断质疑自己。问题在于，这种质疑并不会消失，所以你要做的就是无视它，不断的解决问题，不断的积累经验。&lt;/p&gt;
 
-&lt;p&gt;首先我要说明的是以下提到的只是一些帮你提升技能的小贴士。最终你还是需要找到一条最适合你自己的路。这些只是我发现对我有帮助的点。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;首先我要说明的是以下提到的只是一些帮你提升技能的小贴士。最终你还是需要找到一条最适合你自己的路。这些只是我发现对我有帮助的点。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -734,7 +732,7 @@ rerere是干啥用的？ 它会让Git记住你是如何解决某个文件的两�
 在repo目录里mkdir .git/rr-cache
 不过推荐前者。
 能举例说明吗？ 参考inline的注释。
-$ git init git-rerere-test Initialized empty Git repository in /cygdrive/e/test/git-rerere-test/.git/ $ cd git-rerere-test $ git config rerere.enabled true # 开启rerere功能  $ echo &amp;#34;What fruit do you like?&amp;#34; &amp;gt;&amp;gt; question $ git add . &amp;amp;&amp;amp; git commit -m &amp;#34;initial drop&amp;#34; [master (root-commit) af9fdf9] initial drop 1 files changed, 1 insertions(+), 0 deletions(-) create mode 100644 question $ git branch test # 创建test分支  $ echo &amp;#34;I like orange&amp;#34; &amp;gt;&amp;gt; question $ git add .</description>
+$ git init git-rerere-test Initialized empty Git repository in /cygdrive/e/test/git-rerere-test/.git/ $ cd git-rerere-test $ git config rerere.enabled true # 开启rerere功能 $ echo &amp;#34;What fruit do you like?&amp;#34; &amp;gt;&amp;gt; question $ git add . &amp;amp;&amp;amp; git commit -m &amp;#34;initial drop&amp;#34; [master (root-commit) af9fdf9] initial drop 1 files changed, 1 insertions(+), 0 deletions(-) create mode 100644 question $ git branch test # 创建test分支 $ echo &amp;#34;I like orange&amp;#34; &amp;gt;&amp;gt; question $ git add .</description>
     </item>
     
     <item>

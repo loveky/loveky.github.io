@@ -55,7 +55,7 @@ sudo apt-get install xvfb Xvfb :99 -screen 0 1024x768x16 &amp;gt;&amp;gt; /tmp/X
 
 
 
-<meta name="generator" content="Hugo 0.41" />
+<meta name="generator" content="Hugo 0.52" />
 
 
 <link rel="canonical" href="https://loveky.github.io/2013/12/06/travis-pro/" />
@@ -293,7 +293,7 @@ curl -L https://get.rvm.io | bash -s stable --ruby<span style="color:#f92672">=<
 
 <p>我们测试Rails时需要用capybar跑feature spec。有js相关的测试需要启动一个浏览器来执行测试代码，但是linode上的Ubuntu都是没有display的，因此跑feature spec的时候会遇到无法启动浏览器而报错的情况。Xvfb就是用来创建一个虚拟的Display供启动浏览器用的。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install xvfb
-Xvfb :99 -screen <span style="color:#ae81ff">0</span> 1024x768x16 &gt;&gt; /tmp/Xvfb.log <span style="color:#ae81ff">2</span>&gt;&amp;<span style="color:#ae81ff">1</span> &amp;  # 启动Xvfb</code></pre></div>
+Xvfb :99 -screen <span style="color:#ae81ff">0</span> 1024x768x16 &gt;&gt; /tmp/Xvfb.log <span style="color:#ae81ff">2</span>&gt;&amp;<span style="color:#ae81ff">1</span> &amp;  <span style="color:#75715e"># 启动Xvfb</span></code></pre></div>
 <p>Step4 启动Jenkins，在Jenkins后台Plugin Manager界面安装<a href="https://wiki.jenkins-ci.org/display/JENKINS/GitHub+pull+request+builder+plugin">GitHub Pull Request Builder</a>这个plugin。<br />
 插件安装完成后到后台Configure System页面，找到GitHub pull requests builder的配置项。<br />
 默认的Access Token一栏是空的。我们需要让插件帮我们生成一个。点击Advanced按钮</p>
@@ -318,14 +318,14 @@ Crontab line定义了查询GitHub有没有新PR的频度。默认的<code>*/5 * 
 <p><img src="https://loveky.github.io/img/QQ20131206-6.png" alt="" /></p>
 
 <p>接下来就是填写Build脚本。我们目前在使用下面的脚本内容。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export RAILS_ENV<span style="color:#f92672">=</span>test <span style="color:#75715e"># 设置Rails环境
-</span><span style="color:#75715e"></span>export DISPLAY<span style="color:#f92672">=</span>:99.0 <span style="color:#75715e"># 设置DISPLAY参数，:99.0是在启动Xvfb时设定了，保证两边一致。
-</span><span style="color:#75715e"></span>
-bundle install --without development production <span style="color:#75715e"># 接下来就是准备测试数据库
-</span><span style="color:#75715e"></span>bundle exec rake db:create
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export RAILS_ENV<span style="color:#f92672">=</span>test <span style="color:#75715e"># 设置Rails环境</span>
+export DISPLAY<span style="color:#f92672">=</span>:99.0 <span style="color:#75715e"># 设置DISPLAY参数，:99.0是在启动Xvfb时设定了，保证两边一致。</span>
+
+bundle install --without development production <span style="color:#75715e"># 接下来就是准备测试数据库</span>
+bundle exec rake db:create
 bundle exec rake db:migrate
 
-bundle exec rspec # 执行测试代码</code></pre></div>
+bundle exec rspec <span style="color:#75715e"># 执行测试代码</span></code></pre></div>
 <p>最后确保Post-build Action里选择了Set build status on GitHub commit</p>
 
 <p><img src="https://loveky.github.io/img/QQ20131206-7.png" alt="" /></p>
@@ -363,7 +363,7 @@ bundle exec rspec # 执行测试代码</code></pre></div>
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>1684</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>1854</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">
@@ -372,7 +372,7 @@ bundle exec rspec # 执行测试代码</code></pre></div>
   </div>
     
       <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -395,7 +395,7 @@ bundle exec rspec # 执行测试代码</code></pre></div>
     
   </section>
   <footer class="site-footer">
-  <p>© 2017-2018 loveky的流水账</p>
+  <p>© 2017-2019 loveky的流水账</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
   
 </footer>
