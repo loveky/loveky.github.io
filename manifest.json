@@ -1,6 +1,6 @@
 {
-  "name": "Ritchie Pub.",
-  "short_name": "ritchie",
+  "name": "loveky的博客",
+  "short_name": "loveky的博客",
   "display": "standalone",
   "orientation": "any",
   "start_url": "./?utm_source=homescreen",
