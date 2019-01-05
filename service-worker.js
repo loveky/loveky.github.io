@@ -11,9 +11,7 @@ var filesToCache = [
   'icons/icon-192x192.png',
   'icons/icon-256x256.png',
   'icons/icon-512x512.png',
-  'images/avatar.png',
   'images/grey-prism.svg',
-  'images/qrcode.jpg',
   'styles/main.min.css',
   'scripts/index.min.js',
 
