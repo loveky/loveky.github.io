@@ -9,13 +9,21 @@
 
   
   
-
-
-
-
+  <link href="//cdn.jsdelivr.net" rel="dns-prefetch">
+  <link href="//cdnjs.cloudflare.com" rel="dns-prefetch">
+  <link href="//at.alicdn.com" rel="dns-prefetch">
+  <link href="//fonts.googleapis.com" rel="dns-prefetch">
+  <link href="//fonts.gstatic.com" rel="dns-prefetch">
+  <link href="///disqus.com" rel="dns-prefetch">
+  <link href="//c.disquscdn.com" rel="dns-prefetch">
+  
+  
+  
 
   
-  <meta name="author" content="loveky" />
+
+  
+  
   <meta name="description" content="原文地址 http://cryto.net/~joepie91/blog/2016/05/11/what-is-promise-try-and-why-does-it-matter/
 在#Node.js#频道里经常困扰大家的一个话题是Bluebird提供的Promise.try方法。大家并不清楚该方法的功能也不知道为何要使用它。同时，几乎所有的关于Promsie的指南中针对该方法错误的演示使得这种情况没有任何改善。
 在本文中，我会尝试解释究竟什么是Promise.try以及为何你应该使用它。我假设你已经对Promise有所了解并且知道.then在Promise中的作用。
@@ -28,13 +36,13 @@ var Promise = require(&amp;quot;bluebird&amp;quot;); function getUsername(userId
 这样做有什么意义呢？ 以上的代码看起来似乎是多余的。但实际上它有以下几个优点：
  更好的错误处理 同步代码中的异常不论出现在何处都会以rejection的形式向Promise链后端传递。 更好的兼容性 你可以始终使用你自己喜欢的Promise实现，而不用担心第三方代码在使用哪个。 更好的代码阅读体验 所有的代码在水平方向上将处于同一个缩进层级，这将使你阅读代码变得更容易。  接下来我会逐一介绍这些优点：
 1. 更好的错误处理 Promise的一个被大力宣扬的优点就是用户可以用同一种方式同时处理同步异常和异步异常 —— 同步异常会被捕获并且会作为一个rejected Promise向后传递。但事实真的是这样吗？让我们看看以下这个上文示例的小变种：
-function getUsername(userId) { return database.users.get({id: userId}) .then(function(user) { return uesr." />
+function getUsername(userId) { return database.users.get({id: userId}) .then(function(user) { return uesr.">
 
   
   
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@loveky_" />
-    <meta name="twitter:title" content="[译]什么是Promise.try" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@loveky_">
+    <meta name="twitter:title" content="[译]什么是Promise.try">
     <meta name="twitter:description" content="原文地址 http://cryto.net/~joepie91/blog/2016/05/11/what-is-promise-try-and-why-does-it-matter/
 在#Node.js#频道里经常困扰大家的一个话题是Bluebird提供的Promise.try方法。大家并不清楚该方法的功能也不知道为何要使用它。同时，几乎所有的关于Promsie的指南中针对该方法错误的演示使得这种情况没有任何改善。
 在本文中，我会尝试解释究竟什么是Promise.try以及为何你应该使用它。我假设你已经对Promise有所了解并且知道.then在Promise中的作用。
@@ -47,13 +55,13 @@ var Promise = require(&amp;quot;bluebird&amp;quot;); function getUsername(userId
 这样做有什么意义呢？ 以上的代码看起来似乎是多余的。但实际上它有以下几个优点：
  更好的错误处理 同步代码中的异常不论出现在何处都会以rejection的形式向Promise链后端传递。 更好的兼容性 你可以始终使用你自己喜欢的Promise实现，而不用担心第三方代码在使用哪个。 更好的代码阅读体验 所有的代码在水平方向上将处于同一个缩进层级，这将使你阅读代码变得更容易。  接下来我会逐一介绍这些优点：
 1. 更好的错误处理 Promise的一个被大力宣扬的优点就是用户可以用同一种方式同时处理同步异常和异步异常 —— 同步异常会被捕获并且会作为一个rejected Promise向后传递。但事实真的是这样吗？让我们看看以下这个上文示例的小变种：
-function getUsername(userId) { return database.users.get({id: userId}) .then(function(user) { return uesr." />
-    <meta name="twitter:image" content="https://loveky.github.io/img/avatar.jpg" />
+function getUsername(userId) { return database.users.get({id: userId}) .then(function(user) { return uesr.">
+    <meta name="twitter:image" content="/images/avatar.jpg">
   
 
   
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="[译]什么是Promise.try" />
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="[译]什么是Promise.try">
   <meta property="og:description" content="原文地址 http://cryto.net/~joepie91/blog/2016/05/11/what-is-promise-try-and-why-does-it-matter/
 在#Node.js#频道里经常困扰大家的一个话题是Bluebird提供的Promise.try方法。大家并不清楚该方法的功能也不知道为何要使用它。同时，几乎所有的关于Promsie的指南中针对该方法错误的演示使得这种情况没有任何改善。
 在本文中，我会尝试解释究竟什么是Promise.try以及为何你应该使用它。我假设你已经对Promise有所了解并且知道.then在Promise中的作用。
@@ -66,53 +74,62 @@ var Promise = require(&amp;quot;bluebird&amp;quot;); function getUsername(userId
 这样做有什么意义呢？ 以上的代码看起来似乎是多余的。但实际上它有以下几个优点：
  更好的错误处理 同步代码中的异常不论出现在何处都会以rejection的形式向Promise链后端传递。 更好的兼容性 你可以始终使用你自己喜欢的Promise实现，而不用担心第三方代码在使用哪个。 更好的代码阅读体验 所有的代码在水平方向上将处于同一个缩进层级，这将使你阅读代码变得更容易。  接下来我会逐一介绍这些优点：
 1. 更好的错误处理 Promise的一个被大力宣扬的优点就是用户可以用同一种方式同时处理同步异常和异步异常 —— 同步异常会被捕获并且会作为一个rejected Promise向后传递。但事实真的是这样吗？让我们看看以下这个上文示例的小变种：
-function getUsername(userId) { return database.users.get({id: userId}) .then(function(user) { return uesr." />
-  <meta property="og:url" content="https://loveky.github.io/2016/08/04/promise-try/" />
-  <meta property="og:image" content="https://loveky.github.io/img/avatar.jpg" />
+function getUsername(userId) { return database.users.get({id: userId}) .then(function(user) { return uesr.">
+  <meta property="og:url" content="https://loveky.github.io/2016/08/04/promise-try/">
+  <meta property="og:image" content="/images/avatar.jpg">
 
 
 
 
-<meta name="generator" content="Hugo 0.52" />
+<meta name="generator" content="Hugo 0.52">
 
 
-<link rel="canonical" href="https://loveky.github.io/2016/08/04/promise-try/" />
-<link rel="alternative" href="https://loveky.github.io/index.xml" title="loveky的流水账" type="application/atom+xml" />
+<link rel="canonical" href="https://loveky.github.io/2016/08/04/promise-try/">
+
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no,email=no,adress=no">
+<meta http-equiv="Cache-Control" content="no-transform">
 
 
-<meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<meta name="format-detection" content="telephone=no,email=no,adress=no" />
-<meta http-equiv="Cache-Control" content="no-transform" />
-
-
-<meta name="robots" content="index,follow" />
-<meta name="referrer" content="origin-when-cross-origin" />
-
-
+<meta name="robots" content="index,follow">
+<meta name="referrer" content="origin-when-cross-origin">
 
 
 
 
 
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<meta name="apple-mobile-web-app-title" content="loveky的流水账" />
-<meta name="msapplication-tooltip" content="loveky的流水账" />
-<meta name='msapplication-navbutton-color' content="#5fbf5e" />
-<meta name="msapplication-TileColor" content="#5fbf5e" />
-<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
-<link rel="icon" href="https://loveky.github.io/img/favicon.ico" />
-<link rel="icon" sizes="192x192" href="https://loveky.github.io/img/touch-icon-android.png" />
-<link rel="apple-touch-icon" href="https://loveky.github.io/img/touch-icon-apple.png" />
-<link rel="mask-icon" href="https://loveky.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
 
 
+<meta name="theme-color" content="#02b875">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="loveky">
+<meta name="msapplication-tooltip" content="loveky">
+<meta name='msapplication-navbutton-color' content="#02b875">
+<meta name="msapplication-TileColor" content="#02b875">
+<meta name="msapplication-TileImage" content="/icons/icon-144x144.png">
+<link rel="icon" href="https://loveky.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://loveky.github.io/icons/icon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://loveky.github.io/icons/icon-32x32.png">
+<link rel="icon" sizes="192x192" href="https://loveky.github.io/icons/icon-192x192.png">
+<link rel="apple-touch-icon" href="https://loveky.github.io/icons/icon-152x152.png">
+<link rel="manifest" href="https://loveky.github.io/manifest.json">
 
-<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
 
-<link rel="stylesheet" href="https://loveky.github.io/css/bundle.css" />
+<link rel="preload" href="https://loveky.github.io/styles/main.min.css" as="style">
+<link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
+<link rel="preload" href="https://loveky.github.io/images/avatar.jpg" as="image">
+<link rel="preload" href="https://loveky.github.io/images/grey-prism.svg" as="image">
 
+
+<style>
+  body {
+    background: rgb(244, 243, 241) url('/images/grey-prism.svg') repeat fixed;
+  }
+</style>
+<link rel="stylesheet" href="https://loveky.github.io/styles/main.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114966753-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -123,46 +140,51 @@ function getUsername(userId) { return database.users.get({id: userId}) .then(fun
 </script>
 
 
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css">
+
+
+
   
-  <!--[if lt IE 9]>
-    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
-  <![endif]-->
+  
+<!--[if lte IE 8]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js"></script>
+<![endif]-->
 
-<!--[if lte IE 11]>
-    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
-  <![endif]-->
-
-
-<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
-
-
-<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+<!--[if lte IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js"></script>
+<![endif]-->
 
 
 </head>
   <body>
     
     <div class="suspension">
-      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
       
         
-        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        <a role="button" aria-label="Go to comments" title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment" aria-hidden="true"></span></a>
         
       
     </div>
     
     
   <header class="site-header">
-  <img class="avatar" src="https://loveky.github.io/img/avatar.jpg" alt="Avatar">
+  <img class="avatar" src="https://loveky.github.io/images/avatar.jpg" alt="Avatar">
   
-  <h2 class="title">loveky的流水账</h2>
+  <h2 class="title">loveky</h2>
   
-  <p class="subtitle"></p>
-  <button class="menu-toggle" type="button">
-    <span class="icon icon-menu"></span>
+  <p class="subtitle">记录生活点滴</p>
+  <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
+    <span class="icon icon-menu" aria-hidden="true"></span>
   </button>
+
   <nav class="site-menu collapsed">
     <h2 class="offscreen">Main Menu</h2>
     <ul class="menu-list">
@@ -171,105 +193,69 @@ function getUsername(userId) { return database.users.get({id: userId}) .then(fun
       
       
         <li class="menu-item
-            
-            
-            
-              is-active
-            ">
-            <a href="https://loveky.github.io/">首页</a>
-          </li>
+          
+          
+           is-active">
+          <a href="https://loveky.github.io/">首页</a>
+        </li>
       
         <li class="menu-item
-            
-            
-            ">
-            <a href="https://loveky.github.io/tags/">标签</a>
-          </li>
+          
+          
+          ">
+          <a href="https://loveky.github.io/tags/">标签</a>
+        </li>
       
         <li class="menu-item
-            
-            
-            ">
-            <a href="https://loveky.github.io/archive/">归档</a>
-          </li>
+          
+          
+          ">
+          <a href="https://loveky.github.io/archive/">归档</a>
+        </li>
       
         <li class="menu-item
-            
-            
-            ">
-            <a href="https://loveky.github.io/links/">链接</a>
-          </li>
+          
+          
+          ">
+          <a href="https://loveky.github.io/links/">链接</a>
+        </li>
       
         <li class="menu-item
-            
-            
-            ">
-            <a href="https://loveky.github.io/about/">关于我</a>
-          </li>
+          
+          
+          ">
+          <a href="https://loveky.github.io/about/">关于我</a>
+        </li>
       
     </ul>
   </nav>
   <nav class="social-menu collapsed">
     <h2 class="offscreen">Social Networks</h2>
-    <ul class="social-list">
-
-      
-      <li class="social-item">
-        <a href="mailto:eWx6Y3lseEBnbWFpbC5jb20=" title="Email"><span class="icon icon-email"></span></a>
-      </li>
-
-      
-      <li class="social-item">
-        <a href="//github.com/loveky" title="GitHub"><span class="icon icon-github"></span></a>
-      </li>
-
-      <li class="social-item">
-        <a href="//twitter.com/loveky_" title="Twitter"><span class="icon icon-twitter"></span></a>
-      </li>
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      <li class="social-item">
-        <a href="//www.zhihu.com/people/loveky" title="Zhihu"><span class="icon icon-zhihu"></span></a>
-      </li>
-
-      
-
-      
-
-      <li class="social-item">
-        <a href="https://loveky.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
-      </li>
-
-    </ul>
+    <ul class="social-list"><li class="social-item">
+          <a href="mailto:eWx6Y3lseEBnbWFpbC5jb20=" title="Email" aria-label="Email">
+            <span class="icon icon-email" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//github.com/loveky" title="GitHub" aria-label="GitHub">
+            <span class="icon icon-github" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//twitter.com/loveky_" title="Twitter" aria-label="Twitter">
+            <span class="icon icon-twitter" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//stackoverflow.com/users/1513552" title="stackOverflow"  aria-label="stackOverflow">
+            <span class="icon icon-stackoverflow" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//www.zhihu.com/people/loveky" title="Zhihu" aria-label="Zhihu">
+            <span class="icon icon-zhihu" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a rel="alternate" type="application/rss+xml" href="https://loveky.github.io/index.xml" title="RSS" aria-label="RSS">
+            <span class="icon icon-rss" aria-hidden="true"></span>
+          </a>
+        </li></ul>
   </nav>
 </header>
 
@@ -476,7 +462,7 @@ return user.name;
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>882</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>884</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">
@@ -507,29 +493,62 @@ return user.name;
       
     
   </section>
-  <footer class="site-footer">
-  <p>© 2017-2019 loveky的流水账</p>
-  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+<footer class="site-footer">
+  <p>© 2017-2019 loveky</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>
 
 
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js"></script>
 
-<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
 
 
-<script src="https://loveky.github.io/js/bundle.js"></script>
+<script async src="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js"></script>
 
+
+
+
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+
+
+<script src="https://loveky.github.io/scripts/index.min.js"></script>
 
 <script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?301a286a5bea7d926e284c27f79bd221";
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(hm, s);
-})();
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('\/service-worker.js').then(function() {
+      console.log('[ServiceWorker] Registered');
+    });
+  }
 </script>
+
+
+
+
+
 
 
 

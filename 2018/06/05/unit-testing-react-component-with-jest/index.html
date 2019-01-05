@@ -9,92 +9,109 @@
 
   
   
-
-
-
-
+  <link href="//cdn.jsdelivr.net" rel="dns-prefetch">
+  <link href="//cdnjs.cloudflare.com" rel="dns-prefetch">
+  <link href="//at.alicdn.com" rel="dns-prefetch">
+  <link href="//fonts.googleapis.com" rel="dns-prefetch">
+  <link href="//fonts.gstatic.com" rel="dns-prefetch">
+  <link href="///disqus.com" rel="dns-prefetch">
+  <link href="//c.disquscdn.com" rel="dns-prefetch">
+  
+  
+  
 
   
-  <meta name="author" content="loveky" />
+
+  
+  
   <meta name="description" content="图片来自 https://blog.algolia.com   在上一篇文章中我们介绍了什么是单元测试以及单元测试框架 Jest 的基本用法。在本文中我们会具体聊聊如何用 Jest 为 React 组件编写单元测试。
 首先我们要明确的一点，那就是 React 组件的单元测试本质是也是单元测试。因此它也符合我们之前介绍过的单元测试的全部特点。唯一不同的地方在于 React 组件的单元测试中我们需要找到合适的方法对执行结果进行断言。换言之，我们要根据 React 的特点来设置代码是否正确执行的判断条件。
 那么 React 组件和其它的被测试对象有何不同呢？仔细想过，我们会发现：
  React 组件的 render 结果是一个组件树，并且整个树最终会被解析成一个纯粹由 HTML 元素构成的树形结构 React 组件可以拥有 state，且 state 的变化会影响 render 结果 React 组件可以拥有生命周期函数，这些生命周期函数会在特定时间点执行  知道了要测试的内容，接下来的问题就是如何执行一个 React 组件并编写断言了。如何执行一个 React 组件呢？看到这个问题估计大多数儿人是蒙的。平时不就是直接 ReactDOM.render 吗？不错，ReactDOM.render 确实可以执行一个 React 组件并将它渲染到页面中，但这种方式不利于编写测试代码。
 有没有更简单的方式呢？其实 React 已经帮我们提供好了工具，让我们一起来看看。
 React 提供的测试工具 在 React 的官方文档中提到了两个用于测试 React 组件的库。让我们分别介绍。
-react-test-renderer 在说 react-test-renderer 之前，让我们先聊聊什么是 renderer。React 最早是被用来开发网页的，所以早期的 React 库中还包含了大量和 DOM 相关的逻辑。后来 React 的设计思想慢慢被迁移到其它场景，最被人们熟知的莫过于 React Native 了。为了灵活性和扩展性，React 的代码被分拆为 React 核心代码与各种 renderer。React 自带了 3 个 renderer，前两个是大家常见的：" />
+react-test-renderer 在说 react-test-renderer 之前，让我们先聊聊什么是 renderer。React 最早是被用来开发网页的，所以早期的 React 库中还包含了大量和 DOM 相关的逻辑。后来 React 的设计思想慢慢被迁移到其它场景，最被人们熟知的莫过于 React Native 了。为了灵活性和扩展性，React 的代码被分拆为 React 核心代码与各种 renderer。React 自带了 3 个 renderer，前两个是大家常见的：">
 
   
   
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@loveky_" />
-    <meta name="twitter:title" content="利用 Jest 为 React 组件编写单元测试" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@loveky_">
+    <meta name="twitter:title" content="利用 Jest 为 React 组件编写单元测试">
     <meta name="twitter:description" content="图片来自 https://blog.algolia.com   在上一篇文章中我们介绍了什么是单元测试以及单元测试框架 Jest 的基本用法。在本文中我们会具体聊聊如何用 Jest 为 React 组件编写单元测试。
 首先我们要明确的一点，那就是 React 组件的单元测试本质是也是单元测试。因此它也符合我们之前介绍过的单元测试的全部特点。唯一不同的地方在于 React 组件的单元测试中我们需要找到合适的方法对执行结果进行断言。换言之，我们要根据 React 的特点来设置代码是否正确执行的判断条件。
 那么 React 组件和其它的被测试对象有何不同呢？仔细想过，我们会发现：
  React 组件的 render 结果是一个组件树，并且整个树最终会被解析成一个纯粹由 HTML 元素构成的树形结构 React 组件可以拥有 state，且 state 的变化会影响 render 结果 React 组件可以拥有生命周期函数，这些生命周期函数会在特定时间点执行  知道了要测试的内容，接下来的问题就是如何执行一个 React 组件并编写断言了。如何执行一个 React 组件呢？看到这个问题估计大多数儿人是蒙的。平时不就是直接 ReactDOM.render 吗？不错，ReactDOM.render 确实可以执行一个 React 组件并将它渲染到页面中，但这种方式不利于编写测试代码。
 有没有更简单的方式呢？其实 React 已经帮我们提供好了工具，让我们一起来看看。
 React 提供的测试工具 在 React 的官方文档中提到了两个用于测试 React 组件的库。让我们分别介绍。
-react-test-renderer 在说 react-test-renderer 之前，让我们先聊聊什么是 renderer。React 最早是被用来开发网页的，所以早期的 React 库中还包含了大量和 DOM 相关的逻辑。后来 React 的设计思想慢慢被迁移到其它场景，最被人们熟知的莫过于 React Native 了。为了灵活性和扩展性，React 的代码被分拆为 React 核心代码与各种 renderer。React 自带了 3 个 renderer，前两个是大家常见的：" />
-    <meta name="twitter:image" content="https://img20.360buyimg.com/uba/s300x300_jfs/t20215/257/718598224/50702/4b2501db/5b168cc4N1fc2ed0b.png" />
+react-test-renderer 在说 react-test-renderer 之前，让我们先聊聊什么是 renderer。React 最早是被用来开发网页的，所以早期的 React 库中还包含了大量和 DOM 相关的逻辑。后来 React 的设计思想慢慢被迁移到其它场景，最被人们熟知的莫过于 React Native 了。为了灵活性和扩展性，React 的代码被分拆为 React 核心代码与各种 renderer。React 自带了 3 个 renderer，前两个是大家常见的：">
+    <meta name="twitter:image" content="https://img20.360buyimg.com/uba/s300x300_jfs/t20215/257/718598224/50702/4b2501db/5b168cc4N1fc2ed0b.png">
   
 
   
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="利用 Jest 为 React 组件编写单元测试" />
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="利用 Jest 为 React 组件编写单元测试">
   <meta property="og:description" content="图片来自 https://blog.algolia.com   在上一篇文章中我们介绍了什么是单元测试以及单元测试框架 Jest 的基本用法。在本文中我们会具体聊聊如何用 Jest 为 React 组件编写单元测试。
 首先我们要明确的一点，那就是 React 组件的单元测试本质是也是单元测试。因此它也符合我们之前介绍过的单元测试的全部特点。唯一不同的地方在于 React 组件的单元测试中我们需要找到合适的方法对执行结果进行断言。换言之，我们要根据 React 的特点来设置代码是否正确执行的判断条件。
 那么 React 组件和其它的被测试对象有何不同呢？仔细想过，我们会发现：
  React 组件的 render 结果是一个组件树，并且整个树最终会被解析成一个纯粹由 HTML 元素构成的树形结构 React 组件可以拥有 state，且 state 的变化会影响 render 结果 React 组件可以拥有生命周期函数，这些生命周期函数会在特定时间点执行  知道了要测试的内容，接下来的问题就是如何执行一个 React 组件并编写断言了。如何执行一个 React 组件呢？看到这个问题估计大多数儿人是蒙的。平时不就是直接 ReactDOM.render 吗？不错，ReactDOM.render 确实可以执行一个 React 组件并将它渲染到页面中，但这种方式不利于编写测试代码。
 有没有更简单的方式呢？其实 React 已经帮我们提供好了工具，让我们一起来看看。
 React 提供的测试工具 在 React 的官方文档中提到了两个用于测试 React 组件的库。让我们分别介绍。
-react-test-renderer 在说 react-test-renderer 之前，让我们先聊聊什么是 renderer。React 最早是被用来开发网页的，所以早期的 React 库中还包含了大量和 DOM 相关的逻辑。后来 React 的设计思想慢慢被迁移到其它场景，最被人们熟知的莫过于 React Native 了。为了灵活性和扩展性，React 的代码被分拆为 React 核心代码与各种 renderer。React 自带了 3 个 renderer，前两个是大家常见的：" />
-  <meta property="og:url" content="https://loveky.github.io/2018/06/05/unit-testing-react-component-with-jest/" />
-  <meta property="og:image" content="https://img20.360buyimg.com/uba/s300x300_jfs/t20215/257/718598224/50702/4b2501db/5b168cc4N1fc2ed0b.png" />
+react-test-renderer 在说 react-test-renderer 之前，让我们先聊聊什么是 renderer。React 最早是被用来开发网页的，所以早期的 React 库中还包含了大量和 DOM 相关的逻辑。后来 React 的设计思想慢慢被迁移到其它场景，最被人们熟知的莫过于 React Native 了。为了灵活性和扩展性，React 的代码被分拆为 React 核心代码与各种 renderer。React 自带了 3 个 renderer，前两个是大家常见的：">
+  <meta property="og:url" content="https://loveky.github.io/2018/06/05/unit-testing-react-component-with-jest/">
+  <meta property="og:image" content="https://img20.360buyimg.com/uba/s300x300_jfs/t20215/257/718598224/50702/4b2501db/5b168cc4N1fc2ed0b.png">
 
 
 
 
-<meta name="generator" content="Hugo 0.52" />
+<meta name="generator" content="Hugo 0.52">
 
 
-<link rel="canonical" href="https://loveky.github.io/2018/06/05/unit-testing-react-component-with-jest/" />
-<link rel="alternative" href="https://loveky.github.io/index.xml" title="loveky的流水账" type="application/atom+xml" />
+<link rel="canonical" href="https://loveky.github.io/2018/06/05/unit-testing-react-component-with-jest/">
+
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no,email=no,adress=no">
+<meta http-equiv="Cache-Control" content="no-transform">
 
 
-<meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<meta name="format-detection" content="telephone=no,email=no,adress=no" />
-<meta http-equiv="Cache-Control" content="no-transform" />
-
-
-<meta name="robots" content="index,follow" />
-<meta name="referrer" content="origin-when-cross-origin" />
-
-
+<meta name="robots" content="index,follow">
+<meta name="referrer" content="origin-when-cross-origin">
 
 
 
 
 
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<meta name="apple-mobile-web-app-title" content="loveky的流水账" />
-<meta name="msapplication-tooltip" content="loveky的流水账" />
-<meta name='msapplication-navbutton-color' content="#5fbf5e" />
-<meta name="msapplication-TileColor" content="#5fbf5e" />
-<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
-<link rel="icon" href="https://loveky.github.io/img/favicon.ico" />
-<link rel="icon" sizes="192x192" href="https://loveky.github.io/img/touch-icon-android.png" />
-<link rel="apple-touch-icon" href="https://loveky.github.io/img/touch-icon-apple.png" />
-<link rel="mask-icon" href="https://loveky.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
 
 
+<meta name="theme-color" content="#02b875">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="loveky">
+<meta name="msapplication-tooltip" content="loveky">
+<meta name='msapplication-navbutton-color' content="#02b875">
+<meta name="msapplication-TileColor" content="#02b875">
+<meta name="msapplication-TileImage" content="/icons/icon-144x144.png">
+<link rel="icon" href="https://loveky.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://loveky.github.io/icons/icon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://loveky.github.io/icons/icon-32x32.png">
+<link rel="icon" sizes="192x192" href="https://loveky.github.io/icons/icon-192x192.png">
+<link rel="apple-touch-icon" href="https://loveky.github.io/icons/icon-152x152.png">
+<link rel="manifest" href="https://loveky.github.io/manifest.json">
 
-<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
 
-<link rel="stylesheet" href="https://loveky.github.io/css/bundle.css" />
+<link rel="preload" href="https://loveky.github.io/styles/main.min.css" as="style">
+<link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
+<link rel="preload" href="https://loveky.github.io/images/avatar.jpg" as="image">
+<link rel="preload" href="https://loveky.github.io/images/grey-prism.svg" as="image">
 
+
+<style>
+  body {
+    background: rgb(244, 243, 241) url('/images/grey-prism.svg') repeat fixed;
+  }
+</style>
+<link rel="stylesheet" href="https://loveky.github.io/styles/main.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114966753-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -105,46 +122,51 @@ react-test-renderer 在说 react-test-renderer 之前，让我们先聊聊什么
 </script>
 
 
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css">
+
+
+
   
-  <!--[if lt IE 9]>
-    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
-  <![endif]-->
+  
+<!--[if lte IE 8]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js"></script>
+<![endif]-->
 
-<!--[if lte IE 11]>
-    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
-  <![endif]-->
-
-
-<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
-
-
-<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+<!--[if lte IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js"></script>
+<![endif]-->
 
 
 </head>
   <body>
     
     <div class="suspension">
-      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
       
         
-        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        <a role="button" aria-label="Go to comments" title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment" aria-hidden="true"></span></a>
         
       
     </div>
     
     
   <header class="site-header">
-  <img class="avatar" src="https://loveky.github.io/img/avatar.jpg" alt="Avatar">
+  <img class="avatar" src="https://loveky.github.io/images/avatar.jpg" alt="Avatar">
   
-  <h2 class="title">loveky的流水账</h2>
+  <h2 class="title">loveky</h2>
   
-  <p class="subtitle"></p>
-  <button class="menu-toggle" type="button">
-    <span class="icon icon-menu"></span>
+  <p class="subtitle">记录生活点滴</p>
+  <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
+    <span class="icon icon-menu" aria-hidden="true"></span>
   </button>
+
   <nav class="site-menu collapsed">
     <h2 class="offscreen">Main Menu</h2>
     <ul class="menu-list">
@@ -153,105 +175,69 @@ react-test-renderer 在说 react-test-renderer 之前，让我们先聊聊什么
       
       
         <li class="menu-item
-            
-            
-            
-              is-active
-            ">
-            <a href="https://loveky.github.io/">首页</a>
-          </li>
+          
+          
+           is-active">
+          <a href="https://loveky.github.io/">首页</a>
+        </li>
       
         <li class="menu-item
-            
-            
-            ">
-            <a href="https://loveky.github.io/tags/">标签</a>
-          </li>
+          
+          
+          ">
+          <a href="https://loveky.github.io/tags/">标签</a>
+        </li>
       
         <li class="menu-item
-            
-            
-            ">
-            <a href="https://loveky.github.io/archive/">归档</a>
-          </li>
+          
+          
+          ">
+          <a href="https://loveky.github.io/archive/">归档</a>
+        </li>
       
         <li class="menu-item
-            
-            
-            ">
-            <a href="https://loveky.github.io/links/">链接</a>
-          </li>
+          
+          
+          ">
+          <a href="https://loveky.github.io/links/">链接</a>
+        </li>
       
         <li class="menu-item
-            
-            
-            ">
-            <a href="https://loveky.github.io/about/">关于我</a>
-          </li>
+          
+          
+          ">
+          <a href="https://loveky.github.io/about/">关于我</a>
+        </li>
       
     </ul>
   </nav>
   <nav class="social-menu collapsed">
     <h2 class="offscreen">Social Networks</h2>
-    <ul class="social-list">
-
-      
-      <li class="social-item">
-        <a href="mailto:eWx6Y3lseEBnbWFpbC5jb20=" title="Email"><span class="icon icon-email"></span></a>
-      </li>
-
-      
-      <li class="social-item">
-        <a href="//github.com/loveky" title="GitHub"><span class="icon icon-github"></span></a>
-      </li>
-
-      <li class="social-item">
-        <a href="//twitter.com/loveky_" title="Twitter"><span class="icon icon-twitter"></span></a>
-      </li>
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      <li class="social-item">
-        <a href="//www.zhihu.com/people/loveky" title="Zhihu"><span class="icon icon-zhihu"></span></a>
-      </li>
-
-      
-
-      
-
-      <li class="social-item">
-        <a href="https://loveky.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
-      </li>
-
-    </ul>
+    <ul class="social-list"><li class="social-item">
+          <a href="mailto:eWx6Y3lseEBnbWFpbC5jb20=" title="Email" aria-label="Email">
+            <span class="icon icon-email" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//github.com/loveky" title="GitHub" aria-label="GitHub">
+            <span class="icon icon-github" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//twitter.com/loveky_" title="Twitter" aria-label="Twitter">
+            <span class="icon icon-twitter" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//stackoverflow.com/users/1513552" title="stackOverflow"  aria-label="stackOverflow">
+            <span class="icon icon-stackoverflow" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//www.zhihu.com/people/loveky" title="Zhihu" aria-label="Zhihu">
+            <span class="icon icon-zhihu" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a rel="alternate" type="application/rss+xml" href="https://loveky.github.io/index.xml" title="RSS" aria-label="RSS">
+            <span class="icon icon-rss" aria-hidden="true"></span>
+          </a>
+        </li></ul>
   </nav>
 </header>
 
@@ -551,7 +537,7 @@ react-test-renderer 在说 react-test-renderer 之前，让我们先聊聊什么
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>212</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>213</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">
@@ -582,29 +568,62 @@ react-test-renderer 在说 react-test-renderer 之前，让我们先聊聊什么
       
     
   </section>
-  <footer class="site-footer">
-  <p>© 2017-2019 loveky的流水账</p>
-  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+<footer class="site-footer">
+  <p>© 2017-2019 loveky</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>
 
 
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js"></script>
 
-<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
 
 
-<script src="https://loveky.github.io/js/bundle.js"></script>
+<script async src="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js"></script>
 
+
+
+
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+
+
+<script src="https://loveky.github.io/scripts/index.min.js"></script>
 
 <script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?301a286a5bea7d926e284c27f79bd221";
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(hm, s);
-})();
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('\/service-worker.js').then(function() {
+      console.log('[ServiceWorker] Registered');
+    });
+  }
 </script>
+
+
+
+
+
 
 
 

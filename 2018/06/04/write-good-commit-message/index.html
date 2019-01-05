@@ -9,13 +9,21 @@
 
   
   
-
-
-
-
+  <link href="//cdn.jsdelivr.net" rel="dns-prefetch">
+  <link href="//cdnjs.cloudflare.com" rel="dns-prefetch">
+  <link href="//at.alicdn.com" rel="dns-prefetch">
+  <link href="//fonts.googleapis.com" rel="dns-prefetch">
+  <link href="//fonts.gstatic.com" rel="dns-prefetch">
+  <link href="///disqus.com" rel="dns-prefetch">
+  <link href="//c.disquscdn.com" rel="dns-prefetch">
+  
+  
+  
 
   
-  <meta name="author" content="loveky" />
+
+  
+  
   <meta name="description" content="今天来说说如何书写好的 commit message。
 Commit message 大家应该每天都在写，每次使用 Git 提交代码时，我们都会在执行 git commit 命令时附带上一句话来简要描述此次提交的改动。
 Commit message 看似简单，作用却很重要。在阅读代码时，可以通过 commit message 了解到作者编写某行代码时的背景；调查 bug 时可以通过搜索 commit message 快速定位相关的提交记录。
@@ -23,13 +31,13 @@ Commit message 看似简单，作用却很重要。在阅读代码时，可以�
 开源社区已经为我们总结出了一套名为 Conventional Commits 的书写规范。很多流行的开源项目都使用了这套规范，如 Karma，Angular 等。其规定的格式如下：
 &amp;lt;type&amp;gt;[optional scope]: &amp;lt;description&amp;gt; [optional body] [optional footer]  下面我们分别来介绍一下其中的各个组成部分：
 type ：用于表明我们这次提交的改动类型，是新增了功能？还是修改了测试代码？又或者是更新了文档？开源社区目前总结出了以下 11 种类型：
- build：主要目的是修改项目构建系统(例如 glup，webpack，rollup 的配置等)的提交 ci：主要目的是修改项目继续集成流程(例如 Travis，Jenkins，GitLab CI，Circle等)的提交 docs：文档更新 feat：新增功能 fix：bug 修复 perf：性能优化 refactor：重构代码(既没有新增功能，也没有修复 bug) style：不影响程序逻辑的代码修改(修改空白字符，补全缺失的分号等) test：新增测试用例或是更新现有测试 revert：回滚某个更早之前的提交 chore：不属于以上类型的其他类型  optional scope：一个可选的修改范围。用于标识此次提交主要涉及到代码中哪个模块。根据项目实际情况填写即可，最好在项目中规定好模块列表，保持一致性。" />
+ build：主要目的是修改项目构建系统(例如 glup，webpack，rollup 的配置等)的提交 ci：主要目的是修改项目继续集成流程(例如 Travis，Jenkins，GitLab CI，Circle等)的提交 docs：文档更新 feat：新增功能 fix：bug 修复 perf：性能优化 refactor：重构代码(既没有新增功能，也没有修复 bug) style：不影响程序逻辑的代码修改(修改空白字符，补全缺失的分号等) test：新增测试用例或是更新现有测试 revert：回滚某个更早之前的提交 chore：不属于以上类型的其他类型  optional scope：一个可选的修改范围。用于标识此次提交主要涉及到代码中哪个模块。根据项目实际情况填写即可，最好在项目中规定好模块列表，保持一致性。">
 
   
   
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@loveky_" />
-    <meta name="twitter:title" content="书写良好的 commit message" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@loveky_">
+    <meta name="twitter:title" content="书写良好的 commit message">
     <meta name="twitter:description" content="今天来说说如何书写好的 commit message。
 Commit message 大家应该每天都在写，每次使用 Git 提交代码时，我们都会在执行 git commit 命令时附带上一句话来简要描述此次提交的改动。
 Commit message 看似简单，作用却很重要。在阅读代码时，可以通过 commit message 了解到作者编写某行代码时的背景；调查 bug 时可以通过搜索 commit message 快速定位相关的提交记录。
@@ -37,13 +45,13 @@ Commit message 看似简单，作用却很重要。在阅读代码时，可以�
 开源社区已经为我们总结出了一套名为 Conventional Commits 的书写规范。很多流行的开源项目都使用了这套规范，如 Karma，Angular 等。其规定的格式如下：
 &amp;lt;type&amp;gt;[optional scope]: &amp;lt;description&amp;gt; [optional body] [optional footer]  下面我们分别来介绍一下其中的各个组成部分：
 type ：用于表明我们这次提交的改动类型，是新增了功能？还是修改了测试代码？又或者是更新了文档？开源社区目前总结出了以下 11 种类型：
- build：主要目的是修改项目构建系统(例如 glup，webpack，rollup 的配置等)的提交 ci：主要目的是修改项目继续集成流程(例如 Travis，Jenkins，GitLab CI，Circle等)的提交 docs：文档更新 feat：新增功能 fix：bug 修复 perf：性能优化 refactor：重构代码(既没有新增功能，也没有修复 bug) style：不影响程序逻辑的代码修改(修改空白字符，补全缺失的分号等) test：新增测试用例或是更新现有测试 revert：回滚某个更早之前的提交 chore：不属于以上类型的其他类型  optional scope：一个可选的修改范围。用于标识此次提交主要涉及到代码中哪个模块。根据项目实际情况填写即可，最好在项目中规定好模块列表，保持一致性。" />
-    <meta name="twitter:image" content="https://loveky.github.io/img/avatar.jpg" />
+ build：主要目的是修改项目构建系统(例如 glup，webpack，rollup 的配置等)的提交 ci：主要目的是修改项目继续集成流程(例如 Travis，Jenkins，GitLab CI，Circle等)的提交 docs：文档更新 feat：新增功能 fix：bug 修复 perf：性能优化 refactor：重构代码(既没有新增功能，也没有修复 bug) style：不影响程序逻辑的代码修改(修改空白字符，补全缺失的分号等) test：新增测试用例或是更新现有测试 revert：回滚某个更早之前的提交 chore：不属于以上类型的其他类型  optional scope：一个可选的修改范围。用于标识此次提交主要涉及到代码中哪个模块。根据项目实际情况填写即可，最好在项目中规定好模块列表，保持一致性。">
+    <meta name="twitter:image" content="/images/avatar.jpg">
   
 
   
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="书写良好的 commit message" />
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="书写良好的 commit message">
   <meta property="og:description" content="今天来说说如何书写好的 commit message。
 Commit message 大家应该每天都在写，每次使用 Git 提交代码时，我们都会在执行 git commit 命令时附带上一句话来简要描述此次提交的改动。
 Commit message 看似简单，作用却很重要。在阅读代码时，可以通过 commit message 了解到作者编写某行代码时的背景；调查 bug 时可以通过搜索 commit message 快速定位相关的提交记录。
@@ -51,53 +59,62 @@ Commit message 看似简单，作用却很重要。在阅读代码时，可以�
 开源社区已经为我们总结出了一套名为 Conventional Commits 的书写规范。很多流行的开源项目都使用了这套规范，如 Karma，Angular 等。其规定的格式如下：
 &amp;lt;type&amp;gt;[optional scope]: &amp;lt;description&amp;gt; [optional body] [optional footer]  下面我们分别来介绍一下其中的各个组成部分：
 type ：用于表明我们这次提交的改动类型，是新增了功能？还是修改了测试代码？又或者是更新了文档？开源社区目前总结出了以下 11 种类型：
- build：主要目的是修改项目构建系统(例如 glup，webpack，rollup 的配置等)的提交 ci：主要目的是修改项目继续集成流程(例如 Travis，Jenkins，GitLab CI，Circle等)的提交 docs：文档更新 feat：新增功能 fix：bug 修复 perf：性能优化 refactor：重构代码(既没有新增功能，也没有修复 bug) style：不影响程序逻辑的代码修改(修改空白字符，补全缺失的分号等) test：新增测试用例或是更新现有测试 revert：回滚某个更早之前的提交 chore：不属于以上类型的其他类型  optional scope：一个可选的修改范围。用于标识此次提交主要涉及到代码中哪个模块。根据项目实际情况填写即可，最好在项目中规定好模块列表，保持一致性。" />
-  <meta property="og:url" content="https://loveky.github.io/2018/06/04/write-good-commit-message/" />
-  <meta property="og:image" content="https://loveky.github.io/img/avatar.jpg" />
+ build：主要目的是修改项目构建系统(例如 glup，webpack，rollup 的配置等)的提交 ci：主要目的是修改项目继续集成流程(例如 Travis，Jenkins，GitLab CI，Circle等)的提交 docs：文档更新 feat：新增功能 fix：bug 修复 perf：性能优化 refactor：重构代码(既没有新增功能，也没有修复 bug) style：不影响程序逻辑的代码修改(修改空白字符，补全缺失的分号等) test：新增测试用例或是更新现有测试 revert：回滚某个更早之前的提交 chore：不属于以上类型的其他类型  optional scope：一个可选的修改范围。用于标识此次提交主要涉及到代码中哪个模块。根据项目实际情况填写即可，最好在项目中规定好模块列表，保持一致性。">
+  <meta property="og:url" content="https://loveky.github.io/2018/06/04/write-good-commit-message/">
+  <meta property="og:image" content="/images/avatar.jpg">
 
 
 
 
-<meta name="generator" content="Hugo 0.52" />
+<meta name="generator" content="Hugo 0.52">
 
 
-<link rel="canonical" href="https://loveky.github.io/2018/06/04/write-good-commit-message/" />
-<link rel="alternative" href="https://loveky.github.io/index.xml" title="loveky的流水账" type="application/atom+xml" />
+<link rel="canonical" href="https://loveky.github.io/2018/06/04/write-good-commit-message/">
+
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no,email=no,adress=no">
+<meta http-equiv="Cache-Control" content="no-transform">
 
 
-<meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<meta name="format-detection" content="telephone=no,email=no,adress=no" />
-<meta http-equiv="Cache-Control" content="no-transform" />
-
-
-<meta name="robots" content="index,follow" />
-<meta name="referrer" content="origin-when-cross-origin" />
-
-
+<meta name="robots" content="index,follow">
+<meta name="referrer" content="origin-when-cross-origin">
 
 
 
 
 
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<meta name="apple-mobile-web-app-title" content="loveky的流水账" />
-<meta name="msapplication-tooltip" content="loveky的流水账" />
-<meta name='msapplication-navbutton-color' content="#5fbf5e" />
-<meta name="msapplication-TileColor" content="#5fbf5e" />
-<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
-<link rel="icon" href="https://loveky.github.io/img/favicon.ico" />
-<link rel="icon" sizes="192x192" href="https://loveky.github.io/img/touch-icon-android.png" />
-<link rel="apple-touch-icon" href="https://loveky.github.io/img/touch-icon-apple.png" />
-<link rel="mask-icon" href="https://loveky.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
 
 
+<meta name="theme-color" content="#02b875">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="loveky">
+<meta name="msapplication-tooltip" content="loveky">
+<meta name='msapplication-navbutton-color' content="#02b875">
+<meta name="msapplication-TileColor" content="#02b875">
+<meta name="msapplication-TileImage" content="/icons/icon-144x144.png">
+<link rel="icon" href="https://loveky.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://loveky.github.io/icons/icon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://loveky.github.io/icons/icon-32x32.png">
+<link rel="icon" sizes="192x192" href="https://loveky.github.io/icons/icon-192x192.png">
+<link rel="apple-touch-icon" href="https://loveky.github.io/icons/icon-152x152.png">
+<link rel="manifest" href="https://loveky.github.io/manifest.json">
 
-<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
 
-<link rel="stylesheet" href="https://loveky.github.io/css/bundle.css" />
+<link rel="preload" href="https://loveky.github.io/styles/main.min.css" as="style">
+<link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
+<link rel="preload" href="https://loveky.github.io/images/avatar.jpg" as="image">
+<link rel="preload" href="https://loveky.github.io/images/grey-prism.svg" as="image">
 
+
+<style>
+  body {
+    background: rgb(244, 243, 241) url('/images/grey-prism.svg') repeat fixed;
+  }
+</style>
+<link rel="stylesheet" href="https://loveky.github.io/styles/main.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114966753-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -108,46 +125,51 @@ type ：用于表明我们这次提交的改动类型，是新增了功能？还
 </script>
 
 
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css">
+
+
+
   
-  <!--[if lt IE 9]>
-    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
-  <![endif]-->
+  
+<!--[if lte IE 8]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js"></script>
+<![endif]-->
 
-<!--[if lte IE 11]>
-    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
-  <![endif]-->
-
-
-<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
-
-
-<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+<!--[if lte IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js"></script>
+<![endif]-->
 
 
 </head>
   <body>
     
     <div class="suspension">
-      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
       
         
-        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        <a role="button" aria-label="Go to comments" title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment" aria-hidden="true"></span></a>
         
       
     </div>
     
     
   <header class="site-header">
-  <img class="avatar" src="https://loveky.github.io/img/avatar.jpg" alt="Avatar">
+  <img class="avatar" src="https://loveky.github.io/images/avatar.jpg" alt="Avatar">
   
-  <h2 class="title">loveky的流水账</h2>
+  <h2 class="title">loveky</h2>
   
-  <p class="subtitle"></p>
-  <button class="menu-toggle" type="button">
-    <span class="icon icon-menu"></span>
+  <p class="subtitle">记录生活点滴</p>
+  <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
+    <span class="icon icon-menu" aria-hidden="true"></span>
   </button>
+
   <nav class="site-menu collapsed">
     <h2 class="offscreen">Main Menu</h2>
     <ul class="menu-list">
@@ -156,105 +178,69 @@ type ：用于表明我们这次提交的改动类型，是新增了功能？还
       
       
         <li class="menu-item
-            
-            
-            
-              is-active
-            ">
-            <a href="https://loveky.github.io/">首页</a>
-          </li>
+          
+          
+           is-active">
+          <a href="https://loveky.github.io/">首页</a>
+        </li>
       
         <li class="menu-item
-            
-            
-            ">
-            <a href="https://loveky.github.io/tags/">标签</a>
-          </li>
+          
+          
+          ">
+          <a href="https://loveky.github.io/tags/">标签</a>
+        </li>
       
         <li class="menu-item
-            
-            
-            ">
-            <a href="https://loveky.github.io/archive/">归档</a>
-          </li>
+          
+          
+          ">
+          <a href="https://loveky.github.io/archive/">归档</a>
+        </li>
       
         <li class="menu-item
-            
-            
-            ">
-            <a href="https://loveky.github.io/links/">链接</a>
-          </li>
+          
+          
+          ">
+          <a href="https://loveky.github.io/links/">链接</a>
+        </li>
       
         <li class="menu-item
-            
-            
-            ">
-            <a href="https://loveky.github.io/about/">关于我</a>
-          </li>
+          
+          
+          ">
+          <a href="https://loveky.github.io/about/">关于我</a>
+        </li>
       
     </ul>
   </nav>
   <nav class="social-menu collapsed">
     <h2 class="offscreen">Social Networks</h2>
-    <ul class="social-list">
-
-      
-      <li class="social-item">
-        <a href="mailto:eWx6Y3lseEBnbWFpbC5jb20=" title="Email"><span class="icon icon-email"></span></a>
-      </li>
-
-      
-      <li class="social-item">
-        <a href="//github.com/loveky" title="GitHub"><span class="icon icon-github"></span></a>
-      </li>
-
-      <li class="social-item">
-        <a href="//twitter.com/loveky_" title="Twitter"><span class="icon icon-twitter"></span></a>
-      </li>
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      <li class="social-item">
-        <a href="//www.zhihu.com/people/loveky" title="Zhihu"><span class="icon icon-zhihu"></span></a>
-      </li>
-
-      
-
-      
-
-      <li class="social-item">
-        <a href="https://loveky.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
-      </li>
-
-    </ul>
+    <ul class="social-list"><li class="social-item">
+          <a href="mailto:eWx6Y3lseEBnbWFpbC5jb20=" title="Email" aria-label="Email">
+            <span class="icon icon-email" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//github.com/loveky" title="GitHub" aria-label="GitHub">
+            <span class="icon icon-github" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//twitter.com/loveky_" title="Twitter" aria-label="Twitter">
+            <span class="icon icon-twitter" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//stackoverflow.com/users/1513552" title="stackOverflow"  aria-label="stackOverflow">
+            <span class="icon icon-stackoverflow" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//www.zhihu.com/people/loveky" title="Zhihu" aria-label="Zhihu">
+            <span class="icon icon-zhihu" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a rel="alternate" type="application/rss+xml" href="https://loveky.github.io/index.xml" title="RSS" aria-label="RSS">
+            <span class="icon icon-rss" aria-hidden="true"></span>
+          </a>
+        </li></ul>
   </nav>
 </header>
 
@@ -364,7 +350,7 @@ type ：用于表明我们这次提交的改动类型，是新增了功能？还
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>213</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>214</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">
@@ -395,29 +381,62 @@ type ：用于表明我们这次提交的改动类型，是新增了功能？还
       
     
   </section>
-  <footer class="site-footer">
-  <p>© 2017-2019 loveky的流水账</p>
-  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+<footer class="site-footer">
+  <p>© 2017-2019 loveky</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>
 
 
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js"></script>
 
-<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
 
 
-<script src="https://loveky.github.io/js/bundle.js"></script>
+<script async src="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js"></script>
 
+
+
+
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+
+
+<script src="https://loveky.github.io/scripts/index.min.js"></script>
 
 <script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?301a286a5bea7d926e284c27f79bd221";
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(hm, s);
-})();
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('\/service-worker.js').then(function() {
+      console.log('[ServiceWorker] Registered');
+    });
+  }
 </script>
+
+
+
+
+
 
 
 

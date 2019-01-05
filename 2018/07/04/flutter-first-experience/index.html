@@ -9,13 +9,21 @@
 
   
   
-
-
-
-
+  <link href="//cdn.jsdelivr.net" rel="dns-prefetch">
+  <link href="//cdnjs.cloudflare.com" rel="dns-prefetch">
+  <link href="//at.alicdn.com" rel="dns-prefetch">
+  <link href="//fonts.googleapis.com" rel="dns-prefetch">
+  <link href="//fonts.gstatic.com" rel="dns-prefetch">
+  <link href="///disqus.com" rel="dns-prefetch">
+  <link href="//c.disquscdn.com" rel="dns-prefetch">
+  
+  
+  
 
   
-  <meta name="author" content="loveky" />
+
+  
+  
   <meta name="description" content="初识 Flutter 还是在上个月的 GMTC 大会上。来自 Google 的工程师现场演示了如何使用 Flutter 构建美观、高性能的移动应用。个人对其中一些特性，比如良好的开发者体验、优秀的跨平台能力很感兴趣。于是决定在会后亲自体验一下。
 最近几天尝试使用 Flutter 把京东 APP 中的排行榜频道的首屏布局实现了一下，算是对基于 Flutter 的开发有了一个最简单的了解，特地记录一下，方便其他想了解、尝试 Flutter 框架的小伙伴。
 首先看看我实现了一个什么样的界面：
@@ -25,13 +33,13 @@ Flutter 开发环境搭建 安装 Flutter 不同平台的安装流程基本一�
 export PATH=~/Software/flutter/bin:$PATH 提示：记得把这行代码放到你的 shell 启动脚本中，避免每次都要手动执行。
 路径添加完成后就可以执行 flutter 命令啦。 Flutter 提供了一个 flutter doctor 命令协助我们安装 Flutter 的依赖。它会检查本地是否有 iOS 和 Android 的开发环境。如果检测到依赖缺失，它还会给出对应依赖的安装方法。你只需要不断执行该方法，然后安装缺失的依赖，直到全部依赖安装完成即可。
 配置代码编辑器 主要是给 IDE 安装相关插件。
-VS Code 上只需要安装 flutter 扩展即可。 Android Studio 上需要安装 flutter 和 dart 两个插件。" />
+VS Code 上只需要安装 flutter 扩展即可。 Android Studio 上需要安装 flutter 和 dart 两个插件。">
 
   
   
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@loveky_" />
-    <meta name="twitter:title" content="Flutter 初体验" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@loveky_">
+    <meta name="twitter:title" content="Flutter 初体验">
     <meta name="twitter:description" content="初识 Flutter 还是在上个月的 GMTC 大会上。来自 Google 的工程师现场演示了如何使用 Flutter 构建美观、高性能的移动应用。个人对其中一些特性，比如良好的开发者体验、优秀的跨平台能力很感兴趣。于是决定在会后亲自体验一下。
 最近几天尝试使用 Flutter 把京东 APP 中的排行榜频道的首屏布局实现了一下，算是对基于 Flutter 的开发有了一个最简单的了解，特地记录一下，方便其他想了解、尝试 Flutter 框架的小伙伴。
 首先看看我实现了一个什么样的界面：
@@ -41,13 +49,13 @@ Flutter 开发环境搭建 安装 Flutter 不同平台的安装流程基本一�
 export PATH=~/Software/flutter/bin:$PATH 提示：记得把这行代码放到你的 shell 启动脚本中，避免每次都要手动执行。
 路径添加完成后就可以执行 flutter 命令啦。 Flutter 提供了一个 flutter doctor 命令协助我们安装 Flutter 的依赖。它会检查本地是否有 iOS 和 Android 的开发环境。如果检测到依赖缺失，它还会给出对应依赖的安装方法。你只需要不断执行该方法，然后安装缺失的依赖，直到全部依赖安装完成即可。
 配置代码编辑器 主要是给 IDE 安装相关插件。
-VS Code 上只需要安装 flutter 扩展即可。 Android Studio 上需要安装 flutter 和 dart 两个插件。" />
-    <meta name="twitter:image" content="https://img12.360buyimg.com/uba/s300x300_jfs/t22333/316/1892258469/68208/66d017fd/5b3ce1e8N69717104.png" />
+VS Code 上只需要安装 flutter 扩展即可。 Android Studio 上需要安装 flutter 和 dart 两个插件。">
+    <meta name="twitter:image" content="https://img12.360buyimg.com/uba/s300x300_jfs/t22333/316/1892258469/68208/66d017fd/5b3ce1e8N69717104.png">
   
 
   
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="Flutter 初体验" />
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Flutter 初体验">
   <meta property="og:description" content="初识 Flutter 还是在上个月的 GMTC 大会上。来自 Google 的工程师现场演示了如何使用 Flutter 构建美观、高性能的移动应用。个人对其中一些特性，比如良好的开发者体验、优秀的跨平台能力很感兴趣。于是决定在会后亲自体验一下。
 最近几天尝试使用 Flutter 把京东 APP 中的排行榜频道的首屏布局实现了一下，算是对基于 Flutter 的开发有了一个最简单的了解，特地记录一下，方便其他想了解、尝试 Flutter 框架的小伙伴。
 首先看看我实现了一个什么样的界面：
@@ -57,53 +65,62 @@ Flutter 开发环境搭建 安装 Flutter 不同平台的安装流程基本一�
 export PATH=~/Software/flutter/bin:$PATH 提示：记得把这行代码放到你的 shell 启动脚本中，避免每次都要手动执行。
 路径添加完成后就可以执行 flutter 命令啦。 Flutter 提供了一个 flutter doctor 命令协助我们安装 Flutter 的依赖。它会检查本地是否有 iOS 和 Android 的开发环境。如果检测到依赖缺失，它还会给出对应依赖的安装方法。你只需要不断执行该方法，然后安装缺失的依赖，直到全部依赖安装完成即可。
 配置代码编辑器 主要是给 IDE 安装相关插件。
-VS Code 上只需要安装 flutter 扩展即可。 Android Studio 上需要安装 flutter 和 dart 两个插件。" />
-  <meta property="og:url" content="https://loveky.github.io/2018/07/04/flutter-first-experience/" />
-  <meta property="og:image" content="https://img12.360buyimg.com/uba/s300x300_jfs/t22333/316/1892258469/68208/66d017fd/5b3ce1e8N69717104.png" />
+VS Code 上只需要安装 flutter 扩展即可。 Android Studio 上需要安装 flutter 和 dart 两个插件。">
+  <meta property="og:url" content="https://loveky.github.io/2018/07/04/flutter-first-experience/">
+  <meta property="og:image" content="https://img12.360buyimg.com/uba/s300x300_jfs/t22333/316/1892258469/68208/66d017fd/5b3ce1e8N69717104.png">
 
 
 
 
-<meta name="generator" content="Hugo 0.52" />
+<meta name="generator" content="Hugo 0.52">
 
 
-<link rel="canonical" href="https://loveky.github.io/2018/07/04/flutter-first-experience/" />
-<link rel="alternative" href="https://loveky.github.io/index.xml" title="loveky的流水账" type="application/atom+xml" />
+<link rel="canonical" href="https://loveky.github.io/2018/07/04/flutter-first-experience/">
+
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no,email=no,adress=no">
+<meta http-equiv="Cache-Control" content="no-transform">
 
 
-<meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<meta name="format-detection" content="telephone=no,email=no,adress=no" />
-<meta http-equiv="Cache-Control" content="no-transform" />
-
-
-<meta name="robots" content="index,follow" />
-<meta name="referrer" content="origin-when-cross-origin" />
-
-
+<meta name="robots" content="index,follow">
+<meta name="referrer" content="origin-when-cross-origin">
 
 
 
 
 
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<meta name="apple-mobile-web-app-title" content="loveky的流水账" />
-<meta name="msapplication-tooltip" content="loveky的流水账" />
-<meta name='msapplication-navbutton-color' content="#5fbf5e" />
-<meta name="msapplication-TileColor" content="#5fbf5e" />
-<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
-<link rel="icon" href="https://loveky.github.io/img/favicon.ico" />
-<link rel="icon" sizes="192x192" href="https://loveky.github.io/img/touch-icon-android.png" />
-<link rel="apple-touch-icon" href="https://loveky.github.io/img/touch-icon-apple.png" />
-<link rel="mask-icon" href="https://loveky.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
 
 
+<meta name="theme-color" content="#02b875">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="loveky">
+<meta name="msapplication-tooltip" content="loveky">
+<meta name='msapplication-navbutton-color' content="#02b875">
+<meta name="msapplication-TileColor" content="#02b875">
+<meta name="msapplication-TileImage" content="/icons/icon-144x144.png">
+<link rel="icon" href="https://loveky.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://loveky.github.io/icons/icon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://loveky.github.io/icons/icon-32x32.png">
+<link rel="icon" sizes="192x192" href="https://loveky.github.io/icons/icon-192x192.png">
+<link rel="apple-touch-icon" href="https://loveky.github.io/icons/icon-152x152.png">
+<link rel="manifest" href="https://loveky.github.io/manifest.json">
 
-<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
 
-<link rel="stylesheet" href="https://loveky.github.io/css/bundle.css" />
+<link rel="preload" href="https://loveky.github.io/styles/main.min.css" as="style">
+<link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
+<link rel="preload" href="https://loveky.github.io/images/avatar.jpg" as="image">
+<link rel="preload" href="https://loveky.github.io/images/grey-prism.svg" as="image">
 
+
+<style>
+  body {
+    background: rgb(244, 243, 241) url('/images/grey-prism.svg') repeat fixed;
+  }
+</style>
+<link rel="stylesheet" href="https://loveky.github.io/styles/main.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114966753-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -114,46 +131,51 @@ VS Code 上只需要安装 flutter 扩展即可。 Android Studio 上需要安�
 </script>
 
 
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css">
+
+
+
   
-  <!--[if lt IE 9]>
-    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
-  <![endif]-->
+  
+<!--[if lte IE 8]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js"></script>
+<![endif]-->
 
-<!--[if lte IE 11]>
-    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
-  <![endif]-->
-
-
-<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
-
-
-<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+<!--[if lte IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js"></script>
+<![endif]-->
 
 
 </head>
   <body>
     
     <div class="suspension">
-      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
       
         
-        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        <a role="button" aria-label="Go to comments" title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment" aria-hidden="true"></span></a>
         
       
     </div>
     
     
   <header class="site-header">
-  <img class="avatar" src="https://loveky.github.io/img/avatar.jpg" alt="Avatar">
+  <img class="avatar" src="https://loveky.github.io/images/avatar.jpg" alt="Avatar">
   
-  <h2 class="title">loveky的流水账</h2>
+  <h2 class="title">loveky</h2>
   
-  <p class="subtitle"></p>
-  <button class="menu-toggle" type="button">
-    <span class="icon icon-menu"></span>
+  <p class="subtitle">记录生活点滴</p>
+  <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
+    <span class="icon icon-menu" aria-hidden="true"></span>
   </button>
+
   <nav class="site-menu collapsed">
     <h2 class="offscreen">Main Menu</h2>
     <ul class="menu-list">
@@ -162,105 +184,69 @@ VS Code 上只需要安装 flutter 扩展即可。 Android Studio 上需要安�
       
       
         <li class="menu-item
-            
-            
-            
-              is-active
-            ">
-            <a href="https://loveky.github.io/">首页</a>
-          </li>
+          
+          
+           is-active">
+          <a href="https://loveky.github.io/">首页</a>
+        </li>
       
         <li class="menu-item
-            
-            
-            ">
-            <a href="https://loveky.github.io/tags/">标签</a>
-          </li>
+          
+          
+          ">
+          <a href="https://loveky.github.io/tags/">标签</a>
+        </li>
       
         <li class="menu-item
-            
-            
-            ">
-            <a href="https://loveky.github.io/archive/">归档</a>
-          </li>
+          
+          
+          ">
+          <a href="https://loveky.github.io/archive/">归档</a>
+        </li>
       
         <li class="menu-item
-            
-            
-            ">
-            <a href="https://loveky.github.io/links/">链接</a>
-          </li>
+          
+          
+          ">
+          <a href="https://loveky.github.io/links/">链接</a>
+        </li>
       
         <li class="menu-item
-            
-            
-            ">
-            <a href="https://loveky.github.io/about/">关于我</a>
-          </li>
+          
+          
+          ">
+          <a href="https://loveky.github.io/about/">关于我</a>
+        </li>
       
     </ul>
   </nav>
   <nav class="social-menu collapsed">
     <h2 class="offscreen">Social Networks</h2>
-    <ul class="social-list">
-
-      
-      <li class="social-item">
-        <a href="mailto:eWx6Y3lseEBnbWFpbC5jb20=" title="Email"><span class="icon icon-email"></span></a>
-      </li>
-
-      
-      <li class="social-item">
-        <a href="//github.com/loveky" title="GitHub"><span class="icon icon-github"></span></a>
-      </li>
-
-      <li class="social-item">
-        <a href="//twitter.com/loveky_" title="Twitter"><span class="icon icon-twitter"></span></a>
-      </li>
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      <li class="social-item">
-        <a href="//www.zhihu.com/people/loveky" title="Zhihu"><span class="icon icon-zhihu"></span></a>
-      </li>
-
-      
-
-      
-
-      <li class="social-item">
-        <a href="https://loveky.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
-      </li>
-
-    </ul>
+    <ul class="social-list"><li class="social-item">
+          <a href="mailto:eWx6Y3lseEBnbWFpbC5jb20=" title="Email" aria-label="Email">
+            <span class="icon icon-email" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//github.com/loveky" title="GitHub" aria-label="GitHub">
+            <span class="icon icon-github" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//twitter.com/loveky_" title="Twitter" aria-label="Twitter">
+            <span class="icon icon-twitter" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//stackoverflow.com/users/1513552" title="stackOverflow"  aria-label="stackOverflow">
+            <span class="icon icon-stackoverflow" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//www.zhihu.com/people/loveky" title="Zhihu" aria-label="Zhihu">
+            <span class="icon icon-zhihu" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a rel="alternate" type="application/rss+xml" href="https://loveky.github.io/index.xml" title="RSS" aria-label="RSS">
+            <span class="icon icon-rss" aria-hidden="true"></span>
+          </a>
+        </li></ul>
   </nav>
 </header>
 
@@ -462,7 +448,7 @@ export FLUTTER_STORAGE_BASE_URL<span style="color:#f92672">=</span>https://stora
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>183</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>184</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">
@@ -493,29 +479,62 @@ export FLUTTER_STORAGE_BASE_URL<span style="color:#f92672">=</span>https://stora
       
     
   </section>
-  <footer class="site-footer">
-  <p>© 2017-2019 loveky的流水账</p>
-  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+<footer class="site-footer">
+  <p>© 2017-2019 loveky</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>
 
 
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js"></script>
 
-<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
 
 
-<script src="https://loveky.github.io/js/bundle.js"></script>
+<script async src="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js"></script>
 
+
+
+
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+
+
+<script src="https://loveky.github.io/scripts/index.min.js"></script>
 
 <script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?301a286a5bea7d926e284c27f79bd221";
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(hm, s);
-})();
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('\/service-worker.js').then(function() {
+      console.log('[ServiceWorker] Registered');
+    });
+  }
 </script>
+
+
+
+
+
 
 
 
