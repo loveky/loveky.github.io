@@ -24,57 +24,33 @@
 
   
   
-  <meta name="description" content="刚开始学习AngularJS Directive时，总是不太能搞明白compile和link两个属性的含义和区别。最近写的多一些，读的资料也多了一些，渐渐有了一些理解，简单记录下来：
-compile属性是一个函数。该函数会针对每一个directive的实例执行一次，在compile阶段：
- 不能访问scope
- 元素还没有被插入document
- 可以修改template，最终结果会被angular缓存
-  link属性可以有两种配置方式。 link属性可以被设置为一个对象，包含pre, post两个属性，分别对应一个函数(preLink, postLink)。preList，postLink的区别在于执行顺序。preLink是自顶向下的，先父节点，后子节点，postLink正好相反。
-.directive{ return { link: { pre: function preLink(){ ... }, post: function postLink() { ... } } } }  link属性也可以被直接设置为一个函数，则默认相当于设置了postLink函数。
-.directive{ return { link: function link(){ ... } } }  等于
-.directive{ return { link: { post: function post() { ... } } } }  由此可见，如果直接将link属性设置为一个函数，则link阶段的执行顺序是自底向上的。
-link阶段会针对每一个被RENDERED的directive实例执行一次。此阶段：
- 可以访问scope(因为controller已经初始化完成)
- 元素已经被插入document中
- 不可以修改template(angular会直接使用之前缓存的内容)">
+  <meta name="description" content="刚开始学习 AngularJS Directive 时，总是不太能搞明白 compile 和 link 两个属性的含义和区别。最近写的多一些，读的资料也多了一些，渐渐有了一些理解，简单记录下来：
+compile 属性是一个函数。该函数会针对每一个 directive 的实例执行一次，在 compile 阶段：
+ 不能访问 scope 元素还没有被插入 document 可以修改 template，最终结果会被 angular 缓存  link 属性可以有两种配置方式。 link 属性可以被设置为一个对象，包含 pre, post 两个属性，分别对应一个函数(preLink, postLink)。preList，postLink 的区别在于执行顺序。preLink 是自顶向下的，先父节点，后子节点，postLink 正好相反。
+.directive{ return { link: { pre: function preLink(){ ... }, post: function postLink() { ... } } } }  link 属性也可以被直接设置为一个函数，则默认相当于设置了 postLink 函数。
+.directive{ return { link: function link(){ ... } } }  等于">
 
   
   
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@loveky_">
     <meta name="twitter:title" content="AngularJS Directive之compile与link">
-    <meta name="twitter:description" content="刚开始学习AngularJS Directive时，总是不太能搞明白compile和link两个属性的含义和区别。最近写的多一些，读的资料也多了一些，渐渐有了一些理解，简单记录下来：
-compile属性是一个函数。该函数会针对每一个directive的实例执行一次，在compile阶段：
- 不能访问scope
- 元素还没有被插入document
- 可以修改template，最终结果会被angular缓存
-  link属性可以有两种配置方式。 link属性可以被设置为一个对象，包含pre, post两个属性，分别对应一个函数(preLink, postLink)。preList，postLink的区别在于执行顺序。preLink是自顶向下的，先父节点，后子节点，postLink正好相反。
-.directive{ return { link: { pre: function preLink(){ ... }, post: function postLink() { ... } } } }  link属性也可以被直接设置为一个函数，则默认相当于设置了postLink函数。
-.directive{ return { link: function link(){ ... } } }  等于
-.directive{ return { link: { post: function post() { ... } } } }  由此可见，如果直接将link属性设置为一个函数，则link阶段的执行顺序是自底向上的。
-link阶段会针对每一个被RENDERED的directive实例执行一次。此阶段：
- 可以访问scope(因为controller已经初始化完成)
- 元素已经被插入document中
- 不可以修改template(angular会直接使用之前缓存的内容)">
+    <meta name="twitter:description" content="刚开始学习 AngularJS Directive 时，总是不太能搞明白 compile 和 link 两个属性的含义和区别。最近写的多一些，读的资料也多了一些，渐渐有了一些理解，简单记录下来：
+compile 属性是一个函数。该函数会针对每一个 directive 的实例执行一次，在 compile 阶段：
+ 不能访问 scope 元素还没有被插入 document 可以修改 template，最终结果会被 angular 缓存  link 属性可以有两种配置方式。 link 属性可以被设置为一个对象，包含 pre, post 两个属性，分别对应一个函数(preLink, postLink)。preList，postLink 的区别在于执行顺序。preLink 是自顶向下的，先父节点，后子节点，postLink 正好相反。
+.directive{ return { link: { pre: function preLink(){ ... }, post: function postLink() { ... } } } }  link 属性也可以被直接设置为一个函数，则默认相当于设置了 postLink 函数。
+.directive{ return { link: function link(){ ... } } }  等于">
     <meta name="twitter:image" content="/images/avatar.jpg">
   
 
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="AngularJS Directive之compile与link">
-  <meta property="og:description" content="刚开始学习AngularJS Directive时，总是不太能搞明白compile和link两个属性的含义和区别。最近写的多一些，读的资料也多了一些，渐渐有了一些理解，简单记录下来：
-compile属性是一个函数。该函数会针对每一个directive的实例执行一次，在compile阶段：
- 不能访问scope
- 元素还没有被插入document
- 可以修改template，最终结果会被angular缓存
-  link属性可以有两种配置方式。 link属性可以被设置为一个对象，包含pre, post两个属性，分别对应一个函数(preLink, postLink)。preList，postLink的区别在于执行顺序。preLink是自顶向下的，先父节点，后子节点，postLink正好相反。
-.directive{ return { link: { pre: function preLink(){ ... }, post: function postLink() { ... } } } }  link属性也可以被直接设置为一个函数，则默认相当于设置了postLink函数。
-.directive{ return { link: function link(){ ... } } }  等于
-.directive{ return { link: { post: function post() { ... } } } }  由此可见，如果直接将link属性设置为一个函数，则link阶段的执行顺序是自底向上的。
-link阶段会针对每一个被RENDERED的directive实例执行一次。此阶段：
- 可以访问scope(因为controller已经初始化完成)
- 元素已经被插入document中
- 不可以修改template(angular会直接使用之前缓存的内容)">
+  <meta property="og:description" content="刚开始学习 AngularJS Directive 时，总是不太能搞明白 compile 和 link 两个属性的含义和区别。最近写的多一些，读的资料也多了一些，渐渐有了一些理解，简单记录下来：
+compile 属性是一个函数。该函数会针对每一个 directive 的实例执行一次，在 compile 阶段：
+ 不能访问 scope 元素还没有被插入 document 可以修改 template，最终结果会被 angular 缓存  link 属性可以有两种配置方式。 link 属性可以被设置为一个对象，包含 pre, post 两个属性，分别对应一个函数(preLink, postLink)。preList，postLink 的区别在于执行顺序。preLink 是自顶向下的，先父节点，后子节点，postLink 正好相反。
+.directive{ return { link: { pre: function preLink(){ ... }, post: function postLink() { ... } } } }  link 属性也可以被直接设置为一个函数，则默认相当于设置了 postLink 函数。
+.directive{ return { link: function link(){ ... } } }  等于">
   <meta property="og:url" content="https://loveky.github.io/2014/04/01/angularjs-directive-compile-link/">
   <meta property="og:image" content="/images/avatar.jpg">
 
@@ -268,18 +244,18 @@ link阶段会针对每一个被RENDERED的directive实例执行一次。此阶�
       <h1 class="post-title">AngularJS Directive之compile与link</h1>
       <p class="post-meta">@loveky · Apr 1, 2014 · 1 min read</p>
     </header>
-    <article class="post-content"><p>刚开始学习AngularJS Directive时，总是不太能搞明白compile和link两个属性的含义和区别。最近写的多一些，读的资料也多了一些，渐渐有了一些理解，简单记录下来：</p>
+    <article class="post-content"><p>刚开始学习 AngularJS Directive 时，总是不太能搞明白 compile 和 link 两个属性的含义和区别。最近写的多一些，读的资料也多了一些，渐渐有了一些理解，简单记录下来：</p>
 
-<p>compile属性是一个函数。该函数会针对每一个directive的实例执行一次，在compile阶段：</p>
+<p>compile 属性是一个函数。该函数会针对每一个 directive 的实例执行一次，在 compile 阶段：</p>
 
 <ul>
-<li>不能访问scope<br /></li>
-<li>元素还没有被插入document<br /></li>
-<li>可以修改template，最终结果会被angular缓存<br /></li>
+<li>不能访问 scope</li>
+<li>元素还没有被插入 document</li>
+<li>可以修改 template，最终结果会被 angular 缓存</li>
 </ul>
 
-<p>link属性可以有两种配置方式。
-link属性可以被设置为一个对象，包含pre, post两个属性，分别对应一个函数(preLink, postLink)。preList，postLink的区别在于执行顺序。preLink是自顶向下的，先父节点，后子节点，postLink正好相反。</p>
+<p>link 属性可以有两种配置方式。
+link 属性可以被设置为一个对象，包含 pre, post 两个属性，分别对应一个函数(preLink, postLink)。preList，postLink 的区别在于执行顺序。preLink 是自顶向下的，先父节点，后子节点，postLink 正好相反。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">.<span style="color:#a6e22e">directive</span>{
   <span style="color:#66d9ef">return</span> {
     <span style="color:#a6e22e">link</span><span style="color:#f92672">:</span> {
@@ -293,7 +269,7 @@ link属性可以被设置为一个对象，包含pre, post两个属性，分别�
   }
 }
 </code></pre></div>
-<p>link属性也可以被直接设置为一个函数，则默认相当于设置了postLink函数。</p>
+<p>link 属性也可以被直接设置为一个函数，则默认相当于设置了 postLink 函数。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">.<span style="color:#a6e22e">directive</span>{
   <span style="color:#66d9ef">return</span> {
     <span style="color:#a6e22e">link</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">link</span>(){
@@ -315,35 +291,35 @@ link属性可以被设置为一个对象，包含pre, post两个属性，分别�
 }
 </code></pre>
 
-<p>由此可见，如果直接将link属性设置为一个函数，则link阶段的执行顺序是自底向上的。</p>
+<p>由此可见，如果直接将 link 属性设置为一个函数，则 link 阶段的执行顺序是自底向上的。</p>
 
-<p>link阶段会针对每一个被RENDERED的directive实例执行一次。此阶段：</p>
+<p>link 阶段会针对每一个被 RENDERED 的 directive 实例执行一次。此阶段：</p>
 
 <ul>
-<li>可以访问scope(因为controller已经初始化完成)<br /></li>
-<li>元素已经被插入document中<br /></li>
-<li>不可以修改template(angular会直接使用之前缓存的内容)<br /></li>
+<li>可以访问 scope(因为 controller 已经初始化完成)</li>
+<li>元素已经被插入 document 中</li>
+<li>不可以修改 template(angular 会直接使用之前缓存的内容)</li>
 </ul>
 
-<p>如果定义了compile属性则link属性会被忽略。<br />
-如果你想同时使用compile方法和link方法，那么compile方法的返回值需要是一个函数，这个函数会被用作link方法。</p>
+<p>如果定义了 compile 属性则 link 属性会被忽略。<br />
+如果你想同时使用 compile 方法和 link 方法，那么 compile 方法的返回值需要是一个函数，这个函数会被用作 link 方法。</p>
 
-<p>对于嵌套directive的初始化流程中controller,compile,link的执行顺序。可以参考下面这个jsFiddle:</p>
+<p>对于嵌套 directive 的初始化流程中 controller,compile,link 的执行顺序。可以参考下面这个 jsFiddle:</p>
 
-<iframe width="100%" height="300" src="http://jsfiddle.net/loveky/K93SE/embedded/" allowfullscreen="allowfullscreen" frameborder="0"> </iframe>
+<iframe width="100%" height="300" src="//jsfiddle.net/loveky/K93SE/embedded/" allowfullscreen="allowfullscreen" frameborder="0"> </iframe>
 
 <p>最后是自己的一些感受：</p>
 
 <ul>
-<li>如果你想通过程序修改directive的template，那么你需要compile方法。<br /></li>
-<li>如果你想从scope中获取数据或者watch数据变化并相应的更新DOM，那么你需要在link方法。<br /></li>
-<li>绝大多数directive是用不到compile方法的。无谓的引入compile方法只会额外增加代码的复杂性。<br /></li>
+<li>如果你想通过程序修改 directive 的 template，那么你需要 compile 方法。</li>
+<li>如果你想从 scope 中获取数据或者 watch 数据变化并相应的更新 DOM，那么你需要在 link 方法。</li>
+<li>绝大多数 directive 是用不到 compile 方法的。无谓的引入 compile 方法只会额外增加代码的复杂性。</li>
 </ul>
 
 <p>另外附上几个链接，供有兴趣的朋友阅读：</p>
 
 <ul>
-<li><a href="http://stackoverflow.com/questions/12164138/what-is-the-difference-between-compile-and-link-function-in-angularjs">What is the difference between compile and link function in angularjs</a><br /></li>
+<li><a href="http://stackoverflow.com/questions/12164138/what-is-the-difference-between-compile-and-link-function-in-angularjs">What is the difference between compile and link function in angularjs</a></li>
 <li><a href="http://stackoverflow.com/questions/13183005/what-exactly-do-you-do-with-the-transclude-function-and-the-clone-linking-functi">What exactly do you do with the transclude function and the clone linking function?</a></li>
 </ul>
 </article>
