@@ -66,7 +66,7 @@ var NgModelController = [&amp;#39;$scope&amp;#39;, &amp;#39;$exceptionHandler&am
 
 
 
-<meta name="generator" content="Hugo 0.52">
+<meta name="generator" content="Hugo 0.54.0">
 
 
 <link rel="canonical" href="https://loveky.github.io/2014/04/11/angularjs-ng-model/">
@@ -324,7 +324,7 @@ var NgModelController = [&amp;#39;$scope&amp;#39;, &amp;#39;$exceptionHandler&am
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">parentForm</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">$element</span>.<span style="color:#a6e22e">inheritedData</span>(<span style="color:#e6db74">&#39;$formController&#39;</span>) <span style="color:#f92672">||</span> <span style="color:#a6e22e">nullFormCtrl</span>,
     <span style="color:#a6e22e">invalidCount</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#75715e">// used to easily determine if we are valid
 </span><span style="color:#75715e"></span>    <span style="color:#a6e22e">$error</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">$error</span> <span style="color:#f92672">=</span> {}; <span style="color:#75715e">// keep invalid keys here
-</span><span style="color:#75715e"></span></code></pre></div>
+</span></code></pre></div>
 <p>获取对上层form的引用，用于在model值合法性改变时通知上层form。<br />
 invalidCount是对当前不合法属性的计数。一个model可能有多个条件来判断其值是否合法。每一个不合法的条件都会让该计数器加一。
 $error哈希则保存了具体不合法的属性的名字。</p>
@@ -458,7 +458,7 @@ $error哈希则保存了具体不合法的属性的名字。</p>
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>1731</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>1767</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">

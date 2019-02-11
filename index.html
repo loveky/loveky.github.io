@@ -43,7 +43,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.52">
+<meta name="generator" content="Hugo 0.54.0">
 
 
 <link rel="canonical" href="https://loveky.github.io/">
@@ -225,6 +225,25 @@
   
    <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2019/02/11/yarn-pnp/" class="post-link">Yarn 的 Plug&#39;n&#39;Play 特性</a></h3>
+    <p class="post-meta">@loveky · Feb 11, 2019</p>
+  </header>
+  
+    <img class="post-cover" src="https://img20.360buyimg.com/uba/s300x300_jfs/t1/8346/34/14379/15918/5c616cecE985b19c2/350ab0c1cb269d3a.jpg" alt="Yarn 的 Plug&#39;n&#39;Play 特性" lazyload="on">
+  
+  <p class="post-summary">前言 Yarn 团队在春节前公布了 Yarn 2.0 的规划。其中提到了一个之前没听说过的名词 “PnP”。发现 Yarn 的这个功能早在 18 年 9 月份就被提出并实现了。于是花了一些时间了解了一下它的工作原理以及解决的问题并整理除了本篇文章。
+现状与痛点 Yarn 团队开发 PnP 特性最直接的原因就是现有的依赖管理方式效率太低。引用依赖时慢，安装依赖时也慢。
+先说说 Node 在处理依赖引用时的逻辑，这个流程会有如下两种情况：
+ 如果我们传给 require() 调用的参数是一个核心模块（例如 “fs”、”path”等）或者是一个本地相对路径（例如 ./module-a.js 或 /my-li/module-b.js），那么 Node 会直接使用对应的文件。 如果不是前面描述的情况，那么 Node 会开始寻找一个名为 node_modules 的目录：  首先 Node 会在当前目录寻找 node_modules，如果没有则到父目录查找，以此类推直到系统根目录。 找到 node_modules 目录之后，再在该目录中寻找名为 moduleName.js 的文件或是名为 moduleName 的子目录。   此处旨在说明问题，对 Node 内部模块解析逻辑做了简化描述
+可见 Node 在解析依赖时需要进行大量的文件 I/O 操作，效率并不高。
+再来看看安装依赖时发生了什么，现阶段 yarn install 操作会执行以下 4 个步骤：
+ 将依赖包的版本区间解析为某个具体的版本号 下载对应版本依赖的 tar 包到本地离线镜像 将依赖从离线镜像解压到本地缓存 将依赖从缓存拷贝到当前目录的 node_modules 目录  其中第 4 步同样涉及大量的文件 I/O，导致安装依赖时效率不高（尤其是在 CI 环境，每次都需要安装全部依赖）。</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2019/02/11/yarn-pnp/">阅读全文 →</a>
+  </footer>
+</article>
+  <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2018/07/18/how-flutter-inheritedwidget-works/" class="post-link">从 Flutter 源码看 InheritedWidget 内部实现原理</a></h3>
     <p class="post-meta">@loveky · Jul 18, 2018</p>
   </header>
@@ -394,27 +413,6 @@ $ nvm ls available Showing the 15 latest available releases. STABLE | UNSTABLE -
  轻松上手  使用 create-react-app 或是 react-native init 创建的项目已经默认集成了 Jest 现有项目，只需创建一个名为 __test__ 的目录，然后在该目录中创建以 .spec.js 或 .test.js 结尾的文件即可  内置强大的断言与 mock 功能 内置测试覆盖率统计功能 内置 Snapshot 机制  虽然 Jest 官网介绍中多次 React，但实际上 Jest 并不是和 React 绑定的。你可以使用它测试任何 JavaScript 项目。</p>
   <footer class="post-footer">
     <a class="read-more" href="https://loveky.github.io/2018/04/02/write-unit-test-for-react-part1-choose-test-framwork/">阅读全文 →</a>
-  </footer>
-</article>
-  <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://loveky.github.io/2018/03/29/setup-gitlab-specific-runner/" class="post-link">为 GitLab 代码库配置 Specific Runner</a></h3>
-    <p class="post-meta">@loveky · Mar 29, 2018</p>
-  </header>
-  
-    <img class="post-cover" src="https://img20.360buyimg.com/uba/s300x300_jfs/t17554/226/1118288536/70645/2284a85f/5abcf960Nd57ab1ab.png" alt="为 GitLab 代码库配置 Specific Runner" lazyload="on">
-  
-  <p class="post-summary">最近要为团队内一个项目搭建持续集成。项目代码托管在公司内部的 GitLab 上，于是很自然的选择使用 GitLab 自带的 CI/CD 功能。
-在 GitLab 的 CI/CD 流程中具体执行任务的节点叫做 runner。GitLab 中有两种类型的 runner：
- Shared Runners 由 GitLab 管理员配置的公有 runner。多个项目公用。作为开发人员无需配置，可以直接使用。 Specific Runners 开发人员为每个代码库单独配置的专属 runner。只能执行所属代码库的任务。需要开发人员手动搭建。  由于我厂的 GitLab 并没有配置任何 Shared Runner。所以只能选择在自己的台式机上手动搭建。
-具体流程如下：
-Step 1 下载 runner 可执行文件 根据你的环境下载 x86 或者 amd64 版本。
-创建 D:\GitLab-Runner 目录，将刚刚下载好的文件复制到该目录并重命名为 gitlab-runner.exe。
-Step 2 以管理员身份运行 Git Bash Step 3 访问代码库的配置页获取配置信息 进入代码库主页，依次点击 Settings =&gt; CI / CD =&gt; Runners settings。
-这里展开的信息中有两个字段需要我们记下来。分别是一个 URL 和一个 Token。
-Step 4 注册 runner 进入 D:\GitLab-Runner 目录执行命令：</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2018/03/29/setup-gitlab-specific-runner/">阅读全文 →</a>
   </footer>
 </article>
  

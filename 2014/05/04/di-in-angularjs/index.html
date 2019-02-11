@@ -90,7 +90,7 @@ myModule.factory(&amp;#39;greeter&amp;#39;, function($window) { return { greet: 
 
 
 
-<meta name="generator" content="Hugo 0.52">
+<meta name="generator" content="Hugo 0.54.0">
 
 
 <link rel="canonical" href="https://loveky.github.io/2014/05/04/di-in-angularjs/">
@@ -345,7 +345,7 @@ Angular injector子系统负责创建组件，解决它们的依赖，并按要�
 </code></pre></div>
 <p>当Angular处理HTML到<code>ng-controller</code>时，它会调用<code>injector</code>生成一个controler的实例:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">injector</span>.<span style="color:#a6e22e">instantiate</span>(<span style="color:#a6e22e">MyController</span>); <span style="color:#75715e">// 同时会处理MyController的依赖
-</span><span style="color:#75715e"></span></code></pre></div>
+</span></code></pre></div>
 <p>所有这些都是自动完成的。通过使用<code>ng-controller</code>来调用injector创建controller实例可以达到既解决了controller的依赖，又不需要将injector暴露给controller的目的。</p>
 
 <p>这就是最终的解决方案。应用程序只需要声明它依赖的服务而不需要与injector打交道，这种组织代码的方法并不违背<code>Law of Demeter</code>。</p>
@@ -479,7 +479,7 @@ Angular injector子系统负责创建组件，解决它们的依赖，并按要�
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>1708</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>1744</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">

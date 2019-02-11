@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Yarn on loveky</title>
+    <link>https://loveky.github.io/tags/yarn/</link>
+    <description>Recent content in Yarn on loveky</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 11 Feb 2019 20:30:55 +0800</lastBuildDate>
+    
+	<atom:link href="https://loveky.github.io/tags/yarn/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Yarn 的 Plug&#39;n&#39;Play 特性</title>
+      <link>https://loveky.github.io/2019/02/11/yarn-pnp/</link>
+      <pubDate>Mon, 11 Feb 2019 20:30:55 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2019/02/11/yarn-pnp/</guid>
+      <description>前言 Yarn 团队在春节前公布了 Yarn 2.0 的规划。其中提到了一个之前没听说过的名词 “PnP”。发现 Yarn 的这个功能早在 18 年 9 月份就被提出并实现了。于是花了一些时间了解了一下它的工作原理以及解决的问题并整理除了本篇文章。
+现状与痛点 Yarn 团队开发 PnP 特性最直接的原因就是现有的依赖管理方式效率太低。引用依赖时慢，安装依赖时也慢。
+先说说 Node 在处理依赖引用时的逻辑，这个流程会有如下两种情况：
+ 如果我们传给 require() 调用的参数是一个核心模块（例如 &amp;ldquo;fs&amp;rdquo;、&amp;rdquo;path&amp;rdquo;等）或者是一个本地相对路径（例如 ./module-a.js 或 /my-li/module-b.js），那么 Node 会直接使用对应的文件。 如果不是前面描述的情况，那么 Node 会开始寻找一个名为 node_modules 的目录：  首先 Node 会在当前目录寻找 node_modules，如果没有则到父目录查找，以此类推直到系统根目录。 找到 node_modules 目录之后，再在该目录中寻找名为 moduleName.js 的文件或是名为 moduleName 的子目录。   此处旨在说明问题，对 Node 内部模块解析逻辑做了简化描述
+可见 Node 在解析依赖时需要进行大量的文件 I/O 操作，效率并不高。
+再来看看安装依赖时发生了什么，现阶段 yarn install 操作会执行以下 4 个步骤：
+ 将依赖包的版本区间解析为某个具体的版本号 下载对应版本依赖的 tar 包到本地离线镜像 将依赖从离线镜像解压到本地缓存 将依赖从缓存拷贝到当前目录的 node_modules 目录  其中第 4 步同样涉及大量的文件 I/O，导致安装依赖时效率不高（尤其是在 CI 环境，每次都需要安装全部依赖）。</description>
+    </item>
+    
+  </channel>
+</rss>

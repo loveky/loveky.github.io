@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Yarn 的 Plug&#39;n&#39;Play 特性</title>
+
+  
+  
+  <link href="//cdn.jsdelivr.net" rel="dns-prefetch">
+  <link href="//cdnjs.cloudflare.com" rel="dns-prefetch">
+  <link href="//at.alicdn.com" rel="dns-prefetch">
+  <link href="//fonts.googleapis.com" rel="dns-prefetch">
+  <link href="//fonts.gstatic.com" rel="dns-prefetch">
+  <link href="///disqus.com" rel="dns-prefetch">
+  <link href="//c.disquscdn.com" rel="dns-prefetch">
+  
+  
+  
+
+  
+
+  
+  
+  <meta name="description" content="前言 Yarn 团队在春节前公布了 Yarn 2.0 的规划。其中提到了一个之前没听说过的名词 “PnP”。发现 Yarn 的这个功能早在 18 年 9 月份就被提出并实现了。于是花了一些时间了解了一下它的工作原理以及解决的问题并整理除了本篇文章。
+现状与痛点 Yarn 团队开发 PnP 特性最直接的原因就是现有的依赖管理方式效率太低。引用依赖时慢，安装依赖时也慢。
+先说说 Node 在处理依赖引用时的逻辑，这个流程会有如下两种情况：
+ 如果我们传给 require() 调用的参数是一个核心模块（例如 &amp;ldquo;fs&amp;rdquo;、&amp;rdquo;path&amp;rdquo;等）或者是一个本地相对路径（例如 ./module-a.js 或 /my-li/module-b.js），那么 Node 会直接使用对应的文件。 如果不是前面描述的情况，那么 Node 会开始寻找一个名为 node_modules 的目录：  首先 Node 会在当前目录寻找 node_modules，如果没有则到父目录查找，以此类推直到系统根目录。 找到 node_modules 目录之后，再在该目录中寻找名为 moduleName.js 的文件或是名为 moduleName 的子目录。   此处旨在说明问题，对 Node 内部模块解析逻辑做了简化描述
+可见 Node 在解析依赖时需要进行大量的文件 I/O 操作，效率并不高。
+再来看看安装依赖时发生了什么，现阶段 yarn install 操作会执行以下 4 个步骤：
+ 将依赖包的版本区间解析为某个具体的版本号 下载对应版本依赖的 tar 包到本地离线镜像 将依赖从离线镜像解压到本地缓存 将依赖从缓存拷贝到当前目录的 node_modules 目录  其中第 4 步同样涉及大量的文件 I/O，导致安装依赖时效率不高（尤其是在 CI 环境，每次都需要安装全部依赖）。">
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@loveky_">
+    <meta name="twitter:title" content="Yarn 的 Plug&#39;n&#39;Play 特性">
+    <meta name="twitter:description" content="前言 Yarn 团队在春节前公布了 Yarn 2.0 的规划。其中提到了一个之前没听说过的名词 “PnP”。发现 Yarn 的这个功能早在 18 年 9 月份就被提出并实现了。于是花了一些时间了解了一下它的工作原理以及解决的问题并整理除了本篇文章。
+现状与痛点 Yarn 团队开发 PnP 特性最直接的原因就是现有的依赖管理方式效率太低。引用依赖时慢，安装依赖时也慢。
+先说说 Node 在处理依赖引用时的逻辑，这个流程会有如下两种情况：
+ 如果我们传给 require() 调用的参数是一个核心模块（例如 &amp;ldquo;fs&amp;rdquo;、&amp;rdquo;path&amp;rdquo;等）或者是一个本地相对路径（例如 ./module-a.js 或 /my-li/module-b.js），那么 Node 会直接使用对应的文件。 如果不是前面描述的情况，那么 Node 会开始寻找一个名为 node_modules 的目录：  首先 Node 会在当前目录寻找 node_modules，如果没有则到父目录查找，以此类推直到系统根目录。 找到 node_modules 目录之后，再在该目录中寻找名为 moduleName.js 的文件或是名为 moduleName 的子目录。   此处旨在说明问题，对 Node 内部模块解析逻辑做了简化描述
+可见 Node 在解析依赖时需要进行大量的文件 I/O 操作，效率并不高。
+再来看看安装依赖时发生了什么，现阶段 yarn install 操作会执行以下 4 个步骤：
+ 将依赖包的版本区间解析为某个具体的版本号 下载对应版本依赖的 tar 包到本地离线镜像 将依赖从离线镜像解压到本地缓存 将依赖从缓存拷贝到当前目录的 node_modules 目录  其中第 4 步同样涉及大量的文件 I/O，导致安装依赖时效率不高（尤其是在 CI 环境，每次都需要安装全部依赖）。">
+    <meta name="twitter:image" content="https://img20.360buyimg.com/uba/s300x300_jfs/t1/8346/34/14379/15918/5c616cecE985b19c2/350ab0c1cb269d3a.jpg">
+  
+
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Yarn 的 Plug&#39;n&#39;Play 特性">
+  <meta property="og:description" content="前言 Yarn 团队在春节前公布了 Yarn 2.0 的规划。其中提到了一个之前没听说过的名词 “PnP”。发现 Yarn 的这个功能早在 18 年 9 月份就被提出并实现了。于是花了一些时间了解了一下它的工作原理以及解决的问题并整理除了本篇文章。
+现状与痛点 Yarn 团队开发 PnP 特性最直接的原因就是现有的依赖管理方式效率太低。引用依赖时慢，安装依赖时也慢。
+先说说 Node 在处理依赖引用时的逻辑，这个流程会有如下两种情况：
+ 如果我们传给 require() 调用的参数是一个核心模块（例如 &amp;ldquo;fs&amp;rdquo;、&amp;rdquo;path&amp;rdquo;等）或者是一个本地相对路径（例如 ./module-a.js 或 /my-li/module-b.js），那么 Node 会直接使用对应的文件。 如果不是前面描述的情况，那么 Node 会开始寻找一个名为 node_modules 的目录：  首先 Node 会在当前目录寻找 node_modules，如果没有则到父目录查找，以此类推直到系统根目录。 找到 node_modules 目录之后，再在该目录中寻找名为 moduleName.js 的文件或是名为 moduleName 的子目录。   此处旨在说明问题，对 Node 内部模块解析逻辑做了简化描述
+可见 Node 在解析依赖时需要进行大量的文件 I/O 操作，效率并不高。
+再来看看安装依赖时发生了什么，现阶段 yarn install 操作会执行以下 4 个步骤：
+ 将依赖包的版本区间解析为某个具体的版本号 下载对应版本依赖的 tar 包到本地离线镜像 将依赖从离线镜像解压到本地缓存 将依赖从缓存拷贝到当前目录的 node_modules 目录  其中第 4 步同样涉及大量的文件 I/O，导致安装依赖时效率不高（尤其是在 CI 环境，每次都需要安装全部依赖）。">
+  <meta property="og:url" content="https://loveky.github.io/2019/02/11/yarn-pnp/">
+  <meta property="og:image" content="https://img20.360buyimg.com/uba/s300x300_jfs/t1/8346/34/14379/15918/5c616cecE985b19c2/350ab0c1cb269d3a.jpg">
+
+
+
+
+<meta name="generator" content="Hugo 0.54.0">
+
+
+<link rel="canonical" href="https://loveky.github.io/2019/02/11/yarn-pnp/">
+
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no,email=no,adress=no">
+<meta http-equiv="Cache-Control" content="no-transform">
+
+
+<meta name="robots" content="index,follow">
+<meta name="referrer" content="origin-when-cross-origin">
+
+
+
+
+
+
+
+<meta name="theme-color" content="#02b875">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="loveky">
+<meta name="msapplication-tooltip" content="loveky">
+<meta name='msapplication-navbutton-color' content="#02b875">
+<meta name="msapplication-TileColor" content="#02b875">
+<meta name="msapplication-TileImage" content="/icons/icon-144x144.png">
+<link rel="icon" href="https://loveky.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://loveky.github.io/icons/icon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://loveky.github.io/icons/icon-32x32.png">
+<link rel="icon" sizes="192x192" href="https://loveky.github.io/icons/icon-192x192.png">
+<link rel="apple-touch-icon" href="https://loveky.github.io/icons/icon-152x152.png">
+<link rel="manifest" href="https://loveky.github.io/manifest.json">
+
+
+<link rel="preload" href="https://loveky.github.io/styles/main.min.css" as="style">
+<link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
+<link rel="preload" href="https://loveky.github.io/images/avatar.jpg" as="image">
+<link rel="preload" href="https://loveky.github.io/images/grey-prism.svg" as="image">
+
+
+<style>
+  body {
+    background: rgb(244, 243, 241) url('/images/grey-prism.svg') repeat fixed;
+  }
+</style>
+<link rel="stylesheet" href="https://loveky.github.io/styles/main.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-114966753-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-114966753-1');
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css">
+
+
+
+  
+  
+<!--[if lte IE 8]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js"></script>
+<![endif]-->
+
+<!--[if lte IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js"></script>
+<![endif]-->
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
+      
+        
+        <a role="button" aria-label="Go to comments" title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment" aria-hidden="true"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://loveky.github.io/images/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">loveky</h2>
+  
+  <p class="subtitle">记录生活点滴</p>
+  <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
+    <span class="icon icon-menu" aria-hidden="true"></span>
+  </button>
+
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+          
+          
+           is-active">
+          <a href="https://loveky.github.io/">首页</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="https://loveky.github.io/tags/">标签</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="https://loveky.github.io/archive/">归档</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="https://loveky.github.io/links/">链接</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="https://loveky.github.io/about/">关于我</a>
+        </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list"><li class="social-item">
+          <a href="mailto:eWx6Y3lseEBnbWFpbC5jb20=" title="Email" aria-label="Email">
+            <span class="icon icon-email" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//github.com/loveky" title="GitHub" aria-label="GitHub">
+            <span class="icon icon-github" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//twitter.com/loveky_" title="Twitter" aria-label="Twitter">
+            <span class="icon icon-twitter" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//stackoverflow.com/users/1513552" title="stackOverflow"  aria-label="stackOverflow">
+            <span class="icon icon-stackoverflow" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//www.zhihu.com/people/loveky" title="Zhihu" aria-label="Zhihu">
+            <span class="icon icon-zhihu" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//www.douban.com/people/54047566" title="Douban" aria-label="Douban">
+            <span class="icon icon-douban" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a rel="alternate" type="application/rss+xml" href="https://loveky.github.io/index.xml" title="RSS" aria-label="RSS">
+            <span class="icon icon-rss" aria-hidden="true"></span>
+          </a>
+        </li></ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Yarn 的 Plug&#39;n&#39;Play 特性</h1>
+      <p class="post-meta">@loveky · Feb 11, 2019 · 2 min read</p>
+    </header>
+    <article class="post-content">
+
+<h2 id="前言">前言</h2>
+
+<p>Yarn 团队在春节前公布了 Yarn 2.0 的<a href="https://github.com/yarnpkg/yarn/issues/6953">规划</a>。其中提到了一个之前没听说过的名词 “PnP”。发现 Yarn 的这个功能早在 18 年 9 月份就被<a href="https://github.com/yarnpkg/rfcs/pull/101">提出</a>并<a href="https://github.com/yarnpkg/yarn/pull/6382">实现</a>了。于是花了一些时间了解了一下它的工作原理以及解决的问题并整理除了本篇文章。</p>
+
+<h2 id="现状与痛点">现状与痛点</h2>
+
+<p>Yarn 团队开发 PnP 特性最直接的原因就是现有的依赖管理方式效率太低。引用依赖时慢，安装依赖时也慢。</p>
+
+<p>先说说 Node 在处理依赖引用时的逻辑，这个流程会有如下两种情况：</p>
+
+<ul>
+<li>如果我们传给 <code>require()</code> 调用的参数是一个<a href="https://nodejs.org/api/modules.html#modules_core_modules">核心模块</a>（例如 &ldquo;fs&rdquo;、&rdquo;path&rdquo;等）或者是一个本地相对路径（例如 <code>./module-a.js</code> 或 <code>/my-li/module-b.js</code>），那么 Node 会直接使用对应的文件。</li>
+<li>如果不是前面描述的情况，那么 Node 会开始寻找一个名为 <code>node_modules</code> 的目录：
+
+<ol>
+<li>首先 Node 会在当前目录寻找 <code>node_modules</code>，如果没有则到父目录查找，以此类推直到系统根目录。</li>
+<li>找到 <code>node_modules</code> 目录之后，再在该目录中寻找名为 <code>moduleName.js</code> 的文件或是名为 <code>moduleName</code> 的子目录。</li>
+</ol></li>
+</ul>
+
+<p><em>此处旨在说明问题，对 Node 内部模块解析逻辑做了简化描述</em></p>
+
+<p>可见 Node 在解析依赖时需要进行大量的文件 I/O 操作，效率并不高。</p>
+
+<p>再来看看安装依赖时发生了什么，现阶段 <code>yarn install</code> 操作会执行以下 4 个步骤：</p>
+
+<ol>
+<li>将依赖包的版本区间解析为某个具体的版本号</li>
+<li>下载对应版本依赖的 tar 包到本地离线镜像</li>
+<li>将依赖从离线镜像解压到本地缓存</li>
+<li>将依赖从缓存拷贝到当前目录的 <code>node_modules</code> 目录</li>
+</ol>
+
+<p>其中第 4 步同样涉及大量的文件 I/O，导致安装依赖时效率不高（尤其是在 CI 环境，每次都需要安装全部依赖）。</p>
+
+<p>Facebook 的工程师受够了这些问题决定寻找一个能彻底解决问题同时还可以与现有生态兼容的解决方案。这便是 Plug&rsquo;n&rsquo;Play 特性，简称 PnP。它已在 Facebook 内部测试了一段时间，现在 Yarn 团队决定与社区分享并共同优化该方案。</p>
+
+<h2 id="实现方案">实现方案</h2>
+
+<p>PnP 的具体工作原理是，作为把依赖从缓存拷贝到 <code>node_modules</code> 的替代方案，Yarn 会维护一张静态映射表，该表中包含了以下信息：</p>
+
+<ul>
+<li>当前依赖树中包含了哪些依赖包的哪些版本</li>
+<li>这些依赖包是如何互相关联的</li>
+<li>这些依赖包在文件系统中的具体位置</li>
+</ul>
+
+<p>这个映射表在 Yarn 的 PnP 实现中对应项目目录中的 <code>.pnp.js</code> 文件。</p>
+
+<p>这个 <code>.pnp.js</code> 文件是如何生成，Yarn 又是如何利用它的呢？</p>
+
+<p>在安装依赖时，在第 3 步完成之后，Yarn 并不会拷贝依赖到 <code>node_modules</code> 目录，而是会在 <code>.pnp.js</code> 中记录下该依赖在缓存中的具体位置。这样就避免了大量的 I/O 操作同时项目目录也不会有 <code>node_modules</code> 目录生成。</p>
+
+<p>同时 <code>.pnp.js</code> 还包含了一个特殊的 resolver，Yarn 会利用这个特殊的 resolver 来处理 <code>require()</code> 请求，该 resolver 会根据 <code>.pnp.js</code> 文件中包含的静态映射表直接确定依赖在文件系统中的具体位置，从而避免了现有实现在处理依赖引用时的 I/O 操作。</p>
+
+<h2 id="带来了哪些好处">带来了哪些好处</h2>
+
+<p>从 PnP 的实现方案可以看出，同一个系统上不同项目引用的相同依赖的相同版本实际都是指向的缓存中的同一个目录。这带来了几个最直观的好处：</p>
+
+<ul>
+<li>安装依赖的速度得到了空前的提升</li>
+<li>CI 环境中多个 CI 实例可以共享同一份缓存</li>
+<li>同一个系统中的多个项目不再需要占用多份磁盘空间</li>
+</ul>
+
+<h2 id="如何开始使用-plug-n-play-特性">如何开始使用 Plug&rsquo;n&rsquo;Play 特性？</h2>
+
+<p>首先你需要 Yarn 1.12+ 版本。然后根据你的具体场景可以选择：</p>
+
+<h3 id="使用-create-react-app-创建项目时开启-pnp">使用 <code>create-react-app</code> 创建项目时开启 PnP</h3>
+
+<p><code>create-react-app</code> 已经<a href="https://github.com/facebook/create-react-app/pull/5136">集成了</a>对 PnP 的支持。只需在创建项目时添加 <code>--use-pnp</code> 参数即可。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npx create-react-app testapp --use-pnp </code></pre></div>
+<h3 id="在已有项目中开启-pnp">在已有项目中开启 PnP</h3>
+
+<p>只需在项目中执行:</p>
+
+<pre><code>yarn --pnp
+</code></pre>
+
+<p>即可开启 PnP 特性。</p>
+
+<h2 id="注意事项">注意事项</h2>
+
+<h3 id="pkg-installconfig-字段"><code>pkg.installConfig</code> 字段</h3>
+
+<p>在项目中开启 PnP 特性后，Yarn 会在 <code>package.json</code> 文件中创建一个 <code>installConfig</code>  字段：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;installConfig&#34;</span>: {
+    <span style="color:#f92672">&#34;pnp&#34;</span>: <span style="color:#66d9ef">true</span>
+  }
+}</code></pre></div>
+<p>只要 <code>installConfig.pnp</code> 的值是一个真值且当前版本的 Yarn 支持，PnP 特性就会被启用。</p>
+
+<h3 id="执行-npm-script-或是运行-js-文件">执行 <code>npm script</code> 或是运行 <code>.js</code> 文件</h3>
+
+<p>由于在开启了 PnP 的项目中不再有 <code>node_modules</code> 目录，所有的依赖引用都必须由 <code>.pnp.js</code> 中的 resolver 处理。因此不论是执行 script 还是用 <code>node</code> 直接执行一个 JS 文件，都必须经由 Yarn 处理。必须通过 <code>yarn run</code> 或是 <code>yarn node</code> 执行。</p>
+
+<h3 id="在项目中调试依赖">在项目中调试依赖</h3>
+
+<p>在开发过程中我们有时会直接修改 <code>node_modules</code> 目录下的依赖来调试。但在 PnP 模式下，由于依赖都指向了全局缓存，我们不再可以直接修改这些依赖。</p>
+
+<p>针对这种场景，Yarn 提供了 <code>yarn unplug packageName</code> 拷贝到项目中的 <code>.pnp/unplugged</code> 目录下。</p>
+
+<p>调试完毕后，再执行 <code>yarn unplug --clear packageName</code> 可移除本地 <code>.pnp/unplugged</code> 中的对应依赖。</p>
+
+<h2 id="总结">总结</h2>
+
+<p>目前 PnP 还是一个相对比较新的特性，大家可以尝试在本地开发环境中启用 PnP 来感受一下它带来的全新体验。遇到问题可以及时反馈到 <a href="https://github.com/yarnpkg/yarn/issues">Yarn 的 issue 列表中</a>。</p>
+
+<p><strong>参考链接：</strong></p>
+
+<ul>
+<li><a href="https://github.com/yarnpkg/yarn/issues/6953">Yarn&rsquo;s Future - v2 and beyond</a></li>
+<li><a href="https://github.com/yarnpkg/rfcs/pull/101">Yarn Plug&rsquo;n&rsquo;Play: Getting rid of node_modules</a></li>
+<li><a href="https://github.com/yarnpkg/rfcs/files/2378943/Plugnplay.pdf">Plug’n’Play Whitepaper</a></li>
+<li><a href="https://github.com/yarnpkg/yarn/pull/6382">Yarn Plug&rsquo;n&rsquo;Play: Implementation</a></li>
+<li><a href="https://yarnpkg.com/en/docs/pnp">https://yarnpkg.com/en/docs/pnp</a></li>
+</ul>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://loveky.github.io/tags/yarn"><span class="tag">Yarn</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        
+      </p>
+    </footer>
+    <div style="text-align:center">
+      <p>如果你觉得这篇文章对你有所帮助，可以微信扫码请作者喝杯咖啡哦~</p>
+      <img width="300" height="300" src="https://loveky.github.io/img/wechat-reward-new.jpg"/>
+  </div>
+    
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "loveky" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  
+<footer class="site-footer">
+  <p>© 2017-2019 loveky</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
+  
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js"></script>
+
+
+
+<script async src="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js"></script>
+
+
+
+
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+
+
+<script src="https://loveky.github.io/scripts/index.min.js"></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('\/service-worker.js').then(function() {
+      console.log('[ServiceWorker] Registered');
+    });
+  }
+</script>
+
+
+
+
+
+
+
+
+  </body>
+</html>

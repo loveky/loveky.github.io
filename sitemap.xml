@@ -18,6 +18,11 @@
   </url>
   
   <url>
+    <loc>https://loveky.github.io/2019/02/11/yarn-pnp/</loc>
+    <lastmod>2019-02-11T20:30:55+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://loveky.github.io/2018/07/18/how-flutter-inheritedwidget-works/</loc>
     <lastmod>2018-07-18T18:52:08+08:00</lastmod>
   </url>
@@ -309,7 +314,7 @@
   
   <url>
     <loc>https://loveky.github.io/post/</loc>
-    <lastmod>2018-07-18T18:52:08+08:00</lastmod>
+    <lastmod>2019-02-11T20:30:55+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -364,6 +369,12 @@
   <url>
     <loc>https://loveky.github.io/tags/webpack/</loc>
     <lastmod>2018-02-26T10:44:38+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://loveky.github.io/tags/yarn/</loc>
+    <lastmod>2019-02-11T20:30:55+08:00</lastmod>
     <priority>0</priority>
   </url>
   
