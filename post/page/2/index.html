@@ -230,6 +230,26 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2018/04/02/write-unit-test-for-react-part1-choose-test-framwork/" class="post-link">为 React 编写单元测试之一 —— 测试框架的选择</a></h3>
+    <p class="post-meta">@loveky · Apr 2, 2018</p>
+  </header>
+  
+    <img class="post-cover" src="https://img10.360buyimg.com/uba/s300x300_jfs/t16669/130/1802409257/334415/68808646/5ad75b8dN54ece703.png" alt="为 React 编写单元测试之一 —— 测试框架的选择" lazyload="on">
+  
+  <p class="post-summary">最近和小伙伴们在尝试做把项目中经常用到的 React 组件整理成一套 React 组件库。为了保证代码质量且方便日后维护，我们决定为组件编写单元测试。接下来几篇文章会聊聊在这个过程中我们遇到的问题以及一些思考。
+正文开始 要写单元测试，首先面临的一个问题就是“我该使用哪个测试框架”？
+如果你去 Google 上搜索“how to test react component”，在结果页面中你大概会来来回回看到以下几个名词/概念：
+ Jest Enzyme Mocha全家桶（套餐内容大概率是：Mocha &#43; Chai &#43; Sinon &#43; Istanbul） react-test-renderer react-dom/test-utils  首先让我们来看看这些库的功能和定位，然后再来做选择。
+🃏 Jest Jest 是 Facebook 开发的一款 JavaScript 测试框架。在 Facebook 内部广泛用来测试各种 JavaScript 代码。其官网上主要列出了以下几个特点：
+ 轻松上手  使用 create-react-app 或是 react-native init 创建的项目已经默认集成了 Jest 现有项目，只需创建一个名为 __test__ 的目录，然后在该目录中创建以 .spec.js 或 .test.js 结尾的文件即可  内置强大的断言与 mock 功能 内置测试覆盖率统计功能 内置 Snapshot 机制  虽然 Jest 官网介绍中多次 React，但实际上 Jest 并不是和 React 绑定的。你可以使用它测试任何 JavaScript 项目。</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2018/04/02/write-unit-test-for-react-part1-choose-test-framwork/">阅读全文 →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2018/03/29/setup-gitlab-specific-runner/" class="post-link">为 GitLab 代码库配置 Specific Runner</a></h3>
     <p class="post-meta">@loveky · Mar 29, 2018</p>
   </header>
@@ -409,29 +429,6 @@ const grep = ... // 一个 grep 命令输出的 stream const wc = ... // 一个 
 还需要注意的是 stdio 流（stdin，stdout，stderr）在子进程中有着与父进程中相反的类型。这使得在子进程中从父进程的 stdio 流中读取或写入数据变得非常简单。</p>
   <footer class="post-footer">
     <a class="read-more" href="https://loveky.github.io/2017/06/05/translate-node-stream-everything-you-need-to-know/">阅读全文 →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://loveky.github.io/2017/05/31/regular-expressions-catastrophic-backtracking/" class="post-link">正则表达式中的悲观回溯</a></h3>
-    <p class="post-meta">@loveky · May 31, 2017</p>
-  </header>
-  
-  <p class="post-summary">前几天有小伙伴来求救说页面上有一个 input 框，随着用户不断输入内容，页面响应会越来越慢直到完全失去响应。
-简单沟通过后得知具体场景是这样的：
- input 框中允许用户输入一连串逗号分隔的商品id 在用户输入的过程中实时检测用户输入的内容是否符合规则，若不符合则给出提示信息  小伙伴的解决方案也很直接：
- 给 input 框绑定 keyup 事件。 在 keyup 事件回调函数中通过正则表达式判断是否符合规则，决定是否展示提示信息。  经过反复验证得到如下规律：
- 用户在输入商品 id 的过程中（连续输入多个数字）不会卡顿 当用户输入逗号时，出现卡顿。随着输入商品 id 的数量增加，卡顿越来越明显，直至浏览器失去响应。  于是打开 Chrome 开发者工具，选择 Performance (原 Timeline) 标签页。将整个过程记录下来，得到如下时间线：
-其中黄色宽条表示 JavaScript 主线程的执行情况。连续的黄条越长，表示单次 JavaScript 运行的时间越长。也就意味着 UI 失去响应的时间越长。这一点从截图中的蓝色框中也可以得到印证。蓝色框中的红色长条表示浏览器一帧（一次渲染）所需要的时间。
-那么到底是 JavaScript 中的哪些代码占中了这么长 CPU 时间呢？我们在底部的选项卡中选中 Bottom-Up ，按 Total Time 降序排列。得到如下结果：
-可以看出，72.% 的 CPU 时间用在了一条正则表达式上。你肯定想到了，这就是小伙伴用来检查用户输入是否合法的正则表达式。
-完整的正则表达式是这样的：
-/^\s*((\d&#43;(\,|，)\d&#43;)*|(\d&#43;))\s*$/  接着去 regex101 上测试一下，测试数据如下，由 10 个商品 ID 组成的字符串：
-123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789  执行结果如下：</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2017/05/31/regular-expressions-catastrophic-backtracking/">阅读全文 →</a>
   </footer>
 </article>
 

@@ -230,6 +230,29 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2017/05/31/regular-expressions-catastrophic-backtracking/" class="post-link">正则表达式中的悲观回溯</a></h3>
+    <p class="post-meta">@loveky · May 31, 2017</p>
+  </header>
+  
+  <p class="post-summary">前几天有小伙伴来求救说页面上有一个 input 框，随着用户不断输入内容，页面响应会越来越慢直到完全失去响应。
+简单沟通过后得知具体场景是这样的：
+ input 框中允许用户输入一连串逗号分隔的商品id 在用户输入的过程中实时检测用户输入的内容是否符合规则，若不符合则给出提示信息  小伙伴的解决方案也很直接：
+ 给 input 框绑定 keyup 事件。 在 keyup 事件回调函数中通过正则表达式判断是否符合规则，决定是否展示提示信息。  经过反复验证得到如下规律：
+ 用户在输入商品 id 的过程中（连续输入多个数字）不会卡顿 当用户输入逗号时，出现卡顿。随着输入商品 id 的数量增加，卡顿越来越明显，直至浏览器失去响应。  于是打开 Chrome 开发者工具，选择 Performance (原 Timeline) 标签页。将整个过程记录下来，得到如下时间线：
+其中黄色宽条表示 JavaScript 主线程的执行情况。连续的黄条越长，表示单次 JavaScript 运行的时间越长。也就意味着 UI 失去响应的时间越长。这一点从截图中的蓝色框中也可以得到印证。蓝色框中的红色长条表示浏览器一帧（一次渲染）所需要的时间。
+那么到底是 JavaScript 中的哪些代码占中了这么长 CPU 时间呢？我们在底部的选项卡中选中 Bottom-Up ，按 Total Time 降序排列。得到如下结果：
+可以看出，72.% 的 CPU 时间用在了一条正则表达式上。你肯定想到了，这就是小伙伴用来检查用户输入是否合法的正则表达式。
+完整的正则表达式是这样的：
+/^\s*((\d&#43;(\,|，)\d&#43;)*|(\d&#43;))\s*$/  接着去 regex101 上测试一下，测试数据如下，由 10 个商品 ID 组成的字符串：
+123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789  执行结果如下：</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2017/05/31/regular-expressions-catastrophic-backtracking/">阅读全文 →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2017/05/12/translate-why-typescript-getting-popular/" class="post-link">[译] 为何TypeScript愈发流行了？</a></h3>
     <p class="post-meta">@loveky · May 12, 2017</p>
   </header>
@@ -404,21 +427,6 @@ http://pan.baidu.com/s/1gfl5FzX</p>
  有服务器，客户端的概念。只能使用服务器的键鼠控制其他主机 不支持在主机间复制粘贴文件或拖拽复制文件（官方宣传支持该功能，但始终复制不成功） 不支持截取其它主机的屏幕  综上，如果你需要跨平台，那么没得选，只能Synergy。否则果断选择Mouse without Borders。</p>
   <footer class="post-footer">
     <a class="read-more" href="https://loveky.github.io/2017/03/18/mouse-without-borders/">阅读全文 →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://loveky.github.io/2016/12/01/redux-source-src-createstore/" class="post-link">Redux 3.6.0 源码阅读 之 src/createStore.js</a></h3>
-    <p class="post-meta">@loveky · Dec 1, 2016</p>
-  </header>
-  
-  <p class="post-summary">嗯，就是学习一下，读读源码。顺便把源码里的文档翻译了一下并添加了一些简单的注释。
-本文对应的文件是src/createStore.js
-import isPlainObject from &#39;lodash/isPlainObject&#39; import $$observable from &#39;symbol-observable&#39; /** * ActionTypes里定义的是Redux保留的私有action。 * 对于任何未知的action，你必须返回store的当前状态。 * 如果传入的当前状态是undefined，你必须返回store的初始状态。 * 不要在应用代码中直接引用这些action。 */ export var ActionTypes = { INIT: &#39;@@redux/INIT&#39; } /** * createStore方法用于创建一个保存程序状态的store。 * 改变store中数据的唯一方法是调用store的`dispatch()`方法。 * * 你的应用中应该只有一个store。为了将程序状态中不同部分的变更逻辑 * 组合在一起，你可以通过`combineReducers`方法将多个reducer组合成一个reducer。 * * @param {Function} reducer 一个返回应用下一状态的函数，入参是程序的当前状态以及 * 要发送的action。 * * @param {any} [preloadedState] store的初始状态。你可以选择性的为store指定一个 * 初始状态。 * 如果你使用了`combineReducers`方法来生成最终的reducer。那么这个初始状态对象的 * 结构必须与调用`combineReducers`方法时传入的参数的结构保持对应关系。 * * @param {Function} enhancer store增强器。你可以选择性的传入一个增强函数来扩展 * store的功能，例如中间件，时间旅行，持久化等。Redux自带的唯一一个增强器是 * `applyMiddleware()`方法。 * * @returns {Store} 返回一个可以读取状态，发送action以及订阅变更通知的Redux store。 */ export default function createStore(reducer, preloadedState, enhancer) { // 如果只传入reducer和enhancer，则store的初始状态为undefined  if (typeof preloadedState === &#39;function&#39; &amp;&amp; typeof enhancer === &#39;undefined&#39;) { enhancer = preloadedState preloadedState = undefined } // enhancer必须是一个函数  if (typeof enhancer !</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2016/12/01/redux-source-src-createstore/">阅读全文 →</a>
   </footer>
 </article>
 

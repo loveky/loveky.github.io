@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Node.js on loveky</title>
+    <link>https://loveky.github.io/tags/node.js/</link>
+    <description>Recent content in Node.js on loveky</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 12 Feb 2019 15:25:32 +0800</lastBuildDate>
+    
+	<atom:link href="https://loveky.github.io/tags/node.js/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Node.js 的模块系统</title>
+      <link>https://loveky.github.io/2019/02/12/nodejs-module-system/</link>
+      <pubDate>Tue, 12 Feb 2019 15:25:32 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2019/02/12/nodejs-module-system/</guid>
+      <description>两个核心模块 require 和 module。
+require 模块对应全局的 require 方法。module 模块对应每一个模块全局空间中的 module 属性。
+Node.js 加载一个模块主要经历以下几个步骤：
+ Resolving -&amp;gt; Loading -&amp;gt; Wrapping -&amp;gt; Evaluating -&amp;gt; Caching
+ Resolving Node.js 中的模块和文件系统中的文件是一一对应的（这一点很重要）。加载模块的过程其实就是执行文件系统中的脚本并将结果载入内存的过程。
+每一个模块都有一个 id 属性，该属性的值就是这个模块对应文件的绝对路径（在 REPL 里为 &amp;ldquo;&amp;ldquo;）。
+Resolving 阶段的工作就是把我们 require 的字符串解析成一个文件系统中的绝对路径。根据我们 require 包的类型，这里又分为三种情况：
+ 核心模块。也即 Node.js 内置的模块，例如 &amp;ldquo;fs&amp;rdquo;、&amp;rdquo;path&amp;rdquo;、&amp;rdquo;http&amp;rdquo; 等，这类模块无需安装即可直接使用。 相对路径/绝对路径。Node.js 直接将相对路径转换成对应的绝对路径。 第三方依赖。如果不是前两种情况，那么 Node.js 会依次查找 module.paths 列表中的目录是否存在。 我们来看看 module.paths 中都有哪些目录： 可以看到主要是从当前目录逐级向上查找 node_modules 目录。这也就是为什么我们的依赖会被安装在 node_modules 目录下的原因。 为了向前兼容，Node.js 还会检查一些已经被废弃的目录，不推荐使用它们。
+在找到这个列表中某个存在的目录之后，Node.js 会在该目录下继续查找，假设我们执行的是 require(&amp;quot;moduleA&amp;quot;)，那么又可以分为以下三种情况：
+ 存在一个 moduleA.js 文件，那么该文件就是最终我们要加载的文件。 存在一个 moduleA 子目录，且该目录下存在一个名为 index.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -225,6 +225,21 @@
   
    <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2014/04/01/angularjs-directive-compile-link/" class="post-link">AngularJS Directive之compile与link</a></h3>
+    <p class="post-meta">@loveky · Apr 1, 2014</p>
+  </header>
+  
+  <p class="post-summary">刚开始学习 AngularJS Directive 时，总是不太能搞明白 compile 和 link 两个属性的含义和区别。最近写的多一些，读的资料也多了一些，渐渐有了一些理解，简单记录下来：
+compile 属性是一个函数。该函数会针对每一个 directive 的实例执行一次，在 compile 阶段：
+ 不能访问 scope 元素还没有被插入 document 可以修改 template，最终结果会被 angular 缓存  link 属性可以有两种配置方式。 link 属性可以被设置为一个对象，包含 pre, post 两个属性，分别对应一个函数(preLink, postLink)。preList，postLink 的区别在于执行顺序。preLink 是自顶向下的，先父节点，后子节点，postLink 正好相反。
+.directive{ return { link: { pre: function preLink(){ ... }, post: function postLink() { ... } } } }  link 属性也可以被直接设置为一个函数，则默认相当于设置了 postLink 函数。
+.directive{ return { link: function link(){ ... } } }  等于</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2014/04/01/angularjs-directive-compile-link/">阅读全文 →</a>
+  </footer>
+</article>
+  <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2014/02/21/use-css3-to-simulate-stop-animation/" class="post-link">使用CSS3实现逐格动画</a></h3>
     <p class="post-meta">@loveky · Feb 21, 2014</p>
   </header>

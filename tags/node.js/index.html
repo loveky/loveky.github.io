@@ -6,7 +6,9 @@
 
   
   <title>
-  Tags | loveky的博客
+  Tag → node.js
+  
+   | loveky的博客
 </title>
 
   
@@ -39,7 +41,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="loveky的博客">
   
-  <meta property="og:url" content="https://loveky.github.io/tags/">
+  <meta property="og:url" content="https://loveky.github.io/tags/node.js/">
   <meta property="og:image" content="/images/avatar.jpg">
 
 
@@ -48,8 +50,8 @@
 <meta name="generator" content="Hugo 0.54.0">
 
 
-<link rel="canonical" href="https://loveky.github.io/tags/">
-<link rel="alternate" type="application/rss+xml" href="https://loveky.github.io/tags/index.xml" title="loveky">
+<link rel="canonical" href="https://loveky.github.io/tags/node.js/">
+<link rel="alternate" type="application/rss+xml" href="https://loveky.github.io/tags/node.js/index.xml" title="loveky">
 
 <meta name="renderer" content="webkit">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -157,8 +159,8 @@
         </li>
       
         <li class="menu-item
-           is-active
           
+           is-active
           ">
           <a href="https://loveky.github.io/tags/">标签</a>
         </li>
@@ -220,101 +222,39 @@
   </nav>
 </header>
 
-  <section class="main post-detail terms-list">
-    <header class="post-header">
-      <h1 class="post-title">Tags</h1>
+  <section class="main post-list">
+    <header class="list-header offscreen">
+      <h2 class="list-label">Posts List</h2>
     </header>
-    <div class="tags-cloud">
+    
+    
       
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2019/02/12/nodejs-module-system/" class="post-link">Node.js 的模块系统</a></h3>
+    <p class="post-meta">@loveky · Feb 12, 2019</p>
+  </header>
+  
+    <img class="post-cover" src="https://img20.360buyimg.com/uba/s300x300_jfs/t1/28747/1/6830/6538/5c6276c0E58a5b593/13cf35af9b707192.png" alt="Node.js 的模块系统" lazyload="on">
+  
+  <p class="post-summary">两个核心模块 require 和 module。
+require 模块对应全局的 require 方法。module 模块对应每一个模块全局空间中的 module 属性。
+Node.js 加载一个模块主要经历以下几个步骤：
+ Resolving -&gt; Loading -&gt; Wrapping -&gt; Evaluating -&gt; Caching
+ Resolving Node.js 中的模块和文件系统中的文件是一一对应的（这一点很重要）。加载模块的过程其实就是执行文件系统中的脚本并将结果载入内存的过程。
+每一个模块都有一个 id 属性，该属性的值就是这个模块对应文件的绝对路径（在 REPL 里为 ““）。
+Resolving 阶段的工作就是把我们 require 的字符串解析成一个文件系统中的绝对路径。根据我们 require 包的类型，这里又分为三种情况：
+ 核心模块。也即 Node.js 内置的模块，例如 “fs”、”path”、”http” 等，这类模块无需安装即可直接使用。 相对路径/绝对路径。Node.js 直接将相对路径转换成对应的绝对路径。 第三方依赖。如果不是前两种情况，那么 Node.js 会依次查找 module.paths 列表中的目录是否存在。 我们来看看 module.paths 中都有哪些目录： 可以看到主要是从当前目录逐级向上查找 node_modules 目录。这也就是为什么我们的依赖会被安装在 node_modules 目录下的原因。 为了向前兼容，Node.js 还会检查一些已经被废弃的目录，不推荐使用它们。
+在找到这个列表中某个存在的目录之后，Node.js 会在该目录下继续查找，假设我们执行的是 require(&#34;moduleA&#34;)，那么又可以分为以下三种情况：
+ 存在一个 moduleA.js 文件，那么该文件就是最终我们要加载的文件。 存在一个 moduleA 子目录，且该目录下存在一个名为 index.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2019/02/12/nodejs-module-system/">阅读全文 →</a>
+  </footer>
+</article>
+
       
-        
-        <a href="https://loveky.github.io/tags/javascript/" class="tag-xxl">javascript</a>
-      
-        
-        <a href="https://loveky.github.io/tags/%E5%B7%A5%E5%85%B7/" class="tag-xxl">工具</a>
-      
-        
-        <a href="https://loveky.github.io/tags/angularjs/" class="tag-xxl">angularjs</a>
-      
-        
-        <a href="https://loveky.github.io/tags/react/" class="tag-xxl">react</a>
-      
-        
-        <a href="https://loveky.github.io/tags/%E7%BF%BB%E8%AF%91/" class="tag-xxl">翻译</a>
-      
-        
-        <a href="https://loveky.github.io/tags/dart/" class="tag-l">dart</a>
-      
-        
-        <a href="https://loveky.github.io/tags/es6/" class="tag-l">es6</a>
-      
-        
-        <a href="https://loveky.github.io/tags/flutter/" class="tag-l">flutter</a>
-      
-        
-        <a href="https://loveky.github.io/tags/%E6%B5%8B%E8%AF%95/" class="tag-l">测试</a>
-      
-        
-        <a href="https://loveky.github.io/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" class="tag-l">源码阅读</a>
-      
-        
-        <a href="https://loveky.github.io/tags/git/" class="tag-m">git</a>
-      
-        
-        <a href="https://loveky.github.io/tags/redux/" class="tag-m">redux</a>
-      
-        
-        <a href="https://loveky.github.io/tags/ruby/" class="tag-m">ruby</a>
-      
-        
-        <a href="https://loveky.github.io/tags/webpack/" class="tag-m">webpack</a>
-      
-        
-        <a href="https://loveky.github.io/tags/%E7%94%9F%E6%B4%BB/" class="tag-m">生活</a>
-      
-        
-        <a href="https://loveky.github.io/tags/%E8%81%8C%E4%B8%9A%E7%94%9F%E6%B6%AF/" class="tag-m">职业生涯</a>
-      
-        
-        <a href="https://loveky.github.io/tags/css3/" class="tag-s">css3</a>
-      
-        
-        <a href="https://loveky.github.io/tags/jenkins/" class="tag-s">jenkins</a>
-      
-        
-        <a href="https://loveky.github.io/tags/koa/" class="tag-s">koa</a>
-      
-        
-        <a href="https://loveky.github.io/tags/node.js/" class="tag-s">node.js</a>
-      
-        
-        <a href="https://loveky.github.io/tags/npm/" class="tag-s">npm</a>
-      
-        
-        <a href="https://loveky.github.io/tags/pwa/" class="tag-s">pwa</a>
-      
-        
-        <a href="https://loveky.github.io/tags/rollup/" class="tag-s">rollup</a>
-      
-        
-        <a href="https://loveky.github.io/tags/tree-shaking/" class="tag-s">tree-shaking</a>
-      
-        
-        <a href="https://loveky.github.io/tags/typescript/" class="tag-s">typescript</a>
-      
-        
-        <a href="https://loveky.github.io/tags/yarn/" class="tag-s">yarn</a>
-      
-        
-        <a href="https://loveky.github.io/tags/%E5%8A%A8%E7%94%BB/" class="tag-s">动画</a>
-      
-        
-        <a href="https://loveky.github.io/tags/%E6%B8%B8%E8%AE%B0/" class="tag-s">游记</a>
-      
-        
-        <a href="https://loveky.github.io/tags/%E8%B0%83%E8%AF%95/" class="tag-s">调试</a>
-      
-    </div>
+    
+    
   </section>
   
 <footer class="site-footer">
