@@ -42,7 +42,7 @@ interface SearchFunc { (source: string, subString: string): boolean; } 如果我
 interface NodeRequireFunction { (id: string): any; } interface NodeRequire extends NodeRequireFunction { resolve: RequireResolve; cache: any; extensions: NodeExtensions; main: NodeModule | undefined; } 索引类型 有时我们想让我们对象支持向数组那样按照数字下标来存取数据，有时我们会想创建一个”字典”对象来存取任意的 &amp;ldquo;key/value&amp;rdquo; 对应关系。这两种情况就需要声明索引类型。区别在于索引本身的类型是数字还是字符串。
 interface StringArray { [index: number]: string; } interface NameAddressMap { [index: string]: string; } 我们可以把一个对象声明成既支持字符串索引有支持数字索引：
 interface ItsOK { [index: string]: string; [index: number]: string; } 如果我们的对象要同时支持两种索引类型，那么必须保证字符串索引对应值的类型是数字索引对应值的类型的超集。">
-    <meta name="twitter:image" content="https://loveky.github.io/images/cover.jpg">
+    <meta name="twitter:image" content="https://img12.360buyimg.com/uba/s300x300_jfs/t1/30646/20/1952/28135/5c63d9dbEc21e77b4/0f96a5ed30759c29.png">
   
 
   
@@ -55,7 +55,7 @@ interface NodeRequireFunction { (id: string): any; } interface NodeRequire exten
 interface StringArray { [index: number]: string; } interface NameAddressMap { [index: string]: string; } 我们可以把一个对象声明成既支持字符串索引有支持数字索引：
 interface ItsOK { [index: string]: string; [index: number]: string; } 如果我们的对象要同时支持两种索引类型，那么必须保证字符串索引对应值的类型是数字索引对应值的类型的超集。">
   <meta property="og:url" content="https://loveky.github.io/2019/02/13/typescript-function-types-and-indexed-types/">
-  <meta property="og:image" content="https://loveky.github.io/images/cover.jpg">
+  <meta property="og:image" content="https://img12.360buyimg.com/uba/s300x300_jfs/t1/30646/20/1952/28135/5c63d9dbEc21e77b4/0f96a5ed30759c29.png">
 
 
 
