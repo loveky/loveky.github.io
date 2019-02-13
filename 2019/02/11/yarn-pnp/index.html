@@ -328,10 +328,7 @@
 <h3 id="在已有项目中开启-pnp">在已有项目中开启 PnP</h3>
 
 <p>只需在项目中执行:</p>
-
-<pre><code>yarn --pnp
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yarn --pnp</code></pre></div>
 <p>即可开启 PnP 特性。</p>
 
 <h2 id="注意事项">注意事项</h2>
@@ -354,7 +351,7 @@
 
 <p>在开发过程中我们有时会直接修改 <code>node_modules</code> 目录下的依赖来调试。但在 PnP 模式下，由于依赖都指向了全局缓存，我们不再可以直接修改这些依赖。</p>
 
-<p>针对这种场景，Yarn 提供了 <code>yarn unplug packageName</code> 拷贝到项目中的 <code>.pnp/unplugged</code> 目录下。</p>
+<p>针对这种场景，Yarn 提供了 <code>yarn unplug packageName</code> 来将某个指定依赖拷贝到项目中的 <code>.pnp/unplugged</code> 目录下。之后 <code>.pnp.js</code> 中的 resolver 就会自动加载这个 unplug 的版本。</p>
 
 <p>调试完毕后，再执行 <code>yarn unplug --clear packageName</code> 可移除本地 <code>.pnp/unplugged</code> 中的对应依赖。</p>
 
