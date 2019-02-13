@@ -6,10 +6,24 @@
     <description>Recent content in Typescript on loveky</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 12 May 2017 14:09:43 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 13 Feb 2019 16:43:55 +0800</lastBuildDate>
     
 	<atom:link href="https://loveky.github.io/tags/typescript/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>TypeScript 中的函数类型与索引类型</title>
+      <link>https://loveky.github.io/2019/02/13/typescript-function-types-and-indexed-types/</link>
+      <pubDate>Wed, 13 Feb 2019 16:43:55 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2019/02/13/typescript-function-types-and-indexed-types/</guid>
+      <description>函数类型 利用 interface 声明函数类型，只需要把接口定义中的属性写成函数签名即可。
+像这样：
+interface SearchFunc { (source: string, subString: string): boolean; } 如果我们的函数本身还有一些属性，例如 Node.js 中的 require() 方法，我们既可以 require(&amp;quot;package&amp;quot;) 又可以 require.resolve(&amp;quot;package&amp;quot;)。这是需要首先为该方法定义一个接口，然后再通过 extends 它来添加属性。
+interface NodeRequireFunction { (id: string): any; } interface NodeRequire extends NodeRequireFunction { resolve: RequireResolve; cache: any; extensions: NodeExtensions; main: NodeModule | undefined; } 索引类型 有时我们想让我们对象支持向数组那样按照数字下标来存取数据，有时我们会想创建一个”字典”对象来存取任意的 &amp;ldquo;key/value&amp;rdquo; 对应关系。这两种情况就需要声明索引类型。区别在于索引本身的类型是数字还是字符串。
+interface StringArray { [index: number]: string; } interface NameAddressMap { [index: string]: string; } 我们可以把一个对象声明成既支持字符串索引有支持数字索引：
+interface ItsOK { [index: string]: string; [index: number]: string; } 如果我们的对象要同时支持两种索引类型，那么必须保证字符串索引对应值的类型是数字索引对应值的类型的超集。</description>
+    </item>
     
     <item>
       <title>[译] 为何TypeScript愈发流行了？</title>

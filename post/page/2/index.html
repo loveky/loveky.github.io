@@ -230,6 +230,26 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2018/04/18/time-to-upgrade-nvm-windows/" class="post-link">是时候升级一下你的 nvm-windows 了</a></h3>
+    <p class="post-meta">@loveky · Apr 18, 2018</p>
+  </header>
+  
+    <img class="post-cover" src="https://img30.360buyimg.com/uba/s300x300_jfs/t17713/272/1820376607/38449/a06696c8/5ad7545eNac82d0be.jpg" alt="是时候升级一下你的 nvm-windows 了" lazyload="on">
+  
+  <p class="post-summary">一直以来都使用 nvm-windows 来管理 Node 版本。从没出过问题。今天团队小伙伴来反馈我们的一个内部命令行工具在 Node 6.10.0 上无法安装。于是决定安装一个 6.10.0 调查一下。
+于是执行：
+nvm install v6.10.0 结果输出：
+$ nvm install v6.10.0 Node.js vv6.10.0 is not yet released or available. 似乎是哪里不对了。
+于是下意识的 nvm ls available 一下看看：
+$ nvm ls available Showing the 15 latest available releases. STABLE | UNSTABLE --------------------------- v8.9.1 | v8.7.0 v8.9.0 | v7.9.0 v8.8.1 | v7.7.4 v8.8.0 | v7.7.3 v7.10.1 | v7.7.2 v7.10.0 | v7.7.1 v7.8.0 | v7.7.0 v6.12.0 | v6.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2018/04/18/time-to-upgrade-nvm-windows/">阅读全文 →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2018/04/02/write-unit-test-for-react-part1-choose-test-framwork/" class="post-link">为 React 编写单元测试之一 —— 测试框架的选择</a></h3>
     <p class="post-meta">@loveky · Apr 2, 2018</p>
   </header>
@@ -404,31 +424,6 @@ navigator.serviceWorker.register(&#39;sw.js&#39;, { scope: &#39;./abc&#39; });  
 更多快捷功能，自己去发现吧！</p>
   <footer class="post-footer">
     <a class="read-more" href="https://loveky.github.io/2017/06/06/chrome-devtools-command-menu/">阅读全文 →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://loveky.github.io/2017/06/05/translate-node-stream-everything-you-need-to-know/" class="post-link">[译] Node.js 流: 你需要知道的一切</a></h3>
-    <p class="post-meta">@loveky · Jun 5, 2017</p>
-  </header>
-  
-  <p class="post-summary">图片来源
-Node.js 中的流有着难以使用，更难以理解的名声。现在我有一个好消息告诉你：事情已经不再是这样了。
-很长时间以来，开发人员创造了许许多多的软件包为的就是可以更简单的使用流。但是在本文中，我会把重点放在原生的 Node.js 流 API上。
- “流是 Node 中最棒的，同时也是最被误解的想法。”
-— Dominic Tarr
- 流到底是什么呢？ 流是数据的集合 —— 就像数组或字符串一样。区别在于流中的数据可能不会立刻就全部可用，并且你无需一次性的把这些数据全部放入内存。这使得流在操作大量数据或是数据从外部来源逐段发送过来的时候变得非常有用。
-然而，流的作用并不仅限于操作大量数据。它还带给我们组合代码的能力。就像我们可以通过管道连接几个简单的 Linux 命令以组合出强大的功能一样，我们可以利用流在 Node 中做同样的事。
-Linux 命令的组合性
-const grep = ... // 一个 grep 命令输出的 stream const wc = ... // 一个 wc 命令输入的 stream grep.pipe(wc) Node 中许多内建的模块都实现了流接口：
-截屏来自于我的 Pluralsight 课程 —— 高级 Node.js
-上边的列表中有一些 Node.js 原生的对象，这些对象也是可以读写的流。这些对象中的一部分是既可读、又可写的流，例如 TCP sockets，zlib 以及 crypto。
-需要注意的是这些对象是紧密关联的。虽然一个 HTTP 响应在客户端是一个可读流，但在服务器端它却是一个可写流。这是因为在 HTTP 的情况中，我们基本上是从一个对象（http.IncomingMessage）读取数据，向另一个对象写入数据（http.ServerResponse）。
-还需要注意的是 stdio 流（stdin，stdout，stderr）在子进程中有着与父进程中相反的类型。这使得在子进程中从父进程的 stdio 流中读取或写入数据变得非常简单。</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2017/06/05/translate-node-stream-everything-you-need-to-know/">阅读全文 →</a>
   </footer>
 </article>
 

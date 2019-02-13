@@ -225,6 +225,24 @@
   
    <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2019/02/13/typescript-function-types-and-indexed-types/" class="post-link">TypeScript 中的函数类型与索引类型</a></h3>
+    <p class="post-meta">@loveky · Feb 13, 2019</p>
+  </header>
+  
+    <img class="post-cover" src="https://loveky.github.io/images/cover.jpg" alt="TypeScript 中的函数类型与索引类型" lazyload="on">
+  
+  <p class="post-summary">函数类型 利用 interface 声明函数类型，只需要把接口定义中的属性写成函数签名即可。
+像这样：
+interface SearchFunc { (source: string, subString: string): boolean; } 如果我们的函数本身还有一些属性，例如 Node.js 中的 require() 方法，我们既可以 require(&#34;package&#34;) 又可以 require.resolve(&#34;package&#34;)。这是需要首先为该方法定义一个接口，然后再通过 extends 它来添加属性。
+interface NodeRequireFunction { (id: string): any; } interface NodeRequire extends NodeRequireFunction { resolve: RequireResolve; cache: any; extensions: NodeExtensions; main: NodeModule | undefined; } 索引类型 有时我们想让我们对象支持向数组那样按照数字下标来存取数据，有时我们会想创建一个”字典”对象来存取任意的 “key/value” 对应关系。这两种情况就需要声明索引类型。区别在于索引本身的类型是数字还是字符串。
+interface StringArray { [index: number]: string; } interface NameAddressMap { [index: string]: string; } 我们可以把一个对象声明成既支持字符串索引有支持数字索引：
+interface ItsOK { [index: string]: string; [index: number]: string; } 如果我们的对象要同时支持两种索引类型，那么必须保证字符串索引对应值的类型是数字索引对应值的类型的超集。</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2019/02/13/typescript-function-types-and-indexed-types/">阅读全文 →</a>
+  </footer>
+</article>
+  <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2019/02/12/nodejs-module-system/" class="post-link">Node.js 的模块系统</a></h3>
     <p class="post-meta">@loveky · Feb 12, 2019</p>
   </header>
@@ -399,24 +417,6 @@ type ：用于表明我们这次提交的改动类型，是新增了功能？还
  准备阶段：构造参数，创建 spy 等 执行阶段：用构造好的参数执行被测试代码 断言阶段：用实际得到的结果与期望的结果比较，以判断该测试是否正常 清理阶段：清理准备阶段对外部环境的影响，移除在准备阶段创建的 spy 等  Jest 简介 Jest 是 Facebook 开发的一款 JavaScript 测试框架。在 Facebook 内部广泛用来测试各种 JavaScript 代码。其官网上主要列出了以下几个特点：</p>
   <footer class="post-footer">
     <a class="read-more" href="https://loveky.github.io/2018/05/17/unit-test-and-jest/">阅读全文 →</a>
-  </footer>
-</article>
-  <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://loveky.github.io/2018/04/18/time-to-upgrade-nvm-windows/" class="post-link">是时候升级一下你的 nvm-windows 了</a></h3>
-    <p class="post-meta">@loveky · Apr 18, 2018</p>
-  </header>
-  
-    <img class="post-cover" src="https://img30.360buyimg.com/uba/s300x300_jfs/t17713/272/1820376607/38449/a06696c8/5ad7545eNac82d0be.jpg" alt="是时候升级一下你的 nvm-windows 了" lazyload="on">
-  
-  <p class="post-summary">一直以来都使用 nvm-windows 来管理 Node 版本。从没出过问题。今天团队小伙伴来反馈我们的一个内部命令行工具在 Node 6.10.0 上无法安装。于是决定安装一个 6.10.0 调查一下。
-于是执行：
-nvm install v6.10.0 结果输出：
-$ nvm install v6.10.0 Node.js vv6.10.0 is not yet released or available. 似乎是哪里不对了。
-于是下意识的 nvm ls available 一下看看：
-$ nvm ls available Showing the 15 latest available releases. STABLE | UNSTABLE --------------------------- v8.9.1 | v8.7.0 v8.9.0 | v7.9.0 v8.8.1 | v7.7.4 v8.8.0 | v7.7.3 v7.10.1 | v7.7.2 v7.10.0 | v7.7.1 v7.8.0 | v7.7.0 v6.12.0 | v6.</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2018/04/18/time-to-upgrade-nvm-windows/">阅读全文 →</a>
   </footer>
 </article>
  
