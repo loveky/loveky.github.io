@@ -230,6 +230,24 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2014/04/11/angularjs-controller/" class="post-link">Angular中的Controller</a></h3>
+    <p class="post-meta">@loveky · Apr 11, 2014</p>
+  </header>
+  
+  <p class="post-summary">在Angular中，一个Controller是一个JavaScript构造函数。当一个Controller通过ng-controller附加到某个DOM元素上时，Angular会使用相应Controller的构造函数来初始化一个新的Controller对象。一个新的child scope会被创建并作为可注入的参数(就是我们看到的$scope)传递给该Controller的构造函数。
+使用Controller：
+ 为$scope对象设置初始状态
+ 为$scope对象添加行为
+  不要使用Controller:
+ 修改DOM —— Controllers应该只负责业务逻辑。将任何UI的逻辑放进Controller都会极大地破坏其可测试性。Angular中可以使用数据绑定用来更新页面中的数据或使用directive来封装DOM操作。 格式化input数据 —— 使用angular form controls 过滤输出数据 —— 使用Angular中的filter机制 跨Controller之间的代码或状态共享 —— 使用Angular中的service机制 管理其他组件的生命周期  </p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2014/04/11/angularjs-controller/">阅读全文 →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2014/04/02/angularjs-ngrepeat/" class="post-link">AngularJS源码阅读之ngRepeat</a></h3>
     <p class="post-meta">@loveky · Apr 2, 2014</p>
   </header>

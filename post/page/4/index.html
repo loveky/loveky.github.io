@@ -230,6 +230,27 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2017/03/21/config-fiddler-with-ios-https/" class="post-link">配置Fiddler拦截iOS/Andorid的https请求</a></h3>
+    <p class="post-meta">@loveky · Mar 21, 2017</p>
+  </header>
+  
+  <p class="post-summary">Fiddler可以配置用来拦截https请求。但默认配置下仅支持拦截PC上的请求。在移动端上的https请求会因为证书问题而失败。如下图所示：
+要解决这个问题，只需要在iOS/Android系统上安装一个安全证书即可。具体步骤如下：
+ 访问http://www.telerik.com/fiddler/add-ons，下载并安装CertMaker for iOS and Android插件。
+ 安装完成后重启Fiddler。
+ 重启后浏览器访问http://ipv4.fiddler:8888，如果看到如下内容，表示安装成功。
+ 在手机浏览器（iOS建议Safari）里打开前边提到的链接，点击页面中最后一个链接FiddlerRoot certificate。下载完后会提示如下页面：
+点击安装，弹出安全认证，要求输入密码。输入后出现以下页面：
+继续点击安装。安装成功提示如下：
+  到这里，所有的配置工作就全部做完了。现在再次访问https页面，已经可以正常打开了。</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2017/03/21/config-fiddler-with-ios-https/">阅读全文 →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2017/03/18/mouse-without-borders/" class="post-link">键盘鼠标共享神器 Mouse without Borders</a></h3>
     <p class="post-meta">@loveky · Mar 18, 2017</p>
   </header>
@@ -427,24 +448,6 @@ var ngModelDirective = function() { return { require: [&#39;ngModel&#39;, &#39;^
 var NgModelController = [&#39;$scope&#39;, &#39;$exceptionHandler&#39;, &#39;$attrs&#39;, &#39;$element&#39;, &#39;$parse&#39;, function($scope, $exceptionHandler, $attr, $element, $parse) { this.</p>
   <footer class="post-footer">
     <a class="read-more" href="https://loveky.github.io/2014/04/11/angularjs-ng-model/">阅读全文 →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://loveky.github.io/2014/04/11/angularjs-controller/" class="post-link">Angular中的Controller</a></h3>
-    <p class="post-meta">@loveky · Apr 11, 2014</p>
-  </header>
-  
-  <p class="post-summary">在Angular中，一个Controller是一个JavaScript构造函数。当一个Controller通过ng-controller附加到某个DOM元素上时，Angular会使用相应Controller的构造函数来初始化一个新的Controller对象。一个新的child scope会被创建并作为可注入的参数(就是我们看到的$scope)传递给该Controller的构造函数。
-使用Controller：
- 为$scope对象设置初始状态
- 为$scope对象添加行为
-  不要使用Controller:
- 修改DOM —— Controllers应该只负责业务逻辑。将任何UI的逻辑放进Controller都会极大地破坏其可测试性。Angular中可以使用数据绑定用来更新页面中的数据或使用directive来封装DOM操作。 格式化input数据 —— 使用angular form controls 过滤输出数据 —— 使用Angular中的filter机制 跨Controller之间的代码或状态共享 —— 使用Angular中的service机制 管理其他组件的生命周期  </p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2014/04/11/angularjs-controller/">阅读全文 →</a>
   </footer>
 </article>
 

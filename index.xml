@@ -42,6 +42,20 @@
     </item>
     
     <item>
+      <title>TypeScript 中的泛型(Generic)</title>
+      <link>https://loveky.github.io/2019/02/14/typescript-generic/</link>
+      <pubDate>Thu, 14 Feb 2019 21:16:10 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2019/02/14/typescript-generic/</guid>
+      <description>在函数中使用泛型 这里 T 可以代表任意类型。
+function identity&amp;lt;T&amp;gt;(arg: T): T { return arg; } 使用时可以明确指定类型：
+let output = identity&amp;lt;string&amp;gt;(&amp;#34;myString&amp;#34;);  不过更多时候是交给 TypeScript 进行类型推断：
+let output = identity(&amp;#34;myString&amp;#34;);  在接口中使用泛型 interface GenericIdentityFn { &amp;lt;T&amp;gt;(arg: T): T; } function identity&amp;lt;T&amp;gt;(arg: T): T { return arg; } let myIdentity: GenericIdentityFn = identity; 我们还可以把泛型参数提升到整个接口的层面，像下面这样：
+interface GenericIdentityFn&amp;lt;T&amp;gt; { (arg: T): T; } 然后在我们使用这个接口的时候，必须明确指定这个泛型参数的类型：
+function identity&amp;lt;T&amp;gt;(arg: T): T { return arg; } let myIdentity: GenericIdentityFn&amp;lt;number&amp;gt; = identity; 我们得到的 myIdentity 方法只能接受数字作为参数。</description>
+    </item>
+    
+    <item>
       <title>TypeScript 中的函数类型与索引类型</title>
       <link>https://loveky.github.io/2019/02/13/typescript-function-types-and-indexed-types/</link>
       <pubDate>Wed, 13 Feb 2019 16:43:55 +0800</pubDate>

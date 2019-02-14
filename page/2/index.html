@@ -225,6 +225,30 @@
   
    <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2018/05/17/unit-test-and-jest/" class="post-link">单元测试与单元测试框架 Jest</a></h3>
+    <p class="post-meta">@loveky · May 17, 2018</p>
+  </header>
+  
+    <img class="post-cover" src="https://img30.360buyimg.com/uba/jfs/t18289/149/2589163081/15881/a8804840/5afd7d2bN055817ae.jpg" alt="单元测试与单元测试框架 Jest" lazyload="on">
+  
+  <p class="post-summary">什么是单元测试？  测试是一种验证我们的代码是否可以按预期工作的手段。
+ 被测试的对象可以是我们程序的任何一个组成部分。大到一个分为多步骤的下单流程，小到代码中的一个函数。
+单元测试特指被测试对象为程序中最小组成单元的测试。这里的最小组成单元可以是一个函数、一个类等等。
+单元测试的优势 由于被测试对象的简单（通常只有一个或多个输入以及一个输出），这就决定了单元测试开发起来也很简单，通常每个测试只有几行到十几行不等。测试代码的简单表示它可以被更频繁的执行（事实上，很多单元测试框架都有 watch 模式。每次改动代码时都会自动执行单元测试）。更频繁的执行意味着更早的发现问题。
+试想，随着代码的不断迭代，程序中总有某些位置会频繁出现某类问题。在没有单元测试时程序员之间往往都是“口口相传”，隔一段时间很可能由于疏忽还会犯同一个错误。有了单元测试我们就可以为这些问题点编写对应的测试代码，每次提交代码前都执行一遍，可以极大的降低相同 bug 重复出现的概率。
+此外，要为一个被测试对象编写单元测试，那么它应该首先是容易被测试的（这似乎是一句废话）。反过来讲，如果你面对一个函数、类却很难编写测试代码的时候，很可能是你的代码设计上存在问题。比如和外部依赖耦合过于紧密。这种情况下，编写单元测试的过程会倒逼我们优化我们代码的结构。将复杂的代码拆解成为更简单、更容易测试的片段。这个过程本身也会潜移默化的提高我们代码的质量。
+单元测试的限制/不足  I get paid for code that works, not for tests - Kent Beck
+ 首先，测试代码再简单，也是需要工作量来开发的。必定占用开发人员的时间。因此需要开发人员在投入与收益之间找到一个最佳的平衡点。
+其次，单元测试覆盖率往往会给开发人员一种错觉：这段代码的单元测试都通过了（测试覆盖率以及 100% 了），肯定没有 bug。其实不然，单元测试覆盖率与代码质量没有必然的联系。作为开发人员必须尽早认识到这一点。
+何时编写单元测试？  开发过程中，单元测试应该来测试那些可能会出错的地方，或是那些边界情况。 维护过程中，单元测试应该围绕着 bug 进行，每个 bug 都应该编写响应的单元测试。从而保证同一个 bug 不会出现第二次。  单元测试中的基本概念？ 单元测试一般包含以下几个部分：
+ 被测试的对象是什么 要测试该对象的什么功能 实际得到的结果 期望的结果 mock / spy （下文会详述）  具体到某个单元测试，往往包含以下几个步骤：
+ 准备阶段：构造参数，创建 spy 等 执行阶段：用构造好的参数执行被测试代码 断言阶段：用实际得到的结果与期望的结果比较，以判断该测试是否正常 清理阶段：清理准备阶段对外部环境的影响，移除在准备阶段创建的 spy 等  Jest 简介 Jest 是 Facebook 开发的一款 JavaScript 测试框架。在 Facebook 内部广泛用来测试各种 JavaScript 代码。其官网上主要列出了以下几个特点：</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2018/05/17/unit-test-and-jest/">阅读全文 →</a>
+  </footer>
+</article>
+  <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2018/04/18/time-to-upgrade-nvm-windows/" class="post-link">是时候升级一下你的 nvm-windows 了</a></h3>
     <p class="post-meta">@loveky · Apr 18, 2018</p>
   </header>
@@ -378,29 +402,6 @@ navigator.serviceWorker.register(&#39;sw.js&#39;, { scope: &#39;./abc&#39; });  
 { &#34;usersById&#34;: { 123: { id: 123, name: &#34;Jane Doe&#34;, email: &#34;jdoe@example.</p>
   <footer class="post-footer">
     <a class="read-more" href="https://loveky.github.io/2017/07/21/translate-five-tips-for-working-with-redux-in-large-applications/">阅读全文 →</a>
-  </footer>
-</article>
-  <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://loveky.github.io/2017/06/06/chrome-devtools-command-menu/" class="post-link">Chrome 开发者工具中的命令菜单</a></h3>
-    <p class="post-meta">@loveky · Jun 6, 2017</p>
-  </header>
-  
-  <p class="post-summary">大家对命令菜单(Command Menu)应该都不陌生。目前主流的编辑器中都内置了对该功能的支持。在 Sublime Text 和 Visual Studio Code 中你都可以通过快捷键 Ctrl &#43; Shift &#43; P 呼出命令菜单（在 Mac 上是 Cmd &#43; Shift &#43; P）。
-在呼出的菜单中输入关键字选择自己需要的命令（支持模糊搜索哦），按回车即可执行命令。极大的提高了效率。
-举个例子，以下的操作是为文件设置 JavaScript 的语法高亮：
-很方便吧。
-如果你已经习惯了这种操作方式，那么今天要告诉你一个好消息。Chrome 开发者工具现在也支持命令菜单了！激活的方式还是 Ctrl &#43; Shift &#43; P。
-激活后，长这个样子：
-熟悉的配方，熟悉的味道。有木有！
-滚动菜单，查看支持的命令，基本涵盖了我们日常开发用到的所有功能。
-举几个实用的小例子吧(这些例子不同命令菜单一样可以实现，但命令菜单可以极大的提高效率)。
-1. 搜索所有资源文件 激活命令菜单，输入 search，选择 Search all files，回车。在弹出的输入框中输入关键字就可以在所有页面引入的资源文件中搜索该关键字了。还支持正则表达式哦。
-2. 禁用/开启页面 JavaScript 激活命令菜单，输入 js，选择 Disable JavaScript。再次选择，即可开启。
-3. 隐藏 HTML 中的注释 激活命令菜单，输入 comment，选择 Hide HTML Comments。
-更多快捷功能，自己去发现吧！</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2017/06/06/chrome-devtools-command-menu/">阅读全文 →</a>
   </footer>
 </article>
  
