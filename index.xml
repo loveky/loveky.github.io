@@ -36,9 +36,9 @@
       
       <guid>https://loveky.github.io/about/</guid>
       <description>前端小学生，现居帝都。目前就职于京东从事前端开发工作。
-工作经历 刚毕业时在一家小型IT服务公司从事运维工作。之后到上海，加入了 eBay 中国研发中心从事 SCM 工程师的工作。期间为了开发一些内部服务开始接触 Ruby on Rails 框架。最终在14年以一名 RoR 工程师的身份加入了 Rakuten 中国研发中心，负责开发公司内部的自动化运维平台。由于是内部系统，所以同时也负责前端页面的开发，并渐渐的把工作重心移到了前端。15 年 4 月正式加入京东用户体验设计部，开始了全新的前端旅程。
-目前在京东主要负责京东商城 PC 端黄金购物流程以及京东 APP 内部分 React Native 页面的开发工作。
-工作中顺手开发的几个 Chrome 插件  DNS Flusher 一键清理 DNS 缓存 Which Host 在页面上展示对应域名实际请求的 IP  平时主要使用以下技术/工具  JavaScript / TypeScript / Dart jQuery / React / React Native / Flutter Redux / MobX SeaJS / Webpack / Rollup Jest / Mocha / Chai / Sison ESLint / TSLint Git / GitLab / GitHub Fiddler / Wireshark / Chrome Dev Tools VS Code  京东 JDC 常年招聘靠谱的前端工程师，有意的小伙伴请发简历至 eWx6Y3lseEBnbWFpbC5jb20=</description>
+工作经历 刚毕业时在一家小型IT服务公司从事运维工作。之后到上海，加入了 eBay 中国研发中心从事 SCM 工程师的工作。期间为了开发一些内部服务开始接触 Ruby on Rails 框架。最终在14年以一名 RoR 工程师的身份加入了 Rakuten 中国研发中心，负责开发公司内部的自动化运维平台。由于是内部系统，所以同时也负责前端页面的开发，并渐渐的把工作重心移到了前端。2015 年 4 月正式加入京东用户体验设计部，开始了全新的前端旅程。
+在京东期间先后负责过京东商城 PC 端黄金购物流程、京东 APP 内部分 React Native 页面的开发工作。目前主要工作内容为内部生产力工具的调研与研发。
+项目  Rocketact 🚀 Developing React projects with ease DNS Flusher 一键清理 DNS 缓存的 Chrome 插件 Which Host 在页面上展示对应域名实际请求的 IP 的 Chrome 插件  平时主要使用以下技术/工具  JavaScript / TypeScript / Dart jQuery / React / React Native / Flutter NestJS Redux / MobX SeaJS / Webpack / Rollup Jest / Mocha / Chai / Sison ESLint / TSLint Git / GitLab / GitHub Fiddler / Wireshark / Chrome Dev Tools VS Code  如无特殊说明，本站全部文章均为原创。转载时请注明出处，非常感谢。</description>
     </item>
     
     <item>
