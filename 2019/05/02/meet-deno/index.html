@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>你可能不知道的git clean</title>
+  <title>初识 Deno</title>
 
   
   
@@ -23,45 +23,27 @@
   
 
   
-  
-  <meta name="description" content="git clean是干啥的？ git clean可以帮你清理workspace中未被git版本控制的文件，比如临时文件，构建出来的二进制文件。
-使用方法 如果你的clean.requireForce项没有设置为false，那么每次使用git clean时都要加上-f参数
-示例如下，workspace中有2个调试logo时创建的临时png文件，commit之前需要删掉。如果不用git clean的话需要一个一个rm。
-LM-SHC-00355679@17:42:26:~/Angular/pomodoro-time (master) =&amp;gt; git status -s ?? image/logo1.png ?? image/logo2.png 使用git clean可以快速清楚，当临时文件较多时尤其方便。
-LM-SHC-00355679@17:42:30:~/Angular/pomodoro-time (master) =&amp;gt; git clean -f Removing image/logo1.png Removing image/logo2.png 有的时候可能需要将当前workspace打包成zip。但是直接打包会将.gitignore里的文件也打进去。这是git clean也可以帮忙。只需加上-x参数。
-LM-SHC-00355679@17:48:13:~/Angular/pomodoro-time (master) =&amp;gt; cat .gitignore /coverage LM-SHC-00355679@17:48:16:~/Angular/pomodoro-time (master) # -d 参数表示连同目录一起删除 =&amp;gt; git clean -xfd Removing coverage/ LM-SHC-00355679@17:48:25:~/Angular/pomodoro-time (master) =&amp;gt; ls coverage ls: coverage: No such file or directory 以上就是git clean的基本用法啦。下面介绍下git clean的其他可选参数：
- -n 并不实际执行删除操作，只显示出将被清理的文件列表
- -X 仅删除.">
+  <meta name="author" content="loveky">
+  <meta name="description" content="Cut out summary from your post content here.
+">
 
   
   
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@loveky_">
-    <meta name="twitter:title" content="你可能不知道的git clean">
-    <meta name="twitter:description" content="git clean是干啥的？ git clean可以帮你清理workspace中未被git版本控制的文件，比如临时文件，构建出来的二进制文件。
-使用方法 如果你的clean.requireForce项没有设置为false，那么每次使用git clean时都要加上-f参数
-示例如下，workspace中有2个调试logo时创建的临时png文件，commit之前需要删掉。如果不用git clean的话需要一个一个rm。
-LM-SHC-00355679@17:42:26:~/Angular/pomodoro-time (master) =&amp;gt; git status -s ?? image/logo1.png ?? image/logo2.png 使用git clean可以快速清楚，当临时文件较多时尤其方便。
-LM-SHC-00355679@17:42:30:~/Angular/pomodoro-time (master) =&amp;gt; git clean -f Removing image/logo1.png Removing image/logo2.png 有的时候可能需要将当前workspace打包成zip。但是直接打包会将.gitignore里的文件也打进去。这是git clean也可以帮忙。只需加上-x参数。
-LM-SHC-00355679@17:48:13:~/Angular/pomodoro-time (master) =&amp;gt; cat .gitignore /coverage LM-SHC-00355679@17:48:16:~/Angular/pomodoro-time (master) # -d 参数表示连同目录一起删除 =&amp;gt; git clean -xfd Removing coverage/ LM-SHC-00355679@17:48:25:~/Angular/pomodoro-time (master) =&amp;gt; ls coverage ls: coverage: No such file or directory 以上就是git clean的基本用法啦。下面介绍下git clean的其他可选参数：
- -n 并不实际执行删除操作，只显示出将被清理的文件列表
- -X 仅删除.">
-    <meta name="twitter:image" content="/images/avatar.jpg">
+    <meta name="twitter:title" content="初识 Deno">
+    <meta name="twitter:description" content="Cut out summary from your post content here.
+">
+    <meta name="twitter:image" content="https://loveky.github.io/images/cover.jpg">
   
 
   
   <meta property="og:type" content="article">
-  <meta property="og:title" content="你可能不知道的git clean">
-  <meta property="og:description" content="git clean是干啥的？ git clean可以帮你清理workspace中未被git版本控制的文件，比如临时文件，构建出来的二进制文件。
-使用方法 如果你的clean.requireForce项没有设置为false，那么每次使用git clean时都要加上-f参数
-示例如下，workspace中有2个调试logo时创建的临时png文件，commit之前需要删掉。如果不用git clean的话需要一个一个rm。
-LM-SHC-00355679@17:42:26:~/Angular/pomodoro-time (master) =&amp;gt; git status -s ?? image/logo1.png ?? image/logo2.png 使用git clean可以快速清楚，当临时文件较多时尤其方便。
-LM-SHC-00355679@17:42:30:~/Angular/pomodoro-time (master) =&amp;gt; git clean -f Removing image/logo1.png Removing image/logo2.png 有的时候可能需要将当前workspace打包成zip。但是直接打包会将.gitignore里的文件也打进去。这是git clean也可以帮忙。只需加上-x参数。
-LM-SHC-00355679@17:48:13:~/Angular/pomodoro-time (master) =&amp;gt; cat .gitignore /coverage LM-SHC-00355679@17:48:16:~/Angular/pomodoro-time (master) # -d 参数表示连同目录一起删除 =&amp;gt; git clean -xfd Removing coverage/ LM-SHC-00355679@17:48:25:~/Angular/pomodoro-time (master) =&amp;gt; ls coverage ls: coverage: No such file or directory 以上就是git clean的基本用法啦。下面介绍下git clean的其他可选参数：
- -n 并不实际执行删除操作，只显示出将被清理的文件列表
- -X 仅删除.">
-  <meta property="og:url" content="https://loveky.github.io/2013/12/18/git-clean/">
-  <meta property="og:image" content="/images/avatar.jpg">
+  <meta property="og:title" content="初识 Deno">
+  <meta property="og:description" content="Cut out summary from your post content here.
+">
+  <meta property="og:url" content="https://loveky.github.io/2019/05/02/meet-deno/">
+  <meta property="og:image" content="https://loveky.github.io/images/cover.jpg">
 
 
 
@@ -69,7 +51,7 @@ LM-SHC-00355679@17:48:13:~/Angular/pomodoro-time (master) =&amp;gt; cat .gitigno
 <meta name="generator" content="Hugo 0.54.0">
 
 
-<link rel="canonical" href="https://loveky.github.io/2013/12/18/git-clean/">
+<link rel="canonical" href="https://loveky.github.io/2019/05/02/meet-deno/">
 
 <meta name="renderer" content="webkit">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -250,56 +232,25 @@ LM-SHC-00355679@17:48:13:~/Angular/pomodoro-time (master) =&amp;gt; cat .gitigno
 
   <section class="main post-detail">
     <header class="post-header">
-      <h1 class="post-title">你可能不知道的git clean</h1>
-      <p class="post-meta">@loveky · Dec 18, 2013 · 1 min read</p>
+      <h1 class="post-title">初识 Deno</h1>
+      <p class="post-meta">@loveky · May 2, 2019 · 1 min read</p>
     </header>
-    <article class="post-content">
+    <article class="post-content"><p>Cut out summary from your post content here.</p>
 
-<h3 id="git-clean是干啥的">git clean是干啥的？</h3>
-
-<p><code>git clean</code>可以帮你清理workspace中未被git版本控制的文件，比如临时文件，构建出来的二进制文件。</p>
-
-<h3 id="使用方法">使用方法</h3>
-
-<p><em>如果你的clean.requireForce项没有设置为false，那么每次使用git clean时都要加上-f参数</em></p>
-
-<p>示例如下，workspace中有2个调试logo时创建的临时png文件，commit之前需要删掉。如果不用git clean的话需要一个一个rm。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">LM-SHC-00355679@17:42:26:~/Angular/pomodoro-time <span style="color:#f92672">(</span>master<span style="color:#f92672">)</span>
-<span style="color:#f92672">=</span>&gt; git status -s
-?? image/logo1.png
-?? image/logo2.png</code></pre></div>
-<p>使用<code>git clean</code>可以快速清楚，当临时文件较多时尤其方便。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">LM-SHC-00355679@17:42:30:~/Angular/pomodoro-time <span style="color:#f92672">(</span>master<span style="color:#f92672">)</span>
-<span style="color:#f92672">=</span>&gt; git clean -f
-Removing image/logo1.png
-Removing image/logo2.png</code></pre></div>
-<p>有的时候可能需要将当前workspace打包成zip。但是直接打包会将.gitignore里的文件也打进去。这是git clean也可以帮忙。只需加上-x参数。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">LM-SHC-00355679@17:48:13:~/Angular/pomodoro-time <span style="color:#f92672">(</span>master<span style="color:#f92672">)</span>
-<span style="color:#f92672">=</span>&gt; cat .gitignore 
-/coverage
-LM-SHC-00355679@17:48:16:~/Angular/pomodoro-time <span style="color:#f92672">(</span>master<span style="color:#f92672">)</span> <span style="color:#75715e"># -d 参数表示连同目录一起删除</span>
-<span style="color:#f92672">=</span>&gt; git clean -xfd
-Removing coverage/
-LM-SHC-00355679@17:48:25:~/Angular/pomodoro-time <span style="color:#f92672">(</span>master<span style="color:#f92672">)</span>
-<span style="color:#f92672">=</span>&gt; ls coverage
-ls: coverage: No such file or directory</code></pre></div>
-<p>以上就是git clean的基本用法啦。下面介绍下git clean的其他可选参数：</p>
-
-<ul>
-<li>-n 并不实际执行删除操作，只显示出将被清理的文件列表<br /></li>
-<li>-X 仅删除.gitignore里标记过的文件，那些既不被git版本控制，又不在.gitignore中的文件会被保留。</li>
-</ul>
-</article>
+<p><div style="text-align:center">
+<iframe  width="560" height="315" src="https://www.youtube.com/embed/z6JRlx5NC9E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+The remaining content of your post.</p></article>
     <footer class="post-footer">
       
       <ul class="post-tags">
         
-          <li><a href="https://loveky.github.io/tags/git"><span class="tag">Git</span></a></li>
+          <li><a href="https://loveky.github.io/tags/deno"><span class="tag">Deno</span></a></li>
         
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>1963</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        
       </p>
     </footer>
     <div style="text-align:center">
