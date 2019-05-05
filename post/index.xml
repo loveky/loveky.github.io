@@ -6,10 +6,26 @@
     <description>Recent content in Posts on loveky</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 14 Feb 2019 21:16:10 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 02 May 2019 20:34:38 +0800</lastBuildDate>
     
 	<atom:link href="https://loveky.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>初识 Deno</title>
+      <link>https://loveky.github.io/2019/05/02/meet-deno/</link>
+      <pubDate>Thu, 02 May 2019 20:34:38 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2019/05/02/meet-deno/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://javascriptweekly.com/issues/432&#34;&gt;几天前的 JavaScript Weekly&lt;/a&gt; 里推送了一条名为 &amp;ldquo;A Look at Deno: A New JavaScript Runtime&amp;rdquo; 的视频，视频的内容是 &lt;a href=&#34;https://deno.land/&#34;&gt;Deno&lt;/a&gt; 的作者(同时也是 Node.js 项目的最初发起人与维护者) &lt;a href=&#34;https://github.com/ry&#34;&gt;Ryan Dahl&lt;/a&gt; 在&lt;a href=&#34;http://jsfest.com.ua/jsfest2019spring/indexe.html&#34;&gt;今年 4 月初的 JS Fest&lt;/a&gt; 大会上做的关于 Deno 的演讲。&lt;/p&gt;
+
+&lt;div style=&#34;text-align:center&#34;&gt;
+&lt;iframe  width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/z6JRlx5NC9E&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;h5 style=&#34;text-align:center&#34;&gt;Deno, a new way to JavaScript&lt;/h5&gt;
+&lt;/div&gt;
+
+&lt;p&gt;看完视频感觉这个项目挺有趣，于是花了一点时间做了一些了解，记录如下。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>TypeScript 中的泛型(Generic)</title>

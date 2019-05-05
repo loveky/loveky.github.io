@@ -23,8 +23,9 @@
   
 
   
-  <meta name="author" content="loveky">
-  <meta name="description" content="Cut out summary from your post content here.
+  
+  <meta name="description" content="几天前的 JavaScript Weekly 里推送了一条名为 &amp;ldquo;A Look at Deno: A New JavaScript Runtime&amp;rdquo; 的视频，视频的内容是 Deno 的作者(同时也是 Node.js 项目的最初发起人与维护者) Ryan Dahl 在今年 4 月初的 JS Fest 大会上做的关于 Deno 的演讲。
+ Deno, a new way to JavaScript  看完视频感觉这个项目挺有趣，于是花了一点时间做了一些了解，记录如下。
 ">
 
   
@@ -32,18 +33,20 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@loveky_">
     <meta name="twitter:title" content="初识 Deno">
-    <meta name="twitter:description" content="Cut out summary from your post content here.
+    <meta name="twitter:description" content="几天前的 JavaScript Weekly 里推送了一条名为 &amp;ldquo;A Look at Deno: A New JavaScript Runtime&amp;rdquo; 的视频，视频的内容是 Deno 的作者(同时也是 Node.js 项目的最初发起人与维护者) Ryan Dahl 在今年 4 月初的 JS Fest 大会上做的关于 Deno 的演讲。
+ Deno, a new way to JavaScript  看完视频感觉这个项目挺有趣，于是花了一点时间做了一些了解，记录如下。
 ">
-    <meta name="twitter:image" content="https://loveky.github.io/images/cover.jpg">
+    <meta name="twitter:image" content="https://img30.360buyimg.com/uba/jfs/t1/33681/25/10580/438939/5ccedcd9Eefb0efcf/60eb84fc6c066d49.gif">
   
 
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="初识 Deno">
-  <meta property="og:description" content="Cut out summary from your post content here.
+  <meta property="og:description" content="几天前的 JavaScript Weekly 里推送了一条名为 &amp;ldquo;A Look at Deno: A New JavaScript Runtime&amp;rdquo; 的视频，视频的内容是 Deno 的作者(同时也是 Node.js 项目的最初发起人与维护者) Ryan Dahl 在今年 4 月初的 JS Fest 大会上做的关于 Deno 的演讲。
+ Deno, a new way to JavaScript  看完视频感觉这个项目挺有趣，于是花了一点时间做了一些了解，记录如下。
 ">
   <meta property="og:url" content="https://loveky.github.io/2019/05/02/meet-deno/">
-  <meta property="og:image" content="https://loveky.github.io/images/cover.jpg">
+  <meta property="og:image" content="https://img30.360buyimg.com/uba/jfs/t1/33681/25/10580/438939/5ccedcd9Eefb0efcf/60eb84fc6c066d49.gif">
 
 
 
@@ -233,14 +236,108 @@
   <section class="main post-detail">
     <header class="post-header">
       <h1 class="post-title">初识 Deno</h1>
-      <p class="post-meta">@loveky · May 2, 2019 · 1 min read</p>
+      <p class="post-meta">@loveky · May 2, 2019 · 2 min read</p>
     </header>
-    <article class="post-content"><p>Cut out summary from your post content here.</p>
+    <article class="post-content"><p><a href="https://javascriptweekly.com/issues/432">几天前的 JavaScript Weekly</a> 里推送了一条名为 &ldquo;A Look at Deno: A New JavaScript Runtime&rdquo; 的视频，视频的内容是 <a href="https://deno.land/">Deno</a> 的作者(同时也是 Node.js 项目的最初发起人与维护者) <a href="https://github.com/ry">Ryan Dahl</a> 在<a href="http://jsfest.com.ua/jsfest2019spring/indexe.html">今年 4 月初的 JS Fest</a> 大会上做的关于 Deno 的演讲。</p>
 
-<p><div style="text-align:center">
+<div style="text-align:center">
 <iframe  width="560" height="315" src="https://www.youtube.com/embed/z6JRlx5NC9E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<h5 style="text-align:center">Deno, a new way to JavaScript</h5>
 </div>
-The remaining content of your post.</p></article>
+
+<p>看完视频感觉这个项目挺有趣，于是花了一点时间做了一些了解，记录如下。</p>
+
+<h3 id="为何要开发-deno">为何要开发 Deno?</h3>
+
+<p>关于为何要开发 Deno，Ryan 其实已经在去年的 JSConf EU 上已经讲过了。在这个主题为 &ldquo;10 Things I Regret About Node.js&rdquo; 的分享中，Ryan 回顾了在他看来当初开发 Node.js 时留下的 10 大遗憾。由于 Node.js 现在已经广泛应用于各个领域，为了保证兼容性，对 Node.js 底层进行大规模改造已经不现实。于是 Ryan 宣布他决定开发一个全新的 JavaScript Runtime 已解决当初的种种缺陷。这便是 Deno。</p>
+
+<div style="text-align:center">
+<iframe  width="560" height="315" src="https://www.youtube.com/embed/M3BM9TB-8yA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<h5 style="text-align:center">10 Things I Regret About Node.js</h5>
+</div>
+
+<p><em>PS: 这个演讲也是干货满满，非常推荐大家观看。</em><br />
+<em>PPS: 敢于在公众面前大方的讨论自己设计软件的种种缺陷，这种精神本身就很值得敬佩。</em></p>
+
+<h3 id="deno-有何特点">Deno 有何特点？</h3>
+
+<p>在我看来，Deno 的几个突出特点有以下几个：</p>
+
+<ul>
+<li>内置 TypeScript 支持</li>
+<li>安全性提升</li>
+<li>基于 ES 标准的模块系统</li>
+<li>既是运行时又是包管理器</li>
+<li>简化的安装方式</li>
+</ul>
+
+<p>下面逐一介绍。</p>
+
+<h4 id="内置-typescript-支持">内置 TypeScript 支持</h4>
+
+<p>顾名思义，Deno 的运行时内置了 TypeScript 引擎，我们可以直接通过 Deno 命令运行 <code>.ts</code> 文件，省去了编译流程以及本地开发环境的配置。</p>
+
+<h4 id="安全性提升">安全性提升</h4>
+
+<p>Deno 会在一个安全沙箱里执行我们的的程序代码，如果程序需要访问文件系统、网络或是派生子进程则必须得到开发者的明确授权，否则会产生一个 <code>PermissionDenied</code> 的异常。</p>
+
+<p>我们通过一个例子来说明。</p>
+
+<p>以下是一个使用 Deno 开发的模拟 *nix 环境下 <code>cat</code> 命令的小程序。它将读取参数中的文件并将内容打印到终端中。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">(<span style="color:#66d9ef">async</span> () =&gt; {
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">Deno</span>.<span style="color:#a6e22e">args</span>.<span style="color:#a6e22e">length</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">filename</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Deno</span>.<span style="color:#a6e22e">args</span>[<span style="color:#a6e22e">i</span>];
+    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">file</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">Deno</span>.<span style="color:#a6e22e">open</span>(<span style="color:#a6e22e">filename</span>);
+    <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">Deno</span>.<span style="color:#a6e22e">copy</span>(<span style="color:#a6e22e">Deno</span>.<span style="color:#a6e22e">stdout</span>, <span style="color:#a6e22e">file</span>);
+    <span style="color:#a6e22e">file</span>.<span style="color:#a6e22e">close</span>();
+  }
+})();
+</code></pre></div>
+<p>我们运行该脚本，提示 Deno 申请读取该文件并询问我们是否授权。当我们选择不授权时，Deno 抛出权限异常并退出。</p>
+
+<p><img src="https://loveky.github.io/img/deno-permission-deny.svg" alt="" /></p>
+
+<p>下面我们手动选择授权：</p>
+
+<p><img src="https://loveky.github.io/img/deno-permission-grant.svg" alt="" /></p>
+
+<p>文件读取成功。</p>
+
+<p>如果觉得每次通过交互式的操作授权麻烦，Deno 还提供了命令行参数来指定开放哪些权限：</p>
+
+<p><img src="https://loveky.github.io/img/deno-permission-grant-by-option.svg" alt="" /></p>
+
+<h4 id="基于-es-标准的模块系统">基于 ES 标准的模块系统</h4>
+
+<p>随着 ES2015 标准的发布，JavaScript 有了正式的模块标准。Deno 的模块系统即建立在 ES 的模块标准之上，它仅支持 <code>import</code> 语句，不支持 <code>require</code> 方法。</p>
+
+<p>为了尽可能和浏览器保持兼容，它还支持 <code>import</code> 一个 URL：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"> <span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">as</span> <span style="color:#a6e22e">log</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;https://deno.land/std/log/mod.ts&#34;</span>;
+</code></pre></div>
+<p>因此，如果你的代码没有使用 <code>Deno</code> 命名空间下的方法，那么它应该可以无缝的运行在浏览器环境中。</p>
+
+<h4 id="既是运行时又是包管理器">既是运行时又是包管理器</h4>
+
+<p>Deno 首次遇到远程 <code>import</code> 时会首先将该文件下载到本地，后续再执行该脚本时，就不会再从网络上下载，而是直接从本地缓存中读取已经缓存的副本，从而支持离线运行代码。本地缓存可以通过环境变量 <code>$DENO_DIR</code> 指定具体路径。</p>
+
+<p>基于这一点，Deno 并没有配套的类似于 npm 的包管理，同时也没有和 <code>package.json</code> 对应的描述文件。</p>
+
+<h4 id="简化的安装方式">简化的安装方式</h4>
+
+<p>Deno 只提供一个可执行文件供下载，只要你下载该文件到本地，你就有了运行 Deno 脚本所以依赖的全部环境。这一点使得维持本地多个版本的 Deno 运行时变得非常简单。</p>
+
+<h3 id="小结">小结</h3>
+
+<p>以上就是 Deno 的一些基本信息，如果想了解更多内容，可以查看完整的 <a href="https://deno.land/manual.html">Deno 用户手册</a>。</p>
+
+<p>另外需要注意的一点是，目前 Deno 还在快速迭代中，现有版本可能包含了各种各样的 bug，同时 API 也随时可能更改。因此现阶段还不推荐在任何非学习场景中使用 Deno。</p>
+
+<h4 id="延伸阅读">延伸阅读</h4>
+
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import">import - JavaScript | MDN</a></li>
+<li><a href="https://developers.google.com/web/fundamentals/primers/modules">Using JavaScript modules on the web</a></li>
+</ul></article>
     <footer class="post-footer">
       
       <ul class="post-tags">
