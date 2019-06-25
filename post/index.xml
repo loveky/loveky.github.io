@@ -6,10 +6,34 @@
     <description>Recent content in Posts on loveky</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 02 May 2019 20:34:38 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 25 Jun 2019 10:53:14 +0800</lastBuildDate>
     
 	<atom:link href="https://loveky.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>正则表达式中的 lookahead 断言与 lookbehind 断言</title>
+      <link>https://loveky.github.io/2019/06/25/regexp-lookahead-assertion/</link>
+      <pubDate>Tue, 25 Jun 2019 10:53:14 +0800</pubDate>
+      
+      <guid>https://loveky.github.io/2019/06/25/regexp-lookahead-assertion/</guid>
+      <description>一个正则表达式引发的空白 最近在开发内部的一个前端异常监控系统，在 Web 端会展示异常上报的来源 IP 以及所在地，大概是这个样子的：
+由于页面空间有限且几乎所有的异常都来自国内，因此做了一个简单的优化，将所在地字符串开头处的“中国”二字移除掉，写个很简单的正则表达式即可：
+result.replace(/^中国/, &amp;#34;&amp;#34;)  改完以后，效果还不错：
+直到有一天小伙伴反馈问题，有的 IP 的地理位置展示了空白，像这样：
+简单调查了一下发现该 IP 的查询结果只有“中国”二字，于是经过前面的处理逻辑后就只剩下空字符串了。
+解决方案 最直接的想法就是增加一个 if / else 判断，如果查询结果是“中国”二字，则跳过正则处理。
+虽然直接，但是感觉不够简洁。能否在原来的正则表达式上优化一把来实现我们要的效果呢？使用今天要说的 lookahead 断言就可以。
+lookahead 断言 在说 lookahead 断言前我们先看看另一个写法：
+result.replace(/^中国./, &amp;#34;&amp;#34;)  这种写法在“中国”二字后多匹配了一个字符，这样写可以避免处理仅有“中国”二字的情况，但带来一个新的问题：在多个字的情况下，多删掉了一个字符。
+我们想要的只是一个 0 长度的断言而不是真正匹配什么内容，就像 \b，^，$ 那样，只表示某个条件是否达成，但并不匹配字符串中的内容。
+这就是 lookahead 的意义，我们只需将正则改写成：
+result.replace(/^中国(?=.)/, &amp;#34;&amp;#34;)  就可以表示只匹配之后还有其它字符的“中国”二字的含义。
+lookahead 断言的写法就是 (?=(regex)) 其中(regex) 就是你想断言的条件。
+只需要将 = 改成 ! 你就得到了一个否定形式的 lookahead 断言，例如 /^中国(?!.)/ 就表示之后没有任何其它字符的“中国”二字。
+lookbehind 断言 与 lookahead 对应的，还有 lookbehind 断言以及它的否定形式：
+/(?&amp;lt;=(regex))/ /(?</description>
+    </item>
     
     <item>
       <title>初识 Deno</title>

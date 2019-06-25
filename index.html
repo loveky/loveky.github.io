@@ -225,6 +225,34 @@
   
    <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2019/06/25/regexp-lookahead-assertion/" class="post-link">正则表达式中的 lookahead 断言与 lookbehind 断言</a></h3>
+    <p class="post-meta">@loveky · Jun 25, 2019</p>
+  </header>
+  
+    <img class="post-cover" src="https://img13.360buyimg.com/uba/s300x300_jfs/t1/41595/38/7447/103723/5d118e9cEe8022b1a/4e79718fdac26cc2.png" alt="正则表达式中的 lookahead 断言与 lookbehind 断言" lazyload="on">
+  
+  <p class="post-summary">一个正则表达式引发的空白 最近在开发内部的一个前端异常监控系统，在 Web 端会展示异常上报的来源 IP 以及所在地，大概是这个样子的：
+由于页面空间有限且几乎所有的异常都来自国内，因此做了一个简单的优化，将所在地字符串开头处的“中国”二字移除掉，写个很简单的正则表达式即可：
+result.replace(/^中国/, &#34;&#34;)  改完以后，效果还不错：
+直到有一天小伙伴反馈问题，有的 IP 的地理位置展示了空白，像这样：
+简单调查了一下发现该 IP 的查询结果只有“中国”二字，于是经过前面的处理逻辑后就只剩下空字符串了。
+解决方案 最直接的想法就是增加一个 if / else 判断，如果查询结果是“中国”二字，则跳过正则处理。
+虽然直接，但是感觉不够简洁。能否在原来的正则表达式上优化一把来实现我们要的效果呢？使用今天要说的 lookahead 断言就可以。
+lookahead 断言 在说 lookahead 断言前我们先看看另一个写法：
+result.replace(/^中国./, &#34;&#34;)  这种写法在“中国”二字后多匹配了一个字符，这样写可以避免处理仅有“中国”二字的情况，但带来一个新的问题：在多个字的情况下，多删掉了一个字符。
+我们想要的只是一个 0 长度的断言而不是真正匹配什么内容，就像 \b，^，$ 那样，只表示某个条件是否达成，但并不匹配字符串中的内容。
+这就是 lookahead 的意义，我们只需将正则改写成：
+result.replace(/^中国(?=.)/, &#34;&#34;)  就可以表示只匹配之后还有其它字符的“中国”二字的含义。
+lookahead 断言的写法就是 (?=(regex)) 其中(regex) 就是你想断言的条件。
+只需要将 = 改成 ! 你就得到了一个否定形式的 lookahead 断言，例如 /^中国(?!.)/ 就表示之后没有任何其它字符的“中国”二字。
+lookbehind 断言 与 lookahead 对应的，还有 lookbehind 断言以及它的否定形式：
+/(?&lt;=(regex))/ /(?</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2019/06/25/regexp-lookahead-assertion/">阅读全文 →</a>
+  </footer>
+</article>
+  <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2019/05/02/meet-deno/" class="post-link">初识 Deno</a></h3>
     <p class="post-meta">@loveky · May 2, 2019</p>
   </header>
@@ -389,25 +417,6 @@ export PATH=~/Software/flutter/bin:$PATH 提示：记得把这行代码放到你
 VS Code 上只需要安装 flutter 扩展即可。 Android Studio 上需要安装 flutter 和 dart 两个插件。</p>
   <footer class="post-footer">
     <a class="read-more" href="https://loveky.github.io/2018/07/04/flutter-first-experience/">阅读全文 →</a>
-  </footer>
-</article>
-  <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://loveky.github.io/2018/06/05/unit-testing-react-component-with-jest/" class="post-link">利用 Jest 为 React 组件编写单元测试</a></h3>
-    <p class="post-meta">@loveky · Jun 5, 2018</p>
-  </header>
-  
-    <img class="post-cover" src="https://img20.360buyimg.com/uba/s300x300_jfs/t20215/257/718598224/50702/4b2501db/5b168cc4N1fc2ed0b.png" alt="利用 Jest 为 React 组件编写单元测试" lazyload="on">
-  
-  <p class="post-summary">图片来自 https://blog.algolia.com   在上一篇文章中我们介绍了什么是单元测试以及单元测试框架 Jest 的基本用法。在本文中我们会具体聊聊如何用 Jest 为 React 组件编写单元测试。
-首先我们要明确的一点，那就是 React 组件的单元测试本质是也是单元测试。因此它也符合我们之前介绍过的单元测试的全部特点。唯一不同的地方在于 React 组件的单元测试中我们需要找到合适的方法对执行结果进行断言。换言之，我们要根据 React 的特点来设置代码是否正确执行的判断条件。
-那么 React 组件和其它的被测试对象有何不同呢？仔细想过，我们会发现：
- React 组件的 render 结果是一个组件树，并且整个树最终会被解析成一个纯粹由 HTML 元素构成的树形结构 React 组件可以拥有 state，且 state 的变化会影响 render 结果 React 组件可以拥有生命周期函数，这些生命周期函数会在特定时间点执行  知道了要测试的内容，接下来的问题就是如何执行一个 React 组件并编写断言了。如何执行一个 React 组件呢？看到这个问题估计大多数儿人是蒙的。平时不就是直接 ReactDOM.render 吗？不错，ReactDOM.render 确实可以执行一个 React 组件并将它渲染到页面中，但这种方式不利于编写测试代码。
-有没有更简单的方式呢？其实 React 已经帮我们提供好了工具，让我们一起来看看。
-React 提供的测试工具 在 React 的官方文档中提到了两个用于测试 React 组件的库。让我们分别介绍。
-react-test-renderer 在说 react-test-renderer 之前，让我们先聊聊什么是 renderer。React 最早是被用来开发网页的，所以早期的 React 库中还包含了大量和 DOM 相关的逻辑。后来 React 的设计思想慢慢被迁移到其它场景，最被人们熟知的莫过于 React Native 了。为了灵活性和扩展性，React 的代码被分拆为 React 核心代码与各种 renderer。React 自带了 3 个 renderer，前两个是大家常见的：</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2018/06/05/unit-testing-react-component-with-jest/">阅读全文 →</a>
   </footer>
 </article>
  

@@ -230,6 +230,22 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2017/07/24/service-worker-101/" class="post-link">Service Worker 基础知识</a></h3>
+    <p class="post-meta">@loveky · Jul 24, 2017</p>
+  </header>
+  
+  <p class="post-summary">本文旨在帮你快速了解 service worker 的基本知识点，让你对 service worker 有一个大致的了解。为以后开发一个简单的 PWA 应用打下基础。
+关于 service worker 的几个基本知识点  它是一个可编程的网络代理，让你可以控制页面请求的处理方式。 它是一个 JavaScript Worker，因此它无法直接操作 DOM。但可以通过 postMessage 接口与页面通信。同时，service worker 中的代码不会阻塞页面响应。 它在闲置时被终止，在需要时被启动。并不是常驻内存。因此你不能在 onfetch 或是 onmessage 回调中依赖全局状态。 被设计成完全异步。因此在 service worker 中无法使用同步 API （例如同步 XHR，localStorage等）。接口重度依赖于 promise。 只能在 HTTPS 页面加载（唯一的例外：localhost/127.0.0.1，方便调试）。  Service worker 的作用域 一个 service worker 的默认作用域是这个 service worker 脚本所在的目录。例如 https://example.com/sw.js 脚本默认就是 https://example.com 下的所有页面。
+你也可以在注册 service worker 时明确指定作用域：
+navigator.serviceWorker.register(&#39;sw.js&#39;, { scope: &#39;./abc&#39; });  假设以上代码在 https://example.com 页面里执行，则意味着该 service worker 的作用域就是 https://example.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2017/07/24/service-worker-101/">阅读全文 →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2017/07/21/translate-five-tips-for-working-with-redux-in-large-applications/" class="post-link">[译] 在大型应用中使用 Redux 的五个技巧</a></h3>
     <p class="post-meta">@loveky · Jul 21, 2017</p>
   </header>
@@ -404,21 +420,6 @@ module.exports = { entry: { app: &#39;./src/js/app.jsx&#39;, vender: [ &#39;clas
 ^1.2.3 := &gt;=1.2.3 &lt;2.0.0 ^0.2.3 := &gt;=0.2.3 &lt;0.3.0 ^0.0.3 := &gt;=0.</p>
   <footer class="post-footer">
     <a class="read-more" href="https://loveky.github.io/2017/03/27/lock-npm-package-version-in-js-project/">阅读全文 →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://loveky.github.io/2017/03/27/react-conf-2017-video/" class="post-link">React Conf 2017视频 百度网盘地址</a></h3>
-    <p class="post-meta">@loveky · Mar 27, 2017</p>
-  </header>
-  
-  <p class="post-summary">React Conf 2017的全部视频已经在YouTube上放出来了。为了方便在家里的电视上播放，就全部下载了一套。顺便上传了百度网盘一份。感兴趣的可以看看哦。全部720p。
-下载地址：
-http://pan.baidu.com/s/1gfl5FzX</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2017/03/27/react-conf-2017-video/">阅读全文 →</a>
   </footer>
 </article>
 
