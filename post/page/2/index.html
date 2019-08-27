@@ -230,6 +230,30 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2018/07/04/flutter-first-experience/" class="post-link">Flutter 初体验</a></h3>
+    <p class="post-meta">@loveky · Jul 4, 2018</p>
+  </header>
+  
+    <img class="post-cover" src="https://img12.360buyimg.com/uba/s300x300_jfs/t22333/316/1892258469/68208/66d017fd/5b3ce1e8N69717104.png" alt="Flutter 初体验" lazyload="on">
+  
+  <p class="post-summary">初识 Flutter 还是在上个月的 GMTC 大会上。来自 Google 的工程师现场演示了如何使用 Flutter 构建美观、高性能的移动应用。个人对其中一些特性，比如良好的开发者体验、优秀的跨平台能力很感兴趣。于是决定在会后亲自体验一下。
+最近几天尝试使用 Flutter 把京东 APP 中的排行榜频道的首屏布局实现了一下，算是对基于 Flutter 的开发有了一个最简单的了解，特地记录一下，方便其他想了解、尝试 Flutter 框架的小伙伴。
+首先看看我实现了一个什么样的界面：
+接下来让我们从不同方面说说 Flutter 的开发。
+Flutter 开发环境搭建 安装 Flutter 不同平台的安装流程基本一致，这里就以 macOS 为例。首先下载 flutter macOS 版，并解压。
+把 Flutter 的 bin 目录添加到系统 PATH 中：
+export PATH=~/Software/flutter/bin:$PATH 提示：记得把这行代码放到你的 shell 启动脚本中，避免每次都要手动执行。
+路径添加完成后就可以执行 flutter 命令啦。 Flutter 提供了一个 flutter doctor 命令协助我们安装 Flutter 的依赖。它会检查本地是否有 iOS 和 Android 的开发环境。如果检测到依赖缺失，它还会给出对应依赖的安装方法。你只需要不断执行该方法，然后安装缺失的依赖，直到全部依赖安装完成即可。
+配置代码编辑器 主要是给 IDE 安装相关插件。
+VS Code 上只需要安装 flutter 扩展即可。 Android Studio 上需要安装 flutter 和 dart 两个插件。</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2018/07/04/flutter-first-experience/">阅读全文 →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2018/06/05/unit-testing-react-component-with-jest/" class="post-link">利用 Jest 为 React 组件编写单元测试</a></h3>
     <p class="post-meta">@loveky · Jun 5, 2018</p>
   </header>
@@ -410,29 +434,6 @@ webpack --entry ./app.js --output-filename app.bunble.js 在生成的 app.bundle
  20170831 Keep Your Bundle Size Under Control 20170830 Understand async/await better 20170828 How to get the most out of the JavaScript console 20170824 ASYNC/AWAIT WILL MAKE YOUR CODE SIMPLER 20170823 Error handling Promises in JavaScript 20170822 Singletons versus Dependency Injection 20170821 Working with Environment Variables in Node.js 20170818 Rx.js: Operators, Part I 20170817 How to use Memoize to cache JavaScript function results and speed up your code 20170816 Building A Simple AI Chatbot With Web Speech API And Node.</p>
   <footer class="post-footer">
     <a class="read-more" href="https://loveky.github.io/2017/08/31/recommend-reading-201708/">阅读全文 →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://loveky.github.io/2017/08/03/config-eslint-and-stylelint-in-project/" class="post-link">在项目中启用 ESLint 与 Stylelint 检查</a></h3>
-    <p class="post-meta">@loveky · Aug 3, 2017</p>
-  </header>
-  
-  <p class="post-summary">多人参与的项目中，经常会多人交叉编辑多个文件。这就导致了各个文件中充斥着各种编码风格。
-最最常见的就有：
- 使用空格还是Tab 一次缩进是 2 个空格还是 4 个空格 还是 8 个空格 字符串使用单引号还是双引号 JavaScript 一行结尾到底要不要加分号 关键字前后要不要加空格 等等等等  不同风格混杂在一起极大的影响代码的可读性与质量。因此在多人项目中维护一致的代码风格就很重要了。
-本文就简单介绍一下如何通过 ESLint 和 Stylelint 为代码库配置针对 JavaScript 与 CSS（SCSS）的代码风格检查。
-配置 ESLint  安装 eslint
-yarn add --dev eslint // or npm install --save-dev eslint 创建配置文件
-./node_modules/.bin/eslint --init  该命令会在项目目录中创建一个 .eslintrc.json 文件。默认生成的配置文件可能看起来是这个样子：
-{ &#34;rules&#34;: { &#34;semi&#34;: [&#34;error&#34;, &#34;always&#34;], &#34;quotes&#34;: [&#34;error&#34;, &#34;double&#34;] } }  rules 里定义的就是你想要检查的规则了。例如上边示例中就配置了分号和引号的使用。
-完整的配置文档可以在这里找到。
- 配置 npm script
-配置好以后就可以通过命令</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2017/08/03/config-eslint-and-stylelint-in-project/">阅读全文 →</a>
   </footer>
 </article>
 

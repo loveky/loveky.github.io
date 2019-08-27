@@ -231,6 +231,22 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2019/08/27/node-child_process-fork-spawn-exec-execfile/" class="post-link">child_process 模块中的 spawn fork exec 与 execFile</a></h3>
+    <p class="post-meta">@loveky · Aug 27, 2019</p>
+  </header>
+  
+    <img class="post-cover" src="https://blog-1300104298.cos.ap-beijing.myqcloud.com/Snipaste_2019-08-27_22-08-24.png" alt="child_process 模块中的 spawn fork exec 与 execFile" lazyload="on">
+  
+  <p class="post-summary">具体用法参考官方文档即可，已经写的很清楚。本文仅做一些简单对比。
+简单对比    方法 spawn fork exec execFile     是否通过 shell 执行子命令 否(*) 否 是 否(*)   读取程序输出 利用子进程的 stdout / stderr 利用子进程的 stdout / stderr 在 callback 中一次返回 在 callback 中一次返回   父子进程通信 process.send() 与 process.on(&#34;message&#34;) (仅当子进程为 Node 脚本时可用) process.send() 与 process.on(&#34;message&#34;) 不支持 不支持   备注  仅限执行 Node 脚本      说明  fork、exec、execFile 都是 spawn 的一种特殊情况，内部都是调用了 spawn 方法。 spwan 和 execFile 默认是创建子进程直接执行指定命令，但是可以通过 option 中的 shell 字段来明确要求在一个 shell 中执行命令。 由于 exec 和 execFile 会把子进程的 stdout 和 stderr 缓存起来一次性返回给调用方，在子进程退出之前，这些缓存数据会在内存中不断累积。为了防止内存占用过多导致的问题，这两个方法的参数对象中接受一个 maxBuffer 字段，表示缓存数据的上限大小，超过该大小会导致子进程被 kill() 且缓存数据会被截断。该参数的默认值是 1024 * 1024。 以上几个方法的源码都在 lib/child_process.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2019/08/27/node-child_process-fork-spawn-exec-execfile/">阅读全文 →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2019/02/12/nodejs-module-system/" class="post-link">Node.js 的模块系统</a></h3>
     <p class="post-meta">@loveky · Feb 12, 2019</p>
   </header>

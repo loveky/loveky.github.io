@@ -230,6 +230,22 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2019/08/27/node-child_process-fork-spawn-exec-execfile/" class="post-link">child_process 模块中的 spawn fork exec 与 execFile</a></h3>
+    <p class="post-meta">@loveky · Aug 27, 2019</p>
+  </header>
+  
+    <img class="post-cover" src="https://blog-1300104298.cos.ap-beijing.myqcloud.com/Snipaste_2019-08-27_22-08-24.png" alt="child_process 模块中的 spawn fork exec 与 execFile" lazyload="on">
+  
+  <p class="post-summary">具体用法参考官方文档即可，已经写的很清楚。本文仅做一些简单对比。
+简单对比    方法 spawn fork exec execFile     是否通过 shell 执行子命令 否(*) 否 是 否(*)   读取程序输出 利用子进程的 stdout / stderr 利用子进程的 stdout / stderr 在 callback 中一次返回 在 callback 中一次返回   父子进程通信 process.send() 与 process.on(&#34;message&#34;) (仅当子进程为 Node 脚本时可用) process.send() 与 process.on(&#34;message&#34;) 不支持 不支持   备注  仅限执行 Node 脚本      说明  fork、exec、execFile 都是 spawn 的一种特殊情况，内部都是调用了 spawn 方法。 spwan 和 execFile 默认是创建子进程直接执行指定命令，但是可以通过 option 中的 shell 字段来明确要求在一个 shell 中执行命令。 由于 exec 和 execFile 会把子进程的 stdout 和 stderr 缓存起来一次性返回给调用方，在子进程退出之前，这些缓存数据会在内存中不断累积。为了防止内存占用过多导致的问题，这两个方法的参数对象中接受一个 maxBuffer 字段，表示缓存数据的上限大小，超过该大小会导致子进程被 kill() 且缓存数据会被截断。该参数的默认值是 1024 * 1024。 以上几个方法的源码都在 lib/child_process.</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2019/08/27/node-child_process-fork-spawn-exec-execfile/">阅读全文 →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2019/06/25/regexp-lookahead-assertion/" class="post-link">正则表达式中的 lookahead 断言与 lookbehind 断言</a></h3>
     <p class="post-meta">@loveky · Jun 25, 2019</p>
   </header>
@@ -416,30 +432,6 @@ export HTTP_PROXY=http://127.0.0.1:51350 export HTTPS_PROXY=http://127.0.0.1:513
 # http proxy util hp() { if [ &#34;$1&#34; = &#34;enable&#34; ] then PORT=&#34;51350&#34; if [ -n &#34;$2&#34; ] then PORT=&#34;$2&#34; fi export HTTP_PROXY=http://127.0.0.1:$PORT export HTTPS_PROXY=http://127.0.0.1:$PORT else export HTTP_PROXY=&#34;&#34; export HTTPS_PROXY=&#34;&#34; fi } 把这都函数代码放到 Shell 启动脚本里。然后需要开启代理的时候执行 hp enable 即可，或是指定代理端口号 hp enable 33333。关闭代理执行 hp 即可。</p>
   <footer class="post-footer">
     <a class="read-more" href="https://loveky.github.io/2018/07/05/config-lantern-as-shell-proxy/">阅读全文 →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://loveky.github.io/2018/07/04/flutter-first-experience/" class="post-link">Flutter 初体验</a></h3>
-    <p class="post-meta">@loveky · Jul 4, 2018</p>
-  </header>
-  
-    <img class="post-cover" src="https://img12.360buyimg.com/uba/s300x300_jfs/t22333/316/1892258469/68208/66d017fd/5b3ce1e8N69717104.png" alt="Flutter 初体验" lazyload="on">
-  
-  <p class="post-summary">初识 Flutter 还是在上个月的 GMTC 大会上。来自 Google 的工程师现场演示了如何使用 Flutter 构建美观、高性能的移动应用。个人对其中一些特性，比如良好的开发者体验、优秀的跨平台能力很感兴趣。于是决定在会后亲自体验一下。
-最近几天尝试使用 Flutter 把京东 APP 中的排行榜频道的首屏布局实现了一下，算是对基于 Flutter 的开发有了一个最简单的了解，特地记录一下，方便其他想了解、尝试 Flutter 框架的小伙伴。
-首先看看我实现了一个什么样的界面：
-接下来让我们从不同方面说说 Flutter 的开发。
-Flutter 开发环境搭建 安装 Flutter 不同平台的安装流程基本一致，这里就以 macOS 为例。首先下载 flutter macOS 版，并解压。
-把 Flutter 的 bin 目录添加到系统 PATH 中：
-export PATH=~/Software/flutter/bin:$PATH 提示：记得把这行代码放到你的 shell 启动脚本中，避免每次都要手动执行。
-路径添加完成后就可以执行 flutter 命令啦。 Flutter 提供了一个 flutter doctor 命令协助我们安装 Flutter 的依赖。它会检查本地是否有 iOS 和 Android 的开发环境。如果检测到依赖缺失，它还会给出对应依赖的安装方法。你只需要不断执行该方法，然后安装缺失的依赖，直到全部依赖安装完成即可。
-配置代码编辑器 主要是给 IDE 安装相关插件。
-VS Code 上只需要安装 flutter 扩展即可。 Android Studio 上需要安装 flutter 和 dart 两个插件。</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://loveky.github.io/2018/07/04/flutter-first-experience/">阅读全文 →</a>
   </footer>
 </article>
 

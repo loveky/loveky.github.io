@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>Angular中的Controller</title>
+  <title>child_process 模块中的 spawn fork exec 与 execFile</title>
 
   
   
@@ -23,39 +23,27 @@
   
 
   
-  
-  <meta name="description" content="在Angular中，一个Controller是一个JavaScript构造函数。当一个Controller通过ng-controller附加到某个DOM元素上时，Angular会使用相应Controller的构造函数来初始化一个新的Controller对象。一个新的child scope会被创建并作为可注入的参数(就是我们看到的$scope)传递给该Controller的构造函数。
-使用Controller：
- 为$scope对象设置初始状态
- 为$scope对象添加行为
-  不要使用Controller:
- 修改DOM —— Controllers应该只负责业务逻辑。将任何UI的逻辑放进Controller都会极大地破坏其可测试性。Angular中可以使用数据绑定用来更新页面中的数据或使用directive来封装DOM操作。 格式化input数据 —— 使用angular form controls 过滤输出数据 —— 使用Angular中的filter机制 跨Controller之间的代码或状态共享 —— 使用Angular中的service机制 管理其他组件的生命周期  ">
+  <meta name="author" content="loveky">
+  <meta name="description" content="具体用法参考官方文档即可，已经写的很清楚。本文仅做一些简单对比。
+简单对比    方法 spawn fork exec execFile     是否通过 shell 执行子命令 否(*) 否 是 否(*)   读取程序输出 利用子进程的 stdout / stderr 利用子进程的 stdout / stderr 在 callback 中一次返回 在 callback 中一次返回   父子进程通信 process.send() 与 process.on(&amp;quot;message&amp;quot;) (仅当子进程为 Node 脚本时可用) process.send() 与 process.on(&amp;quot;message&amp;quot;) 不支持 不支持   备注  仅限执行 Node 脚本      说明  fork、exec、execFile 都是 spawn 的一种特殊情况，内部都是调用了 spawn 方法。 spwan 和 execFile 默认是创建子进程直接执行指定命令，但是可以通过 option 中的 shell 字段来明确要求在一个 shell 中执行命令。 由于 exec 和 execFile 会把子进程的 stdout 和 stderr 缓存起来一次性返回给调用方，在子进程退出之前，这些缓存数据会在内存中不断累积。为了防止内存占用过多导致的问题，这两个方法的参数对象中接受一个 maxBuffer 字段，表示缓存数据的上限大小，超过该大小会导致子进程被 kill() 且缓存数据会被截断。该参数的默认值是 1024 * 1024。 以上几个方法的源码都在 lib/child_process.">
 
   
   
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@loveky_">
-    <meta name="twitter:title" content="Angular中的Controller">
-    <meta name="twitter:description" content="在Angular中，一个Controller是一个JavaScript构造函数。当一个Controller通过ng-controller附加到某个DOM元素上时，Angular会使用相应Controller的构造函数来初始化一个新的Controller对象。一个新的child scope会被创建并作为可注入的参数(就是我们看到的$scope)传递给该Controller的构造函数。
-使用Controller：
- 为$scope对象设置初始状态
- 为$scope对象添加行为
-  不要使用Controller:
- 修改DOM —— Controllers应该只负责业务逻辑。将任何UI的逻辑放进Controller都会极大地破坏其可测试性。Angular中可以使用数据绑定用来更新页面中的数据或使用directive来封装DOM操作。 格式化input数据 —— 使用angular form controls 过滤输出数据 —— 使用Angular中的filter机制 跨Controller之间的代码或状态共享 —— 使用Angular中的service机制 管理其他组件的生命周期  ">
-    <meta name="twitter:image" content="/images/avatar.jpg">
+    <meta name="twitter:title" content="child_process 模块中的 spawn fork exec 与 execFile">
+    <meta name="twitter:description" content="具体用法参考官方文档即可，已经写的很清楚。本文仅做一些简单对比。
+简单对比    方法 spawn fork exec execFile     是否通过 shell 执行子命令 否(*) 否 是 否(*)   读取程序输出 利用子进程的 stdout / stderr 利用子进程的 stdout / stderr 在 callback 中一次返回 在 callback 中一次返回   父子进程通信 process.send() 与 process.on(&amp;quot;message&amp;quot;) (仅当子进程为 Node 脚本时可用) process.send() 与 process.on(&amp;quot;message&amp;quot;) 不支持 不支持   备注  仅限执行 Node 脚本      说明  fork、exec、execFile 都是 spawn 的一种特殊情况，内部都是调用了 spawn 方法。 spwan 和 execFile 默认是创建子进程直接执行指定命令，但是可以通过 option 中的 shell 字段来明确要求在一个 shell 中执行命令。 由于 exec 和 execFile 会把子进程的 stdout 和 stderr 缓存起来一次性返回给调用方，在子进程退出之前，这些缓存数据会在内存中不断累积。为了防止内存占用过多导致的问题，这两个方法的参数对象中接受一个 maxBuffer 字段，表示缓存数据的上限大小，超过该大小会导致子进程被 kill() 且缓存数据会被截断。该参数的默认值是 1024 * 1024。 以上几个方法的源码都在 lib/child_process.">
+    <meta name="twitter:image" content="https://blog-1300104298.cos.ap-beijing.myqcloud.com/Snipaste_2019-08-27_22-08-24.png">
   
 
   
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Angular中的Controller">
-  <meta property="og:description" content="在Angular中，一个Controller是一个JavaScript构造函数。当一个Controller通过ng-controller附加到某个DOM元素上时，Angular会使用相应Controller的构造函数来初始化一个新的Controller对象。一个新的child scope会被创建并作为可注入的参数(就是我们看到的$scope)传递给该Controller的构造函数。
-使用Controller：
- 为$scope对象设置初始状态
- 为$scope对象添加行为
-  不要使用Controller:
- 修改DOM —— Controllers应该只负责业务逻辑。将任何UI的逻辑放进Controller都会极大地破坏其可测试性。Angular中可以使用数据绑定用来更新页面中的数据或使用directive来封装DOM操作。 格式化input数据 —— 使用angular form controls 过滤输出数据 —— 使用Angular中的filter机制 跨Controller之间的代码或状态共享 —— 使用Angular中的service机制 管理其他组件的生命周期  ">
-  <meta property="og:url" content="https://loveky.github.io/2014/04/11/angularjs-controller/">
-  <meta property="og:image" content="/images/avatar.jpg">
+  <meta property="og:title" content="child_process 模块中的 spawn fork exec 与 execFile">
+  <meta property="og:description" content="具体用法参考官方文档即可，已经写的很清楚。本文仅做一些简单对比。
+简单对比    方法 spawn fork exec execFile     是否通过 shell 执行子命令 否(*) 否 是 否(*)   读取程序输出 利用子进程的 stdout / stderr 利用子进程的 stdout / stderr 在 callback 中一次返回 在 callback 中一次返回   父子进程通信 process.send() 与 process.on(&amp;quot;message&amp;quot;) (仅当子进程为 Node 脚本时可用) process.send() 与 process.on(&amp;quot;message&amp;quot;) 不支持 不支持   备注  仅限执行 Node 脚本      说明  fork、exec、execFile 都是 spawn 的一种特殊情况，内部都是调用了 spawn 方法。 spwan 和 execFile 默认是创建子进程直接执行指定命令，但是可以通过 option 中的 shell 字段来明确要求在一个 shell 中执行命令。 由于 exec 和 execFile 会把子进程的 stdout 和 stderr 缓存起来一次性返回给调用方，在子进程退出之前，这些缓存数据会在内存中不断累积。为了防止内存占用过多导致的问题，这两个方法的参数对象中接受一个 maxBuffer 字段，表示缓存数据的上限大小，超过该大小会导致子进程被 kill() 且缓存数据会被截断。该参数的默认值是 1024 * 1024。 以上几个方法的源码都在 lib/child_process.">
+  <meta property="og:url" content="https://loveky.github.io/2019/08/27/node-child_process-fork-spawn-exec-execfile/">
+  <meta property="og:image" content="https://blog-1300104298.cos.ap-beijing.myqcloud.com/Snipaste_2019-08-27_22-08-24.png">
 
 
 
@@ -63,7 +51,7 @@
 <meta name="generator" content="Hugo 0.54.0">
 
 
-<link rel="canonical" href="https://loveky.github.io/2014/04/11/angularjs-controller/">
+<link rel="canonical" href="https://loveky.github.io/2019/08/27/node-child_process-fork-spawn-exec-execfile/">
 
 <meta name="renderer" content="webkit">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -244,40 +232,80 @@
 
   <section class="main post-detail">
     <header class="post-header">
-      <h1 class="post-title">Angular中的Controller</h1>
-      <p class="post-meta">@loveky · Apr 11, 2014 · 1 min read</p>
+      <h1 class="post-title">child_process 模块中的 spawn fork exec 与 execFile</h1>
+      <p class="post-meta">@loveky · Aug 27, 2019 · 1 min read</p>
     </header>
-    <article class="post-content"><p>在Angular中，一个Controller是一个JavaScript<strong>构造函数</strong>。当一个Controller通过<code>ng-controller</code>附加到某个DOM元素上时，Angular会使用相应Controller的构造函数来初始化一个新的Controller对象。一个新的child scope会被创建并作为可注入的参数(就是我们看到的<code>$scope</code>)传递给该Controller的构造函数。</p>
+    <article class="post-content">
 
-<p>使用Controller：</p>
+<p>具体用法参考<a href="https://nodejs.org/api/child_process.html">官方文档</a>即可，已经写的很清楚。本文仅做一些简单对比。</p>
 
-<ul>
-<li>为<code>$scope</code>对象设置初始状态<br /></li>
-<li>为<code>$scope</code>对象添加行为<br /></li>
-</ul>
+<h4 id="简单对比">简单对比</h4>
 
-<p>不要使用Controller:</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>spawn</th>
+<th>fork</th>
+<th>exec</th>
+<th>execFile</th>
+</tr>
+</thead>
 
-<ul>
-<li>修改DOM —— Controllers应该只负责业务逻辑。将任何UI的逻辑放进Controller都会极大地破坏其可测试性。Angular中可以使用数据绑定用来更新页面中的数据或使用<code>directive</code>来封装DOM操作。</li>
-<li>格式化input数据 —— 使用<code>angular form controls</code></li>
-<li>过滤输出数据 —— 使用Angular中的<code>filter</code>机制</li>
-<li>跨Controller之间的代码或状态共享 —— 使用Angular中的<code>service</code>机制</li>
-<li>管理其他组件的生命周期</li>
-</ul>
+<tbody>
+<tr>
+<td>是否通过 shell 执行子命令</td>
+<td>否(*)</td>
+<td>否</td>
+<td>是</td>
+<td>否(*)</td>
+</tr>
+
+<tr>
+<td>读取程序输出</td>
+<td>利用子进程的 stdout / stderr</td>
+<td>利用子进程的 stdout / stderr</td>
+<td>在 callback 中一次返回</td>
+<td>在 callback 中一次返回</td>
+</tr>
+
+<tr>
+<td>父子进程通信</td>
+<td><code>process.send()</code> 与 <code>process.on(&quot;message&quot;)</code> (仅当子进程为 Node 脚本时可用)</td>
+<td><code>process.send()</code> 与 <code>process.on(&quot;message&quot;)</code></td>
+<td>不支持</td>
+<td>不支持</td>
+</tr>
+
+<tr>
+<td>备注</td>
+<td></td>
+<td>仅限执行 Node 脚本</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="说明">说明</h4>
+
+<ol>
+<li><code>fork</code>、<code>exec</code>、<code>execFile</code> 都是 <code>spawn</code> 的一种特殊情况，内部都是调用了 <code>spawn</code> 方法。</li>
+<li><code>spwan</code> 和 <code>execFile</code> 默认是创建子进程直接执行指定命令，但是可以通过 option 中的 <code>shell</code> 字段来明确要求在一个 shell 中执行命令。</li>
+<li>由于 <code>exec</code> 和 <code>execFile</code> 会把子进程的 stdout 和 stderr 缓存起来一次性返回给调用方，在子进程退出之前，这些缓存数据会在内存中不断累积。为了防止内存占用过多导致的问题，这两个方法的参数对象中接受一个 <code>maxBuffer</code> 字段，表示缓存数据的上限大小，超过该大小会导致子进程被 <code>kill()</code> 且缓存数据会被截断。该参数的默认值是 <a href="https://github.com/nodejs/node/blob/v12.9.1/lib/child_process.js#L52"><code>1024 * 1024</code></a>。</li>
+<li>以上几个方法的源码都在 <a href="https://github.com/nodejs/node/blob/v12.9.1/lib/child_process.js"><code>lib/child_process.js</code></a> 中可以找到。</li>
+</ol>
 </article>
     <footer class="post-footer">
       
       <ul class="post-tags">
         
-          <li><a href="https://loveky.github.io/tags/angularjs"><span class="tag">AngularJS</span></a></li>
-        
-          <li><a href="https://loveky.github.io/tags/javascript"><span class="tag">JavaScript</span></a></li>
+          <li><a href="https://loveky.github.io/tags/node.js"><span class="tag">Node.js</span></a></li>
         
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>1964</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        
       </p>
     </footer>
     <div style="text-align:center">

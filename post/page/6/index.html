@@ -230,6 +230,26 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="https://loveky.github.io/2013/11/27/git-rerere/" class="post-link">你可能不知道的git rerere</a></h3>
+    <p class="post-meta">@loveky · Nov 27, 2013</p>
+  </header>
+  
+  <p class="post-summary">rerere 是啥的缩写？ rerere = reuse recorded resolution
+rerere是干啥用的？ 它会让Git记住你是如何解决某个文件的两个版本之间的conflict，这样在下次Git遇到同样的文件在相同的两个版本间发生冲突时，可以自动帮你使用相同的方法解决冲突。
+如何启用rerere？ git config --global rerere.enabled true
+或是
+在repo目录里mkdir .git/rr-cache
+不过推荐前者。
+能举例说明吗？ 参考inline的注释。
+$ git init git-rerere-test Initialized empty Git repository in /cygdrive/e/test/git-rerere-test/.git/ $ cd git-rerere-test $ git config rerere.enabled true # 开启rerere功能 $ echo &#34;What fruit do you like?&#34; &gt;&gt; question $ git add . &amp;&amp; git commit -m &#34;initial drop&#34; [master (root-commit) af9fdf9] initial drop 1 files changed, 1 insertions(&#43;), 0 deletions(-) create mode 100644 question $ git branch test # 创建test分支 $ echo &#34;I like orange&#34; &gt;&gt; question $ git add .</p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://loveky.github.io/2013/11/27/git-rerere/">阅读全文 →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="https://loveky.github.io/2013/06/15/try-sidekiq/" class="post-link">sidekiq初体验</a></h3>
     <p class="post-meta">@loveky · Jun 15, 2013</p>
   </header>
