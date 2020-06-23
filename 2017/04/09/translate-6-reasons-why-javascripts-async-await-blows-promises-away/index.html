@@ -32,7 +32,7 @@ async/await快速入门 为了让还没听说过这个特性的小伙伴们有�
 const makeRequest = () =&amp;gt; getJSON() .then(data =&amp;gt; { console.log(data) return &amp;#34;done&amp;#34; }) makeRequest()  使用async/await则是这样的：
 const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &amp;#34;done&amp;#34; } makeRequest()  使用async/await时有以下几个区别：
  在定义函数时我们使用了async关键字。await关键字只能在使用async定义的函数的内部使用。所有async函数都会返回一个promise，该promise最终resolve的值就是你在函数中return的内容。 由于第一点中的原因，你不能在顶级作用域中await一个函数。因为顶级作用域不是一个async方法。
-// this will not work in top level // await makeRequest()  // this will work makeRequest().then((result) =&amp;gt; { // do something })  await getJSON()意味着直到getJSON()返回的promise在resolve之后，console.">
+// this will not work in top level // await makeRequest()  // this will work makeRequest().then((result) =&amp;gt; { // do something })   await getJSON()意味着直到getJSON()返回的promise在resolve之后，console.">
 
   
   
@@ -47,8 +47,8 @@ async/await快速入门 为了让还没听说过这个特性的小伙伴们有�
 const makeRequest = () =&amp;gt; getJSON() .then(data =&amp;gt; { console.log(data) return &amp;#34;done&amp;#34; }) makeRequest()  使用async/await则是这样的：
 const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &amp;#34;done&amp;#34; } makeRequest()  使用async/await时有以下几个区别：
  在定义函数时我们使用了async关键字。await关键字只能在使用async定义的函数的内部使用。所有async函数都会返回一个promise，该promise最终resolve的值就是你在函数中return的内容。 由于第一点中的原因，你不能在顶级作用域中await一个函数。因为顶级作用域不是一个async方法。
-// this will not work in top level // await makeRequest()  // this will work makeRequest().then((result) =&amp;gt; { // do something })  await getJSON()意味着直到getJSON()返回的promise在resolve之后，console.">
-    <meta name="twitter:image" content="/images/avatar.jpg">
+// this will not work in top level // await makeRequest()  // this will work makeRequest().then((result) =&amp;gt; { // do something })   await getJSON()意味着直到getJSON()返回的promise在resolve之后，console.">
+    <meta name="twitter:image" content="/images/avatar.png">
   
 
   
@@ -62,14 +62,14 @@ async/await快速入门 为了让还没听说过这个特性的小伙伴们有�
 const makeRequest = () =&amp;gt; getJSON() .then(data =&amp;gt; { console.log(data) return &amp;#34;done&amp;#34; }) makeRequest()  使用async/await则是这样的：
 const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &amp;#34;done&amp;#34; } makeRequest()  使用async/await时有以下几个区别：
  在定义函数时我们使用了async关键字。await关键字只能在使用async定义的函数的内部使用。所有async函数都会返回一个promise，该promise最终resolve的值就是你在函数中return的内容。 由于第一点中的原因，你不能在顶级作用域中await一个函数。因为顶级作用域不是一个async方法。
-// this will not work in top level // await makeRequest()  // this will work makeRequest().then((result) =&amp;gt; { // do something })  await getJSON()意味着直到getJSON()返回的promise在resolve之后，console.">
+// this will not work in top level // await makeRequest()  // this will work makeRequest().then((result) =&amp;gt; { // do something })   await getJSON()意味着直到getJSON()返回的promise在resolve之后，console.">
   <meta property="og:url" content="https://loveky.github.io/2017/04/09/translate-6-reasons-why-javascripts-async-await-blows-promises-away/">
-  <meta property="og:image" content="/images/avatar.jpg">
+  <meta property="og:image" content="/images/avatar.png">
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0">
+<meta name="generator" content="Hugo 0.55.6">
 
 
 <link rel="canonical" href="https://loveky.github.io/2017/04/09/translate-6-reasons-why-javascripts-async-await-blows-promises-away/">
@@ -107,7 +107,7 @@ const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &am
 
 <link rel="preload" href="https://loveky.github.io/styles/main.min.css" as="style">
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
-<link rel="preload" href="https://loveky.github.io/images/avatar.jpg" as="image">
+<link rel="preload" href="https://loveky.github.io/images/avatar.png" as="image">
 <link rel="preload" href="https://loveky.github.io/images/grey-prism.svg" as="image">
 
 
@@ -164,7 +164,7 @@ const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &am
     
     
   <header class="site-header">
-  <img class="avatar" src="https://loveky.github.io/images/avatar.jpg" alt="Avatar">
+  <img class="avatar" src="https://loveky.github.io/images/avatar.png" alt="Avatar">
   
   <h2 class="title">loveky</h2>
   
@@ -308,9 +308,9 @@ const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &am
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">makeRequest</span>().<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">result</span>) =&gt; {
   <span style="color:#75715e">// do something
 </span><span style="color:#75715e"></span>})
-</code></pre></div></li>
-
-<li><p><code>await getJSON()</code>意味着直到<code>getJSON()</code>返回的promise在resolve之后，<code>console.log</code>才会执行并输出resolove的值。</p></li>
+</code></pre></div>
+<ol>
+<li><code>await getJSON()</code>意味着直到<code>getJSON()</code>返回的promise在resolve之后，<code>console.log</code>才会执行并输出resolove的值。</li>
 </ol>
 
 <h3 id="为何使用async-await编写出来的代码更好呢">为何使用async/await编写出来的代码更好呢？</h3>
@@ -323,22 +323,24 @@ const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &am
 
 <p>async/await终于使得用同一种构造(古老而好用的<code>try/catch</code>) 处理同步和异步错误成为可能。在下面这段使用promise的代码中，<code>try/catch</code>不能捕获<code>JSON.parse</code>抛出的异常，因为该操作是在promise中进行的。要处理<code>JSON.parse</code>抛出的异常，你需要在promise上调用<code>.catch</code>并重复一遍异常处理的逻辑。通常在生产环境中异常处理逻辑都远比<code>console.log</code>要复杂，因此这会导致大量的冗余代码。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">makeRequest</span> <span style="color:#f92672">=</span> () =&gt; {
-  <span style="color:#66d9ef">try</span> {
-    <span style="color:#a6e22e">getJSON</span>()
-      .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">result</span> =&gt; {
-        <span style="color:#75715e">// this parse may fail
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>(<span style="color:#a6e22e">result</span>)
-        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">data</span>)
-      })
-      <span style="color:#75715e">// uncomment this block to handle asynchronous errors
-</span><span style="color:#75715e"></span>      <span style="color:#75715e">// .catch((err) =&gt; {
-</span><span style="color:#75715e"></span>      <span style="color:#75715e">//   console.log(err)
-</span><span style="color:#75715e"></span>      <span style="color:#75715e">// })
-</span><span style="color:#75715e"></span>  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">err</span>) {
-    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">err</span>)
-  }
+<span style="color:#66d9ef">try</span> {
+<span style="color:#a6e22e">getJSON</span>()
+  .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">result</span> =&gt; {
+    <span style="color:#75715e">// this parse may fail
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>(<span style="color:#a6e22e">result</span>)
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">data</span>)
+  })
+  <span style="color:#75715e">// uncomment this block to handle asynchronous errors
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// .catch((err) =&gt; {
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">//   console.log(err)
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// })
+</span><span style="color:#75715e"></span>} <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">err</span>) {
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">err</span>)
 }
-</code></pre></div>
+}
+</code></pre></div></li>
+</ol>
+
 <p>现在看看使用了async/await的情况，<code>catch</code>代码块现在可以捕获<code>JSON.parse</code>抛出的异常了：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">makeRequest</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> () =&gt; {
   <span style="color:#66d9ef">try</span> {
@@ -503,7 +505,7 @@ const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &am
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>870</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>1171</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">
@@ -536,7 +538,7 @@ const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &am
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 loveky</p>
+  <p>© 2017-2020 loveky</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

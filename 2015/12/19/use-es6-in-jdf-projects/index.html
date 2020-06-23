@@ -27,7 +27,9 @@
   <meta name="description" content="Note: 目前虽然JDF已经支持使用ES6开发脚本，但线上使用还在前期摸索阶段，请大家根据自己项目实际情况评估使用情况
 最近利用业余时间给JDF增加了ES6代码的支持。背后的原理是在项目构建阶段利用Babel将.babel文件转译成ES5代码。关于Babel的更多使用方法可以参考其官网的配置文档。
 下面开始正式介绍在利用ES6特性开发前的准备工作: - 升级JDF到最新版本（&amp;gt;= 1.8.2） - 进入JDF项目目录，安装基本的Babel preset和plugin。关于preset和plugin的更多说明请参考文档
-npm install babel-preset-es2015 npm install babel-plugin-transform-es3-member-expression-literals npm install babel-plugin-transform-es3-property-literals  配置项目的.gitignore文件，忽略node_modules目录。在文件中添加以下内容：  **/node_modules/   引入es6-base.js(包含 es5-shim和babel-polyfill)  至此，所有的准备工作就完成了。接下来就可以利用ES6的各种新特性开发了。需要注意的是所有包含了ES6特性的脚本文件扩展名必须是.babel，否则JDF是不会对其进行编译的。
+npm install babel-preset-es2015 npm install babel-plugin-transform-es3-member-expression-literals npm install babel-plugin-transform-es3-property-literals  配置项目的.gitignore文件，忽略node_modules目录。在文件中添加以下内容：
+**/node_modules/  引入es6-base.js(包含 es5-shim和babel-polyfill)
+  至此，所有的准备工作就完成了。接下来就可以利用ES6的各种新特性开发了。需要注意的是所有包含了ES6特性的脚本文件扩展名必须是.babel，否则JDF是不会对其进行编译的。
 最后是一份简单的FAQ：
 Q: ES6都有哪些新特性，有没有推荐的学习资料？ 当然有，中文版的有阮一峰出品的ECMAScript 6入门。 英文的有： - ES6 In Depth来自Mozilla团队博客的一系列文章，每篇讲解一个新特性。建议按时间顺序阅读。 - Understanding ECMAScript 6来自Nicholas C. Zakas大神的一本ES6小书。
 Q: 我想使用额外的Babel plugin或preset该怎样配置？ 只需在package.json中指定需要额外引入的plugin或preset，例如：
@@ -43,14 +45,16 @@ Q: .babel文件编译出来的代码我看不懂，出了问题如何调试呢�
     <meta name="twitter:description" content="Note: 目前虽然JDF已经支持使用ES6开发脚本，但线上使用还在前期摸索阶段，请大家根据自己项目实际情况评估使用情况
 最近利用业余时间给JDF增加了ES6代码的支持。背后的原理是在项目构建阶段利用Babel将.babel文件转译成ES5代码。关于Babel的更多使用方法可以参考其官网的配置文档。
 下面开始正式介绍在利用ES6特性开发前的准备工作: - 升级JDF到最新版本（&amp;gt;= 1.8.2） - 进入JDF项目目录，安装基本的Babel preset和plugin。关于preset和plugin的更多说明请参考文档
-npm install babel-preset-es2015 npm install babel-plugin-transform-es3-member-expression-literals npm install babel-plugin-transform-es3-property-literals  配置项目的.gitignore文件，忽略node_modules目录。在文件中添加以下内容：  **/node_modules/   引入es6-base.js(包含 es5-shim和babel-polyfill)  至此，所有的准备工作就完成了。接下来就可以利用ES6的各种新特性开发了。需要注意的是所有包含了ES6特性的脚本文件扩展名必须是.babel，否则JDF是不会对其进行编译的。
+npm install babel-preset-es2015 npm install babel-plugin-transform-es3-member-expression-literals npm install babel-plugin-transform-es3-property-literals  配置项目的.gitignore文件，忽略node_modules目录。在文件中添加以下内容：
+**/node_modules/  引入es6-base.js(包含 es5-shim和babel-polyfill)
+  至此，所有的准备工作就完成了。接下来就可以利用ES6的各种新特性开发了。需要注意的是所有包含了ES6特性的脚本文件扩展名必须是.babel，否则JDF是不会对其进行编译的。
 最后是一份简单的FAQ：
 Q: ES6都有哪些新特性，有没有推荐的学习资料？ 当然有，中文版的有阮一峰出品的ECMAScript 6入门。 英文的有： - ES6 In Depth来自Mozilla团队博客的一系列文章，每篇讲解一个新特性。建议按时间顺序阅读。 - Understanding ECMAScript 6来自Nicholas C. Zakas大神的一本ES6小书。
 Q: 我想使用额外的Babel plugin或preset该怎样配置？ 只需在package.json中指定需要额外引入的plugin或preset，例如：
 &amp;#34;babel&amp;#34;: { &amp;#34;plugins&amp;#34;: [&amp;#34;syntax-async-functions&amp;#34;,&amp;#34;transform-regenerator&amp;#34;], &amp;#34;presets&amp;#34;: [&amp;#34;stage-0&amp;#34;] } 并在JDF项目的目录中安装相关npm package即可。
 Q: .babel文件编译出来的代码我看不懂，出了问题如何调试呢？ 我们看到的经过Babel转译后的JS是这样的： 这里包含了大量的Babel生成的代码，非常不利于调试。不过不用担心，JDF在本地开发模式中启用了sourceMap，你只需在Chrome开发者工具中的Sources Tab中在你要调试的JS文件目录下找到同名的.babel文件即可。相关JS中的报错信息，都会被映射到转译前的.babel文件的对应位置。
 关于sourceMap的更多信息请参考这里。">
-    <meta name="twitter:image" content="/images/avatar.jpg">
+    <meta name="twitter:image" content="/images/avatar.png">
   
 
   
@@ -59,7 +63,9 @@ Q: .babel文件编译出来的代码我看不懂，出了问题如何调试呢�
   <meta property="og:description" content="Note: 目前虽然JDF已经支持使用ES6开发脚本，但线上使用还在前期摸索阶段，请大家根据自己项目实际情况评估使用情况
 最近利用业余时间给JDF增加了ES6代码的支持。背后的原理是在项目构建阶段利用Babel将.babel文件转译成ES5代码。关于Babel的更多使用方法可以参考其官网的配置文档。
 下面开始正式介绍在利用ES6特性开发前的准备工作: - 升级JDF到最新版本（&amp;gt;= 1.8.2） - 进入JDF项目目录，安装基本的Babel preset和plugin。关于preset和plugin的更多说明请参考文档
-npm install babel-preset-es2015 npm install babel-plugin-transform-es3-member-expression-literals npm install babel-plugin-transform-es3-property-literals  配置项目的.gitignore文件，忽略node_modules目录。在文件中添加以下内容：  **/node_modules/   引入es6-base.js(包含 es5-shim和babel-polyfill)  至此，所有的准备工作就完成了。接下来就可以利用ES6的各种新特性开发了。需要注意的是所有包含了ES6特性的脚本文件扩展名必须是.babel，否则JDF是不会对其进行编译的。
+npm install babel-preset-es2015 npm install babel-plugin-transform-es3-member-expression-literals npm install babel-plugin-transform-es3-property-literals  配置项目的.gitignore文件，忽略node_modules目录。在文件中添加以下内容：
+**/node_modules/  引入es6-base.js(包含 es5-shim和babel-polyfill)
+  至此，所有的准备工作就完成了。接下来就可以利用ES6的各种新特性开发了。需要注意的是所有包含了ES6特性的脚本文件扩展名必须是.babel，否则JDF是不会对其进行编译的。
 最后是一份简单的FAQ：
 Q: ES6都有哪些新特性，有没有推荐的学习资料？ 当然有，中文版的有阮一峰出品的ECMAScript 6入门。 英文的有： - ES6 In Depth来自Mozilla团队博客的一系列文章，每篇讲解一个新特性。建议按时间顺序阅读。 - Understanding ECMAScript 6来自Nicholas C. Zakas大神的一本ES6小书。
 Q: 我想使用额外的Babel plugin或preset该怎样配置？ 只需在package.json中指定需要额外引入的plugin或preset，例如：
@@ -67,12 +73,12 @@ Q: 我想使用额外的Babel plugin或preset该怎样配置？ 只需在package
 Q: .babel文件编译出来的代码我看不懂，出了问题如何调试呢？ 我们看到的经过Babel转译后的JS是这样的： 这里包含了大量的Babel生成的代码，非常不利于调试。不过不用担心，JDF在本地开发模式中启用了sourceMap，你只需在Chrome开发者工具中的Sources Tab中在你要调试的JS文件目录下找到同名的.babel文件即可。相关JS中的报错信息，都会被映射到转译前的.babel文件的对应位置。
 关于sourceMap的更多信息请参考这里。">
   <meta property="og:url" content="https://loveky.github.io/2015/12/19/use-es6-in-jdf-projects/">
-  <meta property="og:image" content="/images/avatar.jpg">
+  <meta property="og:image" content="/images/avatar.png">
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0">
+<meta name="generator" content="Hugo 0.55.6">
 
 
 <link rel="canonical" href="https://loveky.github.io/2015/12/19/use-es6-in-jdf-projects/">
@@ -110,7 +116,7 @@ Q: .babel文件编译出来的代码我看不懂，出了问题如何调试呢�
 
 <link rel="preload" href="https://loveky.github.io/styles/main.min.css" as="style">
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
-<link rel="preload" href="https://loveky.github.io/images/avatar.jpg" as="image">
+<link rel="preload" href="https://loveky.github.io/images/avatar.png" as="image">
 <link rel="preload" href="https://loveky.github.io/images/grey-prism.svg" as="image">
 
 
@@ -167,7 +173,7 @@ Q: .babel文件编译出来的代码我看不懂，出了问题如何调试呢�
     
     
   <header class="site-header">
-  <img class="avatar" src="https://loveky.github.io/images/avatar.jpg" alt="Avatar">
+  <img class="avatar" src="https://loveky.github.io/images/avatar.png" alt="Avatar">
   
   <h2 class="title">loveky</h2>
   
@@ -270,14 +276,12 @@ Q: .babel文件编译出来的代码我看不懂，出了问题如何调试呢�
 npm install babel-plugin-transform-es3-member-expression-literals
 npm install babel-plugin-transform-es3-property-literals</code></pre></div>
 <ul>
-<li>配置项目的<code>.gitignore</code>文件，忽略<code>node_modules</code>目录。在文件中添加以下内容：</li>
-</ul>
+<li><p>配置项目的<code>.gitignore</code>文件，忽略<code>node_modules</code>目录。在文件中添加以下内容：</p>
 
 <pre><code>**/node_modules/
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>引入<a href="http://misc.360buyimg.com/product/module/es6-base.js">es6-base.js</a>(包含 <a href="https://github.com/es-shims/es5-shim">es5-shim</a>和<a href="http://babeljs.io/docs/usage/polyfill/">babel-polyfill</a>)</li>
+<li><p>引入<a href="http://misc.360buyimg.com/product/module/es6-base.js">es6-base.js</a>(包含 <a href="https://github.com/es-shims/es5-shim">es5-shim</a>和<a href="http://babeljs.io/docs/usage/polyfill/">babel-polyfill</a>)</p></li>
 </ul>
 
 <p>至此，所有的准备工作就完成了。接下来就可以利用ES6的各种新特性开发了。需要注意的是所有包含了ES6特性的脚本文件扩展名<strong>必须</strong>是<code>.babel</code>，否则JDF是不会对其进行编译的。</p>
@@ -319,7 +323,7 @@ npm install babel-plugin-transform-es3-property-literals</code></pre></div>
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>1347</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>1648</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">
@@ -352,7 +356,7 @@ npm install babel-plugin-transform-es3-property-literals</code></pre></div>
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 loveky</p>
+  <p>© 2017-2020 loveky</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

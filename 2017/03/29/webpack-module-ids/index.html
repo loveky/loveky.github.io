@@ -40,7 +40,7 @@ const path = require(&amp;#39;path&amp;#39;); const webpack = require(&amp;#39;w
 举个例子，假设我们有一个项目，项目中入口文件为index.js。其内容如下：
 import add from &amp;#39;./src/add&amp;#39;; import leftPad from &amp;#39;left-pad&amp;#39;; import jsonp from &amp;#39;jsonp&amp;#39;; add(1, 2);  通常我们的webpack.config.js文件就会有类似如下的配置：
 const path = require(&amp;#39;path&amp;#39;); const webpack = require(&amp;#39;webpack&amp;#39;); module.exports = { entry: { &amp;#39;app&amp;#39;: &amp;#39;./index.js&amp;#39;, &amp;#39;vender&amp;#39;: [&amp;#39;left-pad&amp;#39;, &amp;#39;jsonp&amp;#39;] }, output: { filename: &amp;#39;[name].[chunkHash].js&amp;#39;, path: path.resolve(__dirname, &amp;#39;build&amp;#39;) }, resolve: { extensions: [&amp;#39;.js&amp;#39;] }, module: { ... }, plugins:[ new webpack.optimize.CommonsChunkPlugin({ name: [&amp;#39;vender&amp;#39;, &amp;#39;manifest&amp;#39;], minChunks: Infinity, }) ] };  这时，通过Webpack打包，会生成三个文件：">
-    <meta name="twitter:image" content="/images/avatar.jpg">
+    <meta name="twitter:image" content="/images/avatar.png">
   
 
   
@@ -52,12 +52,12 @@ const path = require(&amp;#39;path&amp;#39;); const webpack = require(&amp;#39;w
 import add from &amp;#39;./src/add&amp;#39;; import leftPad from &amp;#39;left-pad&amp;#39;; import jsonp from &amp;#39;jsonp&amp;#39;; add(1, 2);  通常我们的webpack.config.js文件就会有类似如下的配置：
 const path = require(&amp;#39;path&amp;#39;); const webpack = require(&amp;#39;webpack&amp;#39;); module.exports = { entry: { &amp;#39;app&amp;#39;: &amp;#39;./index.js&amp;#39;, &amp;#39;vender&amp;#39;: [&amp;#39;left-pad&amp;#39;, &amp;#39;jsonp&amp;#39;] }, output: { filename: &amp;#39;[name].[chunkHash].js&amp;#39;, path: path.resolve(__dirname, &amp;#39;build&amp;#39;) }, resolve: { extensions: [&amp;#39;.js&amp;#39;] }, module: { ... }, plugins:[ new webpack.optimize.CommonsChunkPlugin({ name: [&amp;#39;vender&amp;#39;, &amp;#39;manifest&amp;#39;], minChunks: Infinity, }) ] };  这时，通过Webpack打包，会生成三个文件：">
   <meta property="og:url" content="https://loveky.github.io/2017/03/29/webpack-module-ids/">
-  <meta property="og:image" content="/images/avatar.jpg">
+  <meta property="og:image" content="/images/avatar.png">
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0">
+<meta name="generator" content="Hugo 0.55.6">
 
 
 <link rel="canonical" href="https://loveky.github.io/2017/03/29/webpack-module-ids/">
@@ -95,7 +95,7 @@ const path = require(&amp;#39;path&amp;#39;); const webpack = require(&amp;#39;w
 
 <link rel="preload" href="https://loveky.github.io/styles/main.min.css" as="style">
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
-<link rel="preload" href="https://loveky.github.io/images/avatar.jpg" as="image">
+<link rel="preload" href="https://loveky.github.io/images/avatar.png" as="image">
 <link rel="preload" href="https://loveky.github.io/images/grey-prism.svg" as="image">
 
 
@@ -152,7 +152,7 @@ const path = require(&amp;#39;path&amp;#39;); const webpack = require(&amp;#39;w
     
     
   <header class="site-header">
-  <img class="avatar" src="https://loveky.github.io/images/avatar.jpg" alt="Avatar">
+  <img class="avatar" src="https://loveky.github.io/images/avatar.png" alt="Avatar">
   
   <h2 class="title">loveky</h2>
   
@@ -353,7 +353,7 @@ const path = require(&amp;#39;path&amp;#39;); const webpack = require(&amp;#39;w
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>881</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>1182</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">
@@ -386,7 +386,7 @@ const path = require(&amp;#39;path&amp;#39;); const webpack = require(&amp;#39;w
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 loveky</p>
+  <p>© 2017-2020 loveky</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

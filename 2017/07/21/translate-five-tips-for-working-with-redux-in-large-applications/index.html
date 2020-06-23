@@ -40,7 +40,7 @@
 设想你有一组从 REST API 获取的数据对象，例如来自 /users 服务的数据。假设我们决定直接将这个普通数组存储在状态中，就像在响应中那样。当我们需要获取一个特定用户对象时会怎样呢？我们需要遍历状态中的所有用户。如果用户很多，这可能会是一个代价高昂的操作。如果我们想跟踪用户的一小部分，例如选中和未选中的用户呢？我们要么需要把数据保存在两个数组中，要么就要跟踪这些选中和未选中用户在主数组中的索引（译者注：此处指的是普通意义上的数组索引）。
 然而，我们决定重构代码改用索引的方式存储数据。我们可以在 reducer 中以如下的方式存储数据：
 { &amp;#34;usersById&amp;#34;: { 123: { id: 123, name: &amp;#34;Jane Doe&amp;#34;, email: &amp;#34;jdoe@example.">
-    <meta name="twitter:image" content="/images/avatar.jpg">
+    <meta name="twitter:image" content="/images/avatar.png">
   
 
   
@@ -52,12 +52,12 @@
 然而，我们决定重构代码改用索引的方式存储数据。我们可以在 reducer 中以如下的方式存储数据：
 { &amp;#34;usersById&amp;#34;: { 123: { id: 123, name: &amp;#34;Jane Doe&amp;#34;, email: &amp;#34;jdoe@example.">
   <meta property="og:url" content="https://loveky.github.io/2017/07/21/translate-five-tips-for-working-with-redux-in-large-applications/">
-  <meta property="og:image" content="/images/avatar.jpg">
+  <meta property="og:image" content="/images/avatar.png">
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0">
+<meta name="generator" content="Hugo 0.55.6">
 
 
 <link rel="canonical" href="https://loveky.github.io/2017/07/21/translate-five-tips-for-working-with-redux-in-large-applications/">
@@ -95,7 +95,7 @@
 
 <link rel="preload" href="https://loveky.github.io/styles/main.min.css" as="style">
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
-<link rel="preload" href="https://loveky.github.io/images/avatar.jpg" as="image">
+<link rel="preload" href="https://loveky.github.io/images/avatar.png" as="image">
 <link rel="preload" href="https://loveky.github.io/images/grey-prism.svg" as="image">
 
 
@@ -152,7 +152,7 @@
     
     
   <header class="site-header">
-  <img class="avatar" src="https://loveky.github.io/images/avatar.jpg" alt="Avatar">
+  <img class="avatar" src="https://loveky.github.io/images/avatar.png" alt="Avatar">
   
   <h2 class="title">loveky</h2>
   
@@ -573,7 +573,7 @@ const setDomainsPagination = setPaginationFor('DOMAINS_');
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>767</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>1068</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">
@@ -606,7 +606,7 @@ const setDomainsPagination = setPaginationFor('DOMAINS_');
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 loveky</p>
+  <p>© 2017-2020 loveky</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

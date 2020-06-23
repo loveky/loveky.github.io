@@ -35,19 +35,19 @@
   <meta name="twitter:site" content="@loveky_">
   <meta name="twitter:title" content="loveky的博客">
   
-  <meta name="twitter:image" content="/images/avatar.jpg">
+  <meta name="twitter:image" content="/images/avatar.png">
 
   
   <meta property="og:type" content="website">
   <meta property="og:title" content="loveky的博客">
   
   <meta property="og:url" content="https://loveky.github.io/tags/%E7%BF%BB%E8%AF%91/">
-  <meta property="og:image" content="/images/avatar.jpg">
+  <meta property="og:image" content="/images/avatar.png">
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0">
+<meta name="generator" content="Hugo 0.55.6">
 
 
 <link rel="canonical" href="https://loveky.github.io/tags/%E7%BF%BB%E8%AF%91/">
@@ -86,7 +86,7 @@
 
 <link rel="preload" href="https://loveky.github.io/styles/main.min.css" as="style">
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
-<link rel="preload" href="https://loveky.github.io/images/avatar.jpg" as="image">
+<link rel="preload" href="https://loveky.github.io/images/avatar.png" as="image">
 <link rel="preload" href="https://loveky.github.io/images/grey-prism.svg" as="image">
 
 
@@ -135,7 +135,7 @@
     
     
   <header class="site-header">
-  <img class="avatar" src="https://loveky.github.io/images/avatar.jpg" alt="Avatar">
+  <img class="avatar" src="https://loveky.github.io/images/avatar.png" alt="Avatar">
   
   <h2 class="title">loveky</h2>
   
@@ -320,7 +320,7 @@ async/await快速入门 为了让还没听说过这个特性的小伙伴们有�
 const makeRequest = () =&gt; getJSON() .then(data =&gt; { console.log(data) return &#34;done&#34; }) makeRequest()  使用async/await则是这样的：
 const makeRequest = async () =&gt; { console.log(await getJSON()) return &#34;done&#34; } makeRequest()  使用async/await时有以下几个区别：
  在定义函数时我们使用了async关键字。await关键字只能在使用async定义的函数的内部使用。所有async函数都会返回一个promise，该promise最终resolve的值就是你在函数中return的内容。 由于第一点中的原因，你不能在顶级作用域中await一个函数。因为顶级作用域不是一个async方法。
-// this will not work in top level // await makeRequest()  // this will work makeRequest().then((result) =&gt; { // do something })  await getJSON()意味着直到getJSON()返回的promise在resolve之后，console.</p>
+// this will not work in top level // await makeRequest()  // this will work makeRequest().then((result) =&gt; { // do something })   await getJSON()意味着直到getJSON()返回的promise在resolve之后，console.</p>
   <footer class="post-footer">
     <a class="read-more" href="https://loveky.github.io/2017/04/09/translate-6-reasons-why-javascripts-async-await-blows-promises-away/">阅读全文 →</a>
   </footer>
@@ -332,7 +332,7 @@ const makeRequest = async () =&gt; { console.log(await getJSON()) return &#34;do
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 loveky</p>
+  <p>© 2017-2020 loveky</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

@@ -29,12 +29,11 @@
  使用空格还是Tab 一次缩进是 2 个空格还是 4 个空格 还是 8 个空格 字符串使用单引号还是双引号 JavaScript 一行结尾到底要不要加分号 关键字前后要不要加空格 等等等等  不同风格混杂在一起极大的影响代码的可读性与质量。因此在多人项目中维护一致的代码风格就很重要了。
 本文就简单介绍一下如何通过 ESLint 和 Stylelint 为代码库配置针对 JavaScript 与 CSS（SCSS）的代码风格检查。
 配置 ESLint  安装 eslint
-yarn add --dev eslint // or npm install --save-dev eslint 创建配置文件
-./node_modules/.bin/eslint --init  该命令会在项目目录中创建一个 .eslintrc.json 文件。默认生成的配置文件可能看起来是这个样子：
+yarn add --dev eslint // or npm install --save-dev eslint  创建配置文件
+./node_modules/.bin/eslint --init   该命令会在项目目录中创建一个 .eslintrc.json 文件。默认生成的配置文件可能看起来是这个样子：
 { &amp;quot;rules&amp;quot;: { &amp;quot;semi&amp;quot;: [&amp;quot;error&amp;quot;, &amp;quot;always&amp;quot;], &amp;quot;quotes&amp;quot;: [&amp;quot;error&amp;quot;, &amp;quot;double&amp;quot;] } }  rules 里定义的就是你想要检查的规则了。例如上边示例中就配置了分号和引号的使用。
 完整的配置文档可以在这里找到。
- 配置 npm script
-配置好以后就可以通过命令">
+ 配置 npm script  配置好以后就可以通过命令">
 
   
   
@@ -46,13 +45,12 @@ yarn add --dev eslint // or npm install --save-dev eslint 创建配置文件
  使用空格还是Tab 一次缩进是 2 个空格还是 4 个空格 还是 8 个空格 字符串使用单引号还是双引号 JavaScript 一行结尾到底要不要加分号 关键字前后要不要加空格 等等等等  不同风格混杂在一起极大的影响代码的可读性与质量。因此在多人项目中维护一致的代码风格就很重要了。
 本文就简单介绍一下如何通过 ESLint 和 Stylelint 为代码库配置针对 JavaScript 与 CSS（SCSS）的代码风格检查。
 配置 ESLint  安装 eslint
-yarn add --dev eslint // or npm install --save-dev eslint 创建配置文件
-./node_modules/.bin/eslint --init  该命令会在项目目录中创建一个 .eslintrc.json 文件。默认生成的配置文件可能看起来是这个样子：
+yarn add --dev eslint // or npm install --save-dev eslint  创建配置文件
+./node_modules/.bin/eslint --init   该命令会在项目目录中创建一个 .eslintrc.json 文件。默认生成的配置文件可能看起来是这个样子：
 { &amp;quot;rules&amp;quot;: { &amp;quot;semi&amp;quot;: [&amp;quot;error&amp;quot;, &amp;quot;always&amp;quot;], &amp;quot;quotes&amp;quot;: [&amp;quot;error&amp;quot;, &amp;quot;double&amp;quot;] } }  rules 里定义的就是你想要检查的规则了。例如上边示例中就配置了分号和引号的使用。
 完整的配置文档可以在这里找到。
- 配置 npm script
-配置好以后就可以通过命令">
-    <meta name="twitter:image" content="/images/avatar.jpg">
+ 配置 npm script  配置好以后就可以通过命令">
+    <meta name="twitter:image" content="/images/avatar.png">
   
 
   
@@ -63,19 +61,18 @@ yarn add --dev eslint // or npm install --save-dev eslint 创建配置文件
  使用空格还是Tab 一次缩进是 2 个空格还是 4 个空格 还是 8 个空格 字符串使用单引号还是双引号 JavaScript 一行结尾到底要不要加分号 关键字前后要不要加空格 等等等等  不同风格混杂在一起极大的影响代码的可读性与质量。因此在多人项目中维护一致的代码风格就很重要了。
 本文就简单介绍一下如何通过 ESLint 和 Stylelint 为代码库配置针对 JavaScript 与 CSS（SCSS）的代码风格检查。
 配置 ESLint  安装 eslint
-yarn add --dev eslint // or npm install --save-dev eslint 创建配置文件
-./node_modules/.bin/eslint --init  该命令会在项目目录中创建一个 .eslintrc.json 文件。默认生成的配置文件可能看起来是这个样子：
+yarn add --dev eslint // or npm install --save-dev eslint  创建配置文件
+./node_modules/.bin/eslint --init   该命令会在项目目录中创建一个 .eslintrc.json 文件。默认生成的配置文件可能看起来是这个样子：
 { &amp;quot;rules&amp;quot;: { &amp;quot;semi&amp;quot;: [&amp;quot;error&amp;quot;, &amp;quot;always&amp;quot;], &amp;quot;quotes&amp;quot;: [&amp;quot;error&amp;quot;, &amp;quot;double&amp;quot;] } }  rules 里定义的就是你想要检查的规则了。例如上边示例中就配置了分号和引号的使用。
 完整的配置文档可以在这里找到。
- 配置 npm script
-配置好以后就可以通过命令">
+ 配置 npm script  配置好以后就可以通过命令">
   <meta property="og:url" content="https://loveky.github.io/2017/08/03/config-eslint-and-stylelint-in-project/">
-  <meta property="og:image" content="/images/avatar.jpg">
+  <meta property="og:image" content="/images/avatar.png">
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0">
+<meta name="generator" content="Hugo 0.55.6">
 
 
 <link rel="canonical" href="https://loveky.github.io/2017/08/03/config-eslint-and-stylelint-in-project/">
@@ -113,7 +110,7 @@ yarn add --dev eslint // or npm install --save-dev eslint 创建配置文件
 
 <link rel="preload" href="https://loveky.github.io/styles/main.min.css" as="style">
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
-<link rel="preload" href="https://loveky.github.io/images/avatar.jpg" as="image">
+<link rel="preload" href="https://loveky.github.io/images/avatar.png" as="image">
 <link rel="preload" href="https://loveky.github.io/images/grey-prism.svg" as="image">
 
 
@@ -170,7 +167,7 @@ yarn add --dev eslint // or npm install --save-dev eslint 创建配置文件
     
     
   <header class="site-header">
-  <img class="avatar" src="https://loveky.github.io/images/avatar.jpg" alt="Avatar">
+  <img class="avatar" src="https://loveky.github.io/images/avatar.png" alt="Avatar">
   
   <h2 class="title">loveky</h2>
   
@@ -289,12 +286,13 @@ yarn add --dev eslint // or npm install --save-dev eslint 创建配置文件
 <li><p>安装 <code>eslint</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">yarn add --dev eslint
 // or
-npm install --save-dev eslint</code></pre></div></li>
-
+npm install --save-dev eslint</code></pre></div>
+<ol>
 <li><p>创建配置文件</p>
 
 <pre><code>./node_modules/.bin/eslint --init
-</code></pre>
+</code></pre></li>
+</ol>
 
 <p>该命令会在项目目录中创建一个 <code>.eslintrc.json</code> 文件。默认生成的配置文件可能看起来是这个样子：</p>
 
@@ -308,9 +306,11 @@ npm install --save-dev eslint</code></pre></div></li>
 
 <p><code>rules</code> 里定义的就是你想要检查的规则了。例如上边示例中就配置了分号和引号的使用。</p>
 
-<p>完整的配置文档可以在<a href="http://eslint.org/docs/user-guide/configuring">这里</a>找到。</p></li>
+<p>完整的配置文档可以在<a href="http://eslint.org/docs/user-guide/configuring">这里</a>找到。</p>
 
-<li><p>配置 npm script</p>
+<ol>
+<li>配置 npm script</li>
+</ol>
 
 <p>配置好以后就可以通过命令</p>
 
@@ -329,9 +329,11 @@ npm install --save-dev eslint</code></pre></div></li>
 yarn run eslint
 </code></pre>
 
-<p>来执行了。</p></li>
+<p>来执行了。</p>
 
-<li><p>引入 airbnb 风格的代码检查</p>
+<ol>
+<li>引入 airbnb 风格的代码检查</li>
+</ol>
 
 <p>通过前三步已经可以正常使用 eslint 了。但是你需要针对很多详细的规则配置以生成一套自己的代码规范检查机制。更糟糕的是，当团队中有多名成员时可能每个人都有自己的习惯，很难统一，谁也不能说服其他人。</p>
 
@@ -381,8 +383,7 @@ yarn add --dev eslint-config-airbnb
 <pre><code>&quot;extends&quot;: &quot;airbnb&quot;
 </code></pre>
 
-<p>就大功告成啦。</p></li>
-</ol>
+<p>就大功告成啦。</p>
 
 <h2 id="配置-stylelint">配置 Stylelint</h2>
 
@@ -390,11 +391,14 @@ yarn add --dev eslint-config-airbnb
 <li><p>安装 Stylelint 及插件</p>
 
 <pre><code>yarn add --dev stylelint stylelint-order
-</code></pre>
+</code></pre></li>
+</ol>
 
-<p>这里除了安装了 stylelint 自身外，还安装了一个 stylelint-order 插件。该插件的作用是强制你按照某个顺序编写 css。例如先写定位，再写盒模型，再写内容区样式，最后写 CSS3 相关属性。这样可以极大的保证我们代码的可读性。</p></li>
+<p>这里除了安装了 stylelint 自身外，还安装了一个 stylelint-order 插件。该插件的作用是强制你按照某个顺序编写 css。例如先写定位，再写盒模型，再写内容区样式，最后写 CSS3 相关属性。这样可以极大的保证我们代码的可读性。</p>
 
-<li><p>配置 Stylelint 规则</p>
+<ol>
+<li>配置 Stylelint 规则</li>
+</ol>
 
 <p>这一点和 ESLint 很像。二者都只是提供了工具与规则。但如何配置这些规则完全取决于使用者。所以我们要根据需要自己引入或配置规则。</p>
 
@@ -417,24 +421,28 @@ yarn add --dev eslint-config-airbnb
 }
 </code></pre>
 
-<p>配置文件中单独配置 <code>at-rule-no-unknown</code> 是为了让 Stylelint 支持 SCSS 语法中的 <code>mixin</code>、<code>extend</code>、<code>content</code> 语法。</p></li>
+<p>配置文件中单独配置 <code>at-rule-no-unknown</code> 是为了让 Stylelint 支持 SCSS 语法中的 <code>mixin</code>、<code>extend</code>、<code>content</code> 语法。</p>
 
-<li><p>配置 npm script</p>
+<ol>
+<li>配置 npm script</li>
+</ol>
 
 <p>在 package.json 中加入：</p>
 
 <pre><code>&quot;stylelint&quot;: &quot;stylelint src/css/**/*.scss src/css/**/*.css&quot;
 </code></pre>
 
-<p>就可以啦。</p></li>
-</ol>
+<p>就可以啦。</p>
 
 <h2 id="小结">小结</h2>
 
 <p>最后可以配置一条 npm script 命令同时执行 JavaScript 与 CSS 检查：</p>
 
-<pre><code>&quot;lint&quot;: &quot;run-p eslint stylelint
-</code></pre>
+<p>```</p></li>
+</ol>
+
+<p>&ldquo;lint&rdquo;: &ldquo;run-p eslint stylelint
+```</p>
 
 <p>这里使用了 <a href="https://www.npmjs.com/package/npm-run-all">npm-run-all</a> 模块中的 <code>run-p</code> 命令<strong>并行</strong>执行两个任务。</p>
 </article>
@@ -447,7 +455,7 @@ yarn add --dev eslint-config-airbnb
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>754</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>1055</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">
@@ -480,7 +488,7 @@ yarn add --dev eslint-config-airbnb
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 loveky</p>
+  <p>© 2017-2020 loveky</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

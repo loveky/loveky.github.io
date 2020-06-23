@@ -63,7 +63,7 @@ react-test-renderer 在说 react-test-renderer 之前，让我们先聊聊什么
 
 
 
-<meta name="generator" content="Hugo 0.54.0">
+<meta name="generator" content="Hugo 0.55.6">
 
 
 <link rel="canonical" href="https://loveky.github.io/2018/06/05/unit-testing-react-component-with-jest/">
@@ -101,7 +101,7 @@ react-test-renderer 在说 react-test-renderer 之前，让我们先聊聊什么
 
 <link rel="preload" href="https://loveky.github.io/styles/main.min.css" as="style">
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
-<link rel="preload" href="https://loveky.github.io/images/avatar.jpg" as="image">
+<link rel="preload" href="https://loveky.github.io/images/avatar.png" as="image">
 <link rel="preload" href="https://loveky.github.io/images/grey-prism.svg" as="image">
 
 
@@ -158,7 +158,7 @@ react-test-renderer 在说 react-test-renderer 之前，让我们先聊聊什么
     
     
   <header class="site-header">
-  <img class="avatar" src="https://loveky.github.io/images/avatar.jpg" alt="Avatar">
+  <img class="avatar" src="https://loveky.github.io/images/avatar.png" alt="Avatar">
   
   <h2 class="title">loveky</h2>
   
@@ -258,7 +258,6 @@ react-test-renderer 在说 react-test-renderer 之前，让我们先聊聊什么
         </figcaption>
 </figure>
 
-
 <p>在<a href="https://loveky.github.io/2018/05/17/unit-test-and-jest/">上一篇文章中</a>我们介绍了什么是单元测试以及单元测试框架 Jest 的基本用法。在本文中我们会具体聊聊如何用 Jest 为 React 组件编写单元测试。</p>
 
 <p>首先我们要明确的一点，那就是 React 组件的单元测试本质是也是单元测试。因此它也符合我们之前介绍过的单元测试的全部特点。唯一不同的地方在于 React 组件的单元测试中我们需要找到合适的方法对执行结果进行断言。换言之，我们要根据 React 的特点来设置代码是否正确执行的判断条件。</p>
@@ -349,14 +348,14 @@ react-test-renderer 在说 react-test-renderer 之前，让我们先聊聊什么
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">describe</span>(<span style="color:#e6db74">&#39;Header&#39;</span>, () =&gt; {
   <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;should render a top level div&#39;</span>, () =&gt; {
     <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">renderer</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ShallowRenderer</span>();
-    <span style="color:#a6e22e">renderer</span>.<span style="color:#a6e22e">render</span>(<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Header</span> <span style="color:#960050;background-color:#1e0010">/&gt;);</span>
+    <span style="color:#a6e22e">renderer</span>.<span style="color:#a6e22e">render</span>(<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Header</span> <span style="color:#f92672">/&gt;</span>);
     <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">renderer</span>.<span style="color:#a6e22e">getRenderOutput</span>();
     <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">type</span>).<span style="color:#a6e22e">toBe</span>(<span style="color:#e6db74">&#39;div&#39;</span>);
   });
 
   <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;should render 3 Link&#39;</span>, () =&gt; {
     <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">renderer</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ShallowRenderer</span>();
-    <span style="color:#a6e22e">renderer</span>.<span style="color:#a6e22e">render</span>(<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Header</span> <span style="color:#960050;background-color:#1e0010">/&gt;);</span>
+    <span style="color:#a6e22e">renderer</span>.<span style="color:#a6e22e">render</span>(<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Header</span> <span style="color:#f92672">/&gt;</span>);
     <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">renderer</span>.<span style="color:#a6e22e">getRenderOutput</span>();
     <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">childrenLink</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">props</span>.<span style="color:#a6e22e">children</span>.<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">c</span> =&gt; <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">type</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">Link</span>);
     <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">childrenLink</span>.<span style="color:#a6e22e">length</span>).<span style="color:#a6e22e">toBe</span>(<span style="color:#ae81ff">3</span>);
@@ -395,7 +394,7 @@ react-test-renderer 在说 react-test-renderer 之前，让我们先聊聊什么
 <p>现在让我们看一个完整的测试用例：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">describe</span>(<span style="color:#e6db74">&#39;Header&#39;</span>, () =&gt; {
   <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;should render 3 a tag with className &#34;my-link&#34;&#39;</span>, () =&gt; {
-    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">testRenderer</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">TestRenderer</span>.<span style="color:#a6e22e">create</span>(<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Header</span> <span style="color:#960050;background-color:#1e0010">/&gt;);</span>
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">testRenderer</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">TestRenderer</span>.<span style="color:#a6e22e">create</span>(<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Header</span> <span style="color:#f92672">/&gt;</span>);
     <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">testInstance</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">testRenderer</span>.<span style="color:#a6e22e">root</span>;
     <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">testInstance</span>.<span style="color:#a6e22e">findAll</span>(<span style="color:#a6e22e">node</span> =&gt; <span style="color:#a6e22e">node</span>.<span style="color:#a6e22e">type</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">node</span>.<span style="color:#a6e22e">props</span>.<span style="color:#a6e22e">className</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;my-link&#39;</span>)).<span style="color:#a6e22e">toHaveLength</span>(<span style="color:#ae81ff">3</span>);
   });
@@ -541,7 +540,7 @@ react-test-renderer 在说 react-test-renderer 之前，让我们先聊聊什么
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>448</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>749</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">
@@ -574,7 +573,7 @@ react-test-renderer 在说 react-test-renderer 之前，让我们先聊聊什么
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 loveky</p>
+  <p>© 2017-2020 loveky</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

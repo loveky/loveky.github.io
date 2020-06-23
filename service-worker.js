@@ -11,9 +11,7 @@ var filesToCache = [
   'icons/icon-192x192.png',
   'icons/icon-256x256.png',
   'icons/icon-512x512.png',
-  'images/avatar.png',
   'images/grey-prism.svg',
-  'images/qrcode.jpg',
   'styles/main.min.css',
   'scripts/index.min.js',
 
@@ -44,23 +42,20 @@ self.addEventListener('install', event => {
   event.waitUntil(caches.open(cacheName).then(cache => cache.addAll(filesToCache)));
 });
 
-// Serve files from the cache
+// network first
 self.addEventListener('fetch', event => {
   event.respondWith(
-    caches
-      .match(event.request)
-      .then(response => {
-        if (response) return response;
-        return fetch(event.request);
-      })
-      .then(response => {
-        if (response.status === 404) return caches.match('404.html');
-        return caches.open(cacheName).then(cache => {
-          cache.put(event.request.url, response.clone());
+    caches.open(cacheName).then(function(cache) {
+      return fetch(event.request)
+        .then(function(response) {
+          if (response.status === 404) return caches.match('404.html');
+          cache.put(event.request, response.clone());
           return response;
+        })
+        .catch(function() {
+          return caches.match(event.request);
         });
-      })
-      .catch(error => console.log('Error, ', error)),
+    }),
   );
 });
 

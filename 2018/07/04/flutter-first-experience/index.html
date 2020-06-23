@@ -72,7 +72,7 @@ VS Code 上只需要安装 flutter 扩展即可。 Android Studio 上需要安�
 
 
 
-<meta name="generator" content="Hugo 0.54.0">
+<meta name="generator" content="Hugo 0.55.6">
 
 
 <link rel="canonical" href="https://loveky.github.io/2018/07/04/flutter-first-experience/">
@@ -110,7 +110,7 @@ VS Code 上只需要安装 flutter 扩展即可。 Android Studio 上需要安�
 
 <link rel="preload" href="https://loveky.github.io/styles/main.min.css" as="style">
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
-<link rel="preload" href="https://loveky.github.io/images/avatar.jpg" as="image">
+<link rel="preload" href="https://loveky.github.io/images/avatar.png" as="image">
 <link rel="preload" href="https://loveky.github.io/images/grey-prism.svg" as="image">
 
 
@@ -167,7 +167,7 @@ VS Code 上只需要安装 flutter 扩展即可。 Android Studio 上需要安�
     
     
   <header class="site-header">
-  <img class="avatar" src="https://loveky.github.io/images/avatar.jpg" alt="Avatar">
+  <img class="avatar" src="https://loveky.github.io/images/avatar.png" alt="Avatar">
   
   <h2 class="title">loveky</h2>
   
@@ -423,18 +423,21 @@ export FLUTTER_STORAGE_BASE_URL<span style="color:#f92672">=</span>https://stora
     border: Border.all(color: Colors.red)
   ),
   child: <span style="color:#66d9ef">new</span> Text(<span style="color:#e6db74">&#34;My Awesome Border&#34;</span>),
-)</code></pre></div></li>
-
-<li><p>由于 Dart 面向对象的特点，基本上所有的样式属性都不支持以字符串的形式书写，而是必须创建特定类的实例或是使用 Flutter 中预先定义好的常量，再看一个例子：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dart" data-lang="dart">ListView.builder(
-  scrollDirection: Axis.horizontal,
-  padding: EdgeInsets.all(<span style="color:#ae81ff">10.0</span>),
-  itemCount: subCategories.length,
-  itemBuilder: (BuildContext context, <span style="color:#66d9ef">int</span> index) {
-
-  }
 )</code></pre></div>
-<p>这里为了指定 ListView 的滚动方向，我们使用了 Flutter 中预先定义好的 <code>Axis.horizontal</code> 常量，为了表示 4 个方向上的 padding 值，我们创建了一个 <code>EdgeInsets</code> 类的实例。</p></li>
+<ul>
+<li>由于 Dart 面向对象的特点，基本上所有的样式属性都不支持以字符串的形式书写，而是必须创建特定类的实例或是使用 Flutter 中预先定义好的常量，再看一个例子：
+```dart
+ListView.builder(
+scrollDirection: Axis.horizontal,
+padding: EdgeInsets.all(10.0),
+itemCount: subCategories.length,
+itemBuilder: (BuildContext context, int index) {</li>
+</ul>
+
+<p>}
+)
+``<code>
+这里为了指定 ListView 的滚动方向，我们使用了 Flutter 中预先定义好的</code>Axis.horizontal<code>常量，为了表示 4 个方向上的 padding 值，我们创建了一个</code>EdgeInsets` 类的实例。</p></li>
 </ul>
 
 <p>以上两个方面在我们刚开始使用 Flutter 开发时会造成一定的困扰，大可不必慌张。只需要一段时间的适应过程，适应之后再配合 IDE 的智能提示功能，开发效率可以得到很大的提升。</p>
@@ -452,7 +455,7 @@ export FLUTTER_STORAGE_BASE_URL<span style="color:#f92672">=</span>https://stora
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>418</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>720</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">
@@ -485,7 +488,7 @@ export FLUTTER_STORAGE_BASE_URL<span style="color:#f92672">=</span>https://stora
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 loveky</p>
+  <p>© 2017-2020 loveky</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

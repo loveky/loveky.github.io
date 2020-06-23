@@ -31,19 +31,19 @@
   <meta name="twitter:site" content="@loveky_">
   <meta name="twitter:title" content="loveky的博客">
   
-  <meta name="twitter:image" content="/images/avatar.jpg">
+  <meta name="twitter:image" content="/images/avatar.png">
 
   
   <meta property="og:type" content="website">
   <meta property="og:title" content="loveky的博客">
   
   <meta property="og:url" content="https://loveky.github.io/">
-  <meta property="og:image" content="/images/avatar.jpg">
+  <meta property="og:image" content="/images/avatar.png">
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0">
+<meta name="generator" content="Hugo 0.55.6">
 
 
 <link rel="canonical" href="https://loveky.github.io/">
@@ -82,7 +82,7 @@
 
 <link rel="preload" href="https://loveky.github.io/styles/main.min.css" as="style">
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
-<link rel="preload" href="https://loveky.github.io/images/avatar.jpg" as="image">
+<link rel="preload" href="https://loveky.github.io/images/avatar.png" as="image">
 <link rel="preload" href="https://loveky.github.io/images/grey-prism.svg" as="image">
 
 
@@ -130,7 +130,7 @@
     </div>
     
      <header class="site-header">
-  <img class="avatar" src="https://loveky.github.io/images/avatar.jpg" alt="Avatar">
+  <img class="avatar" src="https://loveky.github.io/images/avatar.png" alt="Avatar">
   
   <h1 class="title">loveky</h1>
   
@@ -230,7 +230,9 @@
   </header>
   
   <p class="post-summary">本文翻译自JavaScript Template Syntax
-表达式与表达式修饰符  ${expr} ${expr|modifier} ${expr|modifier1|modifier2|...|modifierN} ${expr|modifier1:argExpr1_1} ${expr|modifier1:argExpr1_1,argExpr1_2,...,argExpr1_N} ${expr|modifier1:argExpr1_1,argExpr1_2|...|modifierN:argExprN_1,argExprN_2,...,argExprN_M}   expr可以是不包含右花括号}的任何合法JavaScript表达式 修饰符的格式是modifierName[:argExpr1[,argExpr2[,argExprN]]]  argExpr可以是任何合法的expr    Examples: ${customer.firstName} ${customer.firstName|capitalize} ${customer.firstName|default:&#34;no name&#34;|capitalize} ${article.getCreationDate()|default:new Date()|toCalenderControl:&#34;YYYY.MM.DD&#34;,true,&#34;Creation Date&#34;} ${(lastQuarter.calcRevenue() - fixedCosts) / 1000000}  这里有一份内置的修饰符列表，你也可以通过TrimPath提供的API来创建自定义的修饰符。
+表达式与表达式修饰符  ${expr} ${expr|modifier} ${expr|modifier1|modifier2|...|modifierN} ${expr|modifier1:argExpr1_1} ${expr|modifier1:argExpr1_1,argExpr1_2,...,argExpr1_N} ${expr|modifier1:argExpr1_1,argExpr1_2|...|modifierN:argExprN_1,argExprN_2,...,argExprN_M}   expr可以是不包含右花括号}的任何合法JavaScript表达式 修饰符的格式是modifierName[:argExpr1[,argExpr2[,argExprN]]]
+ argExpr可以是任何合法的expr
+Examples: ${customer.firstName} ${customer.firstName|capitalize} ${customer.firstName|default:&#34;no name&#34;|capitalize} ${article.getCreationDate()|default:new Date()|toCalenderControl:&#34;YYYY.MM.DD&#34;,true,&#34;Creation Date&#34;} ${(lastQuarter.calcRevenue() - fixedCosts) / 1000000}    这里有一份内置的修饰符列表，你也可以通过TrimPath提供的API来创建自定义的修饰符。
 表达式还可以写成${% customer.firstName %}这种形式，多出的%字符允许你的表达式中出现花括号}。例如：
  Visit our ${% emitLink(&#39;Solutions and Products&#39;, { color: &#39;red&#39;, blink: false }) %}  表达式中的空白字符是可选的，你也可以写成下面的格式：
  ${%customer.firstName%} ${%customer.firstName|capitalize%}  声明 声明标签可以嵌套使用。
@@ -423,7 +425,7 @@ sudo apt-get install xvfb Xvfb :99 -screen 0 1024x768x16 &gt;&gt; /tmp/Xvfb.</p>
 </section>
 
 <footer class="site-footer">
-  <p>© 2017-2019 loveky</p>
+  <p>© 2017-2020 loveky</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

@@ -89,7 +89,7 @@ async/await快速入门 为了让还没听说过这个特性的小伙伴们有�
 const makeRequest = () =&amp;gt; getJSON() .then(data =&amp;gt; { console.log(data) return &amp;#34;done&amp;#34; }) makeRequest()  使用async/await则是这样的：
 const makeRequest = async () =&amp;gt; { console.log(await getJSON()) return &amp;#34;done&amp;#34; } makeRequest()  使用async/await时有以下几个区别：
  在定义函数时我们使用了async关键字。await关键字只能在使用async定义的函数的内部使用。所有async函数都会返回一个promise，该promise最终resolve的值就是你在函数中return的内容。 由于第一点中的原因，你不能在顶级作用域中await一个函数。因为顶级作用域不是一个async方法。
-// this will not work in top level // await makeRequest()  // this will work makeRequest().then((result) =&amp;gt; { // do something })  await getJSON()意味着直到getJSON()返回的promise在resolve之后，console.</description>
+// this will not work in top level // await makeRequest()  // this will work makeRequest().then((result) =&amp;gt; { // do something })   await getJSON()意味着直到getJSON()返回的promise在resolve之后，console.</description>
     </item>
     
   </channel>

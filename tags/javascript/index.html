@@ -6,7 +6,7 @@
 
   
   <title>
-  Tag → javascript
+  Tag → JavaScript
   
    | loveky的博客
 </title>
@@ -35,19 +35,19 @@
   <meta name="twitter:site" content="@loveky_">
   <meta name="twitter:title" content="loveky的博客">
   
-  <meta name="twitter:image" content="/images/avatar.jpg">
+  <meta name="twitter:image" content="/images/avatar.png">
 
   
   <meta property="og:type" content="website">
   <meta property="og:title" content="loveky的博客">
   
   <meta property="og:url" content="https://loveky.github.io/tags/javascript/">
-  <meta property="og:image" content="/images/avatar.jpg">
+  <meta property="og:image" content="/images/avatar.png">
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0">
+<meta name="generator" content="Hugo 0.55.6">
 
 
 <link rel="canonical" href="https://loveky.github.io/tags/javascript/">
@@ -86,7 +86,7 @@
 
 <link rel="preload" href="https://loveky.github.io/styles/main.min.css" as="style">
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
-<link rel="preload" href="https://loveky.github.io/images/avatar.jpg" as="image">
+<link rel="preload" href="https://loveky.github.io/images/avatar.png" as="image">
 <link rel="preload" href="https://loveky.github.io/images/grey-prism.svg" as="image">
 
 
@@ -135,7 +135,7 @@
     
     
   <header class="site-header">
-  <img class="avatar" src="https://loveky.github.io/images/avatar.jpg" alt="Avatar">
+  <img class="avatar" src="https://loveky.github.io/images/avatar.png" alt="Avatar">
   
   <h2 class="title">loveky</h2>
   
@@ -240,12 +240,11 @@
  使用空格还是Tab 一次缩进是 2 个空格还是 4 个空格 还是 8 个空格 字符串使用单引号还是双引号 JavaScript 一行结尾到底要不要加分号 关键字前后要不要加空格 等等等等  不同风格混杂在一起极大的影响代码的可读性与质量。因此在多人项目中维护一致的代码风格就很重要了。
 本文就简单介绍一下如何通过 ESLint 和 Stylelint 为代码库配置针对 JavaScript 与 CSS（SCSS）的代码风格检查。
 配置 ESLint  安装 eslint
-yarn add --dev eslint // or npm install --save-dev eslint 创建配置文件
-./node_modules/.bin/eslint --init  该命令会在项目目录中创建一个 .eslintrc.json 文件。默认生成的配置文件可能看起来是这个样子：
+yarn add --dev eslint // or npm install --save-dev eslint  创建配置文件
+./node_modules/.bin/eslint --init   该命令会在项目目录中创建一个 .eslintrc.json 文件。默认生成的配置文件可能看起来是这个样子：
 { &#34;rules&#34;: { &#34;semi&#34;: [&#34;error&#34;, &#34;always&#34;], &#34;quotes&#34;: [&#34;error&#34;, &#34;double&#34;] } }  rules 里定义的就是你想要检查的规则了。例如上边示例中就配置了分号和引号的使用。
 完整的配置文档可以在这里找到。
- 配置 npm script
-配置好以后就可以通过命令</p>
+ 配置 npm script  配置好以后就可以通过命令</p>
   <footer class="post-footer">
     <a class="read-more" href="https://loveky.github.io/2017/08/03/config-eslint-and-stylelint-in-project/">阅读全文 →</a>
   </footer>
@@ -347,7 +346,7 @@ async/await快速入门 为了让还没听说过这个特性的小伙伴们有�
 const makeRequest = () =&gt; getJSON() .then(data =&gt; { console.log(data) return &#34;done&#34; }) makeRequest()  使用async/await则是这样的：
 const makeRequest = async () =&gt; { console.log(await getJSON()) return &#34;done&#34; } makeRequest()  使用async/await时有以下几个区别：
  在定义函数时我们使用了async关键字。await关键字只能在使用async定义的函数的内部使用。所有async函数都会返回一个promise，该promise最终resolve的值就是你在函数中return的内容。 由于第一点中的原因，你不能在顶级作用域中await一个函数。因为顶级作用域不是一个async方法。
-// this will not work in top level // await makeRequest()  // this will work makeRequest().then((result) =&gt; { // do something })  await getJSON()意味着直到getJSON()返回的promise在resolve之后，console.</p>
+// this will not work in top level // await makeRequest()  // this will work makeRequest().then((result) =&gt; { // do something })   await getJSON()意味着直到getJSON()返回的promise在resolve之后，console.</p>
   <footer class="post-footer">
     <a class="read-more" href="https://loveky.github.io/2017/04/09/translate-6-reasons-why-javascripts-async-await-blows-promises-away/">阅读全文 →</a>
   </footer>
@@ -433,7 +432,7 @@ import isPlainObject from &#39;lodash/isPlainObject&#39; import $$observable fro
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 loveky</p>
+  <p>© 2017-2020 loveky</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

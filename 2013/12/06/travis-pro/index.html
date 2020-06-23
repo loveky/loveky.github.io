@@ -44,7 +44,7 @@ wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key 
 sudo su - jenkins curl -L https://get.rvm.io | bash -s stable --ruby=1.9.3 Setp3 安装Xvfb。(如果你的测试不需要用模拟的DISPLAY，那你可以忽略此步骤)
 我们测试Rails时需要用capybar跑feature spec。有js相关的测试需要启动一个浏览器来执行测试代码，但是linode上的Ubuntu都是没有display的，因此跑feature spec的时候会遇到无法启动浏览器而报错的情况。Xvfb就是用来创建一个虚拟的Display供启动浏览器用的。
 sudo apt-get install xvfb Xvfb :99 -screen 0 1024x768x16 &amp;gt;&amp;gt; /tmp/Xvfb.">
-    <meta name="twitter:image" content="/images/avatar.jpg">
+    <meta name="twitter:image" content="/images/avatar.png">
   
 
   
@@ -58,12 +58,12 @@ sudo su - jenkins curl -L https://get.rvm.io | bash -s stable --ruby=1.9.3 Setp3
 我们测试Rails时需要用capybar跑feature spec。有js相关的测试需要启动一个浏览器来执行测试代码，但是linode上的Ubuntu都是没有display的，因此跑feature spec的时候会遇到无法启动浏览器而报错的情况。Xvfb就是用来创建一个虚拟的Display供启动浏览器用的。
 sudo apt-get install xvfb Xvfb :99 -screen 0 1024x768x16 &amp;gt;&amp;gt; /tmp/Xvfb.">
   <meta property="og:url" content="https://loveky.github.io/2013/12/06/travis-pro/">
-  <meta property="og:image" content="/images/avatar.jpg">
+  <meta property="og:image" content="/images/avatar.png">
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0">
+<meta name="generator" content="Hugo 0.55.6">
 
 
 <link rel="canonical" href="https://loveky.github.io/2013/12/06/travis-pro/">
@@ -101,7 +101,7 @@ sudo apt-get install xvfb Xvfb :99 -screen 0 1024x768x16 &amp;gt;&amp;gt; /tmp/X
 
 <link rel="preload" href="https://loveky.github.io/styles/main.min.css" as="style">
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
-<link rel="preload" href="https://loveky.github.io/images/avatar.jpg" as="image">
+<link rel="preload" href="https://loveky.github.io/images/avatar.png" as="image">
 <link rel="preload" href="https://loveky.github.io/images/grey-prism.svg" as="image">
 
 
@@ -158,7 +158,7 @@ sudo apt-get install xvfb Xvfb :99 -screen 0 1024x768x16 &amp;gt;&amp;gt; /tmp/X
     
     
   <header class="site-header">
-  <img class="avatar" src="https://loveky.github.io/images/avatar.jpg" alt="Avatar">
+  <img class="avatar" src="https://loveky.github.io/images/avatar.png" alt="Avatar">
   
   <h2 class="title">loveky</h2>
   
@@ -353,7 +353,7 @@ bundle exec rspec <span style="color:#75715e"># 执行测试代码</span></code>
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>2089</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>2391</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">
@@ -386,7 +386,7 @@ bundle exec rspec <span style="color:#75715e"># 执行测试代码</span></code>
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 loveky</p>
+  <p>© 2017-2020 loveky</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

@@ -56,7 +56,7 @@ var Promise = require(&amp;quot;bluebird&amp;quot;); function getUsername(userId
  更好的错误处理 同步代码中的异常不论出现在何处都会以rejection的形式向Promise链后端传递。 更好的兼容性 你可以始终使用你自己喜欢的Promise实现，而不用担心第三方代码在使用哪个。 更好的代码阅读体验 所有的代码在水平方向上将处于同一个缩进层级，这将使你阅读代码变得更容易。  接下来我会逐一介绍这些优点：
 1. 更好的错误处理 Promise的一个被大力宣扬的优点就是用户可以用同一种方式同时处理同步异常和异步异常 —— 同步异常会被捕获并且会作为一个rejected Promise向后传递。但事实真的是这样吗？让我们看看以下这个上文示例的小变种：
 function getUsername(userId) { return database.users.get({id: userId}) .then(function(user) { return uesr.">
-    <meta name="twitter:image" content="/images/avatar.jpg">
+    <meta name="twitter:image" content="/images/avatar.png">
   
 
   
@@ -76,12 +76,12 @@ var Promise = require(&amp;quot;bluebird&amp;quot;); function getUsername(userId
 1. 更好的错误处理 Promise的一个被大力宣扬的优点就是用户可以用同一种方式同时处理同步异常和异步异常 —— 同步异常会被捕获并且会作为一个rejected Promise向后传递。但事实真的是这样吗？让我们看看以下这个上文示例的小变种：
 function getUsername(userId) { return database.users.get({id: userId}) .then(function(user) { return uesr.">
   <meta property="og:url" content="https://loveky.github.io/2016/08/04/promise-try/">
-  <meta property="og:image" content="/images/avatar.jpg">
+  <meta property="og:image" content="/images/avatar.png">
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0">
+<meta name="generator" content="Hugo 0.55.6">
 
 
 <link rel="canonical" href="https://loveky.github.io/2016/08/04/promise-try/">
@@ -119,7 +119,7 @@ function getUsername(userId) { return database.users.get({id: userId}) .then(fun
 
 <link rel="preload" href="https://loveky.github.io/styles/main.min.css" as="style">
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
-<link rel="preload" href="https://loveky.github.io/images/avatar.jpg" as="image">
+<link rel="preload" href="https://loveky.github.io/images/avatar.png" as="image">
 <link rel="preload" href="https://loveky.github.io/images/grey-prism.svg" as="image">
 
 
@@ -176,7 +176,7 @@ function getUsername(userId) { return database.users.get({id: userId}) .then(fun
     
     
   <header class="site-header">
-  <img class="avatar" src="https://loveky.github.io/images/avatar.jpg" alt="Avatar">
+  <img class="avatar" src="https://loveky.github.io/images/avatar.png" alt="Avatar">
   
   <h2 class="title">loveky</h2>
   
@@ -466,7 +466,7 @@ return user.name;
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>1118</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>1419</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">
@@ -499,7 +499,7 @@ return user.name;
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 loveky</p>
+  <p>© 2017-2020 loveky</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

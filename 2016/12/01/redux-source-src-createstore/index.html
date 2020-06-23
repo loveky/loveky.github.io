@@ -36,7 +36,7 @@ import isPlainObject from &amp;#39;lodash/isPlainObject&amp;#39; import $$observ
     <meta name="twitter:description" content="嗯，就是学习一下，读读源码。顺便把源码里的文档翻译了一下并添加了一些简单的注释。
 本文对应的文件是src/createStore.js
 import isPlainObject from &amp;#39;lodash/isPlainObject&amp;#39; import $$observable from &amp;#39;symbol-observable&amp;#39; /** * ActionTypes里定义的是Redux保留的私有action。 * 对于任何未知的action，你必须返回store的当前状态。 * 如果传入的当前状态是undefined，你必须返回store的初始状态。 * 不要在应用代码中直接引用这些action。 */ export var ActionTypes = { INIT: &amp;#39;@@redux/INIT&amp;#39; } /** * createStore方法用于创建一个保存程序状态的store。 * 改变store中数据的唯一方法是调用store的`dispatch()`方法。 * * 你的应用中应该只有一个store。为了将程序状态中不同部分的变更逻辑 * 组合在一起，你可以通过`combineReducers`方法将多个reducer组合成一个reducer。 * * @param {Function} reducer 一个返回应用下一状态的函数，入参是程序的当前状态以及 * 要发送的action。 * * @param {any} [preloadedState] store的初始状态。你可以选择性的为store指定一个 * 初始状态。 * 如果你使用了`combineReducers`方法来生成最终的reducer。那么这个初始状态对象的 * 结构必须与调用`combineReducers`方法时传入的参数的结构保持对应关系。 * * @param {Function} enhancer store增强器。你可以选择性的传入一个增强函数来扩展 * store的功能，例如中间件，时间旅行，持久化等。Redux自带的唯一一个增强器是 * `applyMiddleware()`方法。 * * @returns {Store} 返回一个可以读取状态，发送action以及订阅变更通知的Redux store。 */ export default function createStore(reducer, preloadedState, enhancer) { // 如果只传入reducer和enhancer，则store的初始状态为undefined  if (typeof preloadedState === &amp;#39;function&amp;#39; &amp;amp;&amp;amp; typeof enhancer === &amp;#39;undefined&amp;#39;) { enhancer = preloadedState preloadedState = undefined } // enhancer必须是一个函数  if (typeof enhancer !">
-    <meta name="twitter:image" content="/images/avatar.jpg">
+    <meta name="twitter:image" content="/images/avatar.png">
   
 
   
@@ -46,12 +46,12 @@ import isPlainObject from &amp;#39;lodash/isPlainObject&amp;#39; import $$observ
 本文对应的文件是src/createStore.js
 import isPlainObject from &amp;#39;lodash/isPlainObject&amp;#39; import $$observable from &amp;#39;symbol-observable&amp;#39; /** * ActionTypes里定义的是Redux保留的私有action。 * 对于任何未知的action，你必须返回store的当前状态。 * 如果传入的当前状态是undefined，你必须返回store的初始状态。 * 不要在应用代码中直接引用这些action。 */ export var ActionTypes = { INIT: &amp;#39;@@redux/INIT&amp;#39; } /** * createStore方法用于创建一个保存程序状态的store。 * 改变store中数据的唯一方法是调用store的`dispatch()`方法。 * * 你的应用中应该只有一个store。为了将程序状态中不同部分的变更逻辑 * 组合在一起，你可以通过`combineReducers`方法将多个reducer组合成一个reducer。 * * @param {Function} reducer 一个返回应用下一状态的函数，入参是程序的当前状态以及 * 要发送的action。 * * @param {any} [preloadedState] store的初始状态。你可以选择性的为store指定一个 * 初始状态。 * 如果你使用了`combineReducers`方法来生成最终的reducer。那么这个初始状态对象的 * 结构必须与调用`combineReducers`方法时传入的参数的结构保持对应关系。 * * @param {Function} enhancer store增强器。你可以选择性的传入一个增强函数来扩展 * store的功能，例如中间件，时间旅行，持久化等。Redux自带的唯一一个增强器是 * `applyMiddleware()`方法。 * * @returns {Store} 返回一个可以读取状态，发送action以及订阅变更通知的Redux store。 */ export default function createStore(reducer, preloadedState, enhancer) { // 如果只传入reducer和enhancer，则store的初始状态为undefined  if (typeof preloadedState === &amp;#39;function&amp;#39; &amp;amp;&amp;amp; typeof enhancer === &amp;#39;undefined&amp;#39;) { enhancer = preloadedState preloadedState = undefined } // enhancer必须是一个函数  if (typeof enhancer !">
   <meta property="og:url" content="https://loveky.github.io/2016/12/01/redux-source-src-createstore/">
-  <meta property="og:image" content="/images/avatar.jpg">
+  <meta property="og:image" content="/images/avatar.png">
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0">
+<meta name="generator" content="Hugo 0.55.6">
 
 
 <link rel="canonical" href="https://loveky.github.io/2016/12/01/redux-source-src-createstore/">
@@ -89,7 +89,7 @@ import isPlainObject from &amp;#39;lodash/isPlainObject&amp;#39; import $$observ
 
 <link rel="preload" href="https://loveky.github.io/styles/main.min.css" as="style">
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
-<link rel="preload" href="https://loveky.github.io/images/avatar.jpg" as="image">
+<link rel="preload" href="https://loveky.github.io/images/avatar.png" as="image">
 <link rel="preload" href="https://loveky.github.io/images/grey-prism.svg" as="image">
 
 
@@ -146,7 +146,7 @@ import isPlainObject from &amp;#39;lodash/isPlainObject&amp;#39; import $$observ
     
     
   <header class="site-header">
-  <img class="avatar" src="https://loveky.github.io/images/avatar.jpg" alt="Avatar">
+  <img class="avatar" src="https://loveky.github.io/images/avatar.png" alt="Avatar">
   
   <h2 class="title">loveky</h2>
   
@@ -519,7 +519,7 @@ import isPlainObject from &amp;#39;lodash/isPlainObject&amp;#39; import $$observ
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>999</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>1300</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">
@@ -552,7 +552,7 @@ import isPlainObject from &amp;#39;lodash/isPlainObject&amp;#39; import $$observ
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 loveky</p>
+  <p>© 2017-2020 loveky</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

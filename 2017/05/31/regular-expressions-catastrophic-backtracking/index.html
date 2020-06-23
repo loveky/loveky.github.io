@@ -52,7 +52,7 @@
 完整的正则表达式是这样的：
 /^\s*((\d&#43;(\,|，)\d&#43;)*|(\d&#43;))\s*$/  接着去 regex101 上测试一下，测试数据如下，由 10 个商品 ID 组成的字符串：
 123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789  执行结果如下：">
-    <meta name="twitter:image" content="/images/avatar.jpg">
+    <meta name="twitter:image" content="/images/avatar.png">
   
 
   
@@ -70,12 +70,12 @@
 /^\s*((\d&#43;(\,|，)\d&#43;)*|(\d&#43;))\s*$/  接着去 regex101 上测试一下，测试数据如下，由 10 个商品 ID 组成的字符串：
 123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789  执行结果如下：">
   <meta property="og:url" content="https://loveky.github.io/2017/05/31/regular-expressions-catastrophic-backtracking/">
-  <meta property="og:image" content="/images/avatar.jpg">
+  <meta property="og:image" content="/images/avatar.png">
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0">
+<meta name="generator" content="Hugo 0.55.6">
 
 
 <link rel="canonical" href="https://loveky.github.io/2017/05/31/regular-expressions-catastrophic-backtracking/">
@@ -113,7 +113,7 @@
 
 <link rel="preload" href="https://loveky.github.io/styles/main.min.css" as="style">
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
-<link rel="preload" href="https://loveky.github.io/images/avatar.jpg" as="image">
+<link rel="preload" href="https://loveky.github.io/images/avatar.png" as="image">
 <link rel="preload" href="https://loveky.github.io/images/grey-prism.svg" as="image">
 
 
@@ -170,7 +170,7 @@
     
     
   <header class="site-header">
-  <img class="avatar" src="https://loveky.github.io/images/avatar.jpg" alt="Avatar">
+  <img class="avatar" src="https://loveky.github.io/images/avatar.png" alt="Avatar">
   
   <h2 class="title">loveky</h2>
   
@@ -300,7 +300,7 @@
 <p>可以看出，72.% 的 CPU 时间用在了一条正则表达式上。你肯定想到了，这就是小伙伴用来检查用户输入是否合法的正则表达式。</p>
 
 <p>完整的正则表达式是这样的：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#e6db74">/^\s*((\d+(\,|，)\d+)*|(\d+))\s*$/</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#f92672">/^</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#a6e22e">s</span><span style="color:#f92672">*</span>((<span style="color:#960050;background-color:#1e0010">\</span><span style="color:#a6e22e">d</span><span style="color:#f92672">+</span>(<span style="color:#960050;background-color:#1e0010">\</span>,<span style="color:#f92672">|</span><span style="color:#960050;background-color:#1e0010">，</span>)<span style="color:#960050;background-color:#1e0010">\</span><span style="color:#a6e22e">d</span><span style="color:#f92672">+</span>)<span style="color:#f92672">*|</span>(<span style="color:#960050;background-color:#1e0010">\</span><span style="color:#a6e22e">d</span><span style="color:#f92672">+</span>))<span style="color:#960050;background-color:#1e0010">\</span><span style="color:#a6e22e">s</span><span style="color:#f92672">*</span><span style="color:#a6e22e">$</span><span style="color:#f92672">/</span>
 </code></pre></div>
 <p>接着去 <a href="https://regex101.com/">regex101</a> 上测试一下，测试数据如下，由 10 个商品 ID 组成的字符串：</p>
 
@@ -322,7 +322,7 @@
 <p>经过多次测试发现：每次正常匹配执行的时间都很短。每次不匹配时，执行的时间都很长，且随着字符串长度的增加，时间成倍的增长。</p>
 
 <p>接下来让我们认真的观察一下这个正则表达式：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#e6db74">/^\s*((\d+(\,|，)\d+)*|(\d+))\s*$/</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#f92672">/^</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#a6e22e">s</span><span style="color:#f92672">*</span>((<span style="color:#960050;background-color:#1e0010">\</span><span style="color:#a6e22e">d</span><span style="color:#f92672">+</span>(<span style="color:#960050;background-color:#1e0010">\</span>,<span style="color:#f92672">|</span><span style="color:#960050;background-color:#1e0010">，</span>)<span style="color:#960050;background-color:#1e0010">\</span><span style="color:#a6e22e">d</span><span style="color:#f92672">+</span>)<span style="color:#f92672">*|</span>(<span style="color:#960050;background-color:#1e0010">\</span><span style="color:#a6e22e">d</span><span style="color:#f92672">+</span>))<span style="color:#960050;background-color:#1e0010">\</span><span style="color:#a6e22e">s</span><span style="color:#f92672">*</span><span style="color:#a6e22e">$</span><span style="color:#f92672">/</span>
 </code></pre></div>
 <p>去掉匹配首尾的空白字符，其核心结构只有两部分 <code>((\d+(\,|，)\d+)*</code> 与 <code>(\d+)</code>。前者用于匹配多个商品 ID 的情况，后者匹配只有一个商品 ID 的情况。</p>
 
@@ -561,7 +561,7 @@ d. 累计回溯 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 = 36 次。</p></li>
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>818</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>1119</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">
@@ -594,7 +594,7 @@ d. 累计回溯 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 = 36 次。</p></li>
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 loveky</p>
+  <p>© 2017-2020 loveky</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

@@ -62,7 +62,7 @@ function SomeClass(greeter) { this.greeter = greeter; } SomeClass.prototype.doSo
 下面是一个使用injector服务的例子：
 // Provide the wiring information in a module var myModule = angular.module(&amp;#39;myModule&amp;#39;, []);  下面的代码告诉injector如何创建greeter服务。需要注意的是greeter又依赖于$window服务。greeter实际上是一个包含greet方法的对象。
 myModule.factory(&amp;#39;greeter&amp;#39;, function($window) { return { greet: function(text) { $window.alert(text); } }; });  下面的代码演示了如何创建一个injector并通过它来请求greeter服务:">
-    <meta name="twitter:image" content="/images/avatar.jpg">
+    <meta name="twitter:image" content="/images/avatar.png">
   
 
   
@@ -85,12 +85,12 @@ function SomeClass(greeter) { this.greeter = greeter; } SomeClass.prototype.doSo
 // Provide the wiring information in a module var myModule = angular.module(&amp;#39;myModule&amp;#39;, []);  下面的代码告诉injector如何创建greeter服务。需要注意的是greeter又依赖于$window服务。greeter实际上是一个包含greet方法的对象。
 myModule.factory(&amp;#39;greeter&amp;#39;, function($window) { return { greet: function(text) { $window.alert(text); } }; });  下面的代码演示了如何创建一个injector并通过它来请求greeter服务:">
   <meta property="og:url" content="https://loveky.github.io/2014/05/04/di-in-angularjs/">
-  <meta property="og:image" content="/images/avatar.jpg">
+  <meta property="og:image" content="/images/avatar.png">
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0">
+<meta name="generator" content="Hugo 0.55.6">
 
 
 <link rel="canonical" href="https://loveky.github.io/2014/05/04/di-in-angularjs/">
@@ -128,7 +128,7 @@ myModule.factory(&amp;#39;greeter&amp;#39;, function($window) { return { greet: 
 
 <link rel="preload" href="https://loveky.github.io/styles/main.min.css" as="style">
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
-<link rel="preload" href="https://loveky.github.io/images/avatar.jpg" as="image">
+<link rel="preload" href="https://loveky.github.io/images/avatar.png" as="image">
 <link rel="preload" href="https://loveky.github.io/images/grey-prism.svg" as="image">
 
 
@@ -185,7 +185,7 @@ myModule.factory(&amp;#39;greeter&amp;#39;, function($window) { return { greet: 
     
     
   <header class="site-header">
-  <img class="avatar" src="https://loveky.github.io/images/avatar.jpg" alt="Avatar">
+  <img class="avatar" src="https://loveky.github.io/images/avatar.png" alt="Avatar">
   
   <h2 class="title">loveky</h2>
   
@@ -479,7 +479,7 @@ Angular injector子系统负责创建组件，解决它们的依赖，并按要�
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>1941</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>2242</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">
@@ -512,7 +512,7 @@ Angular injector子系统负责创建组件，解决它们的依赖，并按要�
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 loveky</p>
+  <p>© 2017-2020 loveky</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

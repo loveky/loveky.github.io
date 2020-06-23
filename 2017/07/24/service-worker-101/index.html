@@ -38,7 +38,7 @@ navigator.serviceWorker.register(&amp;#39;sw.js&amp;#39;, { scope: &amp;#39;./ab
 关于 service worker 的几个基本知识点  它是一个可编程的网络代理，让你可以控制页面请求的处理方式。 它是一个 JavaScript Worker，因此它无法直接操作 DOM。但可以通过 postMessage 接口与页面通信。同时，service worker 中的代码不会阻塞页面响应。 它在闲置时被终止，在需要时被启动。并不是常驻内存。因此你不能在 onfetch 或是 onmessage 回调中依赖全局状态。 被设计成完全异步。因此在 service worker 中无法使用同步 API （例如同步 XHR，localStorage等）。接口重度依赖于 promise。 只能在 HTTPS 页面加载（唯一的例外：localhost/127.0.0.1，方便调试）。  Service worker 的作用域 一个 service worker 的默认作用域是这个 service worker 脚本所在的目录。例如 https://example.com/sw.js 脚本默认就是 https://example.com 下的所有页面。
 你也可以在注册 service worker 时明确指定作用域：
 navigator.serviceWorker.register(&amp;#39;sw.js&amp;#39;, { scope: &amp;#39;./abc&amp;#39; });  假设以上代码在 https://example.com 页面里执行，则意味着该 service worker 的作用域就是 https://example.">
-    <meta name="twitter:image" content="/images/avatar.jpg">
+    <meta name="twitter:image" content="/images/avatar.png">
   
 
   
@@ -49,12 +49,12 @@ navigator.serviceWorker.register(&amp;#39;sw.js&amp;#39;, { scope: &amp;#39;./ab
 你也可以在注册 service worker 时明确指定作用域：
 navigator.serviceWorker.register(&amp;#39;sw.js&amp;#39;, { scope: &amp;#39;./abc&amp;#39; });  假设以上代码在 https://example.com 页面里执行，则意味着该 service worker 的作用域就是 https://example.">
   <meta property="og:url" content="https://loveky.github.io/2017/07/24/service-worker-101/">
-  <meta property="og:image" content="/images/avatar.jpg">
+  <meta property="og:image" content="/images/avatar.png">
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0">
+<meta name="generator" content="Hugo 0.55.6">
 
 
 <link rel="canonical" href="https://loveky.github.io/2017/07/24/service-worker-101/">
@@ -92,7 +92,7 @@ navigator.serviceWorker.register(&amp;#39;sw.js&amp;#39;, { scope: &amp;#39;./ab
 
 <link rel="preload" href="https://loveky.github.io/styles/main.min.css" as="style">
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
-<link rel="preload" href="https://loveky.github.io/images/avatar.jpg" as="image">
+<link rel="preload" href="https://loveky.github.io/images/avatar.png" as="image">
 <link rel="preload" href="https://loveky.github.io/images/grey-prism.svg" as="image">
 
 
@@ -149,7 +149,7 @@ navigator.serviceWorker.register(&amp;#39;sw.js&amp;#39;, { scope: &amp;#39;./ab
     
     
   <header class="site-header">
-  <img class="avatar" src="https://loveky.github.io/images/avatar.jpg" alt="Avatar">
+  <img class="avatar" src="https://loveky.github.io/images/avatar.png" alt="Avatar">
   
   <h2 class="title">loveky</h2>
   
@@ -373,7 +373,7 @@ navigator.serviceWorker.register(&amp;#39;sw.js&amp;#39;, { scope: &amp;#39;./ab
       </ul>
       
       <p class="post-copyright">
-        本文发表于 <strong>764</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
+        本文发表于 <strong>1065</strong> 天前，文章内容可能已经不准确，甚至是错误的。请谨慎参考。
       </p>
     </footer>
     <div style="text-align:center">
@@ -406,7 +406,7 @@ navigator.serviceWorker.register(&amp;#39;sw.js&amp;#39;, { scope: &amp;#39;./ab
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 loveky</p>
+  <p>© 2017-2020 loveky</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>
